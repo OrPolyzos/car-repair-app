@@ -5,9 +5,9 @@
 </head>
 <body>
     <h1>${errorMessage!""}</h1>
-    <h2>Create new User</h2>
-    
-    <form action="/admin/users/create" method="POST" id="userForm" name="userForm">
+    <h2>Edit User</h2>
+
+    <form action="/admin/users/editUser" method="POST" id="userForm" name="userForm">
         <h4><i>User's Personal Details</i></h4>
         <#--bind this field with the registration form fields-->
         <@spring.bind "userForm.firstName" />
@@ -49,7 +49,7 @@
         </#list>
 
         <@spring.bind "userForm.password"/>
-        Password: <input type="password" name="password" id="password" placeholder="p4$$w0rd"/>
+        Password: <input type="password" name="password" id="password" placeholder="p4$$w0rd" value="${userForm.password!""}"/>
         <#list spring.status.errorMessages as error>
              <span>${error}</span>
         </#list>
@@ -73,48 +73,7 @@
              <span>${error}</span>
         </#list>
         <br><br>
-        <input type="submit" value="Create">
-    </form>
-    <hr></hr>
-    <h2>Search User</h2>
-    <form action="/admin/users/search" method="POST" id="userSearchForm" name="userSearchForm">
-        <h4><i>Fill in User's AFM and/or Email</i></h4>
-        <#--bind this field with the registration form fields-->
-        <@spring.bind "userSearchForm.afm" />
-        AFM: <input type="text" name="afm" id="firstName" placeholder="123456789" value="${userSearchForm.afm!""}"/>
-        <#list spring.status.errorMessages as error>
-             <span>${error}</span>
-        </#list>
-
-        <@spring.bind "userSearchForm.email"/>
-        Email: <input type="text" name="email" id="email" placeholder="john@doe.com" value="${userSearchForm.email!""}"/>
-        <#list spring.status.errorMessages as error>
-             <span>${error}</span>
-        </#list>
-
-        <br><br>
-        <input type="submit" value="Search">
-    </form>
-<hr></hr>
-    <h2>${searchNotFoundMessage!""}</h2>
-    <#if userList??>
-        <h3>Retrieved Users:</h3>
-        <#list userList as user>
-        <span>
-        <form action="/admin/users/edit/${user.afm}" method="GET">
-            ${user.firstName} ${user.lastName} with AFM: ${user.afm} and Email: ${user.email}
-        <button type="submit" formaction="/admin/users/delete/${user.afm}" onclick="return confirm('Are you sure?')">Delete</button>
         <input type="submit" value="Edit">
-        </form>
-        </span>
-        </#list>
-    </#if>
-    <script>
-    function myFunction() {
-        confirm("Are you sure to delete?");
-    }
-    </script>
+    </form>
 </body>
 </html>
-
-

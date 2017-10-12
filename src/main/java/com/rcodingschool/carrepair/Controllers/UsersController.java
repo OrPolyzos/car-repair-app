@@ -24,6 +24,7 @@ public class UsersController {
     private static final String USER_FORM = "userForm";
     private static final String SEARCH_FORM = "userSearchForm";
     private static final String USER_LIST = "userList";
+    private static final String NOT_FOUND = "searchNotFoundMessage";
 
     //We will use the @InitBinder annotation and the initBinder method to
     //trim all the user's input from spaces
@@ -52,7 +53,7 @@ public class UsersController {
     //This means when the user has submitted data in the input fields
     //We will bind each one of the user's inputs in the registerUserForm.ftl
     // to the corresponding fields of the userForm object
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/create", method = RequestMethod.POST)
     public String processCreateUser(@Valid @ModelAttribute(USER_FORM) UserForm userForm,
                                    BindingResult bindingResult, Model model,
                                    RedirectAttributes redirectAttributes) {
@@ -83,8 +84,6 @@ public class UsersController {
                       RedirectAttributes redirectAttributes) {
         System.err.println(afm);
         //Delete the user
-        //Simple logic just for debugging
-        //redirectAttributes.addFlashAttribute("userList", myList);
         return "redirect:/admin/users";
     }
 
@@ -105,6 +104,9 @@ public class UsersController {
 
 
         if (userSearchForm.getAfm() == null && userSearchForm.getEmail() == null){
+            if (tempList.isEmpty()){
+                redirectAttributes.addFlashAttribute(NOT_FOUND, "No records were found!");
+            }
             redirectAttributes.addFlashAttribute(USER_LIST, tempList);
         }
         else{
@@ -121,4 +123,54 @@ public class UsersController {
         }
         return "redirect:/admin/users";
     }
+
+    @RequestMapping(value = "/users/edit/{afm}", method = RequestMethod.GET)
+    public String showEditUser(@PathVariable String afm,
+                                    RedirectAttributes redirectAttributes) {
+        System.err.println(afm);
+        //Find the user
+        List<User> users = SloppyRepository.getAllUsers();
+        for (User user : users){
+            if (user.getAfm().equals(afm)){
+                UserForm userForm = UserConverter.buildUserFormObject(user);
+                redirectAttributes.addFlashAttribute(USER_FORM, userForm);
+                break;
+            }
+        }
+        return "redirect:/admin/users/editUser";
+    }
+
+    @RequestMapping(value = "/users/editUser", method = RequestMethod.GET)
+    public String showEditUserView(Model model) {
+        Map<String, Object> map = model.asMap();
+        if (!map.containsKey(USER_FORM)) {
+            model.addAttribute(USER_FORM, new UserForm());
+        }
+        return "editUser";
+    }
+
+    @RequestMapping(value = "/users/editUser", method = RequestMethod.POST)
+    public String processEditUser(@Valid @ModelAttribute(USER_FORM) UserForm userForm,
+                                    BindingResult bindingResult, Model model,
+                                    RedirectAttributes redirectAttributes) {
+
+        //If something does not pass our @Valid(ations), then this means that our BindingResult
+        //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
+        if (bindingResult.hasErrors()) {
+            //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult."+USER_FORM, bindingResult);
+            redirectAttributes.addFlashAttribute(USER_FORM, userForm);
+            return "redirect:/admin/users/editUser";
+        }
+        try {
+            //Trying to build a user from our UserForm
+            User user = UserConverter.buildUserObject(userForm);
+            return "redirect:/admin/users";
+        } catch (Exception exception) {
+            //if an error occurs show it to the user
+            redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
+            return "redirect:/admin/users/editUser";
+        }
+    }
+
 }
