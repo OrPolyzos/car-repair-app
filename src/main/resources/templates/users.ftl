@@ -77,17 +77,17 @@
     </form>
     <hr></hr>
     <h2>Search User</h2>
-    <form action="/registerUserForm" method="post" id="searchForm" name="searchForm">
+    <form action="/admin/users/search" method="POST" id="userSearchForm" name="userSearchForm">
         <h4><i>Fill in User's AFM and/or Email</i></h4>
         <#--bind this field with the registration form fields-->
-        <@spring.bind "userForm.afm" />
-        AFM: <input type="text" name="afm" id="firstName" placeholder="123456789"/>
+        <@spring.bind "userSearchForm.afm" />
+        AFM: <input type="text" name="afm" id="firstName" placeholder="123456789" value="${userSearchForm.afm!""}"/>
         <#list spring.status.errorMessages as error>
              <span>${error}</span>
         </#list>
 
-        <@spring.bind "userForm.email"/>
-        Email: <input type="text" name="email" id="email" placeholder="john@doe.com"/>
+        <@spring.bind "userSearchForm.email"/>
+        Email: <input type="text" name="email" id="email" placeholder="john@doe.com" value="${userSearchForm.email!""}"/>
         <#list spring.status.errorMessages as error>
              <span>${error}</span>
         </#list>
@@ -115,7 +115,6 @@
         confirm("Are you sure to delete?");
     }
     </script>
-
 </body>
 </html>
 

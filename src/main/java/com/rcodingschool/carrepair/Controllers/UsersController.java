@@ -3,6 +3,8 @@ package com.rcodingschool.carrepair.Controllers;
 import com.rcodingschool.carrepair.Converters.UserConverter;
 import com.rcodingschool.carrepair.Domain.User;
 import com.rcodingschool.carrepair.Model.UserForm;
+import com.rcodingschool.carrepair.Model.UserSearchForm;
+import com.rcodingschool.carrepair.SloppyRepository;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +20,10 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
-public class RegisterUserFormController {
+public class UsersController {
     private static final String USER_FORM = "userForm";
-    private static List<User> myList = new ArrayList<User>();
-    private static User user1 = new User("Oresths", "Polyzos", "123456789", "asdasd", "ore@pol", "User");
-    private static User user2 = new User("Tolhs", "Gakhs", "000002222", "asdasdas", "tol@gak", "Admin");
+    private static final String SEARCH_FORM = "userSearchForm";
+    private static final String USER_LIST = "userList";
 
     //We will use the @InitBinder annotation and the initBinder method to
     //trim all the user's input from spaces
@@ -35,13 +36,13 @@ public class RegisterUserFormController {
 
     //The registerUserForm method which maps the registerUserForm.ftl for GET requests
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String showUsers(Model model) {
-        myList.add(user1);
-        myList.add(user2);
+    public String showUsersView(Model model) {
         Map<String, Object> map = model.asMap();
         if (!map.containsKey(USER_FORM)) {
             model.addAttribute(USER_FORM, new UserForm());
-            model.addAttribute("userList", myList);
+        }
+        if (!map.containsKey(SEARCH_FORM)){
+            model.addAttribute(SEARCH_FORM, new UserSearchForm());
         }
         return "users";
     }
@@ -52,7 +53,7 @@ public class RegisterUserFormController {
     //We will bind each one of the user's inputs in the registerUserForm.ftl
     // to the corresponding fields of the userForm object
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public String registerUserForm(@Valid @ModelAttribute(USER_FORM) UserForm userForm,
+    public String processCreateUser(@Valid @ModelAttribute(USER_FORM) UserForm userForm,
                                    BindingResult bindingResult, Model model,
                                    RedirectAttributes redirectAttributes) {
 
@@ -62,23 +63,14 @@ public class RegisterUserFormController {
             //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
             String err = "Some fields were incorrect!";
             redirectAttributes.addFlashAttribute("errorMessage", err);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userForm", bindingResult);
-            redirectAttributes.addFlashAttribute("userForm", userForm);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult."+USER_FORM, bindingResult);
+            redirectAttributes.addFlashAttribute(USER_FORM, userForm);
             return "redirect:/admin/users";
         }
-
         try {
             //Trying to build a user from our UserForm
             User user = UserConverter.buildUserObject(userForm);
-            //Just printing the user in console for debugging
-            System.err.println(user.toString());
-            myList.add(user);
-            //Adding the user to redirectAttributes so we can show its fields to the TestTestTest.ftl
-            redirectAttributes.addFlashAttribute(user);
-            redirectAttributes.addFlashAttribute("userList", myList);
             return "redirect:/admin/users";
-            //accountService.register(user);
-            //session.setAttribute("username", registrationForm.getUsername());
         } catch (Exception exception) {
             //if an error occurs show it to the user
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
@@ -86,27 +78,47 @@ public class RegisterUserFormController {
         }
     }
 
-
     @RequestMapping(value = "/users/delete/{afm}", method = RequestMethod.POST)
-    public String deleteUser(@PathVariable String afm,
+    public String processDeleteUser(@PathVariable String afm,
                       RedirectAttributes redirectAttributes) {
         System.err.println(afm);
         //Delete the user
         //Simple logic just for debugging
-        boolean found = false;
-        User founduser = null;
-        for (User user : myList){
-            if (user.getAfm().equals(afm)){
-                found = true;
-                founduser = user;
-            }
-        }
-        if (found=true && founduser!= null){
-            myList.remove(founduser);
-        }
-
-        redirectAttributes.addFlashAttribute("userList", myList);
+        //redirectAttributes.addFlashAttribute("userList", myList);
         return "redirect:/admin/users";
     }
 
+    @RequestMapping(value = "/users/search", method = RequestMethod.POST)
+    public String processSearchUser(@Valid @ModelAttribute(SEARCH_FORM) UserSearchForm userSearchForm,
+                             BindingResult bindingResult, Model model,
+                             RedirectAttributes redirectAttributes){
+
+        //If something does not pass our @Valid(ations), then this means that our BindingResult
+        //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
+        if (bindingResult.hasErrors()) {
+            //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult."+SEARCH_FORM, bindingResult);
+            redirectAttributes.addFlashAttribute(SEARCH_FORM, userSearchForm);
+            return "redirect:/admin/users";
+        }
+        List<User> tempList = SloppyRepository.getAllUsers();
+
+
+        if (userSearchForm.getAfm() == null && userSearchForm.getEmail() == null){
+            redirectAttributes.addFlashAttribute(USER_LIST, tempList);
+        }
+        else{
+            boolean found = false;
+            List<User> finalList = new ArrayList<>();
+            for (User user : tempList){
+                if (user.getAfm().equals(userSearchForm.getAfm())){
+                    finalList.add(user);
+                }
+            }
+            if (!finalList.isEmpty()){
+                redirectAttributes.addFlashAttribute(USER_LIST, finalList);
+            }
+        }
+        return "redirect:/admin/users";
+    }
 }
