@@ -6,6 +6,7 @@
 <body>
     <h1>${errorMessage!""}</h1>
     <h2>${actionText!"Create new User"}</h2>
+    
     <form action="/admin/users" method="post" id="userForm" name="userForm">
         <h4><i>User's Personal Details</i></h4>
         <#--bind this field with the registration form fields-->
@@ -101,9 +102,11 @@
         <h3>Retrieved Users:</h3>
         <#list userList as user>
         <span>
-        <form action="/admin/users/delete/${user.afm}" method="POST">
-            <a href="smth">${user.firstName} ${user.lastName} with AFM: ${user.afm} and Email: ${user.email}</a>
-        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete" />
+        <form action="/admin/users/edit/${user.afm}" method="POST">
+            ${user.firstName} ${user.lastName} with AFM: ${user.afm} and Email: ${user.email}
+        <button type="submit" formaction="/admin/users/delete/${user.afm}" onclick="return confirm('Are you sure?')">Delete</button>
+        <input type="submit" value="Edit">
+        </form>
         </span>
         </#list>
     </#if>

@@ -21,6 +21,8 @@ import java.util.Map;
 public class RegisterUserFormController {
     private static final String USER_FORM = "userForm";
     private static List<User> myList = new ArrayList<User>();
+    private static User user1 = new User("Oresths", "Polyzos", "123456789", "asdasd", "ore@pol", "User");
+    private static User user2 = new User("Tolhs", "Gakhs", "000002222", "asdasdas", "tol@gak", "Admin");
 
     //We will use the @InitBinder annotation and the initBinder method to
     //trim all the user's input from spaces
@@ -33,10 +35,13 @@ public class RegisterUserFormController {
 
     //The registerUserForm method which maps the registerUserForm.ftl for GET requests
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String registerUserForm(Model model) {
+    public String showUsers(Model model) {
+        myList.add(user1);
+        myList.add(user2);
         Map<String, Object> map = model.asMap();
         if (!map.containsKey(USER_FORM)) {
             model.addAttribute(USER_FORM, new UserForm());
+            model.addAttribute("userList", myList);
         }
         return "users";
     }
@@ -79,8 +84,6 @@ public class RegisterUserFormController {
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
             return "redirect:/admin/users";
         }
-
-
     }
 
 
@@ -90,14 +93,20 @@ public class RegisterUserFormController {
         System.err.println(afm);
         //Delete the user
         //Simple logic just for debugging
+        boolean found = false;
+        User founduser = null;
         for (User user : myList){
             if (user.getAfm().equals(afm)){
-                myList.remove(user);
+                found = true;
+                founduser = user;
             }
         }
+        if (found=true && founduser!= null){
+            myList.remove(founduser);
+        }
+
         redirectAttributes.addFlashAttribute("userList", myList);
         return "redirect:/admin/users";
     }
-
 
 }
