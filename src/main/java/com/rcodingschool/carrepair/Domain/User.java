@@ -1,13 +1,35 @@
 package com.rcodingschool.carrepair.Domain;
 
+import javax.persistence.*;
 
+@Entity(name="Users")
 public class User {
 
-    private String firstName, lastName;
+    @Id
+    @Column(name = "UserID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userID;
+
+    @Column(name = "Firstname", nullable = false)
+    private String firstName;
+
+    @Column(name = "Lastname", nullable = false)
+    private String lastName;
+
+    @Column(name = "Afm", nullable = false, unique = true)
     private String afm;
+
+    @Column(name = "Password", nullable = false)
     private String password;
+
+    @Column (name = "Email", nullable = false, unique = true)
     private String email;
+
+    @Column (name = "Type", nullable = false)
     private String type = "User";
+
+    @Column (name = "AddressID")
+    private Long addressID;
 
     public User(String firstName, String lastName, String afm, String password, String email, String type) {
         this.firstName = firstName;
@@ -17,6 +39,8 @@ public class User {
         this.email = email;
         this.type = type;
     }
+
+    public User(){}
 
     public String getFirstName() {
         return firstName;
@@ -66,15 +90,32 @@ public class User {
         this.type = type;
     }
 
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
+    public Long getAddressID() {
+        return addressID;
+    }
+
+    public void setAddressID(Long addressID) {
+        this.addressID = addressID;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "AFM=" + afm +
+                "UserID ='" + userID + '\'' +
+                ", AddressID =" + addressID+ '\'' +
+                ", Email='" + email + '\'' +
                 ", First Name='" + firstName + '\'' +
                 ", Last Name='" + lastName + '\'' +
-                ", Email='" + email + '\'' +
-                ", Type='" + type + '\'' +
                 ", Password='" + password + '\'' +
+                ", Type='" + type + '\'' +
                 '}';
     }
 

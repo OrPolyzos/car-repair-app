@@ -91,7 +91,6 @@
         <#list spring.status.errorMessages as error>
              <span>${error}</span>
         </#list>
-
         <br><br>
         <input type="submit" value="Search">
     </form>
@@ -99,15 +98,39 @@
     <h2>${searchNotFoundMessage!""}</h2>
     <#if userList??>
         <h3>Retrieved Users:</h3>
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>Address ID</th>
+                <th>AFM</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Type</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
         <#list userList as user>
         <span>
-        <form action="/admin/users/edit/${user.afm}" method="GET">
-            ${user.firstName} ${user.lastName} with AFM: ${user.afm} and Email: ${user.email}
-        <button type="submit" formaction="/admin/users/delete/${user.afm}" onclick="return confirm('Are you sure?')">Delete</button>
-        <input type="submit" value="Edit">
-        </form>
+        <tr>
+            <td>${user.userID}</td>
+            <td>${user.addressID}</td>
+            <td>${user.afm}</td>
+            <td>${user.email}</td>
+            <td>${user.firstName}</td>
+            <td>${user.lastName}</td>
+            <td>${user.type}</td>
+
+            <form action="/admin/users/edit/${user.afm}" method="GET">
+            <td> <input type="submit" value="Edit"> </td>
+            <td>
+                <button type="submit" formaction="/admin/users/delete/${user.afm}" formmethod="POST" onclick="return confirm('Are you sure?')">Delete</button>
+            </td>
+            </form>
+        </tr>
         </span>
         </#list>
+    </table>
     </#if>
     <script>
     function myFunction() {

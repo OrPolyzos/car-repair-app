@@ -4,7 +4,9 @@ import com.rcodingschool.carrepair.Converters.UserConverter;
 import com.rcodingschool.carrepair.Domain.User;
 import com.rcodingschool.carrepair.Model.UserForm;
 import com.rcodingschool.carrepair.Model.UserSearchForm;
+import com.rcodingschool.carrepair.Services.UserService;
 import com.rcodingschool.carrepair.SloppyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class UsersController {
     private static final String SEARCH_FORM = "userSearchForm";
     private static final String USER_LIST = "userList";
     private static final String NOT_FOUND = "searchNotFoundMessage";
+
+    @Autowired
+    private UserService userService;
 
     //We will use the @InitBinder annotation and the initBinder method to
     //trim all the user's input from spaces
@@ -62,8 +67,6 @@ public class UsersController {
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {
             //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
-            String err = "Some fields were incorrect!";
-            redirectAttributes.addFlashAttribute("errorMessage", err);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult."+USER_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(USER_FORM, userForm);
             return "redirect:/admin/users";
@@ -71,6 +74,8 @@ public class UsersController {
         try {
             //Trying to build a user from our UserForm
             User user = UserConverter.buildUserObject(userForm);
+            userService.save(user);
+            redirectAttributes.addFlashAttribute("errorMessage","User was created!");
             return "redirect:/admin/users";
         } catch (Exception exception) {
             //if an error occurs show it to the user
@@ -82,8 +87,8 @@ public class UsersController {
     @RequestMapping(value = "/users/delete/{afm}", method = RequestMethod.POST)
     public String processDeleteUser(@PathVariable String afm,
                       RedirectAttributes redirectAttributes) {
-        System.err.println(afm);
-        //Delete the user
+        userService.deleteByAfm(afm);
+        redirectAttributes.addFlashAttribute("errorMessage", "User was deleted successfully");
         return "redirect:/admin/users";
     }
 
@@ -100,26 +105,21 @@ public class UsersController {
             redirectAttributes.addFlashAttribute(SEARCH_FORM, userSearchForm);
             return "redirect:/admin/users";
         }
-        List<User> tempList = SloppyRepository.getAllUsers();
-
-
+        List<User> usersList;
         if (userSearchForm.getAfm() == null && userSearchForm.getEmail() == null){
-            if (tempList.isEmpty()){
-                redirectAttributes.addFlashAttribute(NOT_FOUND, "No records were found!");
-            }
-            redirectAttributes.addFlashAttribute(USER_LIST, tempList);
+            usersList = userService.findAll();
+        }
+        else if (userSearchForm.getAfm() != null){
+            usersList = userService.findByAfm(userSearchForm.getAfm());
+        }
+        else {
+            usersList = userService.findByEmail(userSearchForm.getEmail());
+        }
+        if (usersList.isEmpty()){
+            redirectAttributes.addFlashAttribute(NOT_FOUND, "No records were found!");
         }
         else{
-            boolean found = false;
-            List<User> finalList = new ArrayList<>();
-            for (User user : tempList){
-                if (user.getAfm().equals(userSearchForm.getAfm())){
-                    finalList.add(user);
-                }
-            }
-            if (!finalList.isEmpty()){
-                redirectAttributes.addFlashAttribute(USER_LIST, finalList);
-            }
+            redirectAttributes.addFlashAttribute(USER_LIST, usersList);
         }
         return "redirect:/admin/users";
     }

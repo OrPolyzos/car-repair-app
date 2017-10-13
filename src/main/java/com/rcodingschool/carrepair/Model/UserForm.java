@@ -32,7 +32,7 @@ public class UserForm {
 
     @NotNull(message="This field is required!")
     @Size(max=128, message="The street name can contain up to 128 characters!")
-    @Pattern(regexp="^[a-zA-Z']{1,128}", message="The street name can contain only characters!")
+    @Pattern(regexp="^[a-zA-Z' ]{1,128}", message="The street name can contain only characters!")
     private String addressStreet;
 
 
