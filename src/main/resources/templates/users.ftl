@@ -124,7 +124,7 @@
             <form action="/admin/users/edit/${user.afm}" method="GET">
             <td> <input type="submit" value="Edit"> </td>
             <td>
-                <button type="submit" formaction="/admin/users/delete/${user.afm}" formmethod="POST" onclick="return confirm('Are you sure?')">Delete</button>
+                <button type="submit" formaction="/admin/users/delete/${user.userID}" formmethod="POST" onclick="return confirm('Are you sure?')">Delete</button>
             </td>
             </form>
         </tr>

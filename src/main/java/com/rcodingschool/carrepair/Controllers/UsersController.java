@@ -84,10 +84,10 @@ public class UsersController {
         }
     }
 
-    @RequestMapping(value = "/users/delete/{afm}", method = RequestMethod.POST)
-    public String processDeleteUser(@PathVariable String afm,
+    @RequestMapping(value = "/users/delete/{id}", method = RequestMethod.POST)
+    public String processDeleteUser(@PathVariable Long id,
                       RedirectAttributes redirectAttributes) {
-        userService.deleteByAfm(afm);
+        userService.deleteByUserID(id);
         redirectAttributes.addFlashAttribute("errorMessage", "User was deleted successfully");
         return "redirect:/admin/users";
     }

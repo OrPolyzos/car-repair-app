@@ -14,5 +14,5 @@ public interface UserService {
 
     void save(User user);
 
-    void deleteByAfm(String afm);
+    void deleteByUserID(Long userID);
 }

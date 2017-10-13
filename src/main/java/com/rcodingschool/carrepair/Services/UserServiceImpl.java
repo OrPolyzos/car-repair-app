@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     public void save(User user) { userRepository.save(user); }
 
     @Override
-    public void deleteByAfm(String afm) {
-        userRepository.deleteByAfm(afm);
+    public void deleteByUserID(Long userID) {
+        userRepository.deleteByUserID(userID);
     }
 }
