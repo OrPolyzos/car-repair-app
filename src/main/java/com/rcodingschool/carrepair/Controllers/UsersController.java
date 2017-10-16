@@ -2,9 +2,11 @@ package com.rcodingschool.carrepair.Controllers;
 
 import com.rcodingschool.carrepair.Converters.UserConverter;
 import com.rcodingschool.carrepair.Domain.User;
+import com.rcodingschool.carrepair.Domain.Vehicle;
 import com.rcodingschool.carrepair.Model.UserForm;
 import com.rcodingschool.carrepair.Model.UserSearchForm;
 import com.rcodingschool.carrepair.Services.UserService;
+import com.rcodingschool.carrepair.Services.VehicleService;
 import com.rcodingschool.carrepair.SloppyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,10 +29,14 @@ public class UsersController {
     private static final String USER_FORM = "userForm";
     private static final String SEARCH_FORM = "userSearchForm";
     private static final String USER_LIST = "userList";
+    private static final String VEHICLE_LIST = "vehicleList";
     private static final String NOT_FOUND = "searchNotFoundMessage";
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private VehicleService vehicleService;
 
     //We will use the @InitBinder annotation and the initBinder method to
     //trim all the user's input from spaces

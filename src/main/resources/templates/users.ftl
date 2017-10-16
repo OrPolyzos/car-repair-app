@@ -100,35 +100,35 @@
         <h3>Retrieved Users:</h3>
         <table>
             <tr>
-                <th>User ID</th>
-                <th>Address ID</th>
-                <th>AFM</th>
-                <th>Email</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Type</th>
-                <th>Edit Vehicles</th>
-                <th>Delete User</th>
-                <th>Manage vehicles</th>
+                <th align="center">User ID</th>
+                <th align="center">Address ID</th>
+                <th align="center">AFM</th>
+                <th align="center">Email</th>
+                <th align="center">First Name</th>
+                <th align="center">Last Name</th>
+                <th align="center">Type</th>
+                <th align="center">Edit</th>
+                <th align="center">Delete</th>
+                <th align="center"Vehicles</th>
             </tr>
         <#list userList as user>
         <span>
         <tr>
-            <td>${user.userID}</td>
-            <td>${user.addressID!"To be implemented..."}</td>
-            <td>${user.afm}</td>
-            <td>${user.email}</td>
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>${user.type}</td>
+            <td align="center">${user.userID}</td>
+            <td align="center">${user.addressID!"To be implemented..."}</td>
+            <td align="center">${user.afm}</td>
+            <td align="center">${user.email}</td>
+            <td align="center">${user.firstName}</td>
+            <td align="center">${user.lastName}</td>
+            <td align="center">${user.type}</td>
 
             <form action="/admin/users/edit/${user.userID}" method="GET">
-            <td> <input type="submit" value="Edit"> </td>
-            <td>
-                <button type="submit" formaction="/admin/users/delete/${user.userID}" formmethod="GET" onclick="return confirm('Are you sure?')">Delete</button>
+            <td align="center"> <input type="submit" value="Edit"> </td>
+            <td align="center">
+                <button type="submit" formaction="/admin/users/delete/${user.userID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
             </td>
-            <td>
-                <button type="submit" formaction="/admin/users/vehicles/${user.userID}" formmethod="GET">Vehicles</button>
+            <td alight="center">
+                <button type="submit" formaction="/admin/vehicles/${user.userID}" formmethod="GET">Vehicles</button>
             </td>
             </form>
         </tr>

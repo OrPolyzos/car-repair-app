@@ -2,14 +2,11 @@ package com.rcodingschool.carrepair.Domain;
 
 import org.springframework.format.annotation.NumberFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.*;
-import java.time.Year;
+import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity(name="Vehicles")
-public class Vehicle {
+@Entity(name = "Vehicles")
+public class Vehicle implements Serializable {
 
     @Id
     @Column(name = "VehicleID", nullable = false)
@@ -25,16 +22,18 @@ public class Vehicle {
     private String fuelType;
 
     @Column(name = "Year", nullable = false)
-    private Integer year;
+    private String year;
 
     @Column(name = "Color", nullable = false)
     private String color;
 
-
     @Column(name = "UserID", nullable = false)
     private Long userID;
 
-    public Vehicle(String vehicleID, String brand, String model, String fuelType, Integer year, String color, Long userID) {
+    public Vehicle() {
+    }
+
+    public Vehicle(String vehicleID, String brand, String model, String fuelType, String year, String color, Long userID) {
         this.vehicleID = vehicleID;
         this.brand = brand;
         this.model = model;
@@ -43,8 +42,6 @@ public class Vehicle {
         this.color = color;
         this.userID = userID;
     }
-
-    public Vehicle(){}
 
     public String getVehicleID() {
         return vehicleID;
@@ -86,11 +83,11 @@ public class Vehicle {
         this.fuelType = fuelType;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

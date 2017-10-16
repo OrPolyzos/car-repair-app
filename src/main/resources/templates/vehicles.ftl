@@ -94,9 +94,9 @@
                 <th>Model</th>
                 <th>Year</th>
                 <th>Color</th>
-                <th>Fuel Type</th>
-                <th>Edit Vehicle</th>
-                <th>Delete Vehicle</th>
+                <th>Fuel</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         <#list vehicleList as vehicle>
         <span>
@@ -113,9 +113,6 @@
             <td>
                 <button type="submit" formaction="/admin/vehicles/delete/${vehicle.vehicleID}" formmethod="GET" onclick="return confirm('Are you sure?')">Delete</button>
             </td>
-            <!--td>
-                <button type="submit" formaction="/admin/users/vehicles/repairs/${vehicle.userID}" formmethod="GET">Repairs</button>
-            </td-->
             </form>
         </tr>
         </span>

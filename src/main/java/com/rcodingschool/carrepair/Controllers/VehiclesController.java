@@ -1,11 +1,8 @@
 package com.rcodingschool.carrepair.Controllers;
 
-import com.rcodingschool.carrepair.Converters.UserConverter;
 import com.rcodingschool.carrepair.Converters.VehicleConverter;
 import com.rcodingschool.carrepair.Domain.User;
 import com.rcodingschool.carrepair.Domain.Vehicle;
-import com.rcodingschool.carrepair.Model.UserForm;
-import com.rcodingschool.carrepair.Model.UserSearchForm;
 import com.rcodingschool.carrepair.Model.VehicleForm;
 import com.rcodingschool.carrepair.Model.VehicleSearchForm;
 import com.rcodingschool.carrepair.Services.UserService;
@@ -46,12 +43,29 @@ public class VehiclesController {
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    //The registerUserForm method which maps the registerUserForm.ftl for GET requests
+    //The shoForm method which maps the registerUserForm.ftl for GET requests
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
-    public String showUsersView(Model model) {
+    public String showVehiclesView(Model model) {
         Map<String, Object> map = model.asMap();
         if (!map.containsKey(VEHICLE_FORM)) {
             model.addAttribute(VEHICLE_FORM, new VehicleForm());
+        }
+        if (!map.containsKey(SEARCH_FORM)){
+            model.addAttribute(SEARCH_FORM, new VehicleSearchForm());
+        }
+        return "vehicles";
+    }
+
+    //The registerUserForm method which maps the registerUserForm.ftl for GET requests
+    @RequestMapping(value = "/vehicles/{id}", method = RequestMethod.GET)
+    public String showVehiclesViewForSpecificUser(@PathVariable Long id,  Model model) {
+        Map<String, Object> map = model.asMap();
+        List<Vehicle> vehiclesList = vehicleService.findByUserID(id);
+        model.addAttribute(VEHICLE_LIST,vehiclesList);
+        if (!map.containsKey(VEHICLE_FORM)) {
+            VehicleForm vehicleForm = new VehicleForm();
+            vehicleForm.setAfm(userService.findOne(id).getAfm());
+            model.addAttribute(VEHICLE_FORM, vehicleForm);
         }
         if (!map.containsKey(SEARCH_FORM)){
             model.addAttribute(SEARCH_FORM, new VehicleSearchForm());

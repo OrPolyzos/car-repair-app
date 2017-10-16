@@ -12,17 +12,17 @@ public class VehicleForm {
 
     @NotNull(message="This field is required!")
     @Size(max=32, message="Brand should be up to 32 characters!")
-    @Pattern(regexp="^[0-9a-zA-Z]{1,32}", message="Brand can contain only alphanumericals!")
+    @Pattern(regexp="^[0-9a-zA-Z' ]{1,32}", message="Brand can contain only alphanumericals!")
     private String brand;
 
     @NotNull(message="This field is required!")
     @Size(max=32, message="The model should be up to 32 characters!")
-    @Pattern(regexp="^[0-9a-zA-Z']{1,32}", message="The model can contain only alphanumericals!")
+    @Pattern(regexp="^[0-9a-zA-Z' ]{1,32}", message="The model can contain only alphanumericals!")
     private String model;
 
     @NotNull(message="This field is required!")
     @Size(max=32, message="The color should be up to 32 characters!")
-    @Pattern(regexp="^[a-zA-Z']{1,32}", message="Color contains only characters!")
+    @Pattern(regexp="^[a-zA-Z ]{1,32}", message="Color contains only characters!")
     private String color;
 
     @NotNull(message="This field is required!")
@@ -30,10 +30,9 @@ public class VehicleForm {
     private String fuelType;
 
     @NotNull(message="This field is required!")
-    @Min(value=1950, message="Year of construction must be greater or equal than 1950!")
-    @Max(value=2017, message = "Year of construction must not be greater than the current year!")
-    //@Pattern(regexp="^[0-9]{4}", message = "Only numbers allowed!")
-    private Integer year;
+
+    @Pattern(regexp="^19[5-9][0-9]|200[0-9]|201[0-7]", message="Choose a year from 1950 to 2017!")
+    private String year;
 
     @NotNull(message="This field is required!")
     @Size(min=9, max=9, message="AFM should be exactly 9 digits!")
@@ -98,11 +97,11 @@ public class VehicleForm {
         this.fuelType = fuelType;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 }

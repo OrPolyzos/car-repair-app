@@ -1,9 +1,10 @@
 package com.rcodingschool.carrepair.Domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity(name="Users")
-public class User {
+@Entity(name = "Users")
+public class User implements Serializable {
 
     @Id
     @Column(name = "UserID", nullable = false)
@@ -22,14 +23,17 @@ public class User {
     @Column(name = "Password", nullable = false)
     private String password;
 
-    @Column (name = "Email", nullable = false, unique = true)
+    @Column(name = "Email", nullable = false, unique = true)
     private String email;
 
-    @Column (name = "Type", nullable = false)
+    @Column(name = "Type", nullable = false)
     private String type = "User";
 
-    @Column (name = "AddressID")
+    @Column(name = "AddressID")
     private Long addressID;
+
+    public User() {
+    }
 
     public User(String firstName, String lastName, String afm, String password, String email, String type) {
         this.firstName = firstName;
@@ -50,8 +54,6 @@ public class User {
         this.userID = userID;
         this.addressID = addressID;
     }
-
-    public User(){}
 
     public String getFirstName() {
         return firstName;
@@ -121,7 +123,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "UserID ='" + userID + '\'' +
-                ", AddressID =" + addressID+ '\'' +
+                ", AddressID =" + addressID + '\'' +
                 ", Email='" + email + '\'' +
                 ", First Name='" + firstName + '\'' +
                 ", Last Name='" + lastName + '\'' +

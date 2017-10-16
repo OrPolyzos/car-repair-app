@@ -47,7 +47,7 @@ public class UserForm {
     private Integer addressNumber;
 
     @NotNull(message="This field is required!")
-    @Pattern(regexp="^[0-9]{5}", message="The street name can contain only characters!")
+    @Pattern(regexp="^[0-9]{5}", message="The Zip code can be up to 5 digits!")
     private String addressZipCode;
 
 
