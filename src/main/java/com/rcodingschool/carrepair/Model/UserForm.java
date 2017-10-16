@@ -6,6 +6,11 @@ import javax.validation.constraints.*;
 
 public class UserForm {
 
+    private Long userID;
+
+    private Long addressID;
+
+
     @NotNull(message="This field is required!")
     @Size(min=1, max=128, message="Maximum length is 128 characters!")
     @Pattern(regexp="^[a-zA-Z]{1,128}", message="Only uppercase and lowercase characters allowed!")
@@ -45,6 +50,7 @@ public class UserForm {
     @Pattern(regexp="^[0-9]{5}", message="The street name can contain only characters!")
     private String addressZipCode;
 
+
     public String getAddressZipCode() {
         return addressZipCode;
     }
@@ -56,6 +62,22 @@ public class UserForm {
     public String getAddressStreet() {
 
         return addressStreet;
+    }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
+    public Long getAddressID() {
+        return addressID;
+    }
+
+    public void setAddressID(Long addressID) {
+        this.addressID = addressID;
     }
 
     public void setAddressStreet(String addressStreet) {

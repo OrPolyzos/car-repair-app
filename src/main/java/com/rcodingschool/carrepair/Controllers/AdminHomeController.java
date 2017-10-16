@@ -11,12 +11,11 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/admin")
+@RequestMapping("/admin")
 public class AdminHomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String adminHome() {
-        List<User> list = SloppyRepository.getAllUsers();
         return "adminIndex";
     }
 }

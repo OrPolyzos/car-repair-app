@@ -40,6 +40,17 @@ public class User {
         this.type = type;
     }
 
+    public User(String firstName, String lastName, String afm, String password, String email, String type, Long userID, Long addressID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.afm = afm;
+        this.password = password;
+        this.email = email;
+        this.type = type;
+        this.userID = userID;
+        this.addressID = addressID;
+    }
+
     public User(){}
 
     public String getFirstName() {

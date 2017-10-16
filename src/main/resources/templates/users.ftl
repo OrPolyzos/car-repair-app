@@ -77,7 +77,7 @@
     </form>
     <hr></hr>
     <h2>Search User</h2>
-    <form action="/admin/users/search" method="POST" id="userSearchForm" name="userSearchForm">
+    <form action="/admin/users/search" method="GET" id="userSearchForm" name="userSearchForm">
         <h4><i>Fill in User's AFM and/or Email</i></h4>
         <#--bind this field with the registration form fields-->
         <@spring.bind "userSearchForm.afm" />
@@ -107,24 +107,28 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Type</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Edit Vehicles</th>
+                <th>Delete User</th>
+                <th>Manage vehicles</th>
             </tr>
         <#list userList as user>
         <span>
         <tr>
             <td>${user.userID}</td>
-            <td>${user.addressID}</td>
+            <td>${user.addressID!"To be implemented..."}</td>
             <td>${user.afm}</td>
             <td>${user.email}</td>
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.type}</td>
 
-            <form action="/admin/users/edit/${user.afm}" method="GET">
+            <form action="/admin/users/edit/${user.userID}" method="GET">
             <td> <input type="submit" value="Edit"> </td>
             <td>
-                <button type="submit" formaction="/admin/users/delete/${user.userID}" formmethod="POST" onclick="return confirm('Are you sure?')">Delete</button>
+                <button type="submit" formaction="/admin/users/delete/${user.userID}" formmethod="GET" onclick="return confirm('Are you sure?')">Delete</button>
+            </td>
+            <td>
+                <button type="submit" formaction="/admin/users/vehicles/${user.userID}" formmethod="GET">Vehicles</button>
             </td>
             </form>
         </tr>

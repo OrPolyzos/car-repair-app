@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface UserService {
 
+    User findOne(Long userID);
+
     List<User> findAll();
 
     List<User> findByAfm(String afm);

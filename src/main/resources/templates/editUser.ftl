@@ -9,6 +9,10 @@
 
     <form action="/admin/users/editUser" method="POST" id="userForm" name="userForm">
         <h4><i>User's Personal Details</i></h4>
+        <@spring.bind "userForm.userID" />
+        <input type="hidden" name="userID" value="${userForm.userID!""}">
+        <@spring.bind "userForm.userID" />
+        <input type="hidden" name="addressID" value="${userForm.addressID!""}">
         <#--bind this field with the registration form fields-->
         <@spring.bind "userForm.firstName" />
         First Name: <input type="text" name="firstName" id="firstName" placeholder="John" value="${userForm.firstName!""}"/>
@@ -74,6 +78,10 @@
         </#list>
         <br><br>
         <input type="submit" value="Edit">
+    </form>
+
+    <form action="/admin/users" method="GET">
+        <input type="submit" value="Back">
     </form>
 </body>
 </html>

@@ -7,6 +7,7 @@ import com.rcodingschool.carrepair.Model.UserSearchForm;
 import com.rcodingschool.carrepair.Services.UserService;
 import com.rcodingschool.carrepair.SloppyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,7 +48,7 @@ public class UsersController {
         if (!map.containsKey(USER_FORM)) {
             model.addAttribute(USER_FORM, new UserForm());
         }
-        if (!map.containsKey(SEARCH_FORM)){
+        if (!map.containsKey(SEARCH_FORM)) {
             model.addAttribute(SEARCH_FORM, new UserSearchForm());
         }
         return "users";
@@ -60,14 +61,14 @@ public class UsersController {
     // to the corresponding fields of the userForm object
     @RequestMapping(value = "/users/create", method = RequestMethod.POST)
     public String processCreateUser(@Valid @ModelAttribute(USER_FORM) UserForm userForm,
-                                   BindingResult bindingResult, Model model,
-                                   RedirectAttributes redirectAttributes) {
+                                    BindingResult bindingResult, Model model,
+                                    RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {
             //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult."+USER_FORM, bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + USER_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(USER_FORM, userForm);
             return "redirect:/admin/users";
         }
@@ -75,7 +76,7 @@ public class UsersController {
             //Trying to build a user from our UserForm
             User user = UserConverter.buildUserObject(userForm);
             userService.save(user);
-            redirectAttributes.addFlashAttribute("errorMessage","User was created!");
+            redirectAttributes.addFlashAttribute("errorMessage", "User was created!");
             return "redirect:/admin/users";
         } catch (Exception exception) {
             //if an error occurs show it to the user
@@ -84,59 +85,51 @@ public class UsersController {
         }
     }
 
-    @RequestMapping(value = "/users/delete/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/delete/{id}", method = RequestMethod.GET)
     public String processDeleteUser(@PathVariable Long id,
-                      RedirectAttributes redirectAttributes) {
+                                    RedirectAttributes redirectAttributes) {
         userService.deleteByUserID(id);
         redirectAttributes.addFlashAttribute("errorMessage", "User was deleted successfully");
         return "redirect:/admin/users";
     }
 
-    @RequestMapping(value = "/users/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/search", method = RequestMethod.GET)
     public String processSearchUser(@Valid @ModelAttribute(SEARCH_FORM) UserSearchForm userSearchForm,
-                             BindingResult bindingResult, Model model,
-                             RedirectAttributes redirectAttributes){
+                                    BindingResult bindingResult, Model model,
+                                    RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {
             //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult."+SEARCH_FORM, bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + SEARCH_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(SEARCH_FORM, userSearchForm);
             return "redirect:/admin/users";
         }
+
         List<User> usersList;
-        if (userSearchForm.getAfm() == null && userSearchForm.getEmail() == null){
+        if (userSearchForm.getAfm() == null && userSearchForm.getEmail() == null) {
             usersList = userService.findAll();
-        }
-        else if (userSearchForm.getAfm() != null){
+        } else if (userSearchForm.getAfm() != null) {
             usersList = userService.findByAfm(userSearchForm.getAfm());
-        }
-        else {
+        } else {
             usersList = userService.findByEmail(userSearchForm.getEmail());
         }
-        if (usersList.isEmpty()){
+        if (usersList.isEmpty()) {
             redirectAttributes.addFlashAttribute(NOT_FOUND, "No records were found!");
-        }
-        else{
+        } else {
             redirectAttributes.addFlashAttribute(USER_LIST, usersList);
         }
         return "redirect:/admin/users";
     }
 
-    @RequestMapping(value = "/users/edit/{afm}", method = RequestMethod.GET)
-    public String showEditUser(@PathVariable String afm,
-                                    RedirectAttributes redirectAttributes) {
-        System.err.println(afm);
+    @RequestMapping(value = "/users/edit/{id}", method = RequestMethod.GET)
+    public String showEditUser(@PathVariable Long id,
+                               RedirectAttributes redirectAttributes) {
         //Find the user
-        List<User> users = SloppyRepository.getAllUsers();
-        for (User user : users){
-            if (user.getAfm().equals(afm)){
-                UserForm userForm = UserConverter.buildUserFormObject(user);
-                redirectAttributes.addFlashAttribute(USER_FORM, userForm);
-                break;
-            }
-        }
+        User user = userService.findOne(id);
+        UserForm userForm = UserConverter.buildUserFormObject(user);
+        redirectAttributes.addFlashAttribute(userForm);
         return "redirect:/admin/users/editUser";
     }
 
@@ -145,26 +138,28 @@ public class UsersController {
         Map<String, Object> map = model.asMap();
         if (!map.containsKey(USER_FORM)) {
             model.addAttribute(USER_FORM, new UserForm());
+            return "redirect:/admin/users";
         }
         return "editUser";
     }
 
     @RequestMapping(value = "/users/editUser", method = RequestMethod.POST)
     public String processEditUser(@Valid @ModelAttribute(USER_FORM) UserForm userForm,
-                                    BindingResult bindingResult, Model model,
-                                    RedirectAttributes redirectAttributes) {
-
+                                  BindingResult bindingResult, Model model,
+                                  RedirectAttributes redirectAttributes) {
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {
             //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult."+USER_FORM, bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + USER_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(USER_FORM, userForm);
             return "redirect:/admin/users/editUser";
         }
         try {
             //Trying to build a user from our UserForm
-            User user = UserConverter.buildUserObject(userForm);
+            User user = UserConverter.buildFullUserObject(userForm);
+            userService.save(user);
+
             return "redirect:/admin/users";
         } catch (Exception exception) {
             //if an error occurs show it to the user
