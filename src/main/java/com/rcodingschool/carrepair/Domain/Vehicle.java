@@ -1,7 +1,5 @@
 package com.rcodingschool.carrepair.Domain;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -35,7 +33,7 @@ public class Vehicle implements Serializable {
     @JoinColumn(name="UserID",referencedColumnName="UserID", updatable = false, insertable = false)
     private User user;
 
-    @OneToMany(mappedBy = "vehicle", targetEntity = Repair.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle", targetEntity = Repair.class)
     private List<Repair> vehicleRepairs;
 
     public Vehicle() {

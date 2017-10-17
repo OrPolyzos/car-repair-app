@@ -37,7 +37,7 @@ public class User implements Serializable {
     @JoinColumn(name = "AddressID", referencedColumnName = "AddressID", updatable = false, insertable = false)
     private Address address;
 
-    @OneToMany(mappedBy = "user", targetEntity = Vehicle.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Vehicle.class)
     private List<Vehicle> userVehicles;
 
     public User() {

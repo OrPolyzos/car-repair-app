@@ -5,7 +5,6 @@ import com.rcodingschool.carrepair.Domain.User;
 import com.rcodingschool.carrepair.Model.UserForm;
 import com.rcodingschool.carrepair.Model.UserSearchForm;
 import com.rcodingschool.carrepair.Services.UserService;
-import com.rcodingschool.carrepair.Services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -73,7 +72,7 @@ public class UsersController {
         }
         try {
             //Trying to build a user from our UserForm
-            User user = UserConverter.buildUserObject(userForm);
+            User user = UserConverter.buildInsertUserObject(userForm);
             //Save the user
             userService.save(user);
             //Send information to the user
@@ -186,7 +185,7 @@ public class UsersController {
         try {
             //Trying to build a user from our UserForm
             //Full means we include userID also
-            User user = UserConverter.buildFullUserObject(userForm);
+            User user = UserConverter.buildUpdateUserObject(userForm);
             //Save the user
             userService.save(user);
             return "redirect:/admin/users";

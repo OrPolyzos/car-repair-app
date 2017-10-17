@@ -1,8 +1,6 @@
 package com.rcodingschool.carrepair.Services;
 
-import com.rcodingschool.carrepair.Domain.User;
 import com.rcodingschool.carrepair.Domain.Vehicle;
-import com.rcodingschool.carrepair.Repositories.UserRepository;
 import com.rcodingschool.carrepair.Repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +35,8 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public void deleteByVehicleID(String vehicleID) {
+
+        //repairReository.deleteByVehicleID
         vehicleRepository.deleteByVehicleID(vehicleID);
     }
 

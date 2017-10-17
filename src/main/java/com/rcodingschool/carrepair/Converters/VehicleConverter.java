@@ -5,6 +5,7 @@ import com.rcodingschool.carrepair.Domain.Vehicle;
 import com.rcodingschool.carrepair.Model.VehicleForm;
 
 public class VehicleConverter {
+
     public static Vehicle buildVehicleObject(VehicleForm vehicleForm, User user) {
         Vehicle vehicle = new Vehicle();
         vehicle.setVehicleID(vehicleForm.getVehicleID());
@@ -14,6 +15,7 @@ public class VehicleConverter {
         vehicle.setYear(vehicleForm.getYear());
         vehicle.setColor(vehicleForm.getColor());
         vehicle.setUserID(user.getUserID());
+
 
         return vehicle;
     }

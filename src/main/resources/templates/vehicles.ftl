@@ -3,7 +3,7 @@
 <head>
     <title>Vehicles</title>
 </head>
-<body>
+<body align="center">
     <h1>${errorMessage!""}</h1>
     <h2>Add Vehicle</h2>
 
@@ -86,33 +86,38 @@
 <hr></hr>
     <h2>${searchNotFoundMessage!""}</h2>
     <#if vehicleList??>
-        <h3>Retrieved Vehicles:</h3>
-        <table>
+        <h3 align="center"><u>Retrieved Vehicles</u></h3>
+        <table align="center">
             <tr>
-                <th>Plate Number</th>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Year</th>
-                <th>Color</th>
-                <th>Fuel</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th align="center">Plate Number</th>
+                <th align="center">Brand</th>
+                <th align="center">Model</th>
+                <th align="center">Year</th>
+                <th align="center">Color</th>
+                <th align="center">Fuel</th>
+                <th align="center">Edit</th>
+                <th align="center">Delete</th>
+                <th align="center">Repairs</th>
             </tr>
         <#list vehicleList as vehicle>
         <span>
         <tr>
-            <td>${vehicle.vehicleID}</td>
-            <td>${vehicle.brand!}</td>
-            <td>${vehicle.model}</td>
-            <td>${vehicle.year}</td>
-            <td>${vehicle.color}</td>
-            <td>${vehicle.fuelType}</td>
+            <td align="center">${vehicle.vehicleID}</td>
+            <td align="center">${vehicle.brand}</td>
+            <td align="center">${vehicle.model}</td>
+            <td align="center">${vehicle.year}</td>
+            <td align="center">${vehicle.color}</td>
+            <td align="center">${vehicle.fuelType}</td>
 
             <form action="/admin/vehicles/edit/${vehicle.vehicleID}" method="GET">
-            <td> <input type="submit" value="Edit"> </td>
-            <td>
+            <td align="center"> <input type="submit" value="Edit"> </td>
+            <td align="center">
                 <button type="submit" formaction="/admin/vehicles/delete/${vehicle.vehicleID}" formmethod="GET" onclick="return confirm('Are you sure?')">Delete</button>
             </td>
+            <td align="center">
+                <button type="submit" formaction="/admin/repairs/${vehicle.vehicleID}" formmethod="GET">Repairs</button>
+            </td>
+
             </form>
         </tr>
         </span>

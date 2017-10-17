@@ -1,7 +1,6 @@
 package com.rcodingschool.carrepair.Services;
 
 import com.rcodingschool.carrepair.Domain.User;
-import com.rcodingschool.carrepair.Domain.Vehicle;
 import com.rcodingschool.carrepair.Repositories.AddressRepository;
 import com.rcodingschool.carrepair.Repositories.UserRepository;
 import com.rcodingschool.carrepair.Repositories.VehicleRepository;
@@ -49,9 +48,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteByUserID(Long userID) {
-        for (Vehicle vehicle : userRepository.findOne(userID).getUserVehicles()){
-            vehicleRepository.deleteByVehicleID(vehicle.getVehicleID());
-        }
+//        for (Vehicle vehicle : userRepository.findOne(userID).getUserVehicles()){
+//            vehicleRepository.deleteByVehicleID(vehicle.getVehicleID());
+//        }
         userRepository.deleteByUserID(userID);
     }
 }

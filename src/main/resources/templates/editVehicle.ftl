@@ -9,6 +9,7 @@
 
     <form action="/admin/vehicles/editVehicle" method="POST" id="vehicleForm" name="vehicleForm">
         <h4><i>Vehicle's Details</i></h4>
+        <h5><u>Owner's AFM: ${vehicleForm.afm!""}</u></h5>
         <#--bind this field with the registration form fields-->
 
         <@spring.bind "vehicleForm.userID" />

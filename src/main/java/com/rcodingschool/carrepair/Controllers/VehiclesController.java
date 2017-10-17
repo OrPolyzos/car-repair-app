@@ -1,7 +1,6 @@
 package com.rcodingschool.carrepair.Controllers;
 
 import com.rcodingschool.carrepair.Converters.VehicleConverter;
-import com.rcodingschool.carrepair.Domain.User;
 import com.rcodingschool.carrepair.Domain.Vehicle;
 import com.rcodingschool.carrepair.Model.VehicleForm;
 import com.rcodingschool.carrepair.Model.VehicleSearchForm;
@@ -44,12 +43,15 @@ public class VehiclesController {
     }
 
 
+    //The showVehiclesView method which maps the "/admin/vehicles/" GET requests and returns the vehicles.ftl
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
     public String showVehiclesView(Model model) {
         Map<String, Object> map = model.asMap();
+        //If our Model does not contain a vehicleForm, add a new VehicleForm()
         if (!map.containsKey(VEHICLE_FORM)) {
             model.addAttribute(VEHICLE_FORM, new VehicleForm());
         }
+        //if our Model does not contain a searchForm, add a new VehicleSearchForm()
         if (!map.containsKey(SEARCH_FORM)) {
             model.addAttribute(SEARCH_FORM, new VehicleSearchForm());
         }
@@ -73,38 +75,40 @@ public class VehiclesController {
         return "vehicles";
     }
 
-    //The registerUserForm method which maps the registerUserForm.ftl for POST request
-    //This means when the user has submitted data in the input fields
-    //We will bind each one of the user's inputs in the registerUserForm.ftl
-    // to the corresponding fields of the userForm object
+    //The processCreateVehicle() method will map "/admin/vehicle/create" POST requests
+    //and eventually it will redirect to "/admin/vehicles"
     @RequestMapping(value = "/vehicles/create", method = RequestMethod.POST)
-    public String processCreateUser(@Valid @ModelAttribute(VEHICLE_FORM) VehicleForm vehicleForm,
-                                    BindingResult bindingResult, Model model,
-                                    RedirectAttributes redirectAttributes) {
+    public String processCreateVehicle(@Valid @ModelAttribute(VEHICLE_FORM) VehicleForm vehicleForm,
+                                       BindingResult bindingResult, Model model,
+                                       RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {
-            //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
+            //Also we will be adding vehicleForm to RedirectAttributes so that we can keep his valid inputs and reshow them
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + VEHICLE_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);
             return "redirect:/admin/vehicles";
         }
         try {
-            //Trying to build a user from our UserForm
-            List<User> userList = userService.findByAfm(vehicleForm.getAfm());
-            if (userList.size() != 0) {
-                vehicleForm.setAfm(userList.get(0).getAfm());
-                Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userList.get(0));
-                vehicleService.save(vehicle);
-                redirectAttributes.addFlashAttribute("errorMessage", "Vehicle was added!");
-                return "redirect:/admin/vehicles";
-            } else {
-                vehicleForm.setAfm(null);
-                redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);
-                redirectAttributes.addFlashAttribute("errorMessage", "The provided AFM does not correspond to a user! Please create a user first!");
-                return "redirect:/admin/vehicles";
-            }
+            //Trying to build a vehicle from our VehicleForm
+            Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userService.findByAfm(vehicleForm.getAfm()).get(0));
+            vehicleService.save(vehicle);
+            return "redirect:/admin/vehicles";
+//            List<User> userList = userService.findByAfm(vehicleForm.getAfm());
+//            if (userList.size() != 0) {
+//                vehicleForm.setAfm(userList.get(0).getAfm());
+//                Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userList.get(0));
+//                vehicleService.save(vehicle);
+//                redirectAttributes.addFlashAttribute("errorMessage", "Vehicle was added!");
+//                return "redirect:/admin/vehicles";
+//            } else {
+//                vehicleForm.setAfm(null);
+//                redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);
+//                redirectAttributes.addFlashAttribute("errorMessage", "The provided AFM does not correspond to a user! Please create a user first!");
+//                return "redirect:/admin/vehicles";
+//            }
+
 
         } catch (Exception exception) {
             //if an error occurs show it to the user :(
@@ -113,18 +117,23 @@ public class VehiclesController {
         }
     }
 
+    //The processDeleteVehicle method will map "/admin/vehicles/delete/{id}" GET requests and
+    //will delete a vehicle and redirect to "/admin/vehicles"
     @RequestMapping(value = "/vehicles/delete/{vehicleID}", method = RequestMethod.GET)
-    public String processDeleteUser(@PathVariable String vehicleID,
-                                    RedirectAttributes redirectAttributes) {
+    public String processDeleteVehicle(@PathVariable String vehicleID,
+                                       RedirectAttributes redirectAttributes) {
+        //Delete the vehicle depending on its vehicleID
         vehicleService.deleteByVehicleID(vehicleID);
         redirectAttributes.addFlashAttribute("errorMessage", "Vehicle was deleted successfully!");
         return "redirect:/admin/vehicles";
     }
 
+    //The processSearchVehicle() method will map "/vehicles/search" GET requests and
+    //will search for a vehicle by either AFM or VehicleID
     @RequestMapping(value = "/vehicles/search", method = RequestMethod.GET)
-    public String processSearchUser(@Valid @ModelAttribute(SEARCH_FORM) VehicleSearchForm vehicleSearchForm,
-                                    BindingResult bindingResult, Model model,
-                                    RedirectAttributes redirectAttributes) {
+    public String processSearchVehicle(@Valid @ModelAttribute(SEARCH_FORM) VehicleSearchForm vehicleSearchForm,
+                                       BindingResult bindingResult, Model model,
+                                       RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
@@ -151,19 +160,26 @@ public class VehiclesController {
         return "redirect:/admin/vehicles";
     }
 
+    //The showEditVehicle() method will map "/vehicles/edit/{vehicleID} GET requests
+    //and will try to find a vehicle based on the id and show the editVehicle.ftl
+    //so that the Admin can edit the vehicle details
     @RequestMapping(value = "/vehicles/edit/{vehicleID}", method = RequestMethod.GET)
-    public String showEditUser(@PathVariable String vehicleID,
+    public String showEditVehicle(@PathVariable String vehicleID,
                                RedirectAttributes redirectAttributes) {
-        //Find the user
+        //Find the vehicle
         Vehicle vehicle = vehicleService.findByVehicleID(vehicleID).get(0);
+        //Create a new vehicleForm based on the vehicle
         VehicleForm vehicleForm = VehicleConverter.buildVehicleFormObject(vehicle);
         redirectAttributes.addFlashAttribute(vehicleForm);
         return "redirect:/admin/vehicles/editVehicle";
     }
 
+    //the showEditUserVehicle will map "/vehicles/editVehicle" GET requests
+    //and redirect to /admin/users or show the "editVehicle.ftl"
     @RequestMapping(value = "/vehicles/editVehicle", method = RequestMethod.GET)
-    public String showEditUserView(Model model) {
+    public String showEditVehiceView(Model model) {
         Map<String, Object> map = model.asMap();
+        //If we ended up here without a vehicleForm then something went wrong so we redirect to vehicles
         if (!map.containsKey(VEHICLE_FORM)) {
             model.addAttribute(VEHICLE_FORM, new VehicleForm());
             return "redirect:/admin/vehicles";
@@ -171,6 +187,8 @@ public class VehiclesController {
         return "editVehicle";
     }
 
+    //The processEditVehicle() method will map "/vehicles/editVehicle" POST requests
+    //and will try to change the details of a Vehicle
     @RequestMapping(value = "/vehicles/editVehicle", method = RequestMethod.POST)
     public String processEditUser(@Valid @ModelAttribute(VEHICLE_FORM) VehicleForm vehicleForm,
                                   BindingResult bindingResult, Model model,
@@ -178,17 +196,15 @@ public class VehiclesController {
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {
-            //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
+            //Also we will be adding vehicleForm to RedirectAttributes so that we can keep his valid inputs and reshow them
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + VEHICLE_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);
             return "redirect:/admin/vehicles/editVehicle";
         }
         try {
-            //Trying to build a user from our UserForm
-            User user = userService.findOne(vehicleForm.getUserID());
-            Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, user);
+            //Trying to build a Vehicle from our VehicleForm
+            Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userService.findOne(vehicleForm.getUserID()));
             vehicleService.save(vehicle);
-
             return "redirect:/admin/vehicles";
         } catch (Exception exception) {
             //if an error occurs show it to the user
