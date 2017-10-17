@@ -5,14 +5,16 @@
 </head>
 <body>
     <h1>${errorMessage!""}</h1>
-    <h2>Add Vehicle</h2>
+    <h2>Edit Vehicle</h2>
 
-    <form action="/admin/vehicles/edit" method="POST" id="vehicleForm" name="vehicleForm">
+    <form action="/admin/vehicles/editVehicle" method="POST" id="vehicleForm" name="vehicleForm">
         <h4><i>Vehicle's Details</i></h4>
         <#--bind this field with the registration form fields-->
 
+        <@spring.bind "vehicleForm.userID" />
+        <input type="hidden" name="userID" value="${vehicleForm.userID!""}">
         <@spring.bind "vehicleForm.afm" />
-        <input type="hidden" name="userID" value="${vehicleForm.afm!""}">
+        <input type="hidden" name="afm" value="${vehicleForm.afm!""}">
 
         <@spring.bind "vehicleForm.vehicleID" />
         Plate Number: <input type="text" name="vehicleID" id="vehicleID" placeholder="ABC-1234" value="${vehicleForm.vehicleID!""}"/>
@@ -34,7 +36,7 @@
         </#list>
 
         <@spring.bind "vehicleForm.year"/>
-        Year: <input type="number" min=1950 max=2017 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}"/>
+        Year: <input type="text" min=1950 max=2017 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}"/>
         <#list spring.status.errorMessages as error>
              <span>${error}</span>
         </#list>

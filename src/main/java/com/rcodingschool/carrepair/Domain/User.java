@@ -2,6 +2,7 @@ package com.rcodingschool.carrepair.Domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "Users")
 public class User implements Serializable {
@@ -32,27 +33,22 @@ public class User implements Serializable {
     @Column(name = "AddressID")
     private Long addressID;
 
+    @OneToOne(optional = false)
+    @JoinColumn(name = "AddressID", referencedColumnName = "AddressID", updatable = false, insertable = false)
+    private Address address;
+
+    @OneToMany(mappedBy = "user", targetEntity = Vehicle.class)
+    private List<Vehicle> userVehicles;
+
     public User() {
     }
 
-    public User(String firstName, String lastName, String afm, String password, String email, String type) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.afm = afm;
-        this.password = password;
-        this.email = email;
-        this.type = type;
+    public Long getUserID() {
+        return userID;
     }
 
-    public User(String firstName, String lastName, String afm, String password, String email, String type, Long userID, Long addressID) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.afm = afm;
-        this.password = password;
-        this.email = email;
-        this.type = type;
+    public void setUserID(Long userID) {
         this.userID = userID;
-        this.addressID = addressID;
     }
 
     public String getFirstName() {
@@ -103,20 +99,28 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    public Long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Long userID) {
-        this.userID = userID;
-    }
-
     public Long getAddressID() {
         return addressID;
     }
 
     public void setAddressID(Long addressID) {
         this.addressID = addressID;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public List<Vehicle> getUserVehicles() {
+        return userVehicles;
+    }
+
+    public void setUserVehicles(List<Vehicle> userVehicles) {
+        this.userVehicles = userVehicles;
     }
 
     @Override

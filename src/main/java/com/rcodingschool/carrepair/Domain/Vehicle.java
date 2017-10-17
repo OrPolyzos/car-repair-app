@@ -4,6 +4,7 @@ import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "Vehicles")
 public class Vehicle implements Serializable {
@@ -30,17 +31,14 @@ public class Vehicle implements Serializable {
     @Column(name = "UserID", nullable = false)
     private Long userID;
 
-    public Vehicle() {
-    }
+    @ManyToOne(optional=false)
+    @JoinColumn(name="UserID",referencedColumnName="UserID", updatable = false, insertable = false)
+    private User user;
 
-    public Vehicle(String vehicleID, String brand, String model, String fuelType, String year, String color, Long userID) {
-        this.vehicleID = vehicleID;
-        this.brand = brand;
-        this.model = model;
-        this.fuelType = fuelType;
-        this.year = year;
-        this.color = color;
-        this.userID = userID;
+    @OneToMany(mappedBy = "vehicle", targetEntity = Repair.class)
+    private List<Repair> vehicleRepairs;
+
+    public Vehicle() {
     }
 
     public String getVehicleID() {
@@ -67,14 +65,6 @@ public class Vehicle implements Serializable {
         this.model = model;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public String getFuelType() {
         return fuelType;
     }
@@ -91,11 +81,35 @@ public class Vehicle implements Serializable {
         this.year = year;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public Long getUserID() {
         return userID;
     }
 
     public void setUserID(Long userID) {
         this.userID = userID;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Repair> getVehicleRepairs() {
+        return vehicleRepairs;
+    }
+
+    public void setVehicleRepairs(List<Repair> vehicleRepairs) {
+        this.vehicleRepairs = vehicleRepairs;
     }
 }

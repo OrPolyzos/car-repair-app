@@ -3,7 +3,7 @@
 <head>
     <title>Users</title>
 </head>
-<body>
+<body align="center">
     <h1>${errorMessage!""}</h1>
     <h2>Edit User</h2>
 
@@ -66,13 +66,13 @@
         </#list>
 
         <@spring.bind "userForm.addressNumber"/>
-        Number: <input type="number" name="addressNumber" id="addressNumber" placeholder="26" value="${userForm.addressNumber!""}"/>
+        Number: <input type="number"  min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="26" value="${userForm.addressNumber!""}"/>
         <#list spring.status.errorMessages as error>
              <span>${error}</span>
         </#list>
 
         <@spring.bind "userForm.addressZipCode"/>
-        Zip Code: <input type="number" name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
+        Zip Code: <input type="number"  min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
         <#list spring.status.errorMessages as error>
              <span>${error}</span>
         </#list>

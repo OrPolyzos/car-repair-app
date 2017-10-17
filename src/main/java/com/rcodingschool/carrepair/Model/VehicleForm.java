@@ -1,5 +1,6 @@
 package com.rcodingschool.carrepair.Model;
 
+import com.rcodingschool.carrepair.Domain.User;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.*;
@@ -30,7 +31,6 @@ public class VehicleForm {
     private String fuelType;
 
     @NotNull(message="This field is required!")
-
     @Pattern(regexp="^19[5-9][0-9]|200[0-9]|201[0-7]", message="Choose a year from 1950 to 2017!")
     private String year;
 
@@ -40,22 +40,6 @@ public class VehicleForm {
     private String afm;
 
     private Long userID;
-
-    public String getAfm() {
-        return afm;
-    }
-
-    public void setAfm(String afm) {
-        this.afm = afm;
-    }
-
-    public Long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Long userID) {
-        this.userID = userID;
-    }
 
     public String getVehicleID() {
         return vehicleID;
@@ -103,5 +87,21 @@ public class VehicleForm {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getAfm() {
+        return afm;
+    }
+
+    public void setAfm(String afm) {
+        this.afm = afm;
+    }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 }

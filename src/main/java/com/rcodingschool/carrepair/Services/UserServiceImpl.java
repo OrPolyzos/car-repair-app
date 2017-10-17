@@ -1,7 +1,10 @@
 package com.rcodingschool.carrepair.Services;
 
 import com.rcodingschool.carrepair.Domain.User;
+import com.rcodingschool.carrepair.Domain.Vehicle;
+import com.rcodingschool.carrepair.Repositories.AddressRepository;
 import com.rcodingschool.carrepair.Repositories.UserRepository;
+import com.rcodingschool.carrepair.Repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     @Override
     public User findOne(Long userID) { return userRepository.findOne(userID); }
@@ -34,10 +43,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) { userRepository.save(user); }
+    public void save(User user) {
+        addressRepository.save(user.getAddress());
+        userRepository.save(user); }
 
     @Override
     public void deleteByUserID(Long userID) {
+        for (Vehicle vehicle : userRepository.findOne(userID).getUserVehicles()){
+            vehicleRepository.deleteByVehicleID(vehicle.getVehicleID());
+        }
         userRepository.deleteByUserID(userID);
     }
 }

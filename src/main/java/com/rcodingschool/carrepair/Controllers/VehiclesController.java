@@ -43,14 +43,14 @@ public class VehiclesController {
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    //The shoForm method which maps the registerUserForm.ftl for GET requests
+
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
     public String showVehiclesView(Model model) {
         Map<String, Object> map = model.asMap();
         if (!map.containsKey(VEHICLE_FORM)) {
             model.addAttribute(VEHICLE_FORM, new VehicleForm());
         }
-        if (!map.containsKey(SEARCH_FORM)){
+        if (!map.containsKey(SEARCH_FORM)) {
             model.addAttribute(SEARCH_FORM, new VehicleSearchForm());
         }
         return "vehicles";
@@ -58,16 +58,16 @@ public class VehiclesController {
 
     //The registerUserForm method which maps the registerUserForm.ftl for GET requests
     @RequestMapping(value = "/vehicles/{id}", method = RequestMethod.GET)
-    public String showVehiclesViewForSpecificUser(@PathVariable Long id,  Model model) {
+    public String showVehiclesViewForSpecificUser(@PathVariable Long id, Model model) {
         Map<String, Object> map = model.asMap();
         List<Vehicle> vehiclesList = vehicleService.findByUserID(id);
-        model.addAttribute(VEHICLE_LIST,vehiclesList);
+        model.addAttribute(VEHICLE_LIST, vehiclesList);
         if (!map.containsKey(VEHICLE_FORM)) {
             VehicleForm vehicleForm = new VehicleForm();
             vehicleForm.setAfm(userService.findOne(id).getAfm());
             model.addAttribute(VEHICLE_FORM, vehicleForm);
         }
-        if (!map.containsKey(SEARCH_FORM)){
+        if (!map.containsKey(SEARCH_FORM)) {
             model.addAttribute(SEARCH_FORM, new VehicleSearchForm());
         }
         return "vehicles";
@@ -93,17 +93,16 @@ public class VehiclesController {
         try {
             //Trying to build a user from our UserForm
             List<User> userList = userService.findByAfm(vehicleForm.getAfm());
-            if (userList.size()!=0){
-                vehicleForm.setUserID(userList.get(0).getUserID());
-                Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm);
+            if (userList.size() != 0) {
+                vehicleForm.setAfm(userList.get(0).getAfm());
+                Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userList.get(0));
                 vehicleService.save(vehicle);
-                redirectAttributes.addFlashAttribute("errorMessage","Vehicle was added!");
+                redirectAttributes.addFlashAttribute("errorMessage", "Vehicle was added!");
                 return "redirect:/admin/vehicles";
-            }
-            else{
+            } else {
                 vehicleForm.setAfm(null);
                 redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);
-                redirectAttributes.addFlashAttribute("errorMessage","The provided AFM does not correspond to a user! Please create a user first!");
+                redirectAttributes.addFlashAttribute("errorMessage", "The provided AFM does not correspond to a user! Please create a user first!");
                 return "redirect:/admin/vehicles";
             }
 
@@ -125,7 +124,7 @@ public class VehiclesController {
     @RequestMapping(value = "/vehicles/search", method = RequestMethod.GET)
     public String processSearchUser(@Valid @ModelAttribute(SEARCH_FORM) VehicleSearchForm vehicleSearchForm,
                                     BindingResult bindingResult, Model model,
-                                    RedirectAttributes redirectAttributes){
+                                    RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
@@ -137,19 +136,16 @@ public class VehiclesController {
         }
 
         List<Vehicle> vehiclesList;
-        if (vehicleSearchForm.getAfm() == null && vehicleSearchForm.getVehicleID() == null){
+        if (vehicleSearchForm.getAfm() == null && vehicleSearchForm.getVehicleID() == null) {
             vehiclesList = vehicleService.findAll();
-        }
-        else if (vehicleSearchForm.getVehicleID() != null){
+        } else if (vehicleSearchForm.getVehicleID() != null) {
             vehiclesList = vehicleService.findByVehicleID(vehicleSearchForm.getVehicleID());
+        } else {
+            vehiclesList = userService.findByAfm(vehicleSearchForm.getAfm()).get(0).getUserVehicles();
         }
-        else {
-            vehiclesList = vehicleService.findByUserID(userService.findByAfm(vehicleSearchForm.getAfm()).get(0).getUserID());
-        }
-        if (vehiclesList.isEmpty()){
+        if (vehiclesList.isEmpty()) {
             redirectAttributes.addFlashAttribute(NOT_FOUND, "No records were found!");
-        }
-        else{
+        } else {
             redirectAttributes.addFlashAttribute(VEHICLE_LIST, vehiclesList);
         }
         return "redirect:/admin/vehicles";
@@ -189,7 +185,8 @@ public class VehiclesController {
         }
         try {
             //Trying to build a user from our UserForm
-            Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm);
+            User user = userService.findOne(vehicleForm.getUserID());
+            Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, user);
             vehicleService.save(vehicle);
 
             return "redirect:/admin/vehicles";

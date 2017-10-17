@@ -1,8 +1,6 @@
 package com.rcodingschool.carrepair.Domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "Addresses")
@@ -10,25 +8,22 @@ public class Address implements Serializable {
 
     @Id
     @Column(name = "AddressID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressID;
 
     @Column(name = "AddressStreet", nullable = false)
     private String addressStreet;
 
     @Column(name = "AddressNumber", nullable = false)
-    private Integer addressNumber;
+    private String addressNumber;
 
     @Column(name = "AddressZipCode", nullable = false)
     private String addressZipCode;
 
-    public Address() {
-    }
+    @OneToOne(optional=false, mappedBy="address", targetEntity = User.class)
+    private User user;
 
-    public Address(Long addressID, String addressStreet, Integer addressNumber, String addressZipCode) {
-        this.addressID = addressID;
-        this.addressStreet = addressStreet;
-        this.addressNumber = addressNumber;
-        this.addressZipCode = addressZipCode;
+    public Address() {
     }
 
     public Long getAddressID() {
@@ -47,11 +42,11 @@ public class Address implements Serializable {
         this.addressStreet = addressStreet;
     }
 
-    public Integer getAddressNumber() {
+    public String getAddressNumber() {
         return addressNumber;
     }
 
-    public void setAddressNumber(Integer addressNumber) {
+    public void setAddressNumber(String addressNumber) {
         this.addressNumber = addressNumber;
     }
 
@@ -61,5 +56,13 @@ public class Address implements Serializable {
 
     public void setAddressZipCode(String addressZipCode) {
         this.addressZipCode = addressZipCode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

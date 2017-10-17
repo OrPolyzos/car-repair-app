@@ -2,6 +2,7 @@ package com.rcodingschool.carrepair.Domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "RepairTypes")
 public class RepairType implements Serializable {
@@ -16,6 +17,9 @@ public class RepairType implements Serializable {
 
     @Column(name = "FixedPrice", nullable = false)
     private Integer fixedPrice;
+
+    @OneToMany(mappedBy = "repairType", targetEntity = Repair.class)
+    private List<Repair> repairsList;
 
     public RepairType() {
     }
