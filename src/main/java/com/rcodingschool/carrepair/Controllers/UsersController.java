@@ -21,8 +21,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class UsersController {
-    private static final String USER_FORM = "userFormmmmmmmm";
-    private static final String USER_FORM = "userFormmmm";
+    private static final String USER_FORM = "userForm";
     private static final String SEARCH_FORM = "userSearchForm";
     private static final String USER_LIST = "userList";
     private static final String NOT_FOUND = "searchNotFoundMessage";
