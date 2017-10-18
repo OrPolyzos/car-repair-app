@@ -18,7 +18,7 @@ public class Repair implements Serializable {
     @Column(name = "RepairDate", nullable = false)
     private LocalDate repairDate;
 
-    @Column(name = "RepairTIme")
+    @Column(name = "RepairTime")
     private LocalTime repairTime;
 
     @Column(name = "RepairStatus", nullable = false)
