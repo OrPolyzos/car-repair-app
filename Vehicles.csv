@@ -1,0 +1,24 @@
+VehicleID;Brand;Model;Fuel;Year;Color;1
+ABC-1234;Volkswagen;Polo;Diesel;2014;Blue;22
+ADS-3444;Citroen;C4;Petrol;2010;Blue;22
+LKJ-9874;Volkswagen;Golf Gti;Petrol;2012;Red;3
+ASD-9899;Seat;Leon;Petrol;2010;Yellow;4
+LKJ-8988;Toyota;Starlet;Petrol;1995;White;2
+ASD-2322;Skoda;Octavia;Diesel;2008;Silver;3
+MGK-9898;Nissan;Navara;Diesel;2006;Silver;4
+NJK-1233;Mercedes-Benz;A-Class;Diesel;2008;Black;5
+ASD-1333;Honda;S2000;Petrol;2004;Black;7
+MLK-8988;BMW;Z4;Diesel;2006;White;4
+LAM-9899;BMW;M3 E30;Petrol;1995;Black;6
+POI-9989;Porsche;911 GT2 RS;Petrol;2004;Orange;7
+POM-2900;Renault;Megane RS;Petrol;2009;Yellow;2
+VFS-9898;Renault;Clio Williams;Petrol;1994;Blue;6
+LKO-9098;Subaru;Impreza WRX STI;Petrol;2002;Blue;6
+JHK-9890;Chevrolet;Camaro;Petrol;2012;Yellow;1
+PLF-0999;Ford;Fiesta;Diesel;2009;BLue;1
+VGM-9239;Ford;Mustang;Petrol;2014;Silver;23
+ADL-9988;Nissan;200SX;Petrol;1994;Red;22
+VGL-9829;Volkswagen;Touareg;Diesel;2012;Blue;1
+VGA-1294;Audi;S3;Petrol;2008;White;3
+MKG-1300;Dodge;Viper;Petrol;2012;Black;7
+LLL-1200;TVR;Tuscan;Petrol;2002;Green;8
