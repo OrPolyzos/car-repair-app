@@ -28,7 +28,7 @@ public class Repair implements Serializable {
     private String repairTasks;
 
     @Column(name = "RepairTotalCost", nullable = false)
-    private Integer repairTotalCost;
+    private Float repairTotalCost;
 
     @Column(name = "RepairTypeID", nullable = false)
     private Short repairTypeID;
@@ -49,7 +49,7 @@ public class Repair implements Serializable {
     }
 
     public Repair(Long repairID, LocalDate repairDate, LocalTime repairTime, String repairStatus, String repairTasks,
-                  Integer repairTotalCost, Short repairTypeID, RepairType repairType, String vehicleID, Vehicle vehicle) {
+                  Float repairTotalCost, Short repairTypeID, RepairType repairType, String vehicleID, Vehicle vehicle) {
         this.repairID = repairID;
         this.repairDate = repairDate;
         this.repairTime = repairTime;
@@ -102,11 +102,11 @@ public class Repair implements Serializable {
         this.repairTasks = repairTasks;
     }
 
-    public Integer getRepairTotalCost() {
+    public Float getRepairTotalCost() {
         return repairTotalCost;
     }
 
-    public void setRepairTotalCost(Integer repairTotalCost) {
+    public void setRepairTotalCost(Float repairTotalCost) {
         this.repairTotalCost = repairTotalCost;
     }
 
