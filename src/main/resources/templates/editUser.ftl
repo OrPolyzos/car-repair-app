@@ -12,7 +12,6 @@
         <@spring.bind "userForm.userID" />
         <input type="hidden" name="userID" value="${userForm.userID!""}">
         <@spring.bind "userForm.userID" />
-        <input type="hidden" name="addressID" value="${userForm.addressID!""}">
         <#--bind this field with the registration form fields-->
         <@spring.bind "userForm.firstName" />
         First Name: <input type="text" name="firstName" id="firstName" placeholder="John" value="${userForm.firstName!""}"/>

@@ -23,13 +23,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-brand">Auto Repair</a>
+                <a href="/admin" class="navbar-brand">Auto Repair</a>
             </div>
 
            <!-- Menu Items -->
             <div class="collapse navbar-collapse" id="mainNavBar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
                         <a href="/admin/users">Users</a>
                     </li>
                     <li>
@@ -41,15 +41,11 @@
                     <li>
                         <a href="/admin/parts">Parts</a>
                     </li>
-                    <li>
-                        <a href="/logout">Logout</a>
-                    </li>
                 </ul>
 
-               <!-- right align
                 <ul class="nav navbar-nav navbar-right">
-                    <a href="">Logout</a>
-                </ul> -->
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
 
            </div>
         </div>

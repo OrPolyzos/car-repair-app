@@ -149,7 +149,7 @@ public class DataGeneration {
             //Initializing a new StringBuilder
             StringBuilder sb = new StringBuilder();
             //Iterating through all the items in plates arraylist
-            for (int i = 0; i < firstNamesList.size(); i++) {
+            for (int i = 0; i < 30; i++) {
                 //Appending the plateID
                 sb.append(afmsList.get(i));
                 sb.append(",");
@@ -163,7 +163,11 @@ public class DataGeneration {
                 sb.append(",");
                 sb.append(lastNamesList.get(i));
                 sb.append(",");
-                sb.append(userAddrIDList.get(i));
+                sb.append(addressesList.get(i));
+                sb.append(",");
+                sb.append(addressesNumbersList.get(i));
+                sb.append(",");
+                sb.append(addressesZipCodesList.get(i));
                 sb.append("\n");
             }
             //Writing to platesfile the content of the stringbuilder.toString()

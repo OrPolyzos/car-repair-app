@@ -30,18 +30,17 @@ public class User implements Serializable {
     @Column(name = "Type", nullable = false)
     private String type = "User";
 
-    @Column(name = "AddressID")
-    private Long addressID;
+    @Column(name = "AddressStreet", nullable = false)
+    private String addressStreet;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "AddressID", referencedColumnName = "AddressID", updatable = false, insertable = false)
-    private Address address;
+    @Column(name = "AddressNumber", nullable = false)
+    private String addressNumber;
+
+    @Column(name = "AddressZipCode", nullable = false)
+    private String addressZipCode;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Vehicle.class)
     private List<Vehicle> userVehicles;
-
-    public User() {
-    }
 
     public Long getUserID() {
         return userID;
@@ -99,20 +98,28 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    public Long getAddressID() {
-        return addressID;
+    public String getAddressStreet() {
+        return addressStreet;
     }
 
-    public void setAddressID(Long addressID) {
-        this.addressID = addressID;
+    public void setAddressStreet(String addressStreet) {
+        this.addressStreet = addressStreet;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getAddressNumber() {
+        return addressNumber;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressNumber(String addressNumber) {
+        this.addressNumber = addressNumber;
+    }
+
+    public String getAddressZipCode() {
+        return addressZipCode;
+    }
+
+    public void setAddressZipCode(String addressZipCode) {
+        this.addressZipCode = addressZipCode;
     }
 
     public List<Vehicle> getUserVehicles() {
@@ -122,18 +129,4 @@ public class User implements Serializable {
     public void setUserVehicles(List<Vehicle> userVehicles) {
         this.userVehicles = userVehicles;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "UserID ='" + userID + '\'' +
-                ", AddressID =" + addressID + '\'' +
-                ", Email='" + email + '\'' +
-                ", First Name='" + firstName + '\'' +
-                ", Last Name='" + lastName + '\'' +
-                ", Password='" + password + '\'' +
-                ", Type='" + type + '\'' +
-                '}';
-    }
-
 }
