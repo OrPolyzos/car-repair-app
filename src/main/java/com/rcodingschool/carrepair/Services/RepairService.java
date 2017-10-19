@@ -7,11 +7,11 @@ public interface RepairService {
 
     Repair findOne(Long repairID);
 
-    Iterable<Repair> findAll();
+    List<Repair> findAll();
 
     List<Repair> findByRepairID(Long repairID);
 
-    List<Repair> findByVehicleID(Long vehicleID);
+    List<Repair> findByVehicleID(String vehicleID);
 
     void save(Repair repair);
 

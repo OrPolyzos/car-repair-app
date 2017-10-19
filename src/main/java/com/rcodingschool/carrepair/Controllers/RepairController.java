@@ -78,7 +78,7 @@ public class RepairController {
             //Trying to build a repair from our RepairForm
 
 
-            Repair repair = RepairConverter.buildRepairObject(repairForm);
+            Repair repair = RepairConverter.buildInsertRepairObject(repairForm);
             //Save the repair
             repairService.save(repair);
             //Send information to the user
@@ -129,7 +129,7 @@ public class RepairController {
             //If the AFM is not null
         } else if (repairSearchForm.getRepairID() != null) {
             //We search for Repairs based on AFM
-            repairList = repairService.findByRepairID(repairSearchForm.getRepairID()));
+            repairList = repairService.findByRepairID(repairSearchForm.getRepairID());
             //Else if AFM is null, means Email is not
         } else {
             //We search for Repairs based on Email
@@ -160,7 +160,6 @@ public class RepairController {
     }
 
     //the showEditRepairView will map "/repairs/editRepair" GET requests
-
     @RequestMapping(value = "/repair/editRepair", method = RequestMethod.GET)
     public String showEditRepairView(Model model) {
         //Get the model
@@ -190,7 +189,7 @@ public class RepairController {
         try {
             //Trying to build a repair from our RepairForm
             //Full means we include repairID also
-            Repair repair = RepairConverter.buildFullRepairObject(repairForm);
+            Repair repair = RepairConverter.buildUpdateRepairObject(repairForm);
             //Save the repair
             repairService.save(repair);
             return "redirect:/admin/repair";
