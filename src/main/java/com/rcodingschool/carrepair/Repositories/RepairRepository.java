@@ -13,7 +13,7 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     List<Repair> findByRepairID(Long repairID);
 
-    List<Repair> findByStatus(String status);
+    List<Repair> findByRepairStatus(String repairStatus);
 
     List<Repair> findByVehicleID(String vehicleID);
 

@@ -27,17 +27,17 @@ public class RepairForm {
     @NotNull(message="This field is required!")
     @Size(max=32, message="The status can not contain up to 32 characters!")
     @Pattern(regexp="^[a-zA-Z']{1,32}", message="The status can contain only characters!")
-    private String status;
+    private String repairStatus;
 
     @NotNull(message="This field is required!")
     @Size(max=1024, message="The tasks can contain until 1024 characters!")
     @Pattern(regexp="^[a-zA-Z']{1,1024}", message="The tasks can contain only characters!")
-    private String tasks;
+    private String repairTasks;
 
     @NotNull(message="This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Min(value=0, message="The totalcost must be greater or equal than 0!")
-    private Float totalCost;
+    private Float repairTotalCost;
 
     @NotNull(message="This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
@@ -46,54 +46,69 @@ public class RepairForm {
 
     @NotNull(message="This field is required!")
     @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number must have the format 'ABC-1234'!")
-    private String vehicleID;
+    private String repairVehicleID;
 
-
-    public Long getRepairID() { return repairID; }
+    public Long getRepairID() {
+        return repairID;
+    }
 
     public void setRepairID(Long repairID) {
         this.repairID = repairID;
     }
 
-    public Date getRepairDate() { return repairDate; }
+    public Date getRepairDate() {
+        return repairDate;
+    }
 
     public void setRepairDate(Date repairDate) {
         this.repairDate = repairDate;
     }
 
-    public Time getRepairTime() { return repairTime; }
+    public Time getRepairTime() {
+        return repairTime;
+    }
 
     public void setRepairTime(Time repairTime) {
         this.repairTime = repairTime;
     }
 
-    public String getStatus() { return status; }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public String getRepairStatus() {
+        return repairStatus;
     }
 
-    public String getTasks() { return tasks; }
-
-    public void setTasks(String tasks) {
-        this.tasks = tasks;
+    public void setRepairStatus(String repairStatus) {
+        this.repairStatus = repairStatus;
     }
 
-    public Float getTotalCost() { return totalCost; }
-
-    public void setTotalCost(float totalCost) {
-        this.totalCost = totalCost;
+    public String getRepairTasks() {
+        return repairTasks;
     }
 
-    public Short getRepairTypeID() { return repairTypeID; }
+    public void setRepairTasks(String repairTasks) {
+        this.repairTasks = repairTasks;
+    }
+
+    public Float getRepairTotalCost() {
+        return repairTotalCost;
+    }
+
+    public void setRepairTotalCost(Float repairTotalCost) {
+        this.repairTotalCost = repairTotalCost;
+    }
+
+    public Short getRepairTypeID() {
+        return repairTypeID;
+    }
 
     public void setRepairTypeID(Short repairTypeID) {
         this.repairTypeID = repairTypeID;
     }
 
-    public String getVehicleID() { return vehicleID; }
+    public String getRepairVehicleID() {
+        return repairVehicleID;
+    }
 
-    public void setVehicleID(String vehicleID) {
-        this.vehicleID = vehicleID;
+    public void setRepairVehicleID(String repairVehicleID) {
+        this.repairVehicleID = repairVehicleID;
     }
 }
