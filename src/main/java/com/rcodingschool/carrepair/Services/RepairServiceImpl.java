@@ -22,14 +22,14 @@ public class RepairServiceImpl implements RepairService {
     public List<Repair> findAll() { return repairRepository.findAll(); }
 
     @Override
-    public List<Repair> findByRepairID(Long repairID) { return repairRepository.findByRepairId(repairID); }
+    public List<Repair> findByRepairID(Long repairID) { return repairRepository.findByRepairID(repairID); }
 
     @Override
-    public List<Repair> findByVehicleID(String vehicleID) { return repairRepository.findByVehicleId(vehicleID); }
+    public List<Repair> findByVehicleID(String vehicleID) { return repairRepository.findByVehicleID(vehicleID); }
 
     @Override
     public void save(Repair repair) { repairRepository.save(repair); }
 
     @Override
-    public void deleteByRepairID(Long repairID) { repairRepository.deleteByRepairId(repairID);}
+    public void deleteByRepairID(Long repairID) { repairRepository.deleteByRepairID(repairID);}
 }
