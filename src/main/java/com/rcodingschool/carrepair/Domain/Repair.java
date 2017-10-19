@@ -3,8 +3,8 @@ package com.rcodingschool.carrepair.Domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
+//import java.time.LocalDate;
+//import java.time.LocalTime;
 import java.util.Date;
 
 @Entity(name = "Repairs")
@@ -16,10 +16,10 @@ public class Repair implements Serializable {
     private Long repairID;
 
     @Column(name = "RepairDate", nullable = false)
-    private LocalDate repairDate;
+    private Date repairDate;
 
     @Column(name = "RepairTime")
-    private LocalTime repairTime;
+    private Time repairTime;
 
     @Column(name = "RepairStatus", nullable = false)
     private String repairStatus;
@@ -48,8 +48,8 @@ public class Repair implements Serializable {
     public Repair() {
     }
 
-    public Repair(Long repairID, LocalDate repairDate, LocalTime repairTime, String repairStatus, String repairTasks,
-                  Float repairTotalCost, Short repairTypeID, RepairType repairType, String vehicleID, Vehicle vehicle) {
+    public Repair(Long repairID, Date repairDate, Time repairTime, String repairStatus, String repairTasks,
+                  Float repairTotalCost, Short repairTypeID, String vehicleID) {
         this.repairID = repairID;
         this.repairDate = repairDate;
         this.repairTime = repairTime;
@@ -57,9 +57,8 @@ public class Repair implements Serializable {
         this.repairTasks = repairTasks;
         this.repairTotalCost = repairTotalCost;
         this.repairTypeID = repairTypeID;
-        this.repairType = repairType;
         this.vehicleID = vehicleID;
-        this.vehicle = vehicle;
+
     }
 
     public Long getRepairID() {
@@ -70,19 +69,19 @@ public class Repair implements Serializable {
         this.repairID = repairID;
     }
 
-    public LocalDate getRepairDate() {
+    public Date getRepairDate() {
         return repairDate;
     }
 
-    public void setRepairDate(LocalDate repairDate) {
+    public void setRepairDate(Date repairDate) {
         this.repairDate = repairDate;
     }
 
-    public LocalTime getRepairTime() {
+    public Time getRepairTime() {
         return repairTime;
     }
 
-    public void setRepairTime(LocalTime repairTime) {
+    public void setRepairTime(Time repairTime) {
         this.repairTime = repairTime;
     }
 
