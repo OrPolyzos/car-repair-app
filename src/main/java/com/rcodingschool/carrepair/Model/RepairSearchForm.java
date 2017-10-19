@@ -5,6 +5,8 @@ import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class RepairSearchForm {
@@ -17,9 +19,10 @@ public class RepairSearchForm {
     @DateTimeFormat(pattern="MM/dd/yyyy")
     private Date repairDate;
 
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The VehicleID must be greater or equal than 1!")
-    private Long vehicleID;
+    @NotNull(message="This field is required!")
+    @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number must have the format 'ABC-1234'!")
+    private String vehicleID;
+
 
     public Long getRepairID() { return repairID; }
 
@@ -33,9 +36,9 @@ public class RepairSearchForm {
         this.repairDate = repairDate;
     }
 
-    public Long getVehicleID() { return vehicleID; }
+    public String getVehicleID() { return vehicleID; }
 
-    public void setVehicleID(Long vehicleID) {
+    public void setVehicleID(String vehicleID) {
         this.vehicleID = vehicleID;
     }
 

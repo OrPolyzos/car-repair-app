@@ -37,7 +37,7 @@ public class RepairForm {
     @NotNull(message="This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Min(value=0, message="The totalcost must be greater or equal than 0!")
-    private int totalCost;
+    private Float totalCost;
 
     @NotNull(message="This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
@@ -45,9 +45,9 @@ public class RepairForm {
     private Short repairTypeID;
 
     @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The VehicleID must be greater or equal than 1!")
-    private Long vehicleID;
+    @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number must have the format 'ABC-1234'!")
+    private String vehicleID;
+
 
     public Long getRepairID() { return repairID; }
 
@@ -79,21 +79,21 @@ public class RepairForm {
         this.tasks = tasks;
     }
 
-    public int getTotalCost() { return totalCost; }
+    public Float getTotalCost() { return totalCost; }
 
-    public void setTotalCost(int totalCost) {
+    public void setTotalCost(float totalCost) {
         this.totalCost = totalCost;
     }
 
-    public Short getRepairtTypeID() { return repairTypeID; }
+    public Short getRepairTypeID() { return repairTypeID; }
 
-    public void setRepairtTypeID(Short repairtTypeID) {
-        this.repairTypeID = repairtTypeID;
+    public void setRepairTypeID(Short repairTypeID) {
+        this.repairTypeID = repairTypeID;
     }
 
-    public Long getVehicleID() { return vehicleID; }
+    public String getVehicleID() { return vehicleID; }
 
-    public void setVehicleID(Long vehicleID) {
+    public void setVehicleID(String vehicleID) {
         this.vehicleID = vehicleID;
     }
 }
