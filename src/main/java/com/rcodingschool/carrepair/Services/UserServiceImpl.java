@@ -1,9 +1,7 @@
 package com.rcodingschool.carrepair.Services;
 
-import com.rcodingschool.carrepair.Domain.Address;
 import com.rcodingschool.carrepair.Domain.User;
 import com.rcodingschool.carrepair.Exceptions.InvalidCredentialsException;
-import com.rcodingschool.carrepair.Repositories.AddressRepository;
 import com.rcodingschool.carrepair.Repositories.UserRepository;
 import com.rcodingschool.carrepair.Repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +16,8 @@ import java.util.Set;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private Set<Long> loggedInUsers = new HashSet<>();
-
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private AddressRepository addressRepository;
 
     @Autowired
     private VehicleRepository vehicleRepository;
@@ -44,13 +37,7 @@ public class UserServiceImpl implements UserService {
                 throw new InvalidCredentialsException("User not found!");
             }
         }
-        loggedInUsers.add(retrievedUser.getUserID());
         return retrievedUser;
-    }
-
-    @Override
-    public void logout(Long userID) {
-        loggedInUsers.remove(userID);
     }
 
     @Override
@@ -70,16 +57,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        Address address = addressRepository.save(user.getAddress());
-        user.setAddressID(address.getAddressID());
         userRepository.save(user);
     }
 
     @Override
     public void deleteByUserID(Long userID) {
-//        for (Vehicle vehicle : userRepository.findOne(userID).getUserVehicles()){
-//            vehicleRepository.deleteByVehicleID(vehicle.getVehicleID());
-//        }
         userRepository.deleteByUserID(userID);
     }
 }

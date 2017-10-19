@@ -10,8 +10,6 @@ public interface UserService {
 
     User login(String username, String password);
 
-    void logout(Long userID) throws Exception;
-
     List<User> findAll();
 
     List<User> findByAfm(String afm);

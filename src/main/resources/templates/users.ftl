@@ -122,9 +122,9 @@
                 <td align="center">${user.firstName}</td>
                 <td align="center">${user.lastName}</td>
                 <td align="center">${user.type}</td>
-                <td align="center">${user.address.addressStreet}</td>
-                <td align="center">${user.address.addressNumber}</td>
-                <td align="center">${user.address.addressZipCode}</td>
+                <td align="center">${user.addressStreet}</td>
+                <td align="center">${user.addressNumber}</td>
+                <td align="center">${user.addressZipCode}</td>
 
                 <form action="/admin/users/edit/${user.userID}" method="GET">
                 <td align="center"> <input type="submit" value="Edit"> </td>
