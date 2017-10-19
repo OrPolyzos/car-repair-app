@@ -19,17 +19,17 @@ public class RepairServiceImpl implements RepairService {
     public Repair findOne(Long repairID) { return repairRepository.findOne(repairID); }
 
     @Override
-    public Iterable<Repair> findAll() { return repairRepository.findAll(); }
+    public List<Repair> findAll() { return repairRepository.findAll(); }
 
     @Override
-    public List<Repair> findByRepairID(Long repairID) { return repairRepository.findByRepairID(repairID); }
+    public List<Repair> findByRepairID(Long repairID) { return repairRepository.findByRepairId(repairID); }
 
     @Override
-    public List<Repair> findByVehicleID(Long vehicleID) { return repairRepository.findByVehicleID(vehicleID); }
+    public List<Repair> findByVehicleID(String vehicleID) { return repairRepository.findByVehicleId(vehicleID); }
 
     @Override
     public void save(Repair repair) { repairRepository.save(repair); }
 
     @Override
-    public void deleteByRepairID(Long repairID) { repairRepository.deleteByRepairID(repairID);}
+    public void deleteByRepairID(Long repairID) { repairRepository.deleteByRepairId(repairID);}
 }

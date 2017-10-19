@@ -36,7 +36,6 @@ public class DataGeneration {
     static List<Integer> userAddrIDList = new ArrayList<>();
 
 
-
     public static void main(String[] args) {
         generateAddresses();
         exportAddressesToCSV();
@@ -69,14 +68,14 @@ public class DataGeneration {
     }
 
     static void generateUsers() {
-        for (int i = 0; i < firstNames.length; i++){
-            for (int j = 0; j < lastNames.length; j++){
+        for (int i = 0; i < firstNames.length; i++) {
+            for (int j = 0; j < lastNames.length; j++) {
                 Random random = new Random();
                 double chance = random.nextDouble();
-                if (chance > 0.5){
+                if (chance > 0.5) {
                     firstNamesList.add(firstNames[i]);
                     lastNamesList.add(lastNames[j]);
-                    emailsList.add(firstNames[i]+"@"+lastNames[j]+".com");
+                    emailsList.add(firstNames[i] + "@" + lastNames[j] + ".com");
                     passwordsList.add(generatePassword());
                     afmsList.add(generateAFM());
                     typesList.add("User");
@@ -90,9 +89,9 @@ public class DataGeneration {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         int passwordLength = 0;
-        do{
+        do {
             passwordLength = random.nextInt(16);
-        } while(passwordLength<6);
+        } while (passwordLength < 6);
 
         for (int i = 0; i < passwordLength; i++) {
             char c = chars[random.nextInt(chars.length)];
@@ -101,7 +100,7 @@ public class DataGeneration {
         return sb.toString();
     }
 
-    private static String generateAFM(){
+    private static String generateAFM() {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 9; i++) {
@@ -181,26 +180,25 @@ public class DataGeneration {
     }
 
 
-
     //Data to populate Repairs' Table
 
-    static String[] statuses = {"Completed", "InProgress", "Pending" };
-    static Short[] repairTypeIds = {1,2,3};
-    static String[] tasks = {"task1", "task2", "task3", "task4" , "task5"};
-    static String[] vehicleIds ={"ABE-123", "BEZ-234" , "EZH-345", "ZHI-456", "HIK-567"};
+    static String[] statuses = {"Completed", "InProgress", "Pending"};
+    static Short[] repairTypeIds = {1, 2, 3};
+    static String[] tasks = {"task1", "task2", "task3", "task4", "task5"};
+    static String[] vehicleIds = {"ABE-123", "BEZ-234", "EZH-345", "ZHI-456", "HIK-567"};
 
 
-    static List<Date> datesList = new ArrayList<> ( );
-    static List<Time> timeList = new ArrayList<> ( );
-    static List<String> statusList = new ArrayList<> ( );
-    static List<String> tasksList = new ArrayList<> ( );
-    static List<Float> totalCostsList = new ArrayList<> ( );
-    static List<Short> repairTypeIdsList = new ArrayList<> ( );
-    static List<String> vehicleIdsList = new ArrayList<> ( );
+    static List<Date> datesList = new ArrayList<>();
+    static List<Time> timeList = new ArrayList<>();
+    static List<String> statusList = new ArrayList<>();
+    static List<String> tasksList = new ArrayList<>();
+    static List<Float> totalCostsList = new ArrayList<>();
+    static List<Short> repairTypeIdsList = new ArrayList<>();
+    static List<String> vehicleIdsList = new ArrayList<>();
 
 
     public static int randBetween(int start, int end) {
-        return start + (int)Math.round(Math.random() * (end - start));
+        return start + (int) Math.round(Math.random() * (end - start));
     }
 
     public static Date generateDates() {
@@ -209,23 +207,23 @@ public class DataGeneration {
         gc.set(gc.YEAR, year);
         int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
         gc.set(gc.DAY_OF_YEAR, dayOfYear);
-        Date date= valueOf(gc.get(gc.YEAR) + "-" + (gc.get(gc.MONTH) + 1) + "-" + gc.get(gc.DAY_OF_MONTH));
+        Date date = valueOf(gc.get(gc.YEAR) + "-" + (gc.get(gc.MONTH) + 1) + "-" + gc.get(gc.DAY_OF_MONTH));
         return date;
     }
 
     static void generateRepairs() {
         for (int i = 0; i < statuses.length; i++) {
-            for (int j=0; i< vehicleIds.length; i++){
-                Random random = new Random ( );
-                double chance = random.nextDouble ( );
+            for (int j = 0; i < vehicleIds.length; i++) {
+                Random random = new Random();
+                double chance = random.nextDouble();
                 if (chance > 0.5) {
-                    datesList.add (generateDates ());
+                    datesList.add(generateDates());
                     //timeList.add (generateTime);
-                    statusList.add (statuses[i]);
-                    tasksList.add (tasks[j]);
+                    statusList.add(statuses[i]);
+                    tasksList.add(tasks[j]);
                     //totalcost
-                    repairTypeIdsList.add (repairTypeIds[i]);
-                    vehicleIdsList.add (vehicleIds[j]);
+                    repairTypeIdsList.add(repairTypeIds[i]);
+                    vehicleIdsList.add(vehicleIds[j]);
                     //sta vehicle ids tha mporouse na einai
                     //repairvehicleIdsList.add(random.next(vehicleIdsList.size ()))
                 }
@@ -237,37 +235,37 @@ public class DataGeneration {
         try {
             String filename = "Repairs";
             //Getting Working Directory
-            String WorkingDir = System.getProperty ("repair.dir");
+            String WorkingDir = System.getProperty("repair.dir");
             //Appending filename
-            PrintWriter exportFile = new PrintWriter (new File (WorkingDir + "\\" + filename + ".csv"));
+            PrintWriter exportFile = new PrintWriter(new File(WorkingDir + "\\" + filename + ".csv"));
             //Initializing a new StringBuilder
-            StringBuilder sb = new StringBuilder ( );
+            StringBuilder sb = new StringBuilder();
             //Iterating through all the items in plates arraylist
             for (int i = 0; i < 30; i++) {
                 //Appending the plateID
-                sb.append (datesList.get (i));
-                sb.append (",");
+                sb.append(datesList.get(i));
+                sb.append(",");
                 //sb.append (timeList.get (i));
                 //sb.append (",");
-                sb.append (statusList.get (i));
-                sb.append (",");
-                sb.append (tasksList.get (i));
-                sb.append (",");
+                sb.append(statusList.get(i));
+                sb.append(",");
+                sb.append(tasksList.get(i));
+                sb.append(",");
                 //sb.append(totalCostsList.get(i));
                 //sb.append(",");
-                sb.append (repairTypeIdsList.get (i));
-                sb.append (",");
-                sb.append (vehicleIdsList.get (i));
-                sb.append (",");
+                sb.append(repairTypeIdsList.get(i));
+                sb.append(",");
+                sb.append(vehicleIdsList.get(i));
+                sb.append(",");
             }
 
 
             //Writing the content of the stringbuilder.toString()
-            exportFile.write (sb.toString ( ));
+            exportFile.write(sb.toString());
             //Closing the files
-            exportFile.close ( );
+            exportFile.close();
         } catch (FileNotFoundException ex) {
-            System.err.println (ex.getMessage ( ));
+            System.err.println(ex.getMessage());
         }
     }
 
