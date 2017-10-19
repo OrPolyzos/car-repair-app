@@ -48,7 +48,7 @@ public class RepairForm {
     @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number must have the format 'ABC-1234'!")
     private String vehicleID;
 
-    
+
     public Long getRepairID() { return repairID; }
 
     public void setRepairID(Long repairID) {
