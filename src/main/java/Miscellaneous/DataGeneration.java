@@ -37,14 +37,12 @@ public class DataGeneration {
 
 
     public static void main(String[] args) {
-//        generateAddresses();
-//        exportAddressesToCSV();
-//        generateUsers();
-//        exportUsersToCSV();
-        for (int i = 0; i < 30; i++){
-            System.out.println(generateDates().toString());
-        }
-        //exportRepairsToCSV();
+ //       generateAddresses();
+  //      exportAddressesToCSV();
+   //     generateUsers();
+        generateRepairs();
+        exportRepairsToCSV();
+        exportRepairsToCSV();
 //        for (int i=0; i < firstNamesList.size(); i++){
 //            System.out.println(firstNamesList.get(i) + " " + lastNamesList.get(i) + " " +
 //            emailsList.get(i) + " " + afmsList.get(i) + " " + passwordsList.get(i) + " " + addressIDList.get(i) + " " + typesList.get(i));
@@ -218,22 +216,18 @@ public class DataGeneration {
     }
 
     static void generateRepairs() {
-        for (int i = 0; i < statuses.length; i++) {
-            for (int j = 0; i < vehicleIds.length; i++) {
-                Random random = new Random();
-                double chance = random.nextDouble();
-                if (chance > 0.5) {
-                    //datesList.add(generateDates());
-                    //timeList.add (generateTime);
-                    statusList.add(statuses[i]);
-                    tasksList.add(tasks[j]);
-                    //totalcost
-                    repairTypeIdsList.add(repairTypeIds[i]);
-                    vehicleIdsList.add(vehicleIds[j]);
-                    //sta vehicle ids tha mporouse na einai
-                    //repairvehicleIdsList.add(random.next(vehicleIdsList.size ()))
-                }
-            }
+        for (int i = 0; i < 50; i++) {
+            Random random = new Random();
+            double chance = random.nextDouble();
+            //datesList.add(generateDates());
+            //timeList.add (generateTime);
+            statusList.add(statuses[random.nextInt(statuses.length)]);
+            tasksList.add(tasks[random.nextInt(tasks.length)]);
+            //totalcost
+            repairTypeIdsList.add(repairTypeIds[random.nextInt(repairTypeIds.length)]);
+            vehicleIdsList.add(vehicleIds[random.nextInt(vehicleIds.length)]);
+            //sta vehicle ids tha mporouse na einai
+            //repairvehicleIdsList.add(random.next(vehicleIdsList.size ()))
         }
     }
 
@@ -241,30 +235,32 @@ public class DataGeneration {
         try {
             String filename = "Repairs";
             //Getting Working Directory
-            String WorkingDir = System.getProperty("repair.dir");
+            String WorkingDir = System.getProperty("user.dir");
             //Appending filename
             PrintWriter exportFile = new PrintWriter(new File(WorkingDir + "\\" + filename + ".csv"));
             //Initializing a new StringBuilder
             StringBuilder sb = new StringBuilder();
             //Iterating through all the items in plates arraylist
-            for (int i = 0; i < 30; i++) {
+            for (int i = 1; i < 30; i++) {
+                Random rand = new Random();
                 //Appending the plateID
                 sb.append(i);
                 sb.append(",");
-                sb.append(datesList.get(i));
-                sb.append(",");
+//                sb.append(datesList.get(i));
+//                sb.append(",");
                 sb.append(statusList.get(i));
                 sb.append(",");
                 sb.append(tasksList.get(i));
                 sb.append(",");
-                sb.append(timeList.get (i));
-                sb.append (",");
-                sb.append(totalCostsList.get(i));
+//                sb.append(timeList.get (i));
+//                sb.append (",");
+                sb.append(rand.nextInt(150));
                 sb.append(",");
                 sb.append(repairTypeIdsList.get(i));
                 sb.append(",");
                 sb.append(vehicleIdsList.get(i));
                 sb.append(",");
+                sb.append("\n");
             }
 
 
