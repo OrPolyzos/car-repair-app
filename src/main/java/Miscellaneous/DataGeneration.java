@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import static java.sql.Date.valueOf;
 
 public class DataGeneration {
 
@@ -37,10 +37,14 @@ public class DataGeneration {
 
 
     public static void main(String[] args) {
-        generateAddresses();
-        exportAddressesToCSV();
-        generateUsers();
-        exportUsersToCSV();
+//        generateAddresses();
+//        exportAddressesToCSV();
+//        generateUsers();
+//        exportUsersToCSV();
+        for (int i = 0; i < 30; i++){
+            System.out.println(generateDates().toString());
+        }
+        //exportRepairsToCSV();
 //        for (int i=0; i < firstNamesList.size(); i++){
 //            System.out.println(firstNamesList.get(i) + " " + lastNamesList.get(i) + " " +
 //            emailsList.get(i) + " " + afmsList.get(i) + " " + passwordsList.get(i) + " " + addressIDList.get(i) + " " + typesList.get(i));
@@ -201,14 +205,16 @@ public class DataGeneration {
         return start + (int) Math.round(Math.random() * (end - start));
     }
 
-    public static Date generateDates() {
+    public static LocalDate generateDates() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
         GregorianCalendar gc = new GregorianCalendar();
         int year = randBetween(2017, 2018);
         gc.set(gc.YEAR, year);
         int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
         gc.set(gc.DAY_OF_YEAR, dayOfYear);
-        Date date = valueOf(gc.get(gc.YEAR) + "-" + (gc.get(gc.MONTH) + 1) + "-" + gc.get(gc.DAY_OF_MONTH));
-        return date;
+        String date = (gc.get(gc.YEAR) + "-" + (gc.get(gc.MONTH) + 1) + "-" + gc.get(gc.DAY_OF_MONTH));
+        LocalDate ldate = LocalDate.parse(date,formatter);
+        return ldate;
     }
 
     static void generateRepairs() {
@@ -217,7 +223,7 @@ public class DataGeneration {
                 Random random = new Random();
                 double chance = random.nextDouble();
                 if (chance > 0.5) {
-                    datesList.add(generateDates());
+                    //datesList.add(generateDates());
                     //timeList.add (generateTime);
                     statusList.add(statuses[i]);
                     tasksList.add(tasks[j]);
@@ -243,16 +249,18 @@ public class DataGeneration {
             //Iterating through all the items in plates arraylist
             for (int i = 0; i < 30; i++) {
                 //Appending the plateID
+                sb.append(i);
+                sb.append(",");
                 sb.append(datesList.get(i));
                 sb.append(",");
-                //sb.append (timeList.get (i));
-                //sb.append (",");
                 sb.append(statusList.get(i));
                 sb.append(",");
                 sb.append(tasksList.get(i));
                 sb.append(",");
-                //sb.append(totalCostsList.get(i));
-                //sb.append(",");
+                sb.append(timeList.get (i));
+                sb.append (",");
+                sb.append(totalCostsList.get(i));
+                sb.append(",");
                 sb.append(repairTypeIdsList.get(i));
                 sb.append(",");
                 sb.append(vehicleIdsList.get(i));
