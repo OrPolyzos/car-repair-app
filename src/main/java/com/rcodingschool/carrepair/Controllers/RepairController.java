@@ -25,7 +25,7 @@ import java.util.Map;
 public class RepairController {
 
     private static final String REPAIR_FORM = "repairForm";
-    private static final String SEARCH_FORM = "RepairSearchForm";
+    private static final String SEARCH_FORM = "repairSearchForm";
     private static final String REPAIR_LIST = "repairList";
     private static final String NOT_FOUND = "searchNotFoundMessage";
     private static final String MESSAGE = "errorMessage";
@@ -45,8 +45,7 @@ public class RepairController {
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-
-    @RequestMapping(value = "/repair", method = RequestMethod.GET)
+    @RequestMapping(value = "/repairs", method = RequestMethod.GET)
     public String showRepairView(Model model) {
         Map<String, Object> map = model.asMap();
         //If our Model does not contain a repairForm, add a new RepairForm()
@@ -57,14 +56,14 @@ public class RepairController {
         if (!map.containsKey(SEARCH_FORM)) {
             model.addAttribute(SEARCH_FORM, new RepairSearchForm());
         }
-        return "repair";
+        return "repairs";
     }
 
 
-    @RequestMapping(value = "/repair/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/repairs/create", method = RequestMethod.POST)
     public String processCreateRepair(@Valid @ModelAttribute(REPAIR_FORM) RepairForm repairForm,
-                                    BindingResult bindingResult, Model model,
-                                    RedirectAttributes redirectAttributes) {
+                                      BindingResult bindingResult, Model model,
+                                      RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
@@ -72,7 +71,7 @@ public class RepairController {
             //Also we will be adding repairForm to RedirectAttributes so that we can keep his valid inputs and reshow them
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + REPAIR_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(REPAIR_FORM, repairForm);
-            return "redirect:/admin/repair";
+            return "redirect:/admin/repairs";
         }
         try {
             //Trying to build a repair from our RepairForm
@@ -87,27 +86,27 @@ public class RepairController {
             //if an error occurs show it to the repair
             redirectAttributes.addFlashAttribute(MESSAGE, exception.getMessage());
         }
-        return "redirect:/admin/repair";
+        return "redirect:/admin/repairs";
     }
 
     //The processDeleteRerair() method will map "/admin/repairs/delete/{id}" GET requests and
     //will delete a repair and redirect to "/admin/repairs"
     @RequestMapping(value = "/repairs/delete/{repairID}", method = RequestMethod.GET)
     public String processDeleteRepair(@PathVariable Long repairID,
-                                    RedirectAttributes redirectAttributes) {
+                                      RedirectAttributes redirectAttributes) {
         //Delete the repair
         repairService.deleteByRepairID(repairID);
         //Send information to the user
         redirectAttributes.addFlashAttribute(MESSAGE, "Repair was deleted!");
-        return "redirect:/admin/repair";
+        return "redirect:/admin/repairs";
     }
 
     //The processSearchUser() method will map "/repairs/search" GET requests and
     //will search for a reapair by either AFM or Email
-    @RequestMapping(value = "/repair/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/repairs/search", method = RequestMethod.GET)
     public String processSearchRepair(@Valid @ModelAttribute(SEARCH_FORM) RepairSearchForm repairSearchForm,
-                                    BindingResult bindingResult, Model model,
-                                    RedirectAttributes redirectAttributes) {
+                                      BindingResult bindingResult, Model model,
+                                      RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
@@ -116,14 +115,14 @@ public class RepairController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + SEARCH_FORM, bindingResult);
             //Send information to the user
             redirectAttributes.addFlashAttribute(SEARCH_FORM, repairSearchForm);
-            return "redirect:/admin/repair";
+            return "redirect:/admin/repairs";
         }
 
         //Initialize a new list of Repairs to hold the results of the search
         List<Repair> repairList;
         //Getting the searchForm values and checking
         //If both are null
-        if (repairSearchForm.getRepairID() == null && repairSearchForm.getVehicleID() == null) {
+        if (repairSearchForm.getRepairID() == null && repairSearchForm.getRepairVehicleID() == null) {
             //Then we retrieve all the repairs
             repairList = repairService.findAll();
             //If the AFM is not null
@@ -133,7 +132,7 @@ public class RepairController {
             //Else if AFM is null, means Email is not
         } else {
             //We search for Repairs based on Email
-            repairList = repairService.findByVehicleID(repairSearchForm.getVehicleID());
+            repairList = repairService.findByVehicleID(repairSearchForm.getRepairVehicleID());
         }
         //If the List is Empty
         if (repairList.isEmpty()) {
@@ -143,30 +142,30 @@ public class RepairController {
 
             redirectAttributes.addFlashAttribute(REPAIR_LIST, repairList);
         }
-        return "redirect:/admin/repair";
+        return "redirect:/admin/repairs";
     }
 
 
     @RequestMapping(value = "/repairs/edit/{repairID}", method = RequestMethod.GET)
     public String showEditRepair(@PathVariable Long repairID,
-                               RedirectAttributes redirectAttributes) {
+                                 RedirectAttributes redirectAttributes) {
         //Find the repair
         Repair repair = repairService.findOne(repairID);
         //Build a repairForm Object based on the repair we found
         RepairForm repairForm = RepairConverter.buildRepairFormObject(repair);
 
         redirectAttributes.addFlashAttribute(repairForm);
-        return "redirect:/admin/repair/editRepair";
+        return "redirect:/admin/repairs/editRepair";
     }
 
     //the showEditRepairView will map "/repairs/editRepair" GET requests
-    @RequestMapping(value = "/repair/editRepair", method = RequestMethod.GET)
+    @RequestMapping(value = "/repairs/editRepair", method = RequestMethod.GET)
     public String showEditRepairView(Model model) {
         //Get the model
         Map<String, Object> map = model.asMap();
         //If there is not already a RepairForm something went wrong so we redirect
-        if (!map.containsKey(REPAIR_FORM)){
-            return "redirect:/admin/repair";
+        if (!map.containsKey(REPAIR_FORM)) {
+            return "redirect:/admin/repairs";
         }
         //If there is not RepairForm
         return "editRepair";
@@ -174,17 +173,17 @@ public class RepairController {
 
     //The processEditRepair() method will map "/repairs/editRepair" POST requests
     //and will try to change the details of a Repair
-    @RequestMapping(value = "/repair/editRepair", method = RequestMethod.POST)
+    @RequestMapping(value = "/repairs/editRepair", method = RequestMethod.POST)
     public String processEditRepair(@Valid @ModelAttribute(REPAIR_FORM) RepairForm repairForm,
-                                  BindingResult bindingResult, Model model,
-                                  RedirectAttributes redirectAttributes) {
+                                    BindingResult bindingResult, Model model,
+                                    RedirectAttributes redirectAttributes) {
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {
             //Also we will be adding userForm to RedirectAttributes so that we can keep his valid inputs and reshow them
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + REPAIR_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(REPAIR_FORM, repairForm);
-            return "redirect:/admin/repair/editRepair";
+            return "redirect:/admin/repairs/editRepair";
         }
         try {
             //Trying to build a repair from our RepairForm
@@ -192,11 +191,11 @@ public class RepairController {
             Repair repair = RepairConverter.buildUpdateRepairObject(repairForm);
             //Save the repair
             repairService.save(repair);
-            return "redirect:/admin/repair";
+            return "redirect:/admin/repairs";
         } catch (Exception exception) {
             //if an error occurs show it to the user
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
-            return "redirect:/admin/repair/editRepair";
+            return "redirect:/admin/repairs/editRepair";
         }
     }
 

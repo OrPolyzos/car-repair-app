@@ -11,11 +11,13 @@ import java.util.List;
 @Repository
 public interface RepairRepository extends CrudRepository<Repair, Long> {
 
-    List<Repair> findByRepairId(Long repairId);
+    Repair findOne(Long repairID);
 
-    List<Repair> findByStatus(String status);
+    List<Repair> findByRepairID(Long repairID);
 
-    List<Repair> findByVehicleId(String vehicleId);
+    List<Repair> findByRepairStatus(String repairStatus);
+
+    List<Repair> findByVehicleID(String vehicleID);
 
     List<Repair> findByRepairTypeID(String RepairTypeID);
 
@@ -25,6 +27,6 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     Repair save(Repair repair);
 
-    void deleteByRepairId(Long RepairId);
+    void deleteByRepairID(Long RepairID);
 
 }

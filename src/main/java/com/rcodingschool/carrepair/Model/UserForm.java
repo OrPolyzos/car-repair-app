@@ -8,9 +8,6 @@ public class UserForm {
 
     private Long userID;
 
-    private Long addressID;
-
-
     @NotNull(message="This field is required!")
     @Size(min=1, max=128, message="Maximum length is 128 characters!")
     @Pattern(regexp="^[a-zA-Z]{1,128}", message="Only uppercase and lowercase characters allowed!")
@@ -56,13 +53,6 @@ public class UserForm {
         this.userID = userID;
     }
 
-    public Long getAddressID() {
-        return addressID;
-    }
-
-    public void setAddressID(Long addressID) {
-        this.addressID = addressID;
-    }
 
     public String getFirstName() {
         return firstName;

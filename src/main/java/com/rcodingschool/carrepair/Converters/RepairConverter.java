@@ -11,10 +11,10 @@ public class RepairConverter {
         Repair repair = new Repair();
         repair.setRepairDate(repairForm.getRepairDate());
         repair.setRepairTime(repairForm.getRepairTime());
-        repair.setRepairStatus(repairForm.getStatus());
-        repair.setRepairTasks(repairForm.getTasks());
-        repair.setRepairTotalCost(repairForm.getTotalCost());
-        repair.setVehicleID(repairForm.getVehicleID());
+        repair.setRepairStatus(repairForm.getRepairStatus());
+        repair.setRepairTasks(repairForm.getRepairTasks());
+        repair.setRepairTotalCost(repairForm.getRepairTotalCost());
+        repair.setVehicleID(repairForm.getRepairVehicleID());
         return repair;
     }
 
@@ -24,10 +24,10 @@ public class RepairConverter {
         repair.setRepairID(repairForm.getRepairID());
         repair.setRepairDate(repairForm.getRepairDate());
         repair.setRepairTime(repairForm.getRepairTime());
-        repair.setRepairStatus(repairForm.getStatus());
-        repair.setRepairTasks(repairForm.getTasks());
-        repair.setRepairTotalCost(repairForm.getTotalCost());
-        repair.setVehicleID(repairForm.getVehicleID());
+        repair.setRepairStatus(repairForm.getRepairStatus());
+        repair.setRepairTasks(repairForm.getRepairTasks());
+        repair.setRepairTotalCost(repairForm.getRepairTotalCost());
+        repair.setVehicleID(repairForm.getRepairVehicleID());
         return repair;
     }
 
@@ -41,10 +41,10 @@ public class RepairConverter {
         //Conversion --> from LocalTime to Time (below)
         //Time.valueOf (repair.getRepairTime () in case we need repair.RepairTime to be LocalDate
         repairForm.setRepairTime (repair.getRepairTime ());
-        repairForm.setStatus (repair.getRepairStatus ());
+        repairForm.setRepairStatus (repair.getRepairStatus ());
         repairForm.setRepairTypeID (repair.getRepairTypeID ());
-        repairForm.setTasks (repair.getRepairTasks ());
-        repairForm.setVehicleID (repair.getVehicleID ());
+        repairForm.setRepairTasks (repair.getRepairTasks ());
+        repairForm.setRepairVehicleID (repair.getVehicleID ());
         return repairForm;
     }
 

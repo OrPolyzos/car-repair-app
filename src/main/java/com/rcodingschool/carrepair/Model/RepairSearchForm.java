@@ -21,25 +21,29 @@ public class RepairSearchForm {
 
     @NotNull(message="This field is required!")
     @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number must have the format 'ABC-1234'!")
-    private String vehicleID;
+    private String repairVehicleID;
 
-
-    public Long getRepairID() { return repairID; }
+    public Long getRepairID() {
+        return repairID;
+    }
 
     public void setRepairID(Long repairID) {
         this.repairID = repairID;
     }
 
-    public Date getRepairDate() { return repairDate; }
+    public Date getRepairDate() {
+        return repairDate;
+    }
 
     public void setRepairDate(Date repairDate) {
         this.repairDate = repairDate;
     }
 
-    public String getVehicleID() { return vehicleID; }
-
-    public void setVehicleID(String vehicleID) {
-        this.vehicleID = vehicleID;
+    public String getRepairVehicleID() {
+        return repairVehicleID;
     }
 
+    public void setRepairVehicleID(String repairVehicleID) {
+        this.repairVehicleID = repairVehicleID;
+    }
 }

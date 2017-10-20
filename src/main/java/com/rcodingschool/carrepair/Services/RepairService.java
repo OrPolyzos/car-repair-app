@@ -7,9 +7,10 @@ public interface RepairService {
 
     Repair findOne(Long repairID);
 
+    List<Repair> findByRepairID(Long repairID);
+
     List<Repair> findAll();
 
-    List<Repair> findByRepairID(Long repairID);
 
     List<Repair> findByVehicleID(String vehicleID);
 
