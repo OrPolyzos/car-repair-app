@@ -10,17 +10,16 @@ import java.util.Date;
 
 public class RepairForm {
 
-    @NotNull(message="This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Min(value=1, message="The repairID must be greater or equal than 1!")
     private Long repairID;
 
-    @NotNull(message="This field is required!")
+//    @NotNull(message="This field is required!")
     @Future (message="Only the future is valid!")
     @DateTimeFormat(pattern="MM/dd/yyyy")
     private Date repairDate;
 
-    @NotNull(message="This field is required!")
+  //  @NotNull(message="This field is required!")
     @DateTimeFormat(pattern="HH:mm")
     private Time repairTime;
 
@@ -34,7 +33,7 @@ public class RepairForm {
     @Pattern(regexp="^[a-zA-Z']{1,1024}", message="The tasks can contain only characters!")
     private String repairTasks;
 
-    @NotNull(message="This field is required!")
+//    @NotNull(message="This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Min(value=0, message="The totalcost must be greater or equal than 0!")
     private Float repairTotalCost;
@@ -47,6 +46,33 @@ public class RepairForm {
     @NotNull(message="This field is required!")
     @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number must have the format 'ABC-1234'!")
     private String repairVehicleID;
+
+//    @NotNull(message="This field is required!")
+//    @Size(max=1024, message="The repair type can contain until 1024 characters!")
+//    @Pattern(regexp="^[a-zA-Z']{1,1024}", message="The repair type can contain only characters!")
+//    private String repairΤype;
+
+//    @NotNull(message="This field is required!")
+//    @NumberFormat(style = NumberFormat.Style.NUMBER)
+//    //check the min value (can't be 1 probably)
+//    @Min(value=1, message="The fixed price must be greater or equal than 1!")
+//    private Integer fixedPrice;
+
+//    public String getRepairΤype() {
+//        return repairΤype;
+//    }
+//
+//    public void setRepairΤype(String repairΤype) {
+//        this.repairΤype = repairΤype;
+//    }
+//
+//    public Integer getFixedPrice() {
+//        return fixedPrice;
+//    }
+//
+//    public void setFixedPrice(Integer fixedPrice) {
+//        this.fixedPrice = fixedPrice;
+//    }
 
     public Long getRepairID() {
         return repairID;

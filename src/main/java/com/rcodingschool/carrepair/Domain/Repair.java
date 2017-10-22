@@ -15,7 +15,7 @@ public class Repair implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long repairID;
 
-    @Column(name = "RepairDate", nullable = false)
+    @Column(name = "RepairDate" /*, nullable = false*/)
     private Date repairDate;
 
     @Column(name = "RepairTime")
@@ -27,7 +27,7 @@ public class Repair implements Serializable {
     @Column(name = "RepairTasks", nullable = false)
     private String repairTasks;
 
-    @Column(name = "RepairTotalCost", nullable = false)
+    @Column(name = "RepairTotalCost" /*nullable = false */)
     private Float repairTotalCost;
 
     @Column(name = "RepairTypeID", nullable = false)
@@ -46,6 +46,22 @@ public class Repair implements Serializable {
 
 
     public Repair() {
+    }
+
+    public RepairType getRepairType() {
+        return repairType;
+    }
+
+    public void setRepairType(RepairType repairType) {
+        this.repairType = repairType;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public Repair(Long repairID, Date repairDate, Time repairTime, String repairStatus, String repairTasks,
