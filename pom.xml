@@ -11,6 +11,12 @@
     <name>Car Repair</name>
     <description>2nd Project for Regeneration Coding School #Java</description>
 
+    <constraint-definition annotation="javax.validation.constraints.Future">
+        <validated-by include-existing-validators="true">
+            <value>package.to.LocalDateFutureValidator</value>
+        </validated-by>
+    </constraint-definition>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -61,6 +67,11 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.4.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

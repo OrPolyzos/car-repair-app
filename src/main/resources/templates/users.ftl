@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <@spring.bind "userForm.password"/>
-                                <input type="text" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.lastName!""}"/>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.lastName!""}"/>
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
                                 </#list>
@@ -144,7 +144,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <h1 align="center">Search</h1>
+                    <h1 align="center">Search User</h1>
                     <form class="Search" class="form-horizontal" action="/admin/users/search" method="GET" id="userSearchForm" name="userSearchForm">
                         <fieldset class="Norm">
                             <legend>Fill in User's AFM or Email</legend>
@@ -241,11 +241,3 @@
     </footer--->
 </body>
 </html>
-
-<!-- <article id="right_content" class="page_subsection">
-< h2 > Χορηγοί < /h2> < iframe src = ""
-scrolling = "no" > < /iframe> < hr >
-< iframe src = ""
-scrolling = "no" > < /iframe> < hr >
-< iframe src = ""
-scrolling = "no" > < /iframe> < /article> -->
