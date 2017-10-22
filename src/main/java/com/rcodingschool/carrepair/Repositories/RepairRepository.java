@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface RepairRepository extends CrudRepository<Repair, Long> {
 
+    Repair findOne(Long repairID);
+
     List<Repair> findByRepairID(Long repairID);
 
     List<Repair> findByRepairStatus(String repairStatus);

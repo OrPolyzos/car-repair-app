@@ -62,8 +62,8 @@ public class RepairController {
 
     @RequestMapping(value = "/repairs/create", method = RequestMethod.POST)
     public String processCreateRepair(@Valid @ModelAttribute(REPAIR_FORM) RepairForm repairForm,
-                                    BindingResult bindingResult, Model model,
-                                    RedirectAttributes redirectAttributes) {
+                                      BindingResult bindingResult, Model model,
+                                      RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
@@ -93,7 +93,7 @@ public class RepairController {
     //will delete a repair and redirect to "/admin/repairs"
     @RequestMapping(value = "/repairs/delete/{repairID}", method = RequestMethod.GET)
     public String processDeleteRepair(@PathVariable Long repairID,
-                                    RedirectAttributes redirectAttributes) {
+                                      RedirectAttributes redirectAttributes) {
         //Delete the repair
         repairService.deleteByRepairID(repairID);
         //Send information to the user
@@ -105,8 +105,8 @@ public class RepairController {
     //will search for a reapair by either AFM or Email
     @RequestMapping(value = "/repairs/search", method = RequestMethod.GET)
     public String processSearchRepair(@Valid @ModelAttribute(SEARCH_FORM) RepairSearchForm repairSearchForm,
-                                    BindingResult bindingResult, Model model,
-                                    RedirectAttributes redirectAttributes) {
+                                      BindingResult bindingResult, Model model,
+                                      RedirectAttributes redirectAttributes) {
 
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
@@ -148,7 +148,7 @@ public class RepairController {
 
     @RequestMapping(value = "/repairs/edit/{repairID}", method = RequestMethod.GET)
     public String showEditRepair(@PathVariable Long repairID,
-                               RedirectAttributes redirectAttributes) {
+                                 RedirectAttributes redirectAttributes) {
         //Find the repair
         Repair repair = repairService.findOne(repairID);
         //Build a repairForm Object based on the repair we found
@@ -164,7 +164,7 @@ public class RepairController {
         //Get the model
         Map<String, Object> map = model.asMap();
         //If there is not already a RepairForm something went wrong so we redirect
-        if (!map.containsKey(REPAIR_FORM)){
+        if (!map.containsKey(REPAIR_FORM)) {
             return "redirect:/admin/repairs";
         }
         //If there is not RepairForm
@@ -175,8 +175,8 @@ public class RepairController {
     //and will try to change the details of a Repair
     @RequestMapping(value = "/repairs/editRepair", method = RequestMethod.POST)
     public String processEditRepair(@Valid @ModelAttribute(REPAIR_FORM) RepairForm repairForm,
-                                  BindingResult bindingResult, Model model,
-                                  RedirectAttributes redirectAttributes) {
+                                    BindingResult bindingResult, Model model,
+                                    RedirectAttributes redirectAttributes) {
         //If something does not pass our @Valid(ations), then this means that our BindingResult
         //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {

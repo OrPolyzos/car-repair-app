@@ -29,8 +29,8 @@ public class Vehicle implements Serializable {
     @Column(name = "UserID", nullable = false)
     private Long userID;
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name="UserID",referencedColumnName="UserID", updatable = false, insertable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "UserID", referencedColumnName = "UserID", updatable = false, insertable = false)
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle", targetEntity = Repair.class)
