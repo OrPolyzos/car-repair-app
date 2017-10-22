@@ -1,43 +1,35 @@
 package com.rcodingschool.carrepair.Model;
 
 
+import com.rcodingschool.carrepair.Validators.Date.FutureDateConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.*;
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class RepairForm {
 
-    @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
     private Long repairID;
 
-    @NotNull(message="This field is required!")
-    @Future (message="Only the future is valid!")
-    @DateTimeFormat(pattern="MM/dd/yyyy")
-    private Date repairDate;
-
-    @NotNull(message="This field is required!")
-    @DateTimeFormat(pattern="HH:mm")
-    private Time repairTime;
+    @FutureDateConstraint
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime repairDateTime;
 
     @NotNull(message="This field is required!")
     @Size(max=32, message="The status can not contain up to 32 characters!")
-    @Pattern(regexp="^[a-zA-Z']{1,32}", message="The status can contain only characters!")
+    @Pattern(regexp="^[a-zA-Z]{1,32}", message="The status can contain only characters!")
     private String repairStatus;
 
     @NotNull(message="This field is required!")
     @Size(max=1024, message="The tasks can contain until 1024 characters!")
-    @Pattern(regexp="^[a-zA-Z']{1,1024}", message="The tasks can contain only characters!")
+    @Pattern(regexp="^[a-zA-Z ]{1,1024}", message="The tasks can contain only characters!")
     private String repairTasks;
 
     @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=0, message="The totalcost must be greater or equal than 0!")
-    private Float repairTotalCost;
+    @Size(min=1, max=9, message="The AFM should be exactly 9 digits!")
+    @Pattern(regexp="^[1-9][0-9]{0,9}", message="The cost must contain only digits!")
+    private String repairTotalCost;
 
     @NotNull(message="This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
@@ -56,20 +48,12 @@ public class RepairForm {
         this.repairID = repairID;
     }
 
-    public Date getRepairDate() {
-        return repairDate;
+    public LocalDateTime getRepairDateTime() {
+        return repairDateTime;
     }
 
-    public void setRepairDate(Date repairDate) {
-        this.repairDate = repairDate;
-    }
-
-    public Time getRepairTime() {
-        return repairTime;
-    }
-
-    public void setRepairTime(Time repairTime) {
-        this.repairTime = repairTime;
+    public void setRepairDateTime(LocalDateTime repairDateTime) {
+        this.repairDateTime = repairDateTime;
     }
 
     public String getRepairStatus() {
@@ -88,14 +72,6 @@ public class RepairForm {
         this.repairTasks = repairTasks;
     }
 
-    public Float getRepairTotalCost() {
-        return repairTotalCost;
-    }
-
-    public void setRepairTotalCost(Float repairTotalCost) {
-        this.repairTotalCost = repairTotalCost;
-    }
-
     public Short getRepairTypeID() {
         return repairTypeID;
     }
@@ -110,5 +86,13 @@ public class RepairForm {
 
     public void setRepairVehicleID(String repairVehicleID) {
         this.repairVehicleID = repairVehicleID;
+    }
+
+    public String getRepairTotalCost() {
+        return repairTotalCost;
+    }
+
+    public void setRepairTotalCost(String repairTotalCost) {
+        this.repairTotalCost = repairTotalCost;
     }
 }

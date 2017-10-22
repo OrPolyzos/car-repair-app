@@ -4,12 +4,17 @@ import com.rcodingschool.carrepair.Domain.Repair;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface RepairRepository extends CrudRepository<Repair, Long> {
+
+    List<Repair> findAll();
+
+    List<Repair> findAllByOrderByRepairDateTime();
+
+    List<Repair> findAllByRepairDateTimeBetween(LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd);
 
     Repair findOne(Long repairID);
 
@@ -21,9 +26,9 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     List<Repair> findByRepairTypeID(String RepairTypeID);
 
-    List<Repair> findByRepairDateAndRepairTime(Date repairDate, Time repairTime);
 
-    List<Repair> findAll();
+
+
 
     Repair save(Repair repair);
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,20 +17,43 @@ public class RepairServiceImpl implements RepairService {
     private RepairRepository repairRepository;
 
     @Override
-    public List<Repair> findByRepairID(Long repairID) { return repairRepository.findByRepairID(repairID); }
+    public List<Repair> findAll() {
+        return repairRepository.findAll();
+    }
 
     @Override
-    public List<Repair> findAll() { return repairRepository.findAll(); }
+    public List<Repair> findAllByOrderByRepairDateTime() {
+        return repairRepository.findAllByOrderByRepairDateTime();
+    }
 
     @Override
-    public Repair findOne(Long repairID) { return repairRepository.findOne(repairID);}
+    public List<Repair> findAllByRepairDateTimeBetween(LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd){
+        return repairRepository.findAllByRepairDateTimeBetween(localDateTimeStart,localDateTimeEnd);
+    }
 
     @Override
-    public List<Repair> findByVehicleID(String vehicleID) { return repairRepository.findByVehicleID(vehicleID); }
+    public List<Repair> findByRepairID(Long repairID) {
+        return repairRepository.findByRepairID(repairID);
+    }
+
 
     @Override
-    public void save(Repair repair) { repairRepository.save(repair); }
+    public Repair findOne(Long repairID) {
+        return repairRepository.findOne(repairID);
+    }
 
     @Override
-    public void deleteByRepairID(Long repairID) { repairRepository.deleteByRepairID(repairID);}
+    public List<Repair> findByVehicleID(String vehicleID) {
+        return repairRepository.findByVehicleID(vehicleID);
+    }
+
+    @Override
+    public void save(Repair repair) {
+        repairRepository.save(repair);
+    }
+
+    @Override
+    public void deleteByRepairID(Long repairID) {
+        repairRepository.deleteByRepairID(repairID);
+    }
 }

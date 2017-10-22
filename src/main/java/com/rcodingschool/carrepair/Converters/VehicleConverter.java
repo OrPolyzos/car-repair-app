@@ -15,8 +15,6 @@ public class VehicleConverter {
         vehicle.setYear(vehicleForm.getYear());
         vehicle.setColor(vehicleForm.getColor());
         vehicle.setUserID(user.getUserID());
-
-
         return vehicle;
     }
 

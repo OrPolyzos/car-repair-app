@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class RepairController {
 
     private static final String REPAIR_FORM = "repairForm";
     private static final String SEARCH_FORM = "repairSearchForm";
-    private static final String REPAIR_LIST = "repairList";
+    private static final String REPAIR_LIST = "repairsList";
     private static final String NOT_FOUND = "searchNotFoundMessage";
     private static final String MESSAGE = "errorMessage";
 
@@ -73,10 +74,9 @@ public class RepairController {
             redirectAttributes.addFlashAttribute(REPAIR_FORM, repairForm);
             return "redirect:/admin/repairs";
         }
+
         try {
             //Trying to build a repair from our RepairForm
-
-
             Repair repair = RepairConverter.buildInsertRepairObject(repairForm);
             //Save the repair
             repairService.save(repair);
@@ -119,20 +119,31 @@ public class RepairController {
         }
 
         //Initialize a new list of Repairs to hold the results of the search
-        List<Repair> repairList;
+        List<Repair> repairList = new ArrayList<>();
         //Getting the searchForm values and checking
         //If both are null
-        if (repairSearchForm.getRepairID() == null && repairSearchForm.getRepairVehicleID() == null) {
-            //Then we retrieve all the repairs
-            repairList = repairService.findAll();
-            //If the AFM is not null
-        } else if (repairSearchForm.getRepairID() != null) {
-            //We search for Repairs based on AFM
+        if (repairSearchForm.getRepairID() != null){
             repairList = repairService.findByRepairID(repairSearchForm.getRepairID());
-            //Else if AFM is null, means Email is not
-        } else {
-            //We search for Repairs based on Email
-            repairList = repairService.findByVehicleID(repairSearchForm.getRepairVehicleID());
+        }
+        else{
+            if (repairSearchForm.getRepairVehicleID() != null){
+                if  (repairSearchForm.getRepairDateTimeStart() == null && repairSearchForm.getRepairDateTimeEnd() == null){
+                    repairList = repairService.findByVehicleID(repairSearchForm.getRepairVehicleID());
+                }
+                else{
+                    if (repairSearchForm.getRepairDateTimeStart() != null && repairSearchForm.getRepairDateTimeEnd() != null){
+                        //repairList = repairService.findAllByRepairDateTimeBetweenAndVehicleID()
+                    }
+                }
+            }
+            else{
+                if (repairSearchForm.getRepairDateTimeStart() != null && repairSearchForm.getRepairDateTimeEnd() != null){
+                    repairList = repairService.findAllByRepairDateTimeBetween(repairSearchForm.getRepairDateTimeStart(), repairSearchForm.getRepairDateTimeEnd());
+                }
+                else{
+                    repairList = repairService.findAll();
+                }
+            }
         }
         //If the List is Empty
         if (repairList.isEmpty()) {
