@@ -5,33 +5,36 @@ import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class PartForm {
 
-    @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
-    private Long repairId;
-
-    @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
     private Long partID;
 
     @NotNull(message="This field is required!")
+    @Size(min=1, max=128, message="Maximum length is 128 characters!")
+    @Pattern(regexp="^[a-zA-Z]{1,128}", message="Only uppercase and lowercase characters allowed!")
+    private String partName;
+
+    @NotNull(message="This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
-    private Short quantity;
+    @Min(value=0, message="PartPrice must be to 0!")
+    private Integer partPrice;
 
-    public Long getRepairId() { return repairId; }
 
-    public void setRepairId(Long repairId) { this.repairId = repairId; }
 
     public Long getPartID() { return partID; }
 
     public void setPartID(Long partID) { this.partID = partID; }
 
-    public Short getQuantity() { return quantity; }
+    public String getPartName() {return partName;}
 
-    public void setQuantity(Short quantity) { this.quantity = quantity; }
+    public void setPartName(String partName) { this.partName = partName;}
+
+    public Integer getPartPrice() {return partPrice;}
+
+    public void setPartPrice(Integer partPrice){this.partPrice = partPrice;}
+
+
 }
