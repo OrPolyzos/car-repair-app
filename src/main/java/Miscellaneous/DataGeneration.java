@@ -39,7 +39,7 @@ public class DataGeneration {
     public static void main(String[] args) {
         generateUsers();
         generateRepairs();
-        exportRepairsToCSV();
+       // exportRepairsToCSV();
 
 
 

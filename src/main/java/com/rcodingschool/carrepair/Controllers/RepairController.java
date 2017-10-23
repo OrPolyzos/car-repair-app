@@ -184,7 +184,7 @@ public class RepairController {
 
     //The processEditRepair() method will map "/repairs/editRepair" POST requests
     //and will try to change the details of a Repair
-    @RequestMapping(value = "/repairs/editRepair", method = RequestMethod.POST)
+    @RequestMapping(value = "admin/repairs/editRepair", method = RequestMethod.POST)
     public String processEditRepair(@Valid @ModelAttribute(REPAIR_FORM) RepairForm repairForm,
                                     BindingResult bindingResult, Model model,
                                     RedirectAttributes redirectAttributes) {
