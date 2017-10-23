@@ -25,8 +25,7 @@ function setup() {
 //  par.id("canvasHolder");
 //  par.child(cnv);
 //  par.style('z-index','-25');
-  cnv.style('z-index','-25')
-;
+  cnv.style('z-index','-25');
   colorMode(HSB, 255);
   cols = floor(width / scl);
   rows = floor(height / scl);
