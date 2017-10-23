@@ -40,7 +40,7 @@ public class DataGeneration {
         generateUsers();
         generateRepairs();
         exportRepairsToCSV();
-        exportRepairsToCSV();
+
 
 
 //        for (int i=0; i < firstNamesList.size(); i++){
