@@ -9,28 +9,28 @@ public class Part implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "partID", nullable = false)
-    private Long partID;
+    private String partID;
 
     @Column(name = "partName", nullable = false)
     private String partName;
 
     @Column(name = "PartPrice", nullable = false)
-    private Integer partPrice;
+    private String partPrice;
 
     public Part() {
     }
 
-    public Part(Long partID, String partName, Integer partPrice) {
+    public Part(String partID, String partName, String partPrice) {
         this.partID = partID;
         this.partName = partName;
         this.partPrice = partPrice;
     }
 
-    public Long getPartID() {
+    public String getPartID() {
         return partID;
     }
 
-    public void setPartID(Long partID) {
+    public void setPartID(String partID) {
         this.partID = partID;
     }
 
@@ -42,11 +42,11 @@ public class Part implements Serializable {
         this.partName = partName;
     }
 
-    public Integer getPartPrice() {
+    public String getPartPrice() {
         return partPrice;
     }
 
-    public void setPartPrice(Integer partPrice) {
+    public void setPartPrice(String partPrice) {
         this.partPrice = partPrice;
     }
 }

@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 
 public class PartForm {
 
-    private Long partID;
+    private String partID;
 
     @NotNull(message="This field is required!")
     @Size(min=1, max=128, message="Maximum length is 128 characters!")
@@ -18,23 +18,22 @@ public class PartForm {
     private String partName;
 
     @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=0, message="PartPrice must be to 0!")
-    private Integer partPrice;
+    @Size(min=1, max=9, message="The partPrice should be until 9 digits!")
+    @Pattern(regexp="^[0-9]{9}", message="The partPrice must contain only digits!")
+    private String partPrice;
 
 
+    public String getPartID() { return partID; }
 
-    public Long getPartID() { return partID; }
-
-    public void setPartID(Long partID) { this.partID = partID; }
+    public void setPartID(String partID) { this.partID = partID; }
 
     public String getPartName() {return partName;}
 
     public void setPartName(String partName) { this.partName = partName;}
 
-    public Integer getPartPrice() {return partPrice;}
+    public String getPartPrice() {return partPrice;}
 
-    public void setPartPrice(Integer partPrice){this.partPrice = partPrice;}
+    public void setPartPrice(String partPrice){this.partPrice = partPrice;}
 
 
 }

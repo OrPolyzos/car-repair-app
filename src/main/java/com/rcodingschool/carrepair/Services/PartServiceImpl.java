@@ -4,7 +4,6 @@ import com.rcodingschool.carrepair.Domain.Part;
 import com.rcodingschool.carrepair.Repositories.PartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class PartServiceImpl implements PartService {
 
 
     @Override
-    public Part findOne(Long partID) { return partRepository.findOne(partID); }
+    public Part findOne(String partID) { return partRepository.findOne(partID); }
 
     @Override
     public List<Part> findAll() {
@@ -25,8 +24,13 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public List<Part> findByPartID(Long partID) {
+    public List<Part> findByPartID(String partID) {
         return partRepository.findByPartID(partID);
+    }
+
+    @Override
+    public List<Part> findByPartPrice1PartPrice2(String partPrice1, String partPrice2) {
+        return partRepository.findByPartPrice1PartPrice2(partPrice1, partPrice2);
     }
 
     @Override
@@ -35,7 +39,7 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public void deleteByPartID(Long partID) {
+    public void deleteByPartID(String partID) {
         partRepository.deleteByPartID(partID);
     }
 

@@ -10,14 +10,16 @@ import java.util.List;
 @Repository
 public interface PartRepository extends CrudRepository<Part, Long>{
 
-    Part findOne(Long partID);
+    Part findOne(String partID);
 
     List<Part> findAll();
 
-    List<Part> findByPartID(Long partID);
+    List<Part> findByPartID(String partID);
 
-    Part save(Part user);
+    List<Part> findByPartPrice1PartPrice2(String partPrice1, String partPrice2);
 
-    void deleteByPartID(Long partID);
+    Part save(Part part);
+
+    void deleteByPartID(String partID);
 
 }
