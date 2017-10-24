@@ -10,7 +10,6 @@ public class RepairPart implements Serializable {
     @Column(name = "RepairID", nullable = false)
     private Long repairID;
 
-
     @Column(name = "PartID", nullable = false)
     private Long partID;
 
@@ -18,12 +17,6 @@ public class RepairPart implements Serializable {
     private Integer quantity;
 
     public RepairPart() {
-    }
-
-    public RepairPart(Long repairID, Long partID, Integer quantity) {
-        this.repairID = repairID;
-        this.partID = partID;
-        this.quantity = quantity;
     }
 
     public Long getRepairID() {

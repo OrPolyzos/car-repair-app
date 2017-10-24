@@ -17,7 +17,7 @@
     <style>
         fieldset.Hor {
             float: left;
-            width: 33.3%;
+            width: 50%;
             padding: 20;
         }
         fieldset.Norm {
@@ -47,38 +47,25 @@
                 <form class="form-horizontal" action="/admin/parts/create" method="POST" id="partForm" name="partForm">
                     <legend>Parts Details</legend>
                     <fieldset class="Hor">
-
-
-                        <#--bind this field with the registration form fields-->
-
-                            <div class="form-group">
-                                <label for="partName">Part Name</label>
-                                <@spring.bind "partForm.partName"/>
-                                <input type="text" class="form-control "name="partName" id="partName" placeholder="turbocharger" value="${partForm.partName!""}"/>
-                                <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
-                                </#list>
-                            </div>
+                        <div class="form-group">
+                            <label for="partName">Part Name</label>
+                            <@spring.bind "partForm.partName"/>
+                            <input type="text" class="form-control "name="partName" id="partName" placeholder="turbocharger" value="${partForm.partName!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
+                        </div>
                     </fieldset>
                     <fieldset class="Hor">
                         <div class="form-group">
                             <label partPriceStart>Cost</label>
-                            <@spring.bind "partForm.partPriceStart"/>
-                            <input type="number" class="form-control" name="partPriceStart" id="partPriceStart" placeholder="100" value="${partForm.partPriceStart!""}"/>
-                            <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
-                            </#list>
-                        </div>
-                        <div class="form-group">
-                            <label partPriceEnd>Cost</label>
-                            <@spring.bind "partForm.partPriceEnd"/>
-                            <input type="number" class="form-control" name="partPriceEnd" id="partPriceEnd" placeholder="100" value="${partForm.partPriceEnd!""}"/>
+                            <@spring.bind "partForm.partPrice"/>
+                            <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
                         </div>
                     </fieldset>
-
                     <br><br>
                     <div class="col-md-12 controls">
                         <span>
@@ -101,7 +88,7 @@
 
             <form class="Search" class="form-horizontal" action="/admin/parts/search" method="GET" id="partSearchForm" name="partSearchForm">
                 <fieldset class="Norm">
-                    <legend>Fill in User's AFM or Email</legend>
+                    <legend>Fill in Part's Fields</legend>
                     <div class="col-md-4">
                         <label for=partID>Part ID</label>
                         <@spring.bind "partSearchForm.partID"/>
@@ -112,7 +99,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for=partPriceStart>Start Price</label>
-                        <@spring.bind "partSearchForm.partID"/>
+                        <@spring.bind "partSearchForm.partPriceStart"/>
                         <input type="number" class="form-control" name="partPriceStart" id="partPriceStart" placeholder="" value="${partSearchForm.partPriceStart!""}"/>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
@@ -120,7 +107,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for=partPriceEnd>End Price</label>
-                        <@spring.bind "partSearchForm.partID"/>
+                        <@spring.bind "partSearchForm.partPriceEnd"/>
                         <input type="number" class="form-control" name="partPriceEnd" id="partPriceEnd" placeholder="" value="${partSearchForm.partPriceEnd!""}"/>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
@@ -161,7 +148,7 @@
                     <tr>
                         <td>${part.partID!"Could not retrieve value!"}</td>
                         <td>${part.partName!"Could not retrieve value!"}</td>
-                        <td>${part.partCost!"Could not retrieve value!"}</td>
+                        <td>${part.partPrice!"Could not retrieve value!"}</td>
                         <form action="/admin/parts/edit/${part.partID}" method="GET">
                         <td>
                             <button type="submit" class="btn btn-success">

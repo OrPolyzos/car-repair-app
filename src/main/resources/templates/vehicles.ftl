@@ -205,12 +205,10 @@
                         <td>
                             <button type="submit" value="Edit" class="btn btn-success">
                                 <span class="glyphicon glyphicon-cog"></span>
-                                    Edit
                             </button>
                         <td>
                             <button type="submit" formaction="/admin/vehicles/delete/${vehicle.vehicleID}" formmethod="GET" class="btn btn-danger" onclick="return confirm('Are you sure?')" >
                                 <span class="glyphicon glyphicon-remove"></span>
-                                    Delete
                             </button>
                         </td>
                     </form>
