@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface PartService {
 
-    Part findOne(String partID);
+    Part findOne(Long partID);
 
     List<Part> findAll();
 
-    List<Part> findByPartID(String partID);
+    List<Part> findByPartID(Long partID);
 
-    List<Part> findByPartPriceStartPartPriceEnd(String partPriceStart, String partPriceEnd);
+    List<Part> findAllByPartPriceBetween(Long partPriceStart, Long partPriceEnd);
 
     void save(Part part);
 
-    void deleteByPartID(String partID);
+    void deleteByPartID(Long partID);
 }

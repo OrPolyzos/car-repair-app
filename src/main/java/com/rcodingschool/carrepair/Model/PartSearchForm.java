@@ -1,7 +1,6 @@
 package com.rcodingschool.carrepair.Model;
 
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 public class PartSearchForm {
 
