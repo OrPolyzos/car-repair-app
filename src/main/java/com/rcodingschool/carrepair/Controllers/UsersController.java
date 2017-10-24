@@ -40,7 +40,7 @@ public class UsersController {
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    //The showUsersView method which maps the "/admin/users/" GET requests and returns the users.ftl
+    //The showUsersView method which maps the "/admin/users/" GET requests and returns the usersOriginal.ftl
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String showUsersView(Model model) {
         Map<String, Object> map = model.asMap();
@@ -135,7 +135,7 @@ public class UsersController {
             //We send Information to the user
             redirectAttributes.addFlashAttribute(NOT_FOUND, "No records were found!");
         } else {
-            //else we send the userList to our users.ftl
+            //else we send the userList to our usersOriginal.ftl
             redirectAttributes.addFlashAttribute(USER_LIST, usersList);
         }
         return "redirect:/admin/users";

@@ -126,7 +126,7 @@ public class PartController {
             //We send Information to the user
             redirectAttributes.addFlashAttribute(NOT_FOUND, "No records were found!");
         } else {
-            //else we send the userList to our users.ftl
+            //else we send the userList to our usersOriginal.ftl
             redirectAttributes.addFlashAttribute(PART_LIST, partsList);
         }
         return "redirect:/admin/parts";

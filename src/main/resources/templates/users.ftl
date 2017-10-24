@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Users</title>
+    <title>Repair Parts</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
@@ -16,7 +16,7 @@
     <!---- Trying to make some cool stuff with p5.js
     <script async src=https://CDN.JSDelivr.net/g/p5.js(p5.min.js+addons/p5.dom.js+addons/p5.sound.js)></script>
     <script defer src=/../sketch.js></script>
-    <script defer src=/../particle.js></script> ---->
+    <script defer src=/../particle.js></script> ------>
 
     <style>
         fieldset.Hor {
@@ -25,7 +25,6 @@
             padding: 20;
         }
         fieldset.Norm {
-            width: 100%;
             padding: 20;
         }
     </style>
@@ -34,108 +33,57 @@
 
 <body>
     <#include "navbar.ftl">
-
     <div class="p5container">
-        <img src="../Images/eXtremeRed.png">
+        <img src="/../Images/eXtremeRed.png">
     </div>
     <h1 class="errorRed">${errorMessage!""}</h1>
-        <h1>Create New User</h1>
-
-        <br><br>
-
-        <div class="container-fluid">
+    <div>
+        <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-sm-12">
+                    <h1 align="center">Add Repair Parts</h1>
+                    <form  class="form-horizontal" action="/admin/repairs/addRepairParts" method="POST" id="addRepairPartsForm" name="addRepairPartsForm">
 
-                    <form  class="form-horizontal" action="/admin/users/create" method="POST" id="userForm" name="userForm">
-                        <fieldset class="Hor">
-                            <legend>User's Personal Details</legend>
-                                <div class="form-group">
-                                    <label for="afm">AFM</label>
-                                    <@spring.bind "userForm.afm"/>
-                                        <input type="text" class="form-control" id="afm" name="afm" placeholder="123456789" value="${userForm.afm!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="firstName">Firstname</label>
-                                    <@spring.bind "userForm.firstName"/>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" value="${userForm.firstName!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Lastname</label>
-                                    <@spring.bind "userForm.lastName"/>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" value="${userForm.lastName!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                        </fieldset>
-                        <fieldset class="Hor">
-                            <legend>User's Credentials</legend>
-                                <div class="form-group">
-                                    <label for="type">Type</label>
-                                    <@spring.bind "userForm.type"/>
-                                        <select class="form-control" id="type" name="type">
-                                            <option value="User">User</option>
-                                            <option value="Admin">Admin</option>
-                                        </select>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
+                             <fieldset class="Hor">
+                             <div class="form-group">
 
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <@spring.bind "userForm.email"/>
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="john@doe.com" value="${userForm.email!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <@spring.bind "userForm.password"/>
-                                        <input type="text" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.lastName!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                        </fieldset>
-                        <fieldset class="Hor">
-                            <legend>User's Address Details</legend>
-                                <div class="form-group">
-                                    <label for="addressStreet">Street</label>
-                                    <@spring.bind "userForm.addressStreet"/>
-                                        <input type="text" class="form-control" id="addressStreet" name="addressStreet" placeholder="Broadway" value="${userForm.addressStreet!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="addressNumber">Number</label>
-                                    <@spring.bind "userForm.addressNumber"/>
-                                        <input class="form-control" type="number" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="28" value="${userForm.addressNumber!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed"class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="addressZipCode">Zip</label>
-                                    <@spring.bind "userForm.addressZipCode"/>
-                                        <input class="form-control" type="number" min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                        </fieldset>
-                        <div class="col-md-12 controls">
+                             <label for="repairId">Repair ID</label>
+                             <@spring.bind "addRepairPartsForm.repairId"/>
+                             <input type="disabled" type="number" name="repairId" id="repairId" placeholder="1" value="${addRepairPartsForm.repairId!""}"/>
+                             <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                             </#list>
+                             </div>
+                             </fieldset>
+
+<!--
+                             <fieldset class="Hor">
+
+                             <div class="form-group">
+                             <label for="partId">Part ID</label>
+                             <@spring.bind "addRepairPartsForm.partId"/>
+                             <input class="form-control" type="number" name="partId" id="partId" placeholder="1" value="${addRepairPartsForm.partId!""}"/>
+                             <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                             </#list>
+                             </div>
+                             </fieldset>
+
+                             <fieldset class="Hor">
+
+                             <div class="form-group">
+                             <label for="quantity">Quantity</label>
+                             <@spring.bind "addRepairPartsForm.quantity"/>
+                             <input class="form-control" type="number" name="quantity" id="quantity" placeholder="1" value="${addRepairPartsForm.quantity!""}"/>
+                             <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                             </#list>
+                             </div>
+                             </fieldset>
+
+                        <div class="col-sm-12 controls">
                         <span>
-                            <button type="submit" id="btn-submit" class="btn btn-success btn-md">Create</button>
+                            <button type="submit" id="btn-submit" class="btn btn-success btn-md">Add</button>
                             <button type="reset" id="btn-clear" class="btn btn-danger btn-md">Clear</button>
                         </span>
                         </div>
@@ -143,109 +91,109 @@
                 </div>
             </div>
         </div>
-
-    <hr></hr>
-
-        <div class="container-fluid">
-            <div class="row">
-                <h1>Search User</h1>
-
-                <br><br>
-
-                <form class="Search" class="form-horizontal" action="/admin/users/search" method="GET" id="userSearchForm" name="userSearchForm">
-                    <fieldset class="Norm">
-                        <legend>Fill in User's AFM or Email</legend>
-                            <div class="col-md-4">
-                                <label for="afm">AFM</label>
-                                <@spring.bind "userSearchForm.afm"/>
-                                    <input type="text" class="form-control" name="afm" id="firstName" placeholder="123456789" value="${userSearchForm.afm!""}"/>
-                                <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
-                                </#list>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="email">Email</label>
-                                <@spring.bind "userSearchForm.email"/>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="john@doe.com" value="${userSearchForm.email!""}"/>
-                                <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
-                                </#list>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="filterInput">Filter</label>
-                                    <input type="text" class="form-control" name="filterInput" id="filterInput" placeholder="john"/>
-                            </div>
-                    </fieldset>
-                    <div class="col-md-12 controls">
-                        <span>
-                            <button type="submit" id="btn-submit" class="btn btn-primary">Search</button>
-                            <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
+    </div>
 
     <h2>${searchNotFoundMessage!""}</h2>
-    <#if userList??>
-        <h3><u>Retrieved Users</u></h3>
+    <#if repairPartsList??>
+        <h3 class="text-center"><u>Retrieved Repair Parts</u></h3>
         <div class="table-responsive">
             <table id="resultsTable" class="table" class="table-hover">
                 <thead>
                     <tr>
-                        <th>User ID</th>
-                        <th>AFM</th>
-                        <th>Email</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Type</th>
-                        <th>Street</th>
-                        <th>Number</th>
-                        <th>Zip Code</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                        <th>Vehicles</th>
+                        <th class="text-center">Repair ID</th>
+                        <th class="text-center">Part ID</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Edit Repair</th>
+                        <th class="text-center">Delete Repair</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <#list userList as user>
+                    <#list repairPartsList as repairPart>
                         <span>
-                    <tr>
-                        <td>${user.userID!"Could not retrieve value!"}</td>
-                        <td>${user.afm!"Could not retrieve value!"}</td>
-                        <td>${user.email!"Could not retrieve value!"}</td>
-                        <td>${user.firstName!"Could not retrieve value!"}</td>
-                        <td>${user.lastName!"Could not retrieve value!"}</td>
-                        <td>${user.type!"Could not retrieve value!"}</td>
-                        <td>${user.addressStreet!"Could not retrieve value!"}</td>
-                        <td>${user.addressNumber!"Could not retrieve value!"}</td>
-                        <td>${user.addressZipCode!"Could not retrieve value!"}</td>
-                        <form action="/admin/users/edit/${user.userID}" method="GET">
-                        <td>
-                            <button type="submit" class="btn btn-success">
-                                <span class="glyphicon glyphicon-cog"></span>
+                <tr>
+                    <td class="text-center">${repairPart.repairId}</td>
+                    <td class="text-center">${repairPart.partId}</td
+                    <td class="text-center">${repairPart.Quantity}</td
+                    <form action="/admin/repairs/addRepairParts/${repairPart.repairId}" method="GET">
+                      <td class="text-center">
+                          <button type="submit">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </button>
+                        </td>
+                        <td class="text-center">
+                            <button type="submit" formaction="/admin/repairs/deleteRepairParts/${repairPart.repairID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this part from this repair?')">
+                            <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </td>
-                        <td>
-                            <button type="submit" class="btn btn-danger" formaction="/admin/users/delete/${user.userID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this user?')">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </td>
-                        <td>
-                            <button type="submit" class="btn btn-info" formaction="/admin/vehicles/${user.userID}" formmethod="GET">
-                                <span class="glyphicon glyphicon-dashboard"></span>
-                            </button>
-                        </td>
-                        </form>
-                    </tr>
-                        </span>
+                    </form>
+                </tr>
+                    </span>
                     </#list>
-                </tbody>
-            </table>
-        </div>
-    </#if>
+            </tbody>
+        </table>
+    </div>
+</#if>
 
-    <#include "footer.ftl">
+   <hr></hr>
+       <div>
+           <center>
+           <div class="container-fluid">
+               <div class="row">
+                   <div class="col-sm-12">
+                       <h1 align="center">Available Parts</h1>
+                       <form class="Search" class="form-horizontal" action="/admin/parts/search" method="GET" id="partSearchForm" name="partSearchForm">
+                           <fieldset class="Norm">
+                               <div class="form-group">
+                                   <hr></hr>
+                        <!--           <label for="filterInput">Filter</label> -->
+                                   <input type="text" class="input-sm" name="filterInput" id="filterInput" placeholder="abc-123..."/>
+                               </fieldset>
+                               </div>
+                               <br><br>
+                           <div class="col-sm-12 controls">
+                               <span>
+                                   <button type="submit" id="btn-submit" class="btn btn-success btn-md">Filter</button>
+                                   <button type="reset" id="btn-clear" class="btn btn-danger btn-md">Clear</button>
+                               </span>
+                           </div>
+                       </form>
+                   </div>
+               </div>
+           </div>
+           </center>
+       </div>
+
+    <#if partsList??>
+        <div class="table-responsive">
+            <table id="resultsTable" class="table" class="table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Part ID</th>
+                        <th class="text-center">Part Name</th>
+                        <th class="text-center">Part Cost</th>
+                        <th class="text-center">Part Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <#list partsList as part>
+                        <span>
+                <tr>
+                    <td class="text-center">${part.partID}</td>
+                    <td class="text-center">${part.partName}</td
+                    <td class="text-center">${part.partPrice}</td
+                    <td class="text-center">${part.quantity}</td
+                    <form action="/admin/parts/searchParts/${part.partId}" method="GET">
+    -->
+                    </form>
+                </tr>
+                    </span>
+                    </#list>
+            </tbody>
+        </table>
+    </div>
+</#if>
+
 
 </body>
 </html>
+
