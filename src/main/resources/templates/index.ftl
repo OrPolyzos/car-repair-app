@@ -6,8 +6,15 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <title>Auto Repair</title>
+        <!---- Trying to make some cool stuff with p5.js ----->
+        <script async src=https://CDN.JSDelivr.net/g/p5.js(p5.min.js+addons/p5.dom.js+addons/p5.sound.js)></script>
+        <script defer src=sketch.js></script>
+        <script defer src=particle.js></script>
+        <!---- Our Custom CSS ----->
+        <link rel="stylesheet" href="p5styles.css">
     </head>
 <body>
+    <!-- NAVABAR -->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -22,29 +29,10 @@
             </div>
         </div>
     </nav>
-    <div align="center">
-        <div class="container"
-            <h1>Welcome to Auto Repair!</h1>
-            <br>
-            This
-            <br><br>
-            here
-            <br><br>
-            could
-            <br><br>
-            have
-            <br><br>
-            some
-            <br><br>
-            info
-            <br><br>
-            about
-            <br><br>
-            the
-            <br><br>
-            site
-            <br><br>
+
+
+        <div class="p5container">
+            <img src="Images/eXtreme.png">
         </div>
-    </div>
     </body>
 </html>

@@ -37,12 +37,12 @@ public class DataGeneration {
 
 
     public static void main(String[] args) {
- //       generateAddresses();
-  //      exportAddressesToCSV();
-   //     generateUsers();
+        generateUsers();
         generateRepairs();
-        exportRepairsToCSV();
-        exportRepairsToCSV();
+       // exportRepairsToCSV();
+
+
+
 //        for (int i=0; i < firstNamesList.size(); i++){
 //            System.out.println(firstNamesList.get(i) + " " + lastNamesList.get(i) + " " +
 //            emailsList.get(i) + " " + afmsList.get(i) + " " + passwordsList.get(i) + " " + addressIDList.get(i) + " " + typesList.get(i));

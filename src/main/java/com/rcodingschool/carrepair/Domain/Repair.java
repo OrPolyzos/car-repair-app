@@ -1,11 +1,10 @@
 package com.rcodingschool.carrepair.Domain;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Time;
-//import java.time.LocalDate;
-//import java.time.LocalTime;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 
 @Entity(name = "Repairs")
 public class Repair implements Serializable {
@@ -15,11 +14,8 @@ public class Repair implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long repairID;
 
-    @Column(name = "RepairDate", nullable = false)
-    private Date repairDate;
-
-    @Column(name = "RepairTime")
-    private Time repairTime;
+    @Column(name = "RepairDateTime", nullable = false)
+    private LocalDateTime repairDateTime;
 
     @Column(name = "RepairStatus", nullable = false)
     private String repairStatus;
@@ -28,7 +24,7 @@ public class Repair implements Serializable {
     private String repairTasks;
 
     @Column(name = "RepairTotalCost", nullable = false)
-    private Float repairTotalCost;
+    private Integer repairTotalCost;
 
     @Column(name = "RepairTypeID", nullable = false)
     private Short repairTypeID;
@@ -48,19 +44,6 @@ public class Repair implements Serializable {
     public Repair() {
     }
 
-    public Repair(Long repairID, Date repairDate, Time repairTime, String repairStatus, String repairTasks,
-                  Float repairTotalCost, Short repairTypeID, String vehicleID) {
-        this.repairID = repairID;
-        this.repairDate = repairDate;
-        this.repairTime = repairTime;
-        this.repairStatus = repairStatus;
-        this.repairTasks = repairTasks;
-        this.repairTotalCost = repairTotalCost;
-        this.repairTypeID = repairTypeID;
-        this.vehicleID = vehicleID;
-
-    }
-
     public Long getRepairID() {
         return repairID;
     }
@@ -69,20 +52,12 @@ public class Repair implements Serializable {
         this.repairID = repairID;
     }
 
-    public Date getRepairDate() {
-        return repairDate;
+    public LocalDateTime getRepairDateTime() {
+        return repairDateTime;
     }
 
-    public void setRepairDate(Date repairDate) {
-        this.repairDate = repairDate;
-    }
-
-    public Time getRepairTime() {
-        return repairTime;
-    }
-
-    public void setRepairTime(Time repairTime) {
-        this.repairTime = repairTime;
+    public void setRepairDateTime(LocalDateTime repairDateTime) {
+        this.repairDateTime = repairDateTime;
     }
 
     public String getRepairStatus() {
@@ -101,11 +76,11 @@ public class Repair implements Serializable {
         this.repairTasks = repairTasks;
     }
 
-    public Float getRepairTotalCost() {
+    public Integer getRepairTotalCost() {
         return repairTotalCost;
     }
 
-    public void setRepairTotalCost(Float repairTotalCost) {
+    public void setRepairTotalCost(Integer repairTotalCost) {
         this.repairTotalCost = repairTotalCost;
     }
 
@@ -117,11 +92,42 @@ public class Repair implements Serializable {
         this.repairTypeID = repairTypeID;
     }
 
+    public RepairType getRepairType() {
+        return repairType;
+    }
+
+    public void setRepairType(RepairType repairType) {
+        this.repairType = repairType;
+    }
+
     public String getVehicleID() {
         return vehicleID;
     }
 
     public void setVehicleID(String vehicleID) {
         this.vehicleID = vehicleID;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    @Override
+    public String toString() {
+        return "Repair{" +
+                "repairID=" + repairID +
+                ", repairDateTime=" + repairDateTime +
+                ", repairStatus='" + repairStatus + '\'' +
+                ", repairTasks='" + repairTasks + '\'' +
+                ", repairTotalCost=" + repairTotalCost +
+                ", repairTypeID=" + repairTypeID +
+                ", repairType=" + repairType +
+                ", vehicleID='" + vehicleID + '\'' +
+                ", vehicle=" + vehicle +
+                '}';
     }
 }

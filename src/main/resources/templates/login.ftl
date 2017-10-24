@@ -12,6 +12,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Custom Css -->
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/styles.css">
+    <!---- Trying to make some cool stuff with p5.js ----->
+    <script async src=https://CDN.JSDelivr.net/g/p5.js(p5.min.js+addons/p5.dom.js+addons/p5.sound.js)></script>
+    <script defer src=sketch.js></script>
+    <script defer src=particle.js></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse">

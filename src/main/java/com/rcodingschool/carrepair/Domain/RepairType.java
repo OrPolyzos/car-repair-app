@@ -12,8 +12,8 @@ public class RepairType implements Serializable {
     @Column(name = "RepairTypeID", nullable = false)
     private Short repairTypeID;
 
-    @Column(name = "RepairType", nullable = false)
-    private String repairType;
+    @Column(name = "RepairTypeDescription", nullable = false)
+    private String repairTypeDescription;
 
     @Column(name = "FixedPrice", nullable = false)
     private Integer fixedPrice;
@@ -24,12 +24,6 @@ public class RepairType implements Serializable {
     public RepairType() {
     }
 
-    public RepairType(Short repairTypeID, String repairType, Integer fixedPrice) {
-        this.repairTypeID = repairTypeID;
-        this.repairType = repairType;
-        this.fixedPrice = fixedPrice;
-    }
-
     public Short getRepairTypeID() {
         return repairTypeID;
     }
@@ -38,12 +32,12 @@ public class RepairType implements Serializable {
         this.repairTypeID = repairTypeID;
     }
 
-    public String getRepairType() {
-        return repairType;
+    public String getRepairTypeDescription() {
+        return repairTypeDescription;
     }
 
-    public void setRepairType(String repairType) {
-        this.repairType = repairType;
+    public void setRepairTypeDescription(String repairTypeDescription) {
+        this.repairTypeDescription = repairTypeDescription;
     }
 
     public Integer getFixedPrice() {
@@ -52,5 +46,13 @@ public class RepairType implements Serializable {
 
     public void setFixedPrice(Integer fixedPrice) {
         this.fixedPrice = fixedPrice;
+    }
+
+    public List<Repair> getRepairsList() {
+        return repairsList;
+    }
+
+    public void setRepairsList(List<Repair> repairsList) {
+        this.repairsList = repairsList;
     }
 }
