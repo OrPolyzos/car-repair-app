@@ -24,3 +24,11 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE  0 lines
 (repair_date_time,repair_status,repair_tasks,repair_total_cost,repair_typeid,vehicleid);
+
+LOAD DATA LOCAL INFILE 'J:\\DevProjects\\IntelliJ Projects\\carrepair\\Parts.csv'
+INTO TABLE parts
+FIELDS TERMINATED BY ';'
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 0 lines
+(part_name,part_price);

@@ -17,7 +17,7 @@
     <style>
         fieldset.Hor {
             float: left;
-            width: 50%;
+            width: 100%;
             padding: 20;
         }
         fieldset.Norm {
@@ -42,30 +42,28 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-
                 <form class="form-horizontal" action="/admin/parts/create" method="POST" id="partForm" name="partForm">
                     <legend>Parts Details</legend>
+                    <div class="col-md-6">
                     <fieldset class="Hor">
-                        <div class="form-group">
                             <label for="partName">Part Name</label>
                             <@spring.bind "partForm.partName"/>
                             <input type="text" class="form-control "name="partName" id="partName" placeholder="turbocharger" value="${partForm.partName!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
-                        </div>
                     </fieldset>
+                    </div>
+                    <div class="col-md-6">
                     <fieldset class="Hor">
-                        <div class="form-group">
                             <label partPriceStart>Cost</label>
                             <@spring.bind "partForm.partPrice"/>
                             <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
-                        </div>
                     </fieldset>
+                    </div>
                     <br><br>
                     <div class="col-md-12 controls">
                         <span>
@@ -74,18 +72,13 @@
                         </span>
                     </div>
                 </form>
-            </div>
         </div>
     </div>
-
     <hr></hr>
-
     <div class="container-fluid">
         <div class="row">
             <h1>Search Part</h1>
-
             <br><br>
-
             <form class="Search" class="form-horizontal" action="/admin/parts/search" method="GET" id="partSearchForm" name="partSearchForm">
                 <fieldset class="Norm">
                     <legend>Fill in Part's Fields</legend>
@@ -127,10 +120,9 @@
             </form>
         </div>
     </div>
-
     <h2>${searchNotFoundMessage!""}</h2>
-    <#if userList??>
-        <h3><u>Retrieved Users</u></h3>
+    <#if partList??>
+        <h3><u>Retrieved Parts</u></h3>
         <div class="table-responsive">
             <table id="resultsTable" class="table" class="table-hover">
                 <thead>
@@ -143,7 +135,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <#list userList as user>
+                <#list partList as part>
                         <span>
                     <tr>
                         <td>${part.partID!"Could not retrieve value!"}</td>

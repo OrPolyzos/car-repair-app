@@ -17,7 +17,6 @@
     <script async src=https://CDN.JSDelivr.net/g/p5.js(p5.min.js+addons/p5.dom.js+addons/p5.sound.js)></script>
     <script defer src=/../sketch.js></script>
     <script defer src=/../particle.js></script> ------>
-
     <style>
         fieldset.Hor {
             float: left;
@@ -28,7 +27,6 @@
             padding: 20;
         }
     </style>
-
 </head>
 
 <body>
