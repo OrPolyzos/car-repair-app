@@ -1,21 +1,53 @@
 package com.rcodingschool.carrepair.Domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
-public class User {
+@Entity(name = "Users")
+public class User implements Serializable {
 
-    private String firstName, lastName;
+    @Id
+    @Column(name = "UserID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userID;
+
+    @Column(name = "Firstname", nullable = false)
+    private String firstName;
+
+    @Column(name = "Lastname", nullable = false)
+    private String lastName;
+
+    @Column(name = "Afm", nullable = false, unique = true)
     private String afm;
+
+    @Column(name = "Password", nullable = false)
     private String password;
+
+    @Column(name = "Email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "Type", nullable = false)
     private String type = "User";
 
-    public User(String firstName, String lastName, String afm, String password, String email, String type) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.afm = afm;
-        this.password = password;
-        this.email = email;
-        this.type = type;
+    @Column(name = "AddressStreet", nullable = false)
+    private String addressStreet;
+
+    @Column(name = "AddressNumber", nullable = false)
+    private String addressNumber;
+
+    @Column(name = "AddressZipCode", nullable = false)
+    private String addressZipCode;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Vehicle.class)
+    private List<Vehicle> userVehicles;
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public String getFirstName() {
@@ -66,16 +98,35 @@ public class User {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "AFM=" + afm +
-                ", First Name='" + firstName + '\'' +
-                ", Last Name='" + lastName + '\'' +
-                ", Email='" + email + '\'' +
-                ", Type='" + type + '\'' +
-                ", Password='" + password + '\'' +
-                '}';
+    public String getAddressStreet() {
+        return addressStreet;
     }
 
+    public void setAddressStreet(String addressStreet) {
+        this.addressStreet = addressStreet;
+    }
+
+    public String getAddressNumber() {
+        return addressNumber;
+    }
+
+    public void setAddressNumber(String addressNumber) {
+        this.addressNumber = addressNumber;
+    }
+
+    public String getAddressZipCode() {
+        return addressZipCode;
+    }
+
+    public void setAddressZipCode(String addressZipCode) {
+        this.addressZipCode = addressZipCode;
+    }
+
+    public List<Vehicle> getUserVehicles() {
+        return userVehicles;
+    }
+
+    public void setUserVehicles(List<Vehicle> userVehicles) {
+        this.userVehicles = userVehicles;
+    }
 }
