@@ -206,7 +206,7 @@
                         </button>
                         </td>
                         <td class="text-center">
-                            <button type="submit" formaction="/admin/users/delete/${repair.repairID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this user?')">
+                            <button type="submit" formaction="/admin/repairs/delete/${repair.repairID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this repair?')">
                             <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </td>
