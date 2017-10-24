@@ -16,7 +16,7 @@ public class PartServiceImpl implements PartService {
 
 
     @Override
-    public Part findOne(String partID) { return partRepository.findOne(partID); }
+    public Part findOne(Long partID) { return partRepository.findOne(partID); }
 
     @Override
     public List<Part> findAll() {
@@ -24,13 +24,13 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public List<Part> findByPartID(String partID) {
+    public List<Part> findByPartID(Long partID) {
         return partRepository.findByPartID(partID);
     }
 
     @Override
-    public List<Part> findByPartPriceStartPartPriceEnd(String partPriceStart, String partPriceEnd) {
-        return partRepository.findByPartPriceStartPartPriceEnd(partPriceStart, partPriceEnd);
+    public List<Part> findAllByPartPriceBetween(Long partPriceStart, Long partPriceEnd) {
+        return partRepository.findAllByPartPriceBetween(partPriceStart, partPriceEnd);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public void deleteByPartID(String partID) {
+    public void deleteByPartID(Long partID) {
         partRepository.deleteByPartID(partID);
     }
 

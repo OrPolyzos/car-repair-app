@@ -15,7 +15,7 @@ public class Part implements Serializable {
     private String partName;
 
     @Column(name = "PartPrice", nullable = false)
-    private Integer partPrice;
+    private Long partPrice;
 
     public Part() {
     }
@@ -36,11 +36,11 @@ public class Part implements Serializable {
         this.partName = partName;
     }
 
-    public Integer getPartPrice() {
+    public Long getPartPrice() {
         return partPrice;
     }
 
-    public void setPartPrice(Integer partPrice) {
+    public void setPartPrice(Long partPrice) {
         this.partPrice = partPrice;
     }
 }

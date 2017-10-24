@@ -7,18 +7,18 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PartRepository extends CrudRepository<Part, String>{
+public interface PartRepository extends CrudRepository<Part, Long>{
 
-    Part findOne(String partID);
+    Part findOne(Long partID);
 
     List<Part> findAll();
 
-    List<Part> findByPartID(String partID);
+    List<Part> findByPartID(Long partID);
 
-    List<Part> findByPartPriceStartPartPriceEnd(String partPriceStart, String partPriceEnd);
+    List<Part> findAllByPartPriceBetween(Long partPriceStart, Long partPriceEnd);
 
     Part save(Part part);
 
-    void deleteByPartID(String partID);
+    void deleteByPartID(Long partID);
 
 }

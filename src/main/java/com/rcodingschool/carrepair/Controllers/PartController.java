@@ -80,7 +80,7 @@ public class PartController {
     //The processDeletePart() method will map "/admin/parts/delete/{id}" GET requests and
     //will delete a part and redirect to "/admin/parts"
     @RequestMapping(value = "/parts/delete/{id}", method = RequestMethod.GET)
-    public String processDeletePart(@PathVariable String id,
+    public String processDeletePart(@PathVariable Long id,
                                     RedirectAttributes redirectAttributes) {
         //Delete the part
         partService.deleteByPartID(id);
@@ -115,11 +115,11 @@ public class PartController {
             //If the AFM is not null
         } else if (partSearchForm.getPartID() != null) {
             //We search for Parts based on PartPriceStart and PartPriceEnd
-            partsList = partService.findByPartPriceStartPartPriceEnd(partSearchForm.getPartPriceStart(), partSearchForm.getPartPriceEnd());
+            partsList = partService.findAllByPartPriceBetween(Long.valueOf(partSearchForm.getPartPriceStart()), Long.valueOf(partSearchForm.getPartPriceEnd()));
             //Else if PartPriceStart or PartPriceEnd is null, means PartID is not
         } else {
             //We search for Parts based on PartID
-            partsList = partService.findByPartID(partSearchForm.getPartID());
+            partsList = partService.findByPartID(Long.valueOf(partSearchForm.getPartID()));
         }
         //If the List is Empty
         if (partsList.isEmpty()) {
@@ -136,7 +136,7 @@ public class PartController {
     //and will try to find a part based on the id and show the editPart.ftl
     //so that the Admin can edit his details
     @RequestMapping(value = "/parts/edit/{id}", method = RequestMethod.GET)
-    public String showEditPart(@PathVariable String id,
+    public String showEditPart(@PathVariable Long id,
                                RedirectAttributes redirectAttributes) {
         //Find the part
         Part part = partService.findOne(id);

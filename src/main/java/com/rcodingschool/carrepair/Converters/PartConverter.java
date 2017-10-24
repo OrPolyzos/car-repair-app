@@ -8,7 +8,7 @@ public class PartConverter {
     public static Part buildInsertPartObject(PartForm partForm) {
         Part part = new Part();
         part.setPartName(partForm.getPartName());
-        part.setPartPrice(Integer.valueOf(partForm.getPartPrice()));
+        part.setPartPrice(Long.valueOf(partForm.getPartPrice()));
         return part;
     }
 
@@ -17,7 +17,7 @@ public class PartConverter {
         //This is what we need for the update (Primary Key)
         part.setPartID(partForm.getPartID());
         part.setPartName(partForm.getPartName());
-        part.setPartPrice(Integer.valueOf(partForm.getPartPrice()));
+        part.setPartPrice(Long.valueOf(partForm.getPartPrice()));
         return part;
     }
 
