@@ -12,7 +12,7 @@
         </div>
         <!-- Menu Items -->
         <div class="collapse navbar-collapse" id="mainNavBar">
-            <ul class="nav navbar-nav navbar-left">
+            <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="/admin/users">Users</a>
                 </li>
@@ -25,14 +25,10 @@
                 <li>
                     <a href="/admin/parts">Parts</a>
                 </li>
-            </ul>
-            <!-- right align -->
-            <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="/logout">Logout</a>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>

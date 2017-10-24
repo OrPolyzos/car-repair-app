@@ -1,21 +1,40 @@
 package com.rcodingschool.carrepair.Model;
 
-import org.springframework.format.annotation.NumberFormat;
-
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 
 public class PartSearchForm {
 
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
-    private Long partID;
+    @Pattern(regexp="^[0-9]{9}", message="PartID should contain only digits!")
+    private String partID;
+
+    @Pattern(regexp="^[0-9]{9}", message="The partPriceStart must contain only digits!")
+    private String partPriceStart;
 
 
-    private String partPrice;
+    @Pattern(regexp="^[0-9]{9}", message="The partPriceEnd must contain only digits!")
+    private String partPriceEnd;
 
-    public Long getPartID() { return partID; }
+    public String getPartID() {
+        return partID;
+    }
 
-    public void setPartID(Long partID) { this.partID = partID; }
+    public void setPartID(String partID) {
+        this.partID = partID;
+    }
 
+    public String getPartPriceStart() {
+        return partPriceStart;
+    }
 
+    public void setPartPriceStart(String partPriceStart) {
+        this.partPriceStart = partPriceStart;
+    }
+
+    public String getPartPriceEnd() {
+        return partPriceEnd;
+    }
+
+    public void setPartPriceEnd(String partPriceEnd) {
+        this.partPriceEnd = partPriceEnd;
+    }
 }
