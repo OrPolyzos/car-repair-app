@@ -17,7 +17,7 @@
     <style>
         fieldset.Hor {
             float: left;
-            width: 100%;
+            width: 33.3%;
             padding: 20;
         }
         fieldset.Norm {
@@ -42,43 +42,51 @@
 
     <div class="container-fluid">
         <div class="row">
-                <form class="form-horizontal" action="/admin/parts/create" method="POST" id="partForm" name="partForm">
-                    <legend>Parts Details</legend>
+            <form class="form-horizontal" action="/admin/parts/create" method="POST" id="partForm" name="partForm">
+                <legend>Parts Details</legend>
                     <div class="col-md-6">
-                    <fieldset class="Hor">
-                            <label for="partName">Part Name</label>
+                        <fieldset class="Hor">
+                            <#--bind this field with the registration form fields-->
                             <@spring.bind "partForm.partName"/>
-                            <input type="text" class="form-control "name="partName" id="partName" placeholder="turbocharger" value="${partForm.partName!""}"/>
+                            <label for="partName">Part Name</label>
+                                <input type="text" class="form-control "name="partName" id="partName" placeholder="turbocharger" value="${partForm.partName!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
-                    </fieldset>
+                        </fieldset>
                     </div>
                     <div class="col-md-6">
-                    <fieldset class="Hor">
-                            <label partPriceStart>Cost</label>
+                        <fieldset class="Hor">
+                            <label partPrice>Cost</label>
                             <@spring.bind "partForm.partPrice"/>
-                            <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
+                                <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
-                    </fieldset>
+                        </fieldset>
                     </div>
+
                     <br><br>
+
                     <div class="col-md-12 controls">
                         <span>
-                            <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
                             <button type="submit" id="btn-submit" class="btn btn-success">Create</button>
+                            <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
                         </span>
                     </div>
                 </form>
+            </div>
         </div>
     </div>
+
     <hr></hr>
+
     <div class="container-fluid">
         <div class="row">
             <h1>Search Part</h1>
+
             <br><br>
+
             <form class="Search" class="form-horizontal" action="/admin/parts/search" method="GET" id="partSearchForm" name="partSearchForm">
                 <fieldset class="Norm">
                     <legend>Fill in Part's Fields</legend>
@@ -120,9 +128,10 @@
             </form>
         </div>
     </div>
+
     <h2>${searchNotFoundMessage!""}</h2>
-    <#if partList??>
-        <h3><u>Retrieved Parts</u></h3>
+    <#if userList??>
+        <h3><u>Retrieved Users</u></h3>
         <div class="table-responsive">
             <table id="resultsTable" class="table" class="table-hover">
                 <thead>
@@ -135,12 +144,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <#list partList as part>
+                <#list userList as user>
                         <span>
                     <tr>
                         <td>${part.partID!"Could not retrieve value!"}</td>
                         <td>${part.partName!"Could not retrieve value!"}</td>
-                        <td>${part.partPrice!"Could not retrieve value!"}</td>
+                        <td>${part.partCost!"Could not retrieve value!"}</td>
                         <form action="/admin/parts/edit/${part.partID}" method="GET">
                         <td>
                             <button type="submit" class="btn btn-success">
