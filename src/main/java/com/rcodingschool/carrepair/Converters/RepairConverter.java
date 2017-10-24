@@ -22,6 +22,7 @@ public class RepairConverter {
         Repair repair = new Repair();
         //We need the ID to update
         repair.setRepairID(repairForm.getRepairID());
+        repair.setRepairTypeID(repairForm.getRepairTypeID());
         repair.setRepairDateTime(repairForm.getRepairDateTime());
         repair.setRepairStatus(repairForm.getRepairStatus());
         repair.setRepairTasks(repairForm.getRepairTasks());

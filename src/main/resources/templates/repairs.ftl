@@ -126,7 +126,7 @@
                         <fieldset class="Norm">
                             <legend>Leave all the fields blank to get all the results</legend>
                             <div class="form-group">
-                                <label for="afm">RepairID</label>
+                                <label for="repairID">RepairID</label>
                                 <@spring.bind "repairSearchForm.repairID"/>
                                 <input type="number" class="input-sm" name="repairID" id="repairID" placeholder="43234" value="${repairSearchForm.repairID!""}"/>
                                 <#list spring.status.errorMessages as error>
