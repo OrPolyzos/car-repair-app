@@ -1,37 +1,45 @@
 package com.rcodingschool.carrepair.Model;
 
 
-import org.springframework.format.annotation.NumberFormat;
-
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class PartForm {
 
-    @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
-    private Long repairId;
-
-    @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
     private Long partID;
 
     @NotNull(message="This field is required!")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
-    private Short quantity;
+    @Size(min=1, max=128, message="Maximum length is 128 characters!")
+    @Pattern(regexp="^[a-zA-Z0-9]{1,128}", message="Only uppercase and lowercase characters allowed!")
+    private String partName;
 
-    public Long getRepairId() { return repairId; }
+    @NotNull(message="This field is required!")
+    @Size(min=1, max=9, message="The partPrice should be until 9 digits!")
+    @Pattern(regexp="^[0-9]{9}", message="The partPrice must contain only digits!")
+    private String partPrice;
 
-    public void setRepairId(Long repairId) { this.repairId = repairId; }
+    public Long getPartID() {
+        return partID;
+    }
 
-    public Long getPartID() { return partID; }
+    public void setPartID(Long partID) {
+        this.partID = partID;
+    }
 
-    public void setPartID(Long partID) { this.partID = partID; }
+    public String getPartName() {
+        return partName;
+    }
 
-    public Short getQuantity() { return quantity; }
+    public void setPartName(String partName) {
+        this.partName = partName;
+    }
 
-    public void setQuantity(Short quantity) { this.quantity = quantity; }
+    public String getPartPrice() {
+        return partPrice;
+    }
+
+    public void setPartPrice(String partPrice) {
+        this.partPrice = partPrice;
+    }
 }

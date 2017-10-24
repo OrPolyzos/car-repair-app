@@ -124,7 +124,7 @@
                         <h1 align="center">Search</h1>
                         <form class="Search" class="form-horizontal" action="/admin/vehicles/search" method="GET" id="vehicleSearchForm" name="vehicleSearchForm">
                             <fieldset class="Norm">
-                                <legend>Fill in User's AFM or Email</legend>
+                                <legend>Fill in User's AFM or Plate Number</legend>
                                 <div class="form-group">
                                     <label for="vehicleID">Plate Number</label>
                                     <@spring.bind "vehicleSearchForm.vehicleID"/>

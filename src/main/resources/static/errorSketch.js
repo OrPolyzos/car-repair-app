@@ -1,27 +1,79 @@
-let canvas;
-let target
-let timeWindow;
+var decorationsCount = 100;
+var decorations = [];
+var y = 400;
+
 function setup(){
-    canvas = createCanvas(windowWidth,windowHeight);
-    canvas.style('z-index','-25');
-    background(51);
-    generateEnemy();
+  canvas = createCanvas(windowWidth,windowHeight);
+  for (var i = 0; i < decorationsCount; i++){
+    var r = random(25,50);
+    var x = random(0,width);
+    var y = random(0,height);
+    decorations[i] = new Decoration(x, y, r);
+  }
+  
 }
 
 function draw(){
-
-}
-
-function mousePressed(){
-    if ((mouseX==target.position.x-12.5 || mouseX==target.position.y+12.5)
-        && (mouseY==target.position.y-12.5 || mouseY==target.position.y+12.5)){
-            generateEnemy();
-        }
-}
-
-function generateEnemy(){
-    background(51);
+  background(51);
+  for (var i = 0; i < decorationsCount/4; i++){
+    decorations[i].move();
+    decorations[i].show();
+    fill(255,10);
+    noStroke();
+    textSize(200);
+    var t = text("Error ", 100, y);
+  }
+  stroke(0);
+  strokeWeight(3);
+  for (var i = decorationsCount/4; i < decorationsCount/2; i++){
+    decorations[i].move();
+    decorations[i].show();
+    //4
     fill(255,0,0);
     stroke(0);
-    target = ellipse(random(0,windowWidth),random(0,windowHeight),25,25);
+    strokeWeight(2);
+    textSize(200);
+    text("4", 600, y);
+    textSize(50);
+    noStroke();
+    fill(252,255,100,10);
+    text("Regeneration", (width/2)-150, height-50);
+  }
+  for (var i = decorationsCount/2; i < 3*decorationsCount/4; i++){
+    decorations[i].move();
+    decorations[i].show();
+    fill(255,255,0);
+    stroke(0);
+    strokeWeight(3);
+    textSize(200);
+    text("0", 710, y);
+    //Coding
+    textSize(50);
+    noStroke();
+    fill(252,255,100,10);
+    text("Coding", (width/2)+170, height-50);
+  }
+  for (var i = 75; i < decorationsCount; i++){
+    decorations[i].move();
+    decorations[i].show();
+    fill(255,0,0);
+    stroke(0);
+    strokeWeight(3);
+    textSize(200);
+    text("4", 825, y);
+    //School
+    textSize(50);
+    noStroke();
+    fill(252,255,100,10);
+    text("School", (width/2)+340, height-50);
+  }
+  
 }
+
+//function mousePressed(){
+//  for (var i = decorations.length-1; i >= 0; i--){
+//    if (decorations[i].wasClicked(mouseX,mouseY)){
+//      decorations.splice(i,1);
+//    }
+//  } 
+//}

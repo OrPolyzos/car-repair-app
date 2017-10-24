@@ -3,27 +3,21 @@ package com.rcodingschool.carrepair.Domain;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+@Entity(name = "Parts")
 public class Part implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PartID", nullable = false)
+    @Column(name = "partID", nullable = false)
     private Long partID;
 
-    @Column(name = "PartName", nullable = false)
-    private String name;
+    @Column(name = "partName", nullable = false)
+    private String partName;
 
     @Column(name = "PartPrice", nullable = false)
     private Integer partPrice;
 
     public Part() {
-    }
-
-    public Part(Long partID, String name, Integer partPrice) {
-        this.partID = partID;
-        this.name = name;
-        this.partPrice = partPrice;
     }
 
     public Long getPartID() {
@@ -34,12 +28,12 @@ public class Part implements Serializable {
         this.partID = partID;
     }
 
-    public String getName() {
-        return name;
+    public String getPartName() {
+        return partName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPartName(String partName) {
+        this.partName = partName;
     }
 
     public Integer getPartPrice() {

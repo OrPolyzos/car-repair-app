@@ -1,13 +1,10 @@
-package com.rcodingschool.carrepair.Repositories;
+package com.rcodingschool.carrepair.Services;
 
 import com.rcodingschool.carrepair.Domain.Part;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface PartRepository extends CrudRepository<Part, String>{
+public interface PartService {
 
     Part findOne(String partID);
 
@@ -17,8 +14,7 @@ public interface PartRepository extends CrudRepository<Part, String>{
 
     List<Part> findByPartPriceStartPartPriceEnd(String partPriceStart, String partPriceEnd);
 
-    Part save(Part part);
+    void save(Part part);
 
     void deleteByPartID(String partID);
-
 }
