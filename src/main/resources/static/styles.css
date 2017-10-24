@@ -6,6 +6,15 @@ body {
      z-index: -30;
 }
 
+#mainNavBar a:hover {
+    color: orange;
+    }
+
+h3 {
+  text-align: center;
+}
+
+
 img {
     position: fixed;
     display: block;
@@ -32,4 +41,13 @@ form.Search {
 .errorRed {
     color: red;
     font-weight: bold;
+}
+
+
+.table th, td {
+  text-align: center;
+}
+
+footer {
+  float: right;
 }
