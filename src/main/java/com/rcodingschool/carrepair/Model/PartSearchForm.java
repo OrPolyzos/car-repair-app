@@ -11,6 +11,8 @@ public class PartSearchForm {
     private Long partID;
 
 
+    private String partPrice;
+
     public Long getPartID() { return partID; }
 
     public void setPartID(Long partID) { this.partID = partID; }

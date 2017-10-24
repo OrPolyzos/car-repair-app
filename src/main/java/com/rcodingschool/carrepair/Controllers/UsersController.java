@@ -71,6 +71,7 @@ public class UsersController {
             redirectAttributes.addFlashAttribute(USER_FORM, userForm);
             return "redirect:/admin/users";
         }
+
         try {
             //Trying to build a user from our UserForm
             User user = UserConverter.buildInsertUserObject(userForm);
@@ -189,6 +190,7 @@ public class UsersController {
             User user = UserConverter.buildUpdateUserObject(userForm);
             //Save the user
             userService.save(user);
+            redirectAttributes.addFlashAttribute(MESSAGE,"User was updated");
             return "redirect:/admin/users";
         } catch (Exception exception) {
             //if an error occurs show it to the user
