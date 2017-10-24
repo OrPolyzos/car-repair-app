@@ -114,12 +114,10 @@ public class PartController {
             partsList = partService.findAll();
             //If the AFM is not null
         } else if (partSearchForm.getPartID() != null) {
-            //We search for Parts based on PartPriceStart and PartPriceEnd
-            partsList = partService.findAllByPartPriceBetween(Long.valueOf(partSearchForm.getPartPriceStart()), Long.valueOf(partSearchForm.getPartPriceEnd()));
-            //Else if PartPriceStart or PartPriceEnd is null, means PartID is not
+            partsList = partService.findByPartID(partSearchForm.getPartID());
         } else {
-            //We search for Parts based on PartID
-            partsList = partService.findByPartID(Long.valueOf(partSearchForm.getPartID()));
+            //We search for Parts based on PartPriceStart and PartPriceEnd
+            partsList = partService.findAllByPartPriceBetween(partSearchForm.getPartPriceStart(), partSearchForm.getPartPriceEnd());
         }
         //If the List is Empty
         if (partsList.isEmpty()) {

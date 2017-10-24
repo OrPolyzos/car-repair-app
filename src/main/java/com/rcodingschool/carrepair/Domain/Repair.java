@@ -29,15 +29,15 @@ public class Repair implements Serializable {
     @Column(name = "RepairTypeID", nullable = false)
     private Short repairTypeID;
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name="RepairTypeID",referencedColumnName="RepairTypeID", updatable = false, insertable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "RepairTypeID", referencedColumnName = "RepairTypeID", updatable = false, insertable = false)
     private RepairType repairType;
 
     @Column(name = "VehicleID", nullable = false)
     private String vehicleID;
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name="VehicleID",referencedColumnName="VehicleID", updatable = false, insertable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "VehicleID", referencedColumnName = "VehicleID", updatable = false, insertable = false)
     private Vehicle vehicle;
 
 

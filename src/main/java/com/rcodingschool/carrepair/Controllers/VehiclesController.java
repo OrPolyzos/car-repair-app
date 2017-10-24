@@ -43,7 +43,7 @@ public class VehiclesController {
     }
 
 
-    //The showVehiclesView method which maps the "/admin/vehicles/" GET requests and returns the vehicles.ftl
+    //The showVehiclesView method which maps the "/admin/vehicles/" GET requests and returns the vehiclesOrestes.ftl
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
     public String showVehiclesView(Model model) {
         Map<String, Object> map = model.asMap();

@@ -1,6 +1,6 @@
-"2017-11-02 01:00:00";"Pending";"Sometasks";320;1;"ABC-1234"
-"2017-12-02 04:03:00";"Pending";"Sometthing";444;1;"ABC-1234"
-"2017-11-02 20:01:00";"Pending";"SomeStuff";2344;1;"ADL-9988"
-"2018-03-03 15:01:00";"Pending";"SomestuffMore";555;1;"ASD-2322"
-"2018-02-01 02:01:00";"Pending";"SSSSSS";88;1;"LAM-9899"
-"2017-11-02 03:01:00";"Pending";"asdas";233;1;"ABC-1234"
+2017-11-02 01:00:00,Pending,Sometasks,320,1,ABC-1234
+2017-12-02 04:03:00,Pending,Sometthing,444,1,ABC-1234
+2017-11-02 20:01:00,Pending,SomeStuff,2344,1,ADL-9988
+2018-03-03 15:01:00,Pending,SomestuffMore,555,1,ASD-2322
+2018-02-01 02:01:00,Pending,SSSSSS,88,1,LAM-9899
+2017-11-02 03:01:00,Pending,asdas,233,1,ABC-1234

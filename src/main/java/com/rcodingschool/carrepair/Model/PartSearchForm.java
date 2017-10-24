@@ -1,40 +1,44 @@
 package com.rcodingschool.carrepair.Model;
 
-import javax.validation.constraints.Pattern;
+import org.springframework.format.annotation.NumberFormat;
+
+import javax.validation.constraints.Min;
 
 public class PartSearchForm {
 
-    @Pattern(regexp="^[0-9]{9}", message="PartID should contain only digits!")
-    private String partID;
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(value=1, message="The partID must be greater or equal than 1!")
+    private Long partID;
 
-    @Pattern(regexp="^[0-9]{9}", message="The partPriceStart must contain only digits!")
-    private String partPriceStart;
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(value=1, message="The start price must be greater or equal than 1!")
+    private Long partPriceStart;
 
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(value=1, message="The end price must be greater or equal than 1!")
+    private Long partPriceEnd;
 
-    @Pattern(regexp="^[0-9]{9}", message="The partPriceEnd must contain only digits!")
-    private String partPriceEnd;
-
-    public String getPartID() {
+    public Long getPartID() {
         return partID;
     }
 
-    public void setPartID(String partID) {
+    public void setPartID(Long partID) {
         this.partID = partID;
     }
 
-    public String getPartPriceStart() {
+    public Long getPartPriceStart() {
         return partPriceStart;
     }
 
-    public void setPartPriceStart(String partPriceStart) {
+    public void setPartPriceStart(Long partPriceStart) {
         this.partPriceStart = partPriceStart;
     }
 
-    public String getPartPriceEnd() {
+    public Long getPartPriceEnd() {
         return partPriceEnd;
     }
 
-    public void setPartPriceEnd(String partPriceEnd) {
+    public void setPartPriceEnd(Long partPriceEnd) {
         this.partPriceEnd = partPriceEnd;
     }
 }

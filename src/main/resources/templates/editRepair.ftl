@@ -111,7 +111,7 @@
                              <div class="form-group">
                              <label for="repairTasks">Tasks</label>
                              <@spring.bind "repairForm.repairTasks"/>
-                             <textarea  class="form-control"  rows=4 cols=50 id="repairTasks" name="repairTasks" placeholder="Engine oil change, Oil filter replacement, Spark plugs Replacement"> ${repairForm.repairTasks!""}</textarea>
+                             <textarea  class="form-control"  rows=4 cols=50 id="repairTasks" name="repairTasks" placeholder="Engine oil change, Oil filter replacement, Spark plugs Replacement">${repairForm.repairTasks!""}</textarea>
                              <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                              </#list>
