@@ -133,9 +133,12 @@
                                     </#list>
                                 </div>
                         </fieldset>
-
+                        <div class="col-md-12 controls">
+                        <span>
                             <button type="submit" id="btn-submit" class="btn btn-success btn-md">Create</button>
                             <button type="reset" id="btn-clear" class="btn btn-danger btn-md">Clear</button>
+                        </span>
+                        </div>
                     </form>
                 </div>
             </div>
