@@ -56,7 +56,7 @@
                              </div>
                              </fieldset>
 
-<!--
+
                              <fieldset class="Hor">
 
                              <div class="form-group">
@@ -145,7 +145,8 @@
                            <fieldset class="Norm">
                                <div class="form-group">
                                    <hr></hr>
-                        <!--           <label for="filterInput">Filter</label> -->
+
+                                  <label for="filterInput">Filter</label>
                                    <input type="text" class="input-sm" name="filterInput" id="filterInput" placeholder="abc-123..."/>
                                </fieldset>
                                </div>
@@ -183,7 +184,7 @@
                     <td class="text-center">${part.partPrice}</td
                     <td class="text-center">${part.quantity}</td
                     <form action="/admin/parts/searchParts/${part.partId}" method="GET">
-    -->
+
                     </form>
                 </tr>
                     </span>
