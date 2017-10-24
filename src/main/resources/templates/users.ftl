@@ -33,158 +33,155 @@
 </head>
 
 <body>
-    <#include "navbar.ftl">
+<#include "navbar.ftl">
 
     <div class="p5container">
         <img src="../Images/eXtremeRed.png">
     </div>
     <h1 class="errorRed">${errorMessage!""}</h1>
-        <h1>Create New User</h1>
+    <h1>Create New User</h1>
 
-        <br><br>
+    <br><br>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
 
-                    <form  class="form-horizontal" action="/admin/users/create" method="POST" id="userForm" name="userForm">
-                        <fieldset class="Hor">
-                            <legend>User's Personal Details</legend>
-                                <div class="form-group">
-                                    <label for="afm">AFM</label>
-                                    <@spring.bind "userForm.afm"/>
-                                        <input type="text" class="form-control" id="afm" name="afm" placeholder="123456789" value="${userForm.afm!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="firstName">Firstname</label>
-                                    <@spring.bind "userForm.firstName"/>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" value="${userForm.firstName!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Lastname</label>
-                                    <@spring.bind "userForm.lastName"/>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" value="${userForm.lastName!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                        </fieldset>
-                        <fieldset class="Hor">
-                            <legend>User's Credentials</legend>
-                                <div class="form-group">
-                                    <label for="type">Type</label>
-                                    <@spring.bind "userForm.type"/>
-                                        <select class="form-control" id="type" name="type">
-                                            <option value="User">User</option>
-                                            <option value="Admin">Admin</option>
-                                        </select>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <@spring.bind "userForm.email"/>
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="john@doe.com" value="${userForm.email!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <@spring.bind "userForm.password"/>
-                                        <input type="text" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.lastName!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                        </fieldset>
-                        <fieldset class="Hor">
-                            <legend>User's Address Details</legend>
-                                <div class="form-group">
-                                    <label for="addressStreet">Street</label>
-                                    <@spring.bind "userForm.addressStreet"/>
-                                        <input type="text" class="form-control" id="addressStreet" name="addressStreet" placeholder="Broadway" value="${userForm.addressStreet!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="addressNumber">Number</label>
-                                    <@spring.bind "userForm.addressNumber"/>
-                                        <input class="form-control" type="number" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="28" value="${userForm.addressNumber!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed"class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                                <div class="form-group">
-                                    <label for="addressZipCode">Zip</label>
-                                    <@spring.bind "userForm.addressZipCode"/>
-                                        <input class="form-control" type="number" min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
-                                    <#list spring.status.errorMessages as error>
-                                        <span class="errorRed">${error}</span>
-                                    </#list>
-                                </div>
-                        </fieldset>
-                        <div class="col-md-12 controls">
-                        <span>
-                            <button type="submit" id="btn-submit" class="btn btn-success btn-md">Create</button>
-                            <button type="reset" id="btn-clear" class="btn btn-danger btn-md">Clear</button>
-                        </span>
+                <form  class="form-horizontal" action="/admin/users/create" method="POST" id="userForm" name="userForm">
+                    <fieldset class="Hor">
+                        <legend>User's Personal Details</legend>
+                        <div class="form-group">
+                            <label for="afm">AFM</label>
+                            <@spring.bind "userForm.afm"/>
+                            <input type="text" class="form-control" id="afm" name="afm" placeholder="123456789" value="${userForm.afm!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group">
+                            <label for="firstName">Firstname</label>
+                            <@spring.bind "userForm.firstName"/>
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" value="${userForm.firstName!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Lastname</label>
+                            <@spring.bind "userForm.lastName"/>
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" value="${userForm.lastName!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
+                        </div>
+                    </fieldset>
+                    <fieldset class="Hor">
+                        <legend>User's Credentials</legend>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <@spring.bind "userForm.type"/>
+                            <select class="form-control" id="type" name="type">
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <@spring.bind "userForm.email"/>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="john@doe.com" value="${userForm.email!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <@spring.bind "userForm.password"/>
+                            <input type="text" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.lastName!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
+                        </div>
+                    </fieldset>
+                    <fieldset class="Hor">
+                        <legend>User's Address Details</legend>
+                        <div class="form-group">
+                            <label for="addressStreet">Street</label>
+                            <@spring.bind "userForm.addressStreet"/>
+                            <input type="text" class="form-control" id="addressStreet" name="addressStreet" placeholder="Broadway" value="${userForm.addressStreet!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
+                        </div>
+                        <div class="form-group">
+                            <label for="addressNumber">Number</label>
+                            <@spring.bind "userForm.addressNumber"/>
+                            <input class="form-control" type="number" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="28" value="${userForm.addressNumber!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed"class="errorRed">${error}</span>
+                            </#list>
+                        </div>
+                        <div class="form-group">
+                            <label for="addressZipCode">Zip</label>
+                            <@spring.bind "userForm.addressZipCode"/>
+                            <input class="form-control" type="number" min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
+                            <#list spring.status.errorMessages as error>
+                                <span class="errorRed">${error}</span>
+                            </#list>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" id="btn-submit" class="btn btn-success btn-md">Create</button>
+                    <button type="reset" id="btn-clear" class="btn btn-danger btn-md">Clear</button>
+                </form>
             </div>
         </div>
+    </div>
 
     <hr></hr>
 
-        <div class="container-fluid">
-            <div class="row">
-                <h1>Search User</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <h1>Search User</h1>
 
-                <br><br>
+            <br><br>
 
-                <form class="Search" class="form-horizontal" action="/admin/users/search" method="GET" id="userSearchForm" name="userSearchForm">
-                    <fieldset class="Norm">
-                        <legend>Fill in User's AFM or Email</legend>
-                            <div class="col-md-4">
-                                <label for="afm">AFM</label>
-                                <@spring.bind "userSearchForm.afm"/>
-                                    <input type="text" class="form-control" name="afm" id="firstName" placeholder="123456789" value="${userSearchForm.afm!""}"/>
-                                <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
-                                </#list>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="email">Email</label>
-                                <@spring.bind "userSearchForm.email"/>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="john@doe.com" value="${userSearchForm.email!""}"/>
-                                <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
-                                </#list>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="filterInput">Filter</label>
-                                    <input type="text" class="form-control" name="filterInput" id="filterInput" placeholder="john"/>
-                            </div>
-                    </fieldset>
-                    <div class="col-md-12 controls">
+            <form class="Search" class="form-horizontal" action="/admin/users/search" method="GET" id="userSearchForm" name="userSearchForm">
+                <fieldset class="Norm">
+                    <legend>Fill in User's AFM or Email</legend>
+                    <div class="col-md-4">
+                        <label for="afm">AFM</label>
+                        <@spring.bind "userSearchForm.afm"/>
+                        <input type="text" class="form-control" name="afm" id="firstName" placeholder="123456789" value="${userSearchForm.afm!""}"/>
+                        <#list spring.status.errorMessages as error>
+                            <span class="errorRed">${error}</span>
+                        </#list>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="email">Email</label>
+                        <@spring.bind "userSearchForm.email"/>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="john@doe.com" value="${userSearchForm.email!""}"/>
+                        <#list spring.status.errorMessages as error>
+                            <span class="errorRed">${error}</span>
+                        </#list>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="filterInput">Filter</label>
+                        <input type="text" class="form-control" name="filterInput" id="filterInput" placeholder="john"/>
+                    </div>
+                </fieldset>
+                <div class="col-md-12 controls">
                         <span>
                             <button type="submit" id="btn-submit" class="btn btn-primary">Search</button>
                             <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
                         </span>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
+    </div>
 
     <h2>${searchNotFoundMessage!""}</h2>
     <#if userList??>
@@ -192,23 +189,23 @@
         <div class="table-responsive">
             <table id="resultsTable" class="table" class="table-hover">
                 <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>AFM</th>
-                        <th>Email</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Type</th>
-                        <th>Street</th>
-                        <th>Number</th>
-                        <th>Zip Code</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                        <th>Vehicles</th>
-                    </tr>
+                <tr>
+                    <th>User ID</th>
+                    <th>AFM</th>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Type</th>
+                    <th>Street</th>
+                    <th>Number</th>
+                    <th>Zip Code</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Vehicles</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <#list userList as user>
+                <#list userList as user>
                         <span>
                     <tr>
                         <td>${user.userID!"Could not retrieve value!"}</td>
@@ -239,7 +236,7 @@
                         </form>
                     </tr>
                         </span>
-                    </#list>
+                </#list>
                 </tbody>
             </table>
         </div>
