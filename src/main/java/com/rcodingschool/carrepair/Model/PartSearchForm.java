@@ -10,24 +10,24 @@ public class PartSearchForm {
     private String partID;
 
     @Size(min=1, max=9, message="The partPrice1 should be until 9 digits!")
-    @Pattern(regexp="^[0-9]{9}", message="The partPrice1 must contain only digits!")
-    private String partPrice1;
+    @Pattern(regexp="^[0-9]{9}", message="The partPriceStart must contain only digits!")
+    private String partPriceStart;
 
     @Size(min=1, max=9, message="The partPrice2 should be until 9 digits!")
-    @Pattern(regexp="^[0-9]{9}", message="The partPrice2 must contain only digits!")
-    private String partPrice2;
+    @Pattern(regexp="^[0-9]{9}", message="The partPriceEnd must contain only digits!")
+    private String partPriceEnd;
 
     public String getPartID() { return partID; }
 
     public void setPartID(String partID) { this.partID = partID; }
 
-    public String getPartPrice1() { return partPrice1; }
+    public String getPartPriceStart() { return partPriceStart; }
 
-    public void setPartPrice1(String partPrice1) { this.partPrice1 = partPrice1; }
+    public void setPartPriceStart(String partPriceStart) { this.partPriceStart = partPriceStart; }
 
-    public String getPartPrice2() { return partPrice2; }
+    public String getPartPriceEnd() { return partPriceEnd; }
 
-    public void setPartPrice2(String partPrice2) { this.partPrice2 = partPrice2; }
+    public void setPartPriceEnd(String partPriceEnd) { this.partPriceEnd = partPriceEnd; }
 
 
 }

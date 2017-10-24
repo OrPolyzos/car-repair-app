@@ -29,8 +29,8 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public List<Part> findByPartPrice1PartPrice2(String partPrice1, String partPrice2) {
-        return partRepository.findByPartPrice1PartPrice2(partPrice1, partPrice2);
+    public List<Part> findByPartPriceStartPartPriceEnd(String partPriceStart, String partPriceEnd) {
+        return partRepository.findByPartPriceStartPartPriceEnd(partPriceStart, partPriceEnd);
     }
 
     @Override

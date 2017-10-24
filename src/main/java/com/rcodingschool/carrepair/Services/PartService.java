@@ -12,7 +12,7 @@ public interface PartService {
 
     List<Part> findByPartID(String partID);
 
-    List<Part> findByPartPrice1PartPrice2(String partPrice1, String partPrice2);
+    List<Part> findByPartPriceStartPartPriceEnd(String partPriceStart, String partPriceEnd);
 
     void save(Part part);
 

@@ -109,14 +109,14 @@ public class PartController {
         List<Part> partsList;
         //Getting the searchForm values and checking
         //If both are null
-        if (partSearchForm.getPartID() == null && (partSearchForm.getPartPrice1() == null || partSearchForm.getPartPrice2() == null) ) {
+        if (partSearchForm.getPartID() == null && (partSearchForm.getPartPriceStart() == null || partSearchForm.getPartPriceEnd() == null) ) {
             //Then we retrieve all the parts
             partsList = partService.findAll();
             //If the AFM is not null
         } else if (partSearchForm.getPartID() != null) {
-            //We search for Parts based on PartPrice1 and PartPrice2
-            partsList = partService.findByPartPrice1PartPrice2(partSearchForm.getPartPrice1(), partSearchForm.getPartPrice2());
-            //Else if PartPrice1 or PartPrice2 is null, means PartID is not
+            //We search for Parts based on PartPriceStart and PartPriceEnd
+            partsList = partService.findByPartPriceStartPartPriceEnd(partSearchForm.getPartPriceStart(), partSearchForm.getPartPriceEnd());
+            //Else if PartPriceStart or PartPriceEnd is null, means PartID is not
         } else {
             //We search for Parts based on PartID
             partsList = partService.findByPartID(partSearchForm.getPartID());

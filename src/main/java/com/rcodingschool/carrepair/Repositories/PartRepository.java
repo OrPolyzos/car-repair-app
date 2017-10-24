@@ -16,7 +16,7 @@ public interface PartRepository extends CrudRepository<Part, Long>{
 
     List<Part> findByPartID(String partID);
 
-    List<Part> findByPartPrice1PartPrice2(String partPrice1, String partPrice2);
+    List<Part> findByPartPriceStartPartPriceEnd(String partPriceStart, String partPriceEnd);
 
     Part save(Part part);
 
