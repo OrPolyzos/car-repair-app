@@ -23,7 +23,7 @@ public class RepairForm {
 
     @NotNull(message="This field is required!")
     @Size(max=1024, message="The tasks can contain until 1024 characters!")
-    @Pattern(regexp="^[a-zA-Z0-9 ]{1,1024}", message="The tasks can contain only characters!")
+    @Pattern(regexp="^[a-zA-Z0-9 !@#$&()`.+,/\"-]{1,1024}", message="The tasks can contain only characters!")
     private String repairTasks;
 
     @NotNull(message="This field is required!")
