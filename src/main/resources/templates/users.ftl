@@ -208,15 +208,15 @@
                     <#list userList as user>
                         <span>
                     <tr>
-                        <td>${user.userID}</td>
-                        <td>${user.afm}</td>
-                        <td>${user.email}</td>
-                        <td>${user.firstName}</td>
-                        <td>${user.lastName}</td>
-                        <td>${user.type}</td>
-                        <td>${user.addressStreet}</td>
-                        <td>${user.addressNumber}</td>
-                        <td>${user.addressZipCode}</td>
+                        <td>${user.userID!"Could not retrieve value!"}</td>
+                        <td>${user.afm!"Could not retrieve value!"}</td>
+                        <td>${user.email!"Could not retrieve value!"}</td>
+                        <td>${user.firstName!"Could not retrieve value!"}</td>
+                        <td>${user.lastName!"Could not retrieve value!"}</td>
+                        <td>${user.type!"Could not retrieve value!"}</td>
+                        <td>${user.addressStreet!"Could not retrieve value!"}</td>
+                        <td>${user.addressNumber!"Could not retrieve value!"}</td>
+                        <td>${user.addressZipCode!"Could not retrieve value!"}</td>
                         <form action="/admin/users/edit/${user.userID}" method="GET">
                         <td>
                             <button type="submit" class="btn btn-success">
