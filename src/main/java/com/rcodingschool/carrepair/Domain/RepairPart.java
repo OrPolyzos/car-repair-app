@@ -10,11 +10,20 @@ import java.util.List;
 @Entity(name = "RepairParts")
 public class RepairPart implements Serializable {
 //We need this relationship table because we have extra columns in it (Quantity)
+
+    //this is optional -- but best practice
+    @Id
+    @Column(name = "RepairPartID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long repairPartID;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RepairID", nullable = false)
+    // edo isos thelei private Repair repair
     private List<Repair> repairsList;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    // edo isos thelei private Part parts
     @JoinColumn(name = "PartID", nullable = false)
     private List<Part> partsList;
 
@@ -23,6 +32,14 @@ public class RepairPart implements Serializable {
 
 
     public RepairPart() {
+    }
+
+    public Long getRepairPartID() {
+        return repairPartID;
+    }
+
+    public void setRepairPartID(Long repairPartID) {
+        this.repairPartID = repairPartID;
     }
 
     public List<Repair> getRepairsList() {

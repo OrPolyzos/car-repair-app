@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -103,14 +102,17 @@ public class RepairPartsController {
         if (!map.containsKey(REPAIRPART_FORM)) {
             RepairPartForm repairPartForm = new RepairPartForm();
             //check if it works
+
+        // EDO PAIZEI NA DOULEUEI KAI XORIS NA MPAINEI STO REPAIR SERVICE ALLA DN EIMAI SIGOURI
             repairPartForm.setRepairID (repairService.findOne (id).getRepairID ());
             model.addAttribute(REPAIRPART_FORM, repairPartForm);
         }
 
+
         //TODO:HANDLE IF THE LIST IS EMPTY
         return "repairParts";
     }
-    
+
     /// SHOW ALL THE AVAILABLE PARTS IN ORDER TO RETRIEVE THE CORRESPONDING PART ID
     @RequestMapping(value = "/repairParts/all", method = RequestMethod.GET)
 
