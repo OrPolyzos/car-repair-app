@@ -142,7 +142,7 @@ public class PartController {
         PartForm partForm = PartConverter.buildPartFormObject(part);
         //Send the partForm to the editPart.ftl
         redirectAttributes.addFlashAttribute(partForm);
-        return "redirect:/admin/parts/editUser";
+        return "redirect:/admin/parts/editPart";
     }
 
     //the showEditPartView will map "/parts/editPart" GET requests
@@ -178,6 +178,7 @@ public class PartController {
             Part part = PartConverter.buildUpdatePartObject(partForm);
             //Save the user
             partService.save(part);
+            redirectAttributes.addFlashAttribute(MESSAGE, "Part was updated!");
             return "redirect:/admin/parts";
         } catch (Exception exception) {
             //if an error occurs show it to the user

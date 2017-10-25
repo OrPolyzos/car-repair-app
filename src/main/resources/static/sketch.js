@@ -29,7 +29,6 @@ function setup() {
   colorMode(HSB, 255);
   cols = floor(width / scl);
   rows = floor(height / scl);
-  fr = createP('');
   flowfield = new Array(cols * rows);
   for (var i = 0; i < 300; i++) {
     particles[i] = new Particle();
@@ -78,7 +77,6 @@ function centerCanvas() {
   var x = (windowWidth - width) / 2;
   var y = (windowHeight - height) / 2;
   cnv.position(x, y);
-//  par.position(x,y);
 }
 function mouseWheel(event) {
   centerCanvas();

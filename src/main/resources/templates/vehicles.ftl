@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <label for="afm">Owner's AFM</label>
                                 <@spring.bind "vehicleForm.afm"/>
-                                <input type="text" class="form-control "name="afm" id="afm" placeholder="123456789" value="${vehicleForm.afm!""}"/>
+                                <input type="number" class="form-control "name="afm" id="afm" placeholder="123456789" value="${vehicleForm.afm!""}"/>
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
                                 </#list>
@@ -141,7 +141,7 @@
                         <#--bind this field with the registration form fields-->
                             <@spring.bind "vehicleSearchForm.afm" />
                             <label for="afm">AFM</label>
-                            <input type="text" class="form-control" name="afm" id="afm" placeholder="123456789" value="${vehicleSearchForm.afm!""}"/>
+                            <input type="number" class="form-control" name="afm" id="afm" placeholder="123456789" value="${vehicleSearchForm.afm!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -218,12 +218,6 @@
                 </tbody>
             </table>
     </#if>
-
-    <script>
-        function myFunction() {
-            confirm("Are you sure to delete?");}
-    </script>
-
     <#include "footer.ftl">
 
 </body>

@@ -99,7 +99,7 @@
                         <div class="form-group">
                             <@spring.bind "repairForm.repairTasks"/>
                             <label for="repairTasks">Tasks</label>
-                                <textarea rows=4 cols=50 id="repairTasks" class="form-control" name="repairTasks" placeholder="Engine oil change, Oil filter replacement, Spark plugs Replacement" value="${repairForm.repairTasks!""}"> </textarea>
+                                <textarea rows=4 cols=50 id="repairTasks" class="form-control" name="repairTasks" placeholder="Engine oil change, Oil filter replacement, Spark plugs Replacement" value="${repairForm.repairTasks!""}">${repairForm.repairTasks!""}</textarea>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -209,7 +209,7 @@
                         <td>${repair.repairStatus!"Could not retrieve value!"}</td>
                         <td>${repair.repairType.repairTypeDescription!"Could not retrieve value!"}</td>
                         <td>${repair.repairTasks!"Could not retrieve value!"}</td>
-                        <td>${repair.repairVehicleID!"Could not retrieve value!"}</td>
+                        <td>${repair.vehicleID!"Could not retrieve value!"}</td>
 
                         <form action="/admin/repairs/edit/${repair.repairID}" method="GET">
                         <td>
@@ -218,7 +218,7 @@
                             </button>
                         </td>
                         <td>
-                            <button type="submit" class="btn btn-danger" formaction="/admin/repairs/delete/${repair.repairID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this user?')">
+                            <button type="submit" class="btn btn-danger" formaction="/admin/repairs/delete/${repair.repairID}" formmethod="GET" onclick="return confirm('Are you sure?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </td>
