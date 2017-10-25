@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "Repairs")
 public class Repair implements Serializable {
@@ -39,6 +40,9 @@ public class Repair implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "VehicleID", referencedColumnName = "VehicleID", updatable = false, insertable = false)
     private Vehicle vehicle;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "repair", targetEntity = RepairPart.class)
+    private List<RepairPart> repairParts;
 
 
     public Repair() {
