@@ -42,14 +42,14 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h1 align="center">Add Repair Parts</h1>
-                    <form  class="form-horizontal" action="/admin/repairs/addRepairParts" method="POST" id="addRepairPartsForm" name="addRepairPartsForm">
+                    <form  class="form-horizontal" action="/admin/repairParts/add" method="POST" id="repairPartsForm" name="repairPartsForm">
 
                              <fieldset class="Hor">
                              <div class="form-group">
 
-                             <label for="repairId">Repair ID</label>
-                             <@spring.bind "addRepairPartsForm.repairId"/>
-                             <input type="disabled" type="number" name="repairId" id="repairId" placeholder="1" value="${addRepairPartsForm.repairId!""}"/>
+                             <label for="repairID">Repair ID</label>
+                             <@spring.bind "repairPartsForm.repairID"/>
+                             <input type="disabled" type="number" name="repairID" id="repairID" placeholder="1" value="${repairPartsForm.repairID!""}"/>
                              <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                              </#list>
@@ -60,9 +60,9 @@
                              <fieldset class="Hor">
 
                              <div class="form-group">
-                             <label for="partId">Part ID</label>
-                             <@spring.bind "addRepairPartsForm.partId"/>
-                             <input class="form-control" type="number" name="partId" id="partId" placeholder="1" value="${addRepairPartsForm.partId!""}"/>
+                             <label for="partID">Part ID</label>
+                             <@spring.bind "repairPartsForm.partID"/>
+                             <input class="form-control" type="number" name="partID" id="partID" placeholder="1" value="${repairPartsForm.partID!""}"/>
                              <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                              </#list>
@@ -73,8 +73,8 @@
 
                              <div class="form-group">
                              <label for="quantity">Quantity</label>
-                             <@spring.bind "addRepairPartsForm.quantity"/>
-                             <input class="form-control" type="number" name="quantity" id="quantity" placeholder="1" value="${addRepairPartsForm.quantity!""}"/>
+                             <@spring.bind "repairPartsForm.quantity"/>
+                             <input class="form-control" type="number" name="quantity" id="quantity" placeholder="1" value="${repairPartsForm.quantity!""}"/>
                              <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                              </#list>
@@ -94,6 +94,8 @@
     </div>
 
     <h2>${searchNotFoundMessage!""}</h2>
+ <form action="/admin/repairs/repairParts/${repairPart.repairID}" method="GET">
+
     <#if repairPartsList??>
         <h3 class="text-center"><u>Retrieved Repair Parts</u></h3>
         <div class="table-responsive">
@@ -111,20 +113,10 @@
                     <#list repairPartsList as repairPart>
                         <span>
                 <tr>
-                    <td class="text-center">${repairPart.repairId}</td>
-                    <td class="text-center">${repairPart.partId}</td
+                    <td class="text-center">${repairPart.repairID}</td>
+                    <td class="text-center">${repairPart.partID}</td
                     <td class="text-center">${repairPart.Quantity}</td
-                    <form action="/admin/repairs/addRepairParts/${repairPart.repairId}" method="GET">
-                      <td class="text-center">
-                          <button type="submit">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </button>
-                        </td>
-                        <td class="text-center">
-                            <button type="submit" formaction="/admin/repairs/deleteRepairParts/${repairPart.repairID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this part from this repair?')">
-                            <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </td>
+                    <form action="/admin/repairs/repairParts/${repairPart.repairID}" method="GET">
                     </form>
                 </tr>
                     </span>
@@ -134,6 +126,8 @@
     </div>
 </#if>
 
+</form>
+
    <hr></hr>
        <div>
            <center>
@@ -141,7 +135,7 @@
                <div class="row">
                    <div class="col-sm-12">
                        <h1 align="center">Available Parts</h1>
-                       <form class="Search" class="form-horizontal" action="/admin/parts/search" method="GET" id="partSearchForm" name="partSearchForm">
+                       <form class="Search" class="form-horizontal" action="/admin/repairParts/all" method="GET" id="partSearchForm" name="partSearchForm">
                            <fieldset class="Norm">
                                <div class="form-group">
                                    <hr></hr>
@@ -183,7 +177,7 @@
                     <td class="text-center">${part.partName}</td
                     <td class="text-center">${part.partPrice}</td
                     <td class="text-center">${part.quantity}</td
-                    <form action="/admin/parts/searchParts/${part.partId}" method="GET">
+                    <form action="/admin/parts/searchParts/${part.partID}" method="GET">
 
                     </form>
                 </tr>
