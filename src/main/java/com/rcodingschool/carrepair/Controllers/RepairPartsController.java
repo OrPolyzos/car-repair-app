@@ -2,6 +2,7 @@ package com.rcodingschool.carrepair.Controllers;
 
 
 import com.rcodingschool.carrepair.Domain.Part;
+import com.rcodingschool.carrepair.Domain.RepairPart;
 import com.rcodingschool.carrepair.Model.RepairPartForm;
 import com.rcodingschool.carrepair.Services.PartService;
 import com.rcodingschool.carrepair.Services.RepairPartService;
@@ -23,15 +24,13 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class RepairPartsController {
 
-    //for editing
-    private static final String REPAIRPART_FORM = "repairPartForm";
-    //for filtering
-    private static final String SEARCH_FORM = "repairPartSearchForm";
+    private static final String REPAIRPART_FORM = "repairPartsForm";
+
     //the parts of a specific repair
     private static final String REPAIRPART_LIST = "repairPartList";
-    private static final String PART_LIST = "partsList";
-
-    private static final String NOT_FOUND = "searchNotFoundMessage";
+    //the full list of parts
+    private static final String WHOLE_PART_LIST = "wholePartList";
+    //for error messages
     private static final String MESSAGE = "errorMessage";
 
     @Autowired
@@ -52,13 +51,19 @@ public class RepairPartsController {
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    @RequestMapping(value = "/repairParts", method = RequestMethod.GET)
-    public String showRepairPartsView(Model model) {
+    @RequestMapping(value = "/repairs/parts/{repairID}", method = RequestMethod.GET)
+    public String showRepairPartsView(@PathVariable Long repairID, Model model) {
         Map<String, Object> map = model.asMap();
         //If our Model does not contain a repairPartForm, add a new RepairPartForm()
+        List<RepairPart> repairsCurrentPartsList = repairPartService.findAllByRepairID(repairID);
+        List<Part> wholePartsList = partService.findAll();
         if (!map.containsKey(REPAIRPART_FORM)) {
+            RepairPartForm repairPartForm = new RepairPartForm();
+            repairPartForm.setRepairID(repairID);
             model.addAttribute(REPAIRPART_FORM, new RepairPartForm ());
         }
+        model.addAttribute(REPAIRPART_LIST, repairsCurrentPartsList);
+        model.addAttribute(WHOLE_PART_LIST, wholePartsList);
         return "repairParts";
     }
 
@@ -81,8 +86,8 @@ public class RepairPartsController {
             return "redirect:/admin/repairParts";
         }
         try {
-            //Trying to build a vehicle from our VehicleForm
-            //RepairPart repairPart = RepairPartConverter.buildRepairPartObject(repairPartForm, repairService.findByRepairID(repairPartForm.getRepairID ()).get(0));
+            //Ttrying to build a RepairPart object
+            //RepairPart repairPart = RepairPartConverter.buildRepairPartObject(repairPartForm);
             //repairPartService.save(repairPart);
             return "redirect:/admin/repairParts";
 
@@ -92,43 +97,5 @@ public class RepairPartsController {
             return "redirect:/admin/repairParts";
         }
     }
-
-    @RequestMapping(value = "/repairParts/{id}", method = RequestMethod.GET)
-    public String showPartsofSpecificRepair(@PathVariable Long id, Model model) {
-        Map<String, Object> map = model.asMap();
-        //List<RepairPart> repairPartList = repairPartService.findByRepairID(id);
-        //model.addAttribute(REPAIRPART_LIST, repairPartList);
-        if (!map.containsKey(REPAIRPART_FORM)) {
-            RepairPartForm repairPartForm = new RepairPartForm();
-            //check if it works
-
-        // EDO PAIZEI NA DOULEUEI KAI XORIS NA MPAINEI STO REPAIR SERVICE ALLA DN EIMAI SIGOURI
-            repairPartForm.setRepairID (repairService.findOne (id).getRepairID ());
-            model.addAttribute(REPAIRPART_FORM, repairPartForm);
-        }
-
-
-        //TODO:HANDLE IF THE LIST IS EMPTY
-        return "repairParts";
-    }
-
-    /// SHOW ALL THE AVAILABLE PARTS IN ORDER TO RETRIEVE THE CORRESPONDING PART ID
-    @RequestMapping(value = "/repairParts/all", method = RequestMethod.GET)
-
-    public String showEveryPart(Model model,
-                                RedirectAttributes redirectAttributes){
-        //Initialize a new list of Parts
-            List<Part> partsList;
-            partsList = partService.findAll();
-              //If the List is Empty
-        if (partsList.isEmpty()) {
-             //We send Information to the user
-            redirectAttributes.addFlashAttribute(NOT_FOUND, "No records were found!");
-        } else {
-            redirectAttributes.addFlashAttribute(PART_LIST, partsList);
-        }
-        return "redirect:/admin/repairParts";
-        }
-
 
 }
