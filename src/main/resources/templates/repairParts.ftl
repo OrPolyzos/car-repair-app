@@ -43,7 +43,8 @@
                 <div class="col-sm-12">
                     <h1 align="center">Add Repair Parts</h1>
                     <form  class="form-horizontal" action="/admin/repairs/parts/add" method="POST" id="repairPartsForm" name="repairPartsForm">
-
+                            <@spring.bind "repairPartsForm.repairID"/>
+                            <input type="hidden" name="repairID" value="${repairPartsForm.repairID!""}"/>
                              <fieldset class="Hor">
 
                              <div class="form-group">

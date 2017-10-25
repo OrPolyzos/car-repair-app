@@ -60,7 +60,7 @@ public class RepairPartsController {
         if (!map.containsKey(REPAIRPART_FORM)) {
             RepairPartForm repairPartForm = new RepairPartForm();
             repairPartForm.setRepairID(repairID);
-            model.addAttribute(REPAIRPART_FORM, new RepairPartForm ());
+            model.addAttribute(REPAIRPART_FORM, repairPartForm);
         }
         model.addAttribute(REPAIRPART_LIST, repairsCurrentPartsList);
         model.addAttribute(WHOLE_PART_LIST, wholePartsList);
@@ -83,18 +83,18 @@ public class RepairPartsController {
             //Also we will be adding repairPartForm to RedirectAttributes so that we can keep his valid inputs and reshow them
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + REPAIRPART_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(REPAIRPART_FORM, repairPartForm);
-            return "redirect:/admin/repairs/parts/{"+repairPartForm.getRepairID()+"}";
+            return "redirect:/admin/repairs/parts/"+repairPartForm.getRepairID();
         }
         try {
             //Ttrying to build a RepairPart object
             //RepairPart repairPart = RepairPartConverter.buildRepairPartObject(repairPartForm);
             //repairPartService.save(repairPart);
-            return "redirect:/admin/repairs/parts/{"+repairPartForm.getRepairID()+"}";
+            return "redirect:/admin/repairs/parts/"+String.valueOf(repairPartForm.getRepairID());
 
         } catch (Exception exception) {
             //if an error occurs show it to the user :(
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
-            return "redirect:/admin/repairs/parts/{"+repairPartForm.getRepairID()+"}";
+            return "redirect:/admin/repairs/parts/"+String.valueOf(repairPartForm.getRepairID());
         }
     }
 
