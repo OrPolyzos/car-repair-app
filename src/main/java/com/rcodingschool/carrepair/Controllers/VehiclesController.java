@@ -26,6 +26,7 @@ public class VehiclesController {
     private static final String SEARCH_FORM = "vehicleSearchForm";
     private static final String VEHICLE_LIST = "vehicleList";
     private static final String NOT_FOUND = "searchNotFoundMessage";
+    private static final String MESSAGE = "errorMessage";
 
     @Autowired
     private UserService userService;
@@ -92,29 +93,22 @@ public class VehiclesController {
         }
         try {
             //Trying to build a vehicle from our VehicleForm
-            Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userService.findByAfm(vehicleForm.getAfm()).get(0));
-            vehicleService.save(vehicle);
-            return "redirect:/admin/vehicles";
-//            List<User> userList = userService.findByAfm(vehicleForm.getAfm());
-//            if (userList.size() != 0) {
-//                vehicleForm.setAfm(userList.get(0).getAfm());
-//                Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userList.get(0));
-//                vehicleService.save(vehicle);
-//                redirectAttributes.addFlashAttribute("errorMessage", "Vehicle was added!");
-//                return "redirect:/admin/vehicles";
-//            } else {
-//                vehicleForm.setAfm(null);
-//                redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);
-//                redirectAttributes.addFlashAttribute("errorMessage", "The provided AFM does not correspond to a user! Please create a user first!");
-//                return "redirect:/admin/vehicles";
-//            }
-
-
+            if (vehicleService.findByVehicleID(vehicleForm.getVehicleID()).isEmpty()) {
+                Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userService.findByAfm(vehicleForm.getAfm()).get(0));
+                vehicleService.save(vehicle);
+                redirectAttributes.addFlashAttribute(MESSAGE, "User was created!");
+            } else {
+                vehicleForm.setVehicleID("");
+                redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);
+                redirectAttributes.addFlashAttribute(MESSAGE, "This plate number already exists!");
+            }
         } catch (Exception exception) {
             //if an error occurs show it to the user :(
-            redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
-            return "redirect:/admin/vehicles";
+            vehicleForm.setAfm("");
+            redirectAttributes.addFlashAttribute(VEHICLE_FORM,vehicleForm);
+            redirectAttributes.addFlashAttribute(MESSAGE, exception.getMessage());
         }
+        return "redirect:/admin/vehicles";
     }
 
     //The processDeleteVehicle method will map "/admin/vehicles/delete/{id}" GET requests and
@@ -124,7 +118,7 @@ public class VehiclesController {
                                        RedirectAttributes redirectAttributes) {
         //Delete the vehicle depending on its vehicleID
         vehicleService.deleteByVehicleID(vehicleID);
-        redirectAttributes.addFlashAttribute("errorMessage", "Vehicle was deleted successfully!");
+        redirectAttributes.addFlashAttribute(MESSAGE, "Vehicle was deleted successfully!");
         return "redirect:/admin/vehicles";
     }
 
@@ -165,7 +159,7 @@ public class VehiclesController {
     //so that the Admin can edit the vehicle details
     @RequestMapping(value = "/vehicles/edit/{vehicleID}", method = RequestMethod.GET)
     public String showEditVehicle(@PathVariable String vehicleID,
-                               RedirectAttributes redirectAttributes) {
+                                  RedirectAttributes redirectAttributes) {
         //Find the vehicle
         Vehicle vehicle = vehicleService.findByVehicleID(vehicleID).get(0);
         //Create a new vehicleForm based on the vehicle
@@ -205,10 +199,11 @@ public class VehiclesController {
             //Trying to build a Vehicle from our VehicleForm
             Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userService.findOne(vehicleForm.getUserID()));
             vehicleService.save(vehicle);
+            redirectAttributes.addFlashAttribute(MESSAGE, "Vehicle was updated!");
             return "redirect:/admin/vehicles";
         } catch (Exception exception) {
             //if an error occurs show it to the user
-            redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
+            redirectAttributes.addFlashAttribute(MESSAGE, exception.getMessage());
             return "redirect:/admin/vehicles/editVehicle";
         }
     }
