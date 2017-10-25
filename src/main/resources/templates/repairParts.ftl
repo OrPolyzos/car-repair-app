@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h1 align="center">Add Repair Parts</h1>
-                    <form  class="form-horizontal" action="/admin/repairParts/add" method="POST" id="repairPartsForm" name="repairPartsForm">
+                    <form  class="form-horizontal" action="/admin/repairs/parts/add" method="POST" id="repairPartsForm" name="repairPartsForm">
 
                              <fieldset class="Hor">
 

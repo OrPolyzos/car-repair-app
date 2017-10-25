@@ -72,7 +72,7 @@ public class RepairPartsController {
 
     //The processCreateVehicle() method will map "/admin/vehicle/create" POST requests
     //and eventually it will redirect to "/admin/vehicles"
-    @RequestMapping(value = "/repairParts/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/repairs/parts/add", method = RequestMethod.POST)
     public String processAddRepairPart(@Valid @ModelAttribute(REPAIRPART_FORM) RepairPartForm repairPartForm,
                                        BindingResult bindingResult, Model model,
                                        RedirectAttributes redirectAttributes) {
@@ -83,18 +83,18 @@ public class RepairPartsController {
             //Also we will be adding repairPartForm to RedirectAttributes so that we can keep his valid inputs and reshow them
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + REPAIRPART_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(REPAIRPART_FORM, repairPartForm);
-            return "redirect:/admin/repairParts";
+            return "redirect:/admin/repairs/parts/{"+repairPartForm.getRepairID()+"}";
         }
         try {
             //Ttrying to build a RepairPart object
             //RepairPart repairPart = RepairPartConverter.buildRepairPartObject(repairPartForm);
             //repairPartService.save(repairPart);
-            return "redirect:/admin/repairParts";
+            return "redirect:/admin/repairs/parts/{"+repairPartForm.getRepairID()+"}";
 
         } catch (Exception exception) {
             //if an error occurs show it to the user :(
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
-            return "redirect:/admin/repairParts";
+            return "redirect:/admin/repairs/parts/{"+repairPartForm.getRepairID()+"}";
         }
     }
 
