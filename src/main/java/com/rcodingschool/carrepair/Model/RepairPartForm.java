@@ -13,7 +13,7 @@ public class RepairPartForm {
     private String partID;
 
     @NotNull(message="This field is required!")
-    @Pattern(regexp="^[1-9]{1,4}", message="The quantity must be equal or greater than 1!")
+    @Pattern(regexp="^[1-9]{1,5}", message="The quantity must be equal or greater than 1!")
     private String Quantity;
 
     public Long getRepairID() {
