@@ -29,4 +29,9 @@ public class RepairPartServiceImpl implements RepairPartService{
     public RepairPart save(RepairPart repairPart) {
         return repairPartRepository.save (repairPart);
     }
+
+    @Override
+    public void deleteByRepairIdOrPartId(Long repairId, Long partId) {
+        repairPartRepository.deleteByRepairIdOrPartId(repairId,partId);
+    }
 }
