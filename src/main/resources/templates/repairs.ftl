@@ -196,6 +196,7 @@
                         <th>Vehicle ID</th>
                         <th>Edit Repair</th>
                         <th>Delete Repair</th>
+                        <th>Add Parts</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -222,6 +223,11 @@
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </td>
+                        <td>
+                            <button type="submit" class="btn btn-success" formaction="/admin/repairs/parts/${repair.repairID}" formmethod="GET" >
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </button>
+                        </td>
                         </form>
                     </tr>
                     </span>
@@ -230,13 +236,6 @@
             </table>
         </div>
     </#if>
-
-    <script>
-    function myFunction() {
-        confirm("Are you sure to delete?");
-    }
-    </script>
-
     <#include "footer.ftl">
 
 </body>
