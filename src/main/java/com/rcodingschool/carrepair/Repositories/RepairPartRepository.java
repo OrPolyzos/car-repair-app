@@ -9,6 +9,15 @@ import java.util.List;
 @Repository
 public interface RepairPartRepository extends CrudRepository<RepairPart, Long> {
 
-    List<RepairPart> findAllByRepairID(Long RepairID);
+    RepairPart findOne(Long repairID);
+
+    List<RepairPart> findAll();
+
+    List<RepairPart> findAllByRepairID(Long repairID);
+
+    RepairPart save(RepairPart repairPart);
+
+    void deleteByRepairID(Long repairID);
+
 
 }
