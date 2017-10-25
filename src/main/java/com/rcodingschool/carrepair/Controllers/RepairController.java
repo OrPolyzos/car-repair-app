@@ -202,6 +202,7 @@ public class RepairController {
             Repair repair = RepairConverter.buildUpdateRepairObject(repairForm);
             //Save the repair
             repairService.save(repair);
+            redirectAttributes.addFlashAttribute(MESSAGE,"Repair was updated!");
             return "redirect:/admin/repairs";
         } catch (Exception exception) {
             //if an error occurs show it to the user

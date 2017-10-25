@@ -1,7 +1,7 @@
 <#import "/spring.ftl" as spring/>
 <html>
 <head>
-    <title>Vehicles</title>
+    <title>Parts</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
@@ -45,7 +45,7 @@
             <form class="form-horizontal" action="/admin/parts/create" method="POST" id="partForm" name="partForm">
                 <legend>Parts Details</legend>
                     <div class="col-md-6">
-                        <fieldset class="Hor">
+                        <fieldset>
                             <#--bind this field with the registration form fields-->
                             <@spring.bind "partForm.partName"/>
                             <label for="partName">Part Name</label>
@@ -56,8 +56,8 @@
                         </fieldset>
                     </div>
                     <div class="col-md-6">
-                        <fieldset class="Hor">
-                            <label partPrice>Cost</label>
+                        <fieldset>
+                            <label partPrice>Price</label>
                             <@spring.bind "partForm.partPrice"/>
                                 <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
                             <#list spring.status.errorMessages as error>
@@ -65,9 +65,8 @@
                             </#list>
                         </fieldset>
                     </div>
-
                     <br><br>
-
+                    <br><br>
                     <div class="col-md-12 controls">
                         <span>
                             <button type="submit" id="btn-submit" class="btn btn-success">Create</button>
@@ -130,26 +129,26 @@
     </div>
 
     <h2>${searchNotFoundMessage!""}</h2>
-    <#if userList??>
-        <h3><u>Retrieved Users</u></h3>
+    <#if partList??>
+        <h3><u>Retrieved Parts</u></h3>
         <div class="table-responsive">
             <table id="resultsTable" class="table" class="table-hover">
                 <thead>
                 <tr>
                     <th>Part ID</th>
                     <th>Part Name</th>
-                    <th>Part Cost</th>
+                    <th>Part Price</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
-                <#list userList as user>
+                <#list partList as part>
                         <span>
                     <tr>
                         <td>${part.partID!"Could not retrieve value!"}</td>
                         <td>${part.partName!"Could not retrieve value!"}</td>
-                        <td>${part.partCost!"Could not retrieve value!"}</td>
+                        <td>${part.partPrice!"Could not retrieve value!"}</td>
                         <form action="/admin/parts/edit/${part.partID}" method="GET">
                         <td>
                             <button type="submit" class="btn btn-success">
@@ -169,8 +168,6 @@
             </table>
         </div>
     </#if>
-
     <#include "footer.ftl">
-
 </body>
 </html>

@@ -4,26 +4,29 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "RepairParts")
+@IdClass(RepairPartID.class)
 public class RepairPart implements Serializable {
 
     @Id
     @Column(name = "RepairID", nullable = false)
     private Long repairID;
 
-
+    @Id
     @Column(name = "PartID", nullable = false)
     private Long partID;
 
     @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
-    public RepairPart() {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RepairID", nullable = false, updatable = false, insertable = false)
+    private Repair repair;
 
-    public RepairPart(Long repairID, Long partID, Integer quantity) {
-        this.repairID = repairID;
-        this.partID = partID;
-        this.quantity = quantity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PartID", nullable = false, updatable = false, insertable = false)
+    private Part part;
+
+    public RepairPart() {
     }
 
     public Long getRepairID() {
@@ -40,6 +43,22 @@ public class RepairPart implements Serializable {
 
     public void setPartID(Long partID) {
         this.partID = partID;
+    }
+
+    public Repair getRepair() {
+        return repair;
+    }
+
+    public void setRepair(Repair repair) {
+        this.repair = repair;
+    }
+
+    public Part getPart() {
+        return part;
+    }
+
+    public void setPart(Part part) {
+        this.part = part;
     }
 
     public Integer getQuantity() {

@@ -39,13 +39,17 @@ form.Search {
 }
 
 .errorRed {
-    color: red;
+    color: yellow;
     font-weight: bold;
 }
 
 
 .table th, td {
   text-align: center;
+}
+
+.table th {
+    color: RoyalBlue;
 }
 
 footer {

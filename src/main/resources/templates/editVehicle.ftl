@@ -34,29 +34,17 @@
         <div class="row">
             <div class="col-md-12">
                 <form action="/admin/vehicles/editVehicle" method="POST" id="vehicleForm" name="vehicleForm">
-                    <h4><i>Vehicle's Details</i></h4>
+                    <h3><i>Vehicle's Details</i></h3>
 
-                    <h5><u>Owner's AFM: ${vehicleForm.afm!""}</u></h5>
-                    <#--bind this field with the registration form fields-->
                     <@spring.bind "vehicleForm.userID" />
                     <input type="hidden" name="userID" value="${vehicleForm.userID!""}">
-                    <@spring.bind "vehicleForm.afm" />
-                    <input type="hidden" name="afm" value="${vehicleForm.afm!""}">
+                     <@spring.bind "vehicleForm.afm" />
+                     <input type="hidden" name="afm" value="${vehicleForm.afm!""}">
+                     <@spring.bind "vehicleForm.vehicleID" />
+                     <input type="hidden" name="vehicleID" value="${vehicleForm.vehicleID!""}">
 
-                    <div class="form-group">
-                        <@spring.bind "vehicleForm.vehicleID" />
-                        <label for="vehicleID">Plate Number</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class=""></i>
-                                    </span>
-                                    <input type="text" class="form-control" name="vehicleID" id="vehicleID" placeholder="ABC-1234" value="${vehicleForm.vehicleID!""}"/>
-                                </div>
-                        <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
-                        </#list>
-                    </div>
-
+                    <h4><u>Owner's AFM: ${vehicleForm.afm!""}</u></h4>
+                    <h4><u>Plate Number: ${vehicleForm.vehicleID!""}</u></h4>
                     <div class="form-group">
                         <@spring.bind "vehicleForm.brand"/>
                         <label for="brand">Brand</label>
@@ -64,7 +52,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicons glyphicons-car"></i>
                                     </span>
-                                    <input type="text" class="form-control" name="brand" id="brand" placeholder="Ford" value="${vehicleForm.brand!""}"/>
+                                    <input type="text" class="form-control" name="brand" id="brand" placeholder="Ford" value="${vehicleForm.brand!""}" required/>
                                 </div>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
@@ -76,7 +64,7 @@
                         <label for="model">Model</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"></span>
-                                    <input type="text" class="form-control" name="model" id="model" placeholder="Focus" value="${vehicleForm.model!""}"/>
+                                    <input type="text" class="form-control" name="model" id="model" placeholder="Focus" value="${vehicleForm.model!""}" required/>
                                 </div>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
@@ -88,7 +76,7 @@
                         <label for="year">Year</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"></span>
-                                    <input type="text" class="form-control" min=1950 max=2017 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}"/>
+                                    <input type="number" class="form-control" min=1950 max=2017 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}" required/>
                                 </div>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
@@ -115,15 +103,13 @@
                         <label for="color">Color</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"></span>
-                                        <input type="String" class="form-control" name="color" id="color" placeholder="Red" value="${vehicleForm.color!""}"/>
+                                        <input type="String" class="form-control" name="color" id="color" placeholder="Red" value="${vehicleForm.color!""}" required/>
                                 </div>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
                         </#list>
                     </div>
-
-        <br><br>
-
+                    <br><br>
                         <button type="submit" value="Edit" class="btn btn-success">Edit</button>
                         <button type="submit" value="Back" class="btn btn-danger" formaction="/admin/vehicles/" formmethod="GET">Back</button>
                 </form>
