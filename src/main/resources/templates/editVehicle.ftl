@@ -45,7 +45,7 @@
 
                     <div class="form-group">
                         <@spring.bind "vehicleForm.vehicleID" />
-                        <label for="plateNumber">Plate Number</label>
+                        <label for="vehicleID">Plate Number</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class=""></i>

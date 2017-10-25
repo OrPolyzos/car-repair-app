@@ -24,15 +24,16 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Auto Repair</a>
+                <a class="navbar-brand" href="/">eXtreme Performance</a>
+            </div>
+            <div class="navbar-right">
                 <a class="navbar-brand" href="/login">Login</a>
             </div>
         </div>
     </nav>
 
-
-        <div class="p5container">
-            <img src="Images/eXtreme.png">
-        </div>
-    </body>
+    <div class="p5container">
+        <img src="Images/eXtreme.png">
+    </div>
+</body>
 </html>
