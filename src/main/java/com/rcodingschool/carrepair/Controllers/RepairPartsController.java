@@ -2,7 +2,6 @@ package com.rcodingschool.carrepair.Controllers;
 
 
 import com.rcodingschool.carrepair.Domain.Part;
-import com.rcodingschool.carrepair.Domain.RepairPart;
 import com.rcodingschool.carrepair.Model.RepairPartForm;
 import com.rcodingschool.carrepair.Services.PartService;
 import com.rcodingschool.carrepair.Services.RepairPartService;
@@ -97,8 +96,8 @@ public class RepairPartsController {
     @RequestMapping(value = "/repairParts/{id}", method = RequestMethod.GET)
     public String showPartsofSpecificRepair(@PathVariable Long id, Model model) {
         Map<String, Object> map = model.asMap();
-        List<RepairPart> repairPartList = repairPartService.findByRepairID(id);
-        model.addAttribute(REPAIRPART_LIST, repairPartList);
+        //List<RepairPart> repairPartList = repairPartService.findByRepairID(id);
+        //model.addAttribute(REPAIRPART_LIST, repairPartList);
         if (!map.containsKey(REPAIRPART_FORM)) {
             RepairPartForm repairPartForm = new RepairPartForm();
             //check if it works

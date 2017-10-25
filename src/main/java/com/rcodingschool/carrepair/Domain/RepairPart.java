@@ -4,16 +4,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "RepairParts")
+@IdClass(RepairPartID.class)
 public class RepairPart implements Serializable {
 
     @Id
-    @Column(name = "RepairPartID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long repairPartID;
-
     @Column(name = "RepairID", nullable = false)
     private Long repairID;
 
+    @Id
     @Column(name = "PartID", nullable = false)
     private Long partID;
 
@@ -29,14 +27,6 @@ public class RepairPart implements Serializable {
     private Part part;
 
     public RepairPart() {
-    }
-
-    public Long getRepairPartID() {
-        return repairPartID;
-    }
-
-    public void setRepairPartID(Long repairPartID) {
-        this.repairPartID = repairPartID;
     }
 
     public Long getRepairID() {

@@ -1,4 +1,9 @@
 package com.rcodingschool.carrepair.Domain;
 
-public class RepairPartID {
+
+import java.io.Serializable;
+
+public class RepairPartID implements Serializable{
+    private Long repairID;
+    private Long partID;
 }
