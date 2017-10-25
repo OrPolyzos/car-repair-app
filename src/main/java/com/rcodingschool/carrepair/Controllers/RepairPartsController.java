@@ -83,8 +83,8 @@ public class RepairPartsController {
         }
         try {
             //Trying to build a vehicle from our VehicleForm
-            RepairPart repairPart = RepairPartConverter.buildRepairPartObject(repairPartForm, repairService.findByRepairID(repairPartForm.getRepairID ()).get(0));
-            repairPartService.save(repairPart);
+            //RepairPart repairPart = RepairPartConverter.buildRepairPartObject(repairPartForm, repairService.findByRepairID(repairPartForm.getRepairID ()).get(0));
+            //repairPartService.save(repairPart);
             return "redirect:/admin/repairParts";
 
         } catch (Exception exception) {
