@@ -1,5 +1,8 @@
 package com.rcodingschool.carrepair.Domain;
 
+import org.hibernate.annotations.Fetch;
+import org.springframework.context.annotation.Lazy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -7,11 +10,11 @@ import java.util.List;
 @Entity(name = "RepairParts")
 public class RepairPart implements Serializable {
 //We need this relationship table because we have extra columns in it (Quantity)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RepairID", nullable = false)
     private List<Repair> repairsList;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PartID", nullable = false)
     private List<Part> partsList;
 
