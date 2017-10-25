@@ -53,7 +53,7 @@
                         <div class="form-group">
                             <label for="afm">AFM</label>
                             <@spring.bind "userForm.afm"/>
-                            <input type="text" class="form-control" id="afm" name="afm" placeholder="123456789" value="${userForm.afm!""}"/>
+                            <input type="number" class="form-control" id="afm" name="afm" placeholder="123456789" value="${userForm.afm!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <@spring.bind "userForm.email"/>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="john@doe.com" value="${userForm.email!""}"/>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="john@doe.com" value="${userForm.email!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -100,7 +100,7 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <@spring.bind "userForm.password"/>
-                            <input type="text" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.lastName!""}"/>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.password!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -133,9 +133,12 @@
                             </#list>
                         </div>
                     </fieldset>
-
-                    <button type="submit" id="btn-submit" class="btn btn-success btn-md">Create</button>
-                    <button type="reset" id="btn-clear" class="btn btn-danger btn-md">Clear</button>
+                <div class="col-md-12 controls">
+                    <span>
+                        <button type="submit" id="btn-submit" class="btn btn-success btn-md">Create</button>
+                        <button type="reset" id="btn-clear" class="btn btn-danger btn-md">Clear</button>
+                    </span>
+                </div>
                 </form>
             </div>
         </div>
@@ -145,7 +148,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <h1>Search User</h1>
+            <h2>Search User</h2>
 
             <br><br>
 
@@ -155,7 +158,7 @@
                     <div class="col-md-4">
                         <label for="afm">AFM</label>
                         <@spring.bind "userSearchForm.afm"/>
-                        <input type="text" class="form-control" name="afm" id="firstName" placeholder="123456789" value="${userSearchForm.afm!""}"/>
+                        <input type="number" class="form-control" name="afm" id="firstName" placeholder="123456789" value="${userSearchForm.afm!""}"/>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
                         </#list>
@@ -174,10 +177,10 @@
                     </div>
                 </fieldset>
                 <div class="col-md-12 controls">
-                        <span>
-                            <button type="submit" id="btn-submit" class="btn btn-primary">Search</button>
-                            <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
-                        </span>
+                    <span>
+                        <button type="submit" id="btn-submit" class="btn btn-primary">Search</button>
+                        <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
+                    </span>
                 </div>
             </form>
         </div>
