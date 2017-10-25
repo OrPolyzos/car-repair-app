@@ -31,7 +31,9 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public void save(Vehicle vehicle) { vehicleRepository.save(vehicle); }
+    public void save(Vehicle vehicle) {
+        vehicleRepository.save(vehicle);
+    }
 
     @Override
     public void deleteByVehicleID(String vehicleID) {

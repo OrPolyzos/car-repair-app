@@ -1,6 +1,7 @@
 package com.rcodingschool.carrepair.Controllers;
 
 
+import com.rcodingschool.carrepair.Converters.RepairPartsConverter;
 import com.rcodingschool.carrepair.Domain.Part;
 import com.rcodingschool.carrepair.Domain.RepairPart;
 import com.rcodingschool.carrepair.Model.RepairPartForm;
@@ -55,15 +56,19 @@ public class RepairPartsController {
     public String showRepairPartsView(@PathVariable Long repairID, Model model) {
         Map<String, Object> map = model.asMap();
         //If our Model does not contain a repairPartForm, add a new RepairPartForm()
-        List<RepairPart> repairsCurrentPartsList = repairPartService.findAllByRepairID(repairID);
-        List<Part> wholePartsList = partService.findAll();
         if (!map.containsKey(REPAIRPART_FORM)) {
             RepairPartForm repairPartForm = new RepairPartForm();
             repairPartForm.setRepairID(repairID);
             model.addAttribute(REPAIRPART_FORM, repairPartForm);
         }
-        model.addAttribute(REPAIRPART_LIST, repairsCurrentPartsList);
-        model.addAttribute(WHOLE_PART_LIST, wholePartsList);
+        List<RepairPart> repairsCurrentPartsList = repairPartService.findAllByRepairID(repairID);
+        if (!repairsCurrentPartsList.isEmpty()){
+            model.addAttribute(REPAIRPART_LIST, repairsCurrentPartsList);
+        }
+        List<Part> wholePartsList = partService.findAll();
+        if (!wholePartsList.isEmpty()){
+            model.addAttribute(WHOLE_PART_LIST, wholePartsList);
+        }
         return "repairParts";
     }
 
@@ -83,18 +88,18 @@ public class RepairPartsController {
             //Also we will be adding repairPartForm to RedirectAttributes so that we can keep his valid inputs and reshow them
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult." + REPAIRPART_FORM, bindingResult);
             redirectAttributes.addFlashAttribute(REPAIRPART_FORM, repairPartForm);
-            return "redirect:/admin/repairs/parts/"+repairPartForm.getRepairID();
+            return "redirect:/admin/repairs/parts/" + repairPartForm.getRepairID();
         }
         try {
-            //Ttrying to build a RepairPart object
-            //RepairPart repairPart = RepairPartConverter.buildRepairPartObject(repairPartForm);
-            //repairPartService.save(repairPart);
-            return "redirect:/admin/repairs/parts/"+String.valueOf(repairPartForm.getRepairID());
+            //Trying to build a RepairPart object
+            RepairPart repairPart = RepairPartsConverter.buildRepairPartObject(repairPartForm);
+            repairPartService.save(repairPart);
+            return "redirect:/admin/repairs/parts/" + String.valueOf(repairPartForm.getRepairID());
 
         } catch (Exception exception) {
             //if an error occurs show it to the user :(
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
-            return "redirect:/admin/repairs/parts/"+String.valueOf(repairPartForm.getRepairID());
+            return "redirect:/admin/repairs/parts/" + String.valueOf(repairPartForm.getRepairID());
         }
     }
 

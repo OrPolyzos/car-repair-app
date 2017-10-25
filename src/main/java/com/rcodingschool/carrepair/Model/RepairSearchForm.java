@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class RepairSearchForm {
 
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
+    @Min(value = 1, message = "The repairID must be greater or equal than 1!")
     private Long repairID;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -19,10 +19,11 @@ public class RepairSearchForm {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime repairDateTimeEnd;
 
-    @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number must have the format 'ABC-1234'!")
+    @Pattern(regexp = "^[A-Z]{3}-[0-9]{4}", message = "Plate number must have the format 'ABC-1234'!")
     private String repairVehicleID;
 
-    public RepairSearchForm(){}
+    public RepairSearchForm() {
+    }
 
     public Long getRepairID() {
         return repairID;

@@ -27,9 +27,6 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
     List<Repair> findByRepairTypeID(String RepairTypeID);
 
 
-
-
-
     Repair save(Repair repair);
 
     void deleteByRepairID(Long RepairID);

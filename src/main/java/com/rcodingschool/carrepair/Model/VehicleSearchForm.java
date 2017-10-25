@@ -1,8 +1,5 @@
 package com.rcodingschool.carrepair.Model;
 
-import org.springframework.format.annotation.NumberFormat;
-
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -12,14 +9,14 @@ public class VehicleSearchForm {
 //    @Pattern(regexp="^[0-9a-zA-Z]{1,32}", message="Brand can contain only characters")
 //    private String brand;
 
-//    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    //    @NumberFormat(style = NumberFormat.Style.NUMBER)
 //    @Min(value=1, message="The userID must be greater or equal than 1!")
 //    private Long userID;
-    @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number should have the format 'ABC-1234'!")
+    @Pattern(regexp = "^[A-Z]{3}-[0-9]{4}", message = "Plate number should have the format 'ABC-1234'!")
     private String vehicleID;
 
-    @Size(min=9, max=9, message="AFM should be exactly 9 digits!")
-    @Pattern(regexp="^[0-9]{9}", message="AFM should contain only digits!")
+    @Size(min = 9, max = 9, message = "AFM should be exactly 9 digits!")
+    @Pattern(regexp = "^[0-9]{9}", message = "AFM should contain only digits!")
     private String afm;
 
     public String getVehicleID() {

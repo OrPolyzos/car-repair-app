@@ -7,15 +7,15 @@ import javax.validation.constraints.Min;
 public class PartSearchForm {
 
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The partID must be greater or equal than 1!")
+    @Min(value = 1, message = "The partID must be greater or equal than 1!")
     private Long partID;
 
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The start price must be greater or equal than 1!")
+    @Min(value = 1, message = "The start price must be greater or equal than 1!")
     private Long partPriceStart;
 
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The end price must be greater or equal than 1!")
+    @Min(value = 1, message = "The end price must be greater or equal than 1!")
     private Long partPriceEnd;
 
     public Long getPartID() {

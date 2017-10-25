@@ -32,7 +32,7 @@ public class SimpleUserController {
             User user = userService.findOne(userID);
             model.addAttribute("user", userService.findOne(userID));
             List<Repair> repairList = new ArrayList<>();
-            for (Vehicle vehicle : user.getUserVehicles()){
+            for (Vehicle vehicle : user.getUserVehicles()) {
                 repairList.addAll(repairService.findByVehicleID(vehicle.getVehicleID()));
             }
             model.addAttribute("repairsList", repairList);

@@ -5,7 +5,10 @@ import com.rcodingschool.carrepair.Validators.Date.FutureDateConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class RepairForm {
@@ -16,28 +19,28 @@ public class RepairForm {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime repairDateTime;
 
-    @NotNull(message="This field is required!")
-    @Size(max=32, message="The status can not contain up to 32 characters!")
-    @Pattern(regexp="^[a-zA-Z ]{1,32}", message="The status can contain only characters!")
+    @NotNull(message = "This field is required!")
+    @Size(max = 32, message = "The status can not contain up to 32 characters!")
+    @Pattern(regexp = "^[a-zA-Z ]{1,32}", message = "The status can contain only characters!")
     private String repairStatus;
 
-    @NotNull(message="This field is required!")
-    @Size(max=1024, message="The tasks can contain until 1024 characters!")
-    @Pattern(regexp="^[a-zA-Z0-9 ]{1,1024}", message="The tasks can contain only characters!")
+    @NotNull(message = "This field is required!")
+    @Size(max = 1024, message = "The tasks can contain until 1024 characters!")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]{1,1024}", message = "The tasks can contain only characters!")
     private String repairTasks;
 
-    @NotNull(message="This field is required!")
-    @Size(min=1, max=9, message="The AFM should be exactly 9 digits!")
-    @Pattern(regexp="^[1-9][0-9]{0,9}", message="The cost must contain only digits!")
+    @NotNull(message = "This field is required!")
+    @Size(min = 1, max = 9, message = "The AFM should be exactly 9 digits!")
+    @Pattern(regexp = "^[1-9][0-9]{0,9}", message = "The cost must contain only digits!")
     private String repairTotalCost;
 
-    @NotNull(message="This field is required!")
+    @NotNull(message = "This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value=1, message="The repairID must be greater or equal than 1!")
+    @Min(value = 1, message = "The repairID must be greater or equal than 1!")
     private Short repairTypeID;
 
-    @NotNull(message="This field is required!")
-    @Pattern(regexp="^[A-Z]{3}-[0-9]{4}", message="Plate number must have the format 'ABC-1234'!")
+    @NotNull(message = "This field is required!")
+    @Pattern(regexp = "^[A-Z]{3}-[0-9]{4}", message = "Plate number must have the format 'ABC-1234'!")
     private String repairVehicleID;
 
     public Long getRepairID() {

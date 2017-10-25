@@ -105,7 +105,7 @@ public class VehiclesController {
         } catch (Exception exception) {
             //if an error occurs show it to the user :(
             vehicleForm.setAfm("");
-            redirectAttributes.addFlashAttribute(VEHICLE_FORM,vehicleForm);
+            redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);
             redirectAttributes.addFlashAttribute(MESSAGE, exception.getMessage());
         }
         return "redirect:/admin/vehicles";

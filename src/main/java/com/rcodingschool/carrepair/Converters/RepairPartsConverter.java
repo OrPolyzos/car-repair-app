@@ -6,7 +6,7 @@ import com.rcodingschool.carrepair.Model.RepairPartForm;
 
 public class RepairPartsConverter {
 
-    public static RepairPart buildRepairPartObject(RepairPartForm repairPartForm, Long repairID) {
+    public static RepairPart buildRepairPartObject(RepairPartForm repairPartForm) {
 
         RepairPart repairPart = new RepairPart();
         repairPart.setRepairID(repairPartForm.getRepairID());

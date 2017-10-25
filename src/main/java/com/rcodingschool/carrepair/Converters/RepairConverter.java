@@ -6,7 +6,7 @@ import com.rcodingschool.carrepair.Model.RepairForm;
 
 
 public class RepairConverter {
-//Object repair using the constructor set on the Domain
+    //Object repair using the constructor set on the Domain
     public static Repair buildInsertRepairObject(RepairForm repairForm) {
         Repair repair = new Repair();
         repair.setRepairTypeID(repairForm.getRepairTypeID());
@@ -34,12 +34,12 @@ public class RepairConverter {
     //Building the repairForm Object using the repair Object
     public static RepairForm buildRepairFormObject(Repair repair) {
         RepairForm repairForm = new RepairForm();
-        repairForm.setRepairID (repair.getRepairID());
+        repairForm.setRepairID(repair.getRepairID());
         repairForm.setRepairDateTime(repair.getRepairDateTime());
-        repairForm.setRepairStatus (repair.getRepairStatus ());
-        repairForm.setRepairTypeID (repair.getRepairTypeID ());
-        repairForm.setRepairTasks (repair.getRepairTasks ());
-        repairForm.setRepairVehicleID (repair.getVehicleID ());
+        repairForm.setRepairStatus(repair.getRepairStatus());
+        repairForm.setRepairTypeID(repair.getRepairTypeID());
+        repairForm.setRepairTasks(repair.getRepairTasks());
+        repairForm.setRepairVehicleID(repair.getVehicleID());
         repairForm.setRepairTotalCost(String.valueOf(repair.getRepairTotalCost()));
         return repairForm;
     }

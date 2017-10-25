@@ -19,9 +19,9 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
             request.getSession().setAttribute("errorMsg", "User not found");
         }
 
-        RedirectStrategy redirectStrategy= super.getRedirectStrategy();
+        RedirectStrategy redirectStrategy = super.getRedirectStrategy();
 
-        redirectStrategy.sendRedirect(request, response,"/login");
+        redirectStrategy.sendRedirect(request, response, "/login");
     }
 
 }

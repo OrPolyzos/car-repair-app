@@ -163,7 +163,7 @@ public class UsersController {
         //Get the model
         Map<String, Object> map = model.asMap();
         //If there is not already a UserForm something went wrong so we redirect
-        if (!map.containsKey(USER_FORM)){
+        if (!map.containsKey(USER_FORM)) {
             return "redirect:/admin/users";
         }
         //If there is not UserForm
@@ -190,7 +190,7 @@ public class UsersController {
             User user = UserConverter.buildUpdateUserObject(userForm);
             //Save the user
             userService.save(user);
-            redirectAttributes.addFlashAttribute(MESSAGE,"User was updated");
+            redirectAttributes.addFlashAttribute(MESSAGE, "User was updated");
             return "redirect:/admin/users";
         } catch (Exception exception) {
             //if an error occurs show it to the user

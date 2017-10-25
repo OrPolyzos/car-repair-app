@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         retrievedUser = userRepository.findByAfmAndPassword(username, password);
         if (retrievedUser == null) {
             retrievedUser = userRepository.findByEmailAndPassword(username, password);
-            if (retrievedUser == null){
+            if (retrievedUser == null) {
                 throw new InvalidCredentialsException("User not found!");
             }
         }

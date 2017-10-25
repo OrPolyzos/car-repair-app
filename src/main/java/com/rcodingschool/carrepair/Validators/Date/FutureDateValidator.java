@@ -13,11 +13,9 @@ public class FutureDateValidator implements ConstraintValidator<FutureDateConstr
     @Override
     public boolean isValid(LocalDateTime inputDate,
                            ConstraintValidatorContext cxt) {
-        if (inputDate != null && inputDate.isAfter(LocalDateTime.now()))
-        {
+        if (inputDate != null && inputDate.isAfter(LocalDateTime.now())) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

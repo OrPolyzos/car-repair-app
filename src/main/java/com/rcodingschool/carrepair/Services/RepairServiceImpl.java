@@ -27,8 +27,8 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public List<Repair> findAllByRepairDateTimeBetween(LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd){
-        return repairRepository.findAllByRepairDateTimeBetween(localDateTimeStart,localDateTimeEnd);
+    public List<Repair> findAllByRepairDateTimeBetween(LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd) {
+        return repairRepository.findAllByRepairDateTimeBetween(localDateTimeStart, localDateTimeEnd);
     }
 
     @Override
