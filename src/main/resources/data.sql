@@ -5,7 +5,7 @@ LOAD DATA LOCAL INFILE 'J:\\DevProjects\\IntelliJ Projects\\carrepair\\Users.csv
 INTO TABLE users
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
+LINES TERMINATED BY '\r'
 IGNORE 0 lines
 (afm,email,password,type,firstname,lastname,address_street,address_number,address_zip_code);
 

@@ -34,9 +34,8 @@
                 <form class="form-horizontal" action="/admin/users/editUser" method="POST" id="userForm" name="userForm">
                     <h4><i>User's Personal Details</i></h4>
                     <@spring.bind "userForm.userID" />
-                    <input type="hidden" id="userID" name="userID" value="${userForm.userID!""}">
+                    <input type="hidden" id="userID" name="userID" value="${userForm.userID!""}"/>
                     <!-- <@spring.bind "userForm.userID" /> -->
-                    <!-- <input type="hidden" name="addressID" value="${userForm.addressID!""}"> -->
 
                     <#--bind this field with the registration form fields-->
                         <div class="form-group">
@@ -58,7 +57,7 @@
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-user"></i>
                                         </span>
-                                        <input type="text" class="form-control" id="firstname" name="First Name" placeholder="john" value="${userForm.firstName!}">
+                                        <input type="text" class="form-control" id="firstname" name="firstName" placeholder="john" value="${userForm.firstName!""}"/>
                                     </div>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
@@ -83,8 +82,8 @@
                             <@spring.bind "userForm.type"/>
                             <label for="type">Type</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon" class="form-control"></span>
-                                        <select id="type" name="type">
+                                        <span class="input-group-addon" ></span>
+                                        <select id="type" name="type" class="form-control">
                                             <option value="User">User</option>
                                             <option value="Admin">Admin</option>
                                         </select>
@@ -118,7 +117,7 @@
                                         <input type="password" class="form-control" name="password" id="password" placeholder="p4$$w0rd" value="${userForm.password!""}"/>
                                     </div>
                             <#list spring.status.errorMessages as error>
-                                <span>${error}</span>
+                                <span class="errorRed">${error}</span>
                             </#list>
                         </div>
 
@@ -135,7 +134,7 @@
                                         <input type="text" class="form-control" name="addressStreet" id="addressStreet" placeholder="Bakers" value="${userForm.addressStreet!""}"/>
                                     </div>
                             <#list spring.status.errorMessages as error>
-                                <span>${error}</span>
+                                <span class="errorRed">${error}</span>
                             </#list>
                         </div>
 
@@ -149,7 +148,7 @@
                                         <input type="number" class="form-control" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="26" value="${userForm.addressNumber!""}"/>
                                     </div>
                             <#list spring.status.errorMessages as error>
-                                <span>${error}</span>
+                                <span class="errorRed">${error}</span>
                             </#list>
                         </div>
 
@@ -163,7 +162,7 @@
                                         <input type="number" class="form-control" min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
                                     </div>
                             <#list spring.status.errorMessages as error>
-                                <span>${error}</span>
+                                <span class="errorRed">${error}</span>
                             </#list>
                         </div>
         <br><br>
