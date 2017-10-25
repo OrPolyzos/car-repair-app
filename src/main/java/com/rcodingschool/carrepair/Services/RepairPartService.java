@@ -10,7 +10,8 @@ public interface RepairPartService {
 
     List<RepairPart> findAll();
 
-    List<RepairPart> findByRepairID(Long repairID);
+
+    List<RepairPart> findAllByRepairID(Long repairID);
 
     void save(RepairPart repairPart);
 

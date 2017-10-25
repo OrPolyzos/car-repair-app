@@ -13,7 +13,7 @@ public interface RepairPartRepository extends CrudRepository<RepairPart, Long> {
 
     List<RepairPart> findAll();
 
-    List<RepairPart> findByRepairID(Long repairID);
+    List<RepairPart> findAllByRepairID(Long repairID);
 
     RepairPart save(RepairPart repairPart);
 

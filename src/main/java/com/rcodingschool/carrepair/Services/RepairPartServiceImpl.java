@@ -25,8 +25,8 @@ public class RepairPartServiceImpl implements RepairPartService{
     }
 
     @Override
-    public List<RepairPart> findByRepairID(Long repairID) {
-        return repairPartRepository.findByRepairID(repairID);
+    public List<RepairPart> findAllByRepairID(Long repairID) {
+        return repairPartRepository.findAllByRepairID(repairID);
     }
 
     @Override
