@@ -48,6 +48,10 @@ form.Search {
   text-align: center;
 }
 
+.table th {
+    color: RoyalBlue;
+}
+
 footer {
   float: right;
 }

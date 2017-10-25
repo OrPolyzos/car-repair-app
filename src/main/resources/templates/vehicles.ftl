@@ -218,12 +218,6 @@
                 </tbody>
             </table>
     </#if>
-
-    <script>
-        function myFunction() {
-            confirm("Are you sure to delete?");}
-    </script>
-
     <#include "footer.ftl">
 
 </body>

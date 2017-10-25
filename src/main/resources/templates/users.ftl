@@ -227,7 +227,7 @@
                             </button>
                         </td>
                         <td>
-                            <button type="submit" class="btn btn-danger" formaction="/admin/users/delete/${user.userID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this user?')">
+                            <button type="submit" class="btn btn-danger" formaction="/admin/users/delete/${user.userID}" formmethod="GET" onclick="return confirm('Are you sure?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </td>
