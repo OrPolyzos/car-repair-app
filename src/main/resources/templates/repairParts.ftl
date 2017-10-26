@@ -21,6 +21,7 @@
         }
         fieldset.Norm {
             padding: 20;
+            width: 100%;
         }
     </style>
 
@@ -94,8 +95,14 @@
                 <tr>
                     <td class="text-center">${repairPart.part.partID}</td>
                     <td class="text-center">${repairPart.part.partPrice}</td>
-                    <td class="text-center">${repairPart.quantity}</td
-                    <td> delete </td>
+                    <td class="text-center">${repairPart.quantity}</td>
+                    <td>
+                        <form action="/admin/repairs/parts/delete/${repairPart.repairID}/${repairPart.part.partID}" method="POST">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        </form>
+                    </td>
                 </tr>
                 </span>
                 </#list>
@@ -106,8 +113,21 @@
         <h2>No parts added to this repair yet!</h2>
     </#if>
     <hr></hr>
-    <label for="filterInput">Filter</label>
-    <input type="text" name="filterInput" id="filterInput" placeholder="turbocharger..."/>
+
+        <div class="container-fluid">
+            <div class="row">
+                <form class="form-horizontal">
+                    <fieldset class="Norm">
+                        <div class="col-md-6 col-md-offset-3">
+                            <label  for="filterInput">Filter</label>
+                            <input type="text" class="form-control" name="filterInput" id="filterInput" placeholder="abc-123..."/>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+
     <hr></hr>
     <#if wholePartList??>
         <h3 class="text-center"><u>All available parts</u></h3>

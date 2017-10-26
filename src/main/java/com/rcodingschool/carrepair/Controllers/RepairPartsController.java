@@ -73,10 +73,6 @@ public class RepairPartsController {
     }
 
 
-    //Add a part in a repair
-
-    //The processCreateVehicle() method will map "/admin/vehicle/create" POST requests
-    //and eventually it will redirect to "/admin/vehicles"
     @RequestMapping(value = "/repairs/parts/add", method = RequestMethod.POST)
     public String processAddRepairPart(@Valid @ModelAttribute(REPAIRPART_FORM) RepairPartForm repairPartForm,
                                        BindingResult bindingResult, Model model,
@@ -101,6 +97,18 @@ public class RepairPartsController {
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
             return "redirect:/admin/repairs/parts/" + String.valueOf(repairPartForm.getRepairID());
         }
+    }
+
+    //The processDeleteUser() method will map "/admin/users/delete/{id}" GET requests and
+    //will delete a user and redirect to "/admin/users"
+    @RequestMapping(value = "/repairs/parts/delete/{repairID}/{partID}", method = RequestMethod.POST)
+    public String processDeleteRepairPart(@PathVariable Long repairID, @PathVariable Long partID,
+                                          RedirectAttributes redirectAttributes) {
+        //Delete the user
+        repairPartService.deleteByRepairIDAndPartID(repairID, partID);
+        //Send information to the user
+        redirectAttributes.addFlashAttribute(MESSAGE, "The part was deleted from the repair!");
+        return "redirect:/admin/repairs/parts/" + String.valueOf(repairID);
     }
 
 }

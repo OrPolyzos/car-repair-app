@@ -16,7 +16,8 @@ public interface RepairPartRepository extends CrudRepository<RepairPart, RepairP
 
     RepairPart save(RepairPart repairPart);
 
-    void deleteByRepairID(Long repairID);
+    void deleteByRepairIDAndPartID(Long repairID, Long partID);
+
 
 
 }

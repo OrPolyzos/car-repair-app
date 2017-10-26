@@ -32,8 +32,8 @@ public class RepairPartServiceImpl implements RepairPartService {
     }
 
     @Override
-    public void deleteByRepairID(Long repairID) {
-        repairPartRepository.deleteByRepairID(repairID);
+    public void deleteByRepairIDAndPartID(Long repairID,Long partID) {
+        repairPartRepository.deleteByRepairIDAndPartID(repairID,partID);
     }
 
 

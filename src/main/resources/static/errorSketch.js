@@ -53,7 +53,7 @@ function draw(){
     fill(252,255,100,10);
     text("Coding", (width/2)+170, height-50);
   }
-  for (var i = 75; i < decorationsCount; i++){
+  for (var i = 3*decorationsCount/4; i < decorationsCount; i++){
     decorations[i].move();
     decorations[i].show();
     fill(255,0,0);

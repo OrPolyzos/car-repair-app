@@ -12,7 +12,7 @@ public interface RepairPartService {
 
     void save(RepairPart repairPart);
 
-    void deleteByRepairID(Long repairID);
+    void deleteByRepairIDAndPartID(Long repairID, Long PartID);
 
 
 }
