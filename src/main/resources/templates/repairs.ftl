@@ -219,7 +219,7 @@
                         </td>
                         <td>
                             <button type="submit" class="btn btn-success" formaction="/admin/repairs/parts/${repair.repairID}" formmethod="GET" >
-                                <span class="glyphicon glyphicon-cog"></span>
+                                <span class="glyphicon glyphicon-plus"></span>
                             </button>
                         </td>
                         </form>
