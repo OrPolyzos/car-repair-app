@@ -32,6 +32,11 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
+    public List<Repair> findTop10ByOrderByRepairDateTimeDesc() {
+        return repairRepository.findTop10ByOrderByRepairDateTimeDesc();
+    }
+
+    @Override
     public List<Repair> findByRepairID(Long repairID) {
         return repairRepository.findByRepairID(repairID);
     }

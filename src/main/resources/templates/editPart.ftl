@@ -1,7 +1,7 @@
 <#import "/spring.ftl" as spring/>
 <html>
 <head>
-    <title>Users</title>
+    <title>Edit Part</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,19 +20,19 @@
 </head>
 <body>
 
-<#include "navbar.ftl">
+    <#include "navbar.ftl">
 
     <div class="p5container">
         <img src="/../Images/eXtremeRed.png">
     </div>
+
     <h1 class="errorRed">${errorMessage!""}</h1>
-    <h2>Edit User</h2>
 
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <form class="form-horizontal" action="/admin/parts/editPart" method="POST" id="partForm" name="partForm">
-                    <h4><i>Part Details</i></h4>
+                    <h4>Part Details</h4>
                     <@spring.bind "partForm.partID"/>
                     <input type="hidden" id="partID" name="partID" value="${partForm.partID!""}">
 
@@ -41,9 +41,9 @@
                             <@spring.bind "partForm.partName"/>
                             <label for="partName">Part Name</label>
                             <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class=""></i>
-                                        </span>
+                                <span class="input-group-addon">
+                                    <i class=""></i>
+                                </span>
                                 <input type="text" class="form-control" name="partName" id="partName" placeholder="Turbocharger" value="${partForm.partName!""}"/>
                             </div>
                             <#list spring.status.errorMessages as error>
@@ -57,10 +57,10 @@
                             <@spring.bind "partForm.partPrice"/>
                             <label for="partPrice">Cost</label>
                             <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class=""></i>
-                                        </span>
-                                <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="" value="${partForm.partPrice!""}"/>
+                                <span class="input-group-addon">
+                                    <i class=""></i>
+                                </span>
+                                <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
                             </div>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
@@ -69,9 +69,8 @@
 
                         <br><br>
 
-                        <button type="submit" value="Edit" class="btn btn-success">Edit</button>
+                        <button type="submit" value="Save" class="btn btn-success">Save</button>
                         <button type="submit" value="Back" class="btn btn-danger" formaction="/admin/parts/" formmethod="GET">Back</button>
-
                 </form>
             </div>
         </div>

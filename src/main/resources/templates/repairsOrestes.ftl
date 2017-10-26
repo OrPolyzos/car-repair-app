@@ -74,7 +74,7 @@
                             </fieldset>
                             <fieldset class="Hor">
                             <div class="form-group">
-                            <label for="repairDate">Scheduled Date & Time</label>
+                            <label for="repairDateTime">Scheduled Date & Time</label>
                             <@spring.bind "repairForm.repairDateTime"/>
                             <input class="form-control" type="datetime-local" name="repairDateTime" id="repairDateTime" value="${repairForm.repairDateTime!""}"/>
                             <#list spring.status.errorMessages as error>

@@ -14,7 +14,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/../styles.css">
     <script type="text/javascript" src="../utilities.js"></script>
 
-
     <style>
         fieldset.Hor {
             float: left;
@@ -23,7 +22,6 @@
         }
         fieldset.Norm {
             padding: 20;
-            width: 100%;
         }
     </style>
 </head>
@@ -31,12 +29,14 @@
 
     <#include "navbar.ftl">
 
-        <div class="p5container">
-            <img src="../Images/eXtremeRed.png">
-        </div>
+    <div class="p5container">
+        <img src="../Images/eXtremeRed.png">
+    </div>
 
     <h1 class="errorRed">${errorMessage!""}</h1>
     <h2>Create Repair</h2>
+
+    <br><br>
 
     <div class="container-fluid">
         <div class="row">
@@ -57,11 +57,11 @@
                             <div class="form-group">
                                 <@spring.bind "repairForm.repairTypeID"/>
                                 <label for="repairTypeID">Type Service</label>
-                                <select class="form-control" id="repairTypeID" name="repairTypeID">
-                                    <option value="1">Small Service</option>
-                                    <option value="2">Great Service</option>
-                                    <option value="3">Custom Service</option>
-                                </select>
+                                    <select class="form-control" id="repairTypeID" name="repairTypeID">
+                                        <option value="1">Small Service</option>
+                                        <option value="2">Great Service</option>
+                                        <option value="3">Custom Service</option>
+                                    </select>
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
                                 </#list>
@@ -69,11 +69,11 @@
                             <div class="form-group">
                                 <@spring.bind "repairForm.repairStatus"/>
                                 <label for="repairStatus">Status</label>
-                                <select class="form-control" id="repairStatus" name="repairStatus">
-                                    <option value="Pending">Pending</option>
-                                    <option value="In progress">In progress</option>
-                                    <option value="Completed">Completed</option>
-                                </select>
+                                    <select class="form-control" id="repairStatus" name="repairStatus">
+                                        <option value="Pending">Pending</option>
+                                        <option value="In progress">In progress</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
                                 </#list>
@@ -91,7 +91,7 @@
                         <div class="form-group">
                             <label for="repairTotalCost">Total Cost</label>
                             <@spring.bind "repairForm.repairTotalCost"/>
-                                <input class="form-control" type="number" name="repairTotalCost" id="repairTotalCost" placeholder="344" value="${repairForm.repairTotalCost!""}"/>
+                                <input class="form-control" type="number" name="repairTotalCost" id="repairTotalCost" placeholder="1000" value="${repairForm.repairTotalCost!""}"/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -99,14 +99,12 @@
                         <div class="form-group">
                             <@spring.bind "repairForm.repairTasks"/>
                             <label for="repairTasks">Tasks</label>
-                                <textarea rows=4 cols=50 id="repairTasks" class="form-control" name="repairTasks" placeholder="Engine oil change, Oil filter replacement, Spark plugs Replacement" value="${repairForm.repairTasks!""}">${repairForm.repairTasks!""}</textarea>
+                                <textarea rows=4 cols=50 id="repairTasks" class="form-control" name="repairTasks" placeholder="Engine oil change, Oil filter replacement, Spark plugs replacement..." value="${repairForm.repairTasks!""}">${repairForm.repairTasks!""}</textarea>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
                         </div>
                     </fieldset>
-
-
                     <div class="col-md-12 controls">
                         <span>
                             <button type="submit" id="btn-submit" class="btn btn-success">Create</button>
@@ -129,7 +127,6 @@
                 <form class="Search" class="form-horizontal" action="/admin/repairs/search" method="GET" id="repairSearchForm" name="repairSearchForm">
                     <fieldset class="Norm">
                         <legend>Please provide the Repair ID, the Plate Number of the Vehicle or the Date</legend>
-
                             <div class="col-md-6">
                                 <#--bind this field with the registration form fields-->
                                 <@spring.bind "repairSearchForm.repairID"/>
@@ -147,7 +144,6 @@
                                     <span class="errorRed">${error}</span>
                                  </#list>
                             </div>
-
                             <div class="col-md-6">
                                 <@spring.bind "repairSearchForm.repairDateTimeStart"/>
                                 <label for="repairDateTimeStart">Scheduled DateTime Start</label>
@@ -164,13 +160,11 @@
                                     <span class="errorRed">${error}</span>
                                 </#list>
                             </div>
-
                             <div class="col-md-6 col-md-offset-3">
                                 <label for="filterInput">Filter</label>
                                     <input type="text" class="form-control" name="filterInput" id="filterInput" placeholder="abc-123..."/>
                             </div>
                     </fieldset>
-        <br><br>
                     <div class="col-md-12 controls">
                         <span>
                             <button type="submit" id="btn-submit" class="btn btn-primary">Search</button>
@@ -180,7 +174,9 @@
                 </form>
         </div>
     </div>
-<hr></hr>
+
+    <hr></hr>
+
     <h2>${searchNotFoundMessage!""}</h2>
     <#if repairsList??>
         <h3><u>Retrieved Repairs</u></h3>
@@ -203,7 +199,7 @@
                     <#list repairsList as repair>
                     <span>
                     <tr>
-                        <td>${repair.repairID!}</td>
+                        <td>${repair.repairID!"Could not retrieve value!"}</td>
                         <td>
                             <input type="datetime-local" name="repairDateTime" id="repairDateTime" value="${repair.repairDateTime!""}" disabled/>
                         </td>
@@ -211,23 +207,22 @@
                         <td>${repair.repairType.repairTypeDescription!"Could not retrieve value!"}</td>
                         <td>${repair.repairTasks!"Could not retrieve value!"}</td>
                         <td>${repair.vehicleID!"Could not retrieve value!"}</td>
-
                         <form action="/admin/repairs/edit/${repair.repairID}" method="GET">
-                        <td>
-                            <button type="submit" class="btn btn-success btn-md">
-                                <span class="glyphicon glyphicon-cog"></span>
-                            </button>
-                        </td>
-                        <td>
-                            <button type="submit" class="btn btn-danger" formaction="/admin/repairs/delete/${repair.repairID}" formmethod="GET" onclick="return confirm('Are you sure?')">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </td>
-                        <td>
-                            <button type="submit" class="btn btn-success" formaction="/admin/repairs/parts/${repair.repairID}" formmethod="GET" >
-                                <span class="glyphicon glyphicon-cog"></span>
-                            </button>
-                        </td>
+                            <td>
+                                <button type="submit" class="btn btn-success btn-md">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-danger" formaction="/admin/repairs/delete/${repair.repairID}" formmethod="GET" onclick="return confirm('Are you sure?')">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-success" formaction="/admin/repairs/parts/${repair.repairID}" formmethod="GET" >
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </td>
                         </form>
                     </tr>
                     </span>
@@ -236,6 +231,7 @@
             </table>
         </div>
     </#if>
+
     <#include "footer.ftl">
 
 </body>

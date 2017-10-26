@@ -13,6 +13,8 @@ public interface RepairService {
 
     List<Repair> findAllByRepairDateTimeBetween(LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd);
 
+    List<Repair> findTop10ByOrderByRepairDateTimeDesc();
+
     Repair findOne(Long repairID);
 
     List<Repair> findByRepairID(Long repairID);
