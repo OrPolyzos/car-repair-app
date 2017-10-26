@@ -115,7 +115,7 @@
 
                     <br><br>
 
-                        <button type="submit" value="Edit" class="btn btn-success">Edit</button>
+                        <button type="submit" value="Save" class="btn btn-success">Save</button>
                         <button type="submit" value="Back" class="btn btn-danger" formaction="/admin/vehicles/" formmethod="GET">Back</button>
                 </form>
             </div>
