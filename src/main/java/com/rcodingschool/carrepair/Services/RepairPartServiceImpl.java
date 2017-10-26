@@ -1,5 +1,6 @@
 package com.rcodingschool.carrepair.Services;
 
+import com.rcodingschool.carrepair.Domain.Repair;
 import com.rcodingschool.carrepair.Domain.RepairPart;
 import com.rcodingschool.carrepair.Repositories.RepairPartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class RepairPartServiceImpl implements RepairPartService {
     @Autowired
     private RepairPartRepository repairPartRepository;
 
+    @Autowired
+    private RepairService repairService;
+
 
     @Override
     public List<RepairPart> findAll() {
@@ -29,6 +33,8 @@ public class RepairPartServiceImpl implements RepairPartService {
     @Override
     public void save(RepairPart repairPart) {
         repairPartRepository.save(repairPart);
+        Repair repair = repairService.findByRepairID(repairPart.getRepairID()).get(0);
+        repairService.save(repair);
     }
 
     @Override

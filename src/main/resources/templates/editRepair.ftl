@@ -12,10 +12,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/../utilities.js"></script>
     <link rel="stylesheet" href="/../styles.css">
-    <!---- Trying to make some cool stuff with p5.js
-    <script async src=https://CDN.JSDelivr.net/g/p5.js(p5.min.js+addons/p5.dom.js+addons/p5.sound.js)></script>
-    <script defer src=/../sketch.js></script>
-    <script defer src=/../particle.js></script> ------>
 
 </head>
 <body>
@@ -53,7 +49,6 @@
                                         <select class="form-control" id="repairTypeID" name="repairTypeID">
                                             <option value="1">Small Service</option>
                                             <option value="2">Great Service</option>
-                                            <option value="3">Custom Service</option>
                                         </select>
                                     </div>
                                 <#list spring.status.errorMessages as error>
@@ -81,17 +76,6 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"></span>
                                         <input class="form-control" type="datetime-local" name="repairDateTime" id="repairDateTime" value="${repairForm.repairDateTime!""}"/>
-                                    </div>
-                                <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
-                                </#list>
-                            </div>
-                            <div class="form-group">
-                                <label for="repairTotalCost">Total Cost</label>
-                                <@spring.bind "repairForm.repairTotalCost"/>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"></span>
-                                        <input class="form-control" type="number" name="repairTotalCost" id="repairTotalCost" placeholder="1000" value="${repairForm.repairTotalCost!""}"/>
                                     </div>
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>

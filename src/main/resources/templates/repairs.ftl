@@ -60,7 +60,6 @@
                                 <select class="form-control" id="repairTypeID" name="repairTypeID">
                                     <option value="1">Small Service</option>
                                     <option value="2">Great Service</option>
-                                    <option value="3">Custom Service</option>
                                 </select>
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
@@ -88,14 +87,7 @@
                                 <span class="errorRed">${error}</span>
                             </#list>
                         </div>
-                        <div class="form-group">
-                            <label for="repairTotalCost">Total Cost</label>
-                            <@spring.bind "repairForm.repairTotalCost"/>
-                                <input class="form-control" type="number" name="repairTotalCost" id="repairTotalCost" placeholder="344" value="${repairForm.repairTotalCost!""}"/>
-                            <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
-                            </#list>
-                        </div>
+
                         <div class="form-group">
                             <@spring.bind "repairForm.repairTasks"/>
                             <label for="repairTasks">Tasks</label>
@@ -192,6 +184,7 @@
                         <th>Scheduled DateTime</th>
                         <th>Status</th>
                         <th>Type</th>
+                        <th>Total Cost</th>
                         <th>Tasks</th>
                         <th>Vehicle ID</th>
                         <th>Edit Repair</th>
@@ -209,6 +202,7 @@
                         </td>
                         <td>${repair.repairStatus!"Could not retrieve value!"}</td>
                         <td>${repair.repairType.repairTypeDescription!"Could not retrieve value!"}</td>
+                        <td>${repair.repairTotalCost!"Could not retrieve value!"}</td>
                         <td>${repair.repairTasks!"Could not retrieve value!"}</td>
                         <td>${repair.vehicleID!"Could not retrieve value!"}</td>
 

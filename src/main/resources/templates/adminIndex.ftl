@@ -28,40 +28,8 @@
         <h1 class="errorRed">${errorMessage!""}</h1>
         <#if user??>
             <h1>Welcome to eXtreme Performance dear ${user.firstName!"admin"}!</h1>
-            <#if user.userVehicles??>
-                <h3><u>Retrieved Vehicles</u></h3>
-                <div class="table-responsive">
-                    <table id="resultsTable" class="table">
-                        <thead>
-                            <tr>
-                                <th>Plate Number</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>Year</th>
-                                <th>Color</th>
-                                <th>Fuel</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <#list user.userVehicles as vehicle>
-                        <span>
-                            <tr>
-                                <td>${vehicle.vehicleID!"Could not retrieve value!"}</td>
-                                <td>${vehicle.brand!"Could not retrieve value!"}</td>
-                                <td>${vehicle.model!"Could not retrieve value!"}</td>
-                                <td>${vehicle.year!"Could not retrieve value!"}</td>
-                                <td>${vehicle.color!"Could not retrieve value!"}</td>
-                                <td>${vehicle.fuelType!"Could not retrieve value!"}</td>
-                            </tr>
-                        </span>
-                        </#list>
-                        </tbody>
-                    </table>
-                </div>
-                    <hr></hr>
-
                 <#if repairsList??>
-                    <h3><u>Retrieved Repairs</u></h3>
+                    <h3><u>Repairs By Repair Date</u></h3>
                     <div class="table-responsive">
                         <table id="resultsTable" class="table">
                             <thead>
@@ -95,12 +63,7 @@
                 <#else>
                     <h3><u>No Repairs found!</u></h3>
                 </#if>
-            <#else>
-                <h3><u>No Vehicles Found</u></h3>
             </#if>
-        </#if>
-
     <#include "footer.ftl">
-
 </body>
 </html>

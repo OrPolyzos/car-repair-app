@@ -37,7 +37,9 @@
         <img src="Images/eXtreme.png">
     </div>
 
+    <div style="float: right;">
     <#include "footer.ftl">
+    </div>
 
 </body>
 </html>

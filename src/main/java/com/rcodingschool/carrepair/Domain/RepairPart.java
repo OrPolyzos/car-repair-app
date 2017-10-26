@@ -18,11 +18,11 @@ public class RepairPart implements Serializable {
     @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "RepairID", nullable = false, updatable = false, insertable = false)
     private Repair repair;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PartID", nullable = false, updatable = false, insertable = false)
     private Part part;
 

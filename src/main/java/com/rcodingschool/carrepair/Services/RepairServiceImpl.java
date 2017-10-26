@@ -1,6 +1,8 @@
 package com.rcodingschool.carrepair.Services;
 
+import com.rcodingschool.carrepair.Domain.Part;
 import com.rcodingschool.carrepair.Domain.Repair;
+import com.rcodingschool.carrepair.Domain.RepairPart;
 import com.rcodingschool.carrepair.Repositories.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,15 @@ public class RepairServiceImpl implements RepairService {
 
     @Autowired
     private RepairRepository repairRepository;
+
+    @Autowired
+    private RepairTypeService repairTypeService;
+
+    @Autowired
+    private RepairPartService repairPartService;
+
+    @Autowired
+    private PartService partService;
 
     @Override
     public List<Repair> findAll() {
@@ -54,6 +65,13 @@ public class RepairServiceImpl implements RepairService {
 
     @Override
     public void save(Repair repair) {
+        Long repairTotalCost = Long.valueOf(repairTypeService.findByRepairTypeID(repair.getRepairTypeID()).getFixedPrice());
+        List<RepairPart> repairParts = repairPartService.findAllByRepairID(repair.getRepairID());
+        for (RepairPart repairPart : repairParts){
+            Part part = partService.findByPartID(repairPart.getPartID()).get(0);
+            repairTotalCost += (part.getPartPrice() * repairPart.getQuantity());
+        }
+        repair.setRepairTotalCost(repairTotalCost);
         repairRepository.save(repair);
     }
 

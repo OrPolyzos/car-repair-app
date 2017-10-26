@@ -80,6 +80,7 @@ public class RepairController {
             Repair repair = RepairConverter.buildInsertRepairObject(repairForm);
             //Save the repair
             repairService.save(repair);
+
             //Send information to the user
             redirectAttributes.addFlashAttribute(MESSAGE, "Repair was created!");
         } catch (Exception exception) {
