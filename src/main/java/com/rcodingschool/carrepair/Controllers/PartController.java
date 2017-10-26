@@ -80,7 +80,7 @@ public class PartController {
 
     //The processDeletePart() method will map "/admin/parts/delete/{id}" GET requests and
     //will delete a part and redirect to "/admin/parts"
-    @RequestMapping(value = "/parts/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/parts/delete/{id}", method = RequestMethod.POST)
     public String processDeletePart(@PathVariable Long id,
                                     RedirectAttributes redirectAttributes) {
         //Delete the part

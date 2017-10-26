@@ -113,7 +113,7 @@ public class VehiclesController {
 
     //The processDeleteVehicle method will map "/admin/vehicles/delete/{id}" GET requests and
     //will delete a vehicle and redirect to "/admin/vehicles"
-    @RequestMapping(value = "/vehicles/delete/{vehicleID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/vehicles/delete/{vehicleID}", method = RequestMethod.POST)
     public String processDeleteVehicle(@PathVariable String vehicleID,
                                        RedirectAttributes redirectAttributes) {
         //Delete the vehicle depending on its vehicleID

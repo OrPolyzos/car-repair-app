@@ -207,7 +207,7 @@
                                 <span class="glyphicon glyphicon-cog"></span>
                             </button>
                         <td>
-                            <button type="submit" formaction="/admin/vehicles/delete/${vehicle.vehicleID}" formmethod="GET" class="btn btn-danger" onclick="return confirm('Are you sure?')" >
+                            <button type="submit" formaction="/admin/vehicles/delete/${vehicle.vehicleID}" formmethod="POST" class="btn btn-danger" onclick="return confirm('Are you sure?')" >
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </td>

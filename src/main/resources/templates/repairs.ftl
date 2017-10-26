@@ -219,7 +219,7 @@
                             </button>
                         </td>
                         <td>
-                            <button type="submit" class="btn btn-danger" formaction="/admin/repairs/delete/${repair.repairID}" formmethod="GET" onclick="return confirm('Are you sure?')">
+                            <button type="submit" class="btn btn-danger" formaction="/admin/repairs/delete/${repair.repairID}" formmethod="POST" onclick="return confirm('Are you sure?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </td>

@@ -88,7 +88,7 @@ public class UsersController {
 
     //The processDeleteUser() method will map "/admin/users/delete/{id}" GET requests and
     //will delete a user and redirect to "/admin/users"
-    @RequestMapping(value = "/users/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/delete/{id}", method = RequestMethod.POST)
     public String processDeleteUser(@PathVariable Long id,
                                     RedirectAttributes redirectAttributes) {
         //Delete the user

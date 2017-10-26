@@ -156,7 +156,7 @@
                             </button>
                         </td>
                         <td>
-                            <button type="submit" class="btn btn-danger" formaction="/admin/parts/delete/${part.partID}" formmethod="GET" onclick="return confirm('Are you sure you want to delete this part?')">
+                            <button type="submit" class="btn btn-danger" formaction="/admin/parts/delete/${part.partID}" formmethod="POST" onclick="return confirm('Are you sure you want to delete this part?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </td>

@@ -91,7 +91,7 @@ public class RepairController {
 
     //The processDeleteRerair() method will map "/admin/repairs/delete/{id}" GET requests and
     //will delete a repair and redirect to "/admin/repairs"
-    @RequestMapping(value = "/repairs/delete/{repairID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/repairs/delete/{repairID}", method = RequestMethod.POST)
     public String processDeleteRepair(@PathVariable Long repairID,
                                       RedirectAttributes redirectAttributes) {
         //Delete the repair
