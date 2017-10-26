@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">eXtreme Performance</a>
+            <a href="/admin" class="navbar-brand">eXtreme Performance</a>
         </div>
         <!-- Menu Items -->
         <div class="collapse navbar-collapse" id="mainNavBar">

@@ -11,55 +11,66 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Custom Css -->
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/styles.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/../styles.css">
     <!---- Trying to make some cool stuff with p5.js ----->
     <script async src=https://CDN.JSDelivr.net/g/p5.js(p5.min.js+addons/p5.dom.js+addons/p5.sound.js)></script>
     <script defer src=sketch.js></script>
     <script defer src=particle.js></script>
 </head>
+
 <body>
-<nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">eXtreme Performance</a>
+            </div>
+        </div>
+    </nav>
+
+    <h2>${message!""}</h2>
+    <h2 class="errorRed">${errorMessage!""}</h2>
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Auto Repair</a>
-        </div>
-    </div>
-</nav>
-<h2>${message!""}</h2>
-<h2>${errorMessage!""}</h2>
-<div class="container">
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="panel panel-info" >
-            <div class="panel-heading">
-                <div class="panel-title">Sign In</div>
-            </div>
-            <div style="padding-top:30px" class="panel-body" >
-                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                <form action="/login" method="post" id="loginform" class="form-horizontal" role="form">
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="afm or email">
-                    </div>
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
-                    </div>
-                    <div style="margin-top:10px" class="form-group">
-                        <!-- Button -->
-                        <div class="col-sm-12 controls">
-                            <button type="submit" id="btn-login" class="btn btn-success">Login</button>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>Sign In</h1>
+                    <form action="/login" method="post" id="loginForm" name="loginForm" style="text-align:center">
+                        <div class="form-group">
+                            <label for="username">Email or AFM</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="username" name="username">
+                                </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control" id="password" name="password">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-lg btn-block">Login!</button>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
-</div>
+
+    <#include "footer.ftl">
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 </body>
 </html>
