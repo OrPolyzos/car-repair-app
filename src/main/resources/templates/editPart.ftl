@@ -66,11 +66,9 @@
                                 <span class="errorRed">${error}</span>
                             </#list>
                         </div>
-
-                        <br><br>
-
-                        <button type="submit" value="Save" class="btn btn-success">Save</button>
-                        <button type="submit" value="Back" class="btn btn-danger" formaction="/admin/parts/" formmethod="GET">Back</button>
+                    <br><br>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
                 </form>
             </div>
         </div>

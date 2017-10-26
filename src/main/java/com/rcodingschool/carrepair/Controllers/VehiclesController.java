@@ -96,7 +96,7 @@ public class VehiclesController {
             if (vehicleService.findByVehicleID(vehicleForm.getVehicleID()).isEmpty()) {
                 Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleForm, userService.findByAfm(vehicleForm.getAfm()).get(0));
                 vehicleService.save(vehicle);
-                redirectAttributes.addFlashAttribute(MESSAGE, "User was created!");
+                redirectAttributes.addFlashAttribute(MESSAGE, "Vehicle was created!");
             } else {
                 vehicleForm.setVehicleID("");
                 redirectAttributes.addFlashAttribute(VEHICLE_FORM, vehicleForm);

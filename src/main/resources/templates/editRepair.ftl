@@ -28,7 +28,8 @@
                 <div class="col-md-12">
                     <form class="form-horizontal" action="/admin/repairs/editRepair" method="POST" id="repairForm" name="repairForm">
                     <legend>Repair's Details</legend>
-
+                        <@spring.bind "repairForm.repairID"/>
+                        <input type="hidden" name="repairID" value="${repairForm.repairID}"/>
                         <#--bind this form with the repair form fields-->
                             <div class="form-group">
                                 <@spring.bind "repairForm.repairVehicleID"/>
@@ -91,14 +92,9 @@
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
                                 </#list>
-
-                     <br><br>
-
-                        <div class="col-md-12 controls">
-                            <span>
-                                <button type="submit" id="btn-submit" class="btn btn-success">Save</button>
+                                <br><br>
+                                <button type="submit" class="btn btn-success">Save</button>
                                 <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
-                            </span>
                         </div>
                     </form>
                 </div>
