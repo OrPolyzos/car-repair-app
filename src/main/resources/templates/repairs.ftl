@@ -36,8 +36,8 @@
         </div>
 
     <h1 class="errorRed">${errorMessage!""}</h1>
-    <h2>Create Repair</h2>
-
+    <h2>Add Repair</h2>
+    <br><br>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">

@@ -23,11 +23,9 @@
 <body>
 
     <#include "navbar.ftl">
-
-        <div>
-            <img src="/../../Images/eXtremeRed.png">
-        </div>
-
+    <div class="p5container">
+        <img src="/../Images/eXtremeRed.png">
+    </div>
     <h1 class="errorRed">${errorMessage!""}</h1>
     <h3>Vehicle's Details</h3>
 
@@ -45,15 +43,13 @@
 
                     <h4><u>Owner's AFM: ${vehicleForm.afm!""}</u></h4>
                     <h4><u>Plate Number: ${vehicleForm.vehicleID!""}</u></h4>
-
                     <br><br>
-
                     <div class="form-group">
                         <@spring.bind "vehicleForm.brand"/>
                         <label for="brand">Brand</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <i class="glyphicons glyphicons-car"></i>
+                                    <i class="glyphicon glyphicon-apple"></i>
                                 </span>
                                 <input type="text" class="form-control" name="brand" id="brand" placeholder="Ford" value="${vehicleForm.brand!""}" required/>
                             </div>
@@ -66,7 +62,9 @@
                         <@spring.bind "vehicleForm.model"/>
                         <label for="model">Model</label>
                             <div class="input-group">
-                                <span class="input-group-addon"></span>
+                                <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-dashboard"></i>
+                                </span>
                                 <input type="text" class="form-control" name="model" id="model" placeholder="Focus" value="${vehicleForm.model!""}" required/>
                             </div>
                         <#list spring.status.errorMessages as error>
@@ -78,7 +76,9 @@
                         <@spring.bind "vehicleForm.year"/>
                         <label for="year">Year</label>
                             <div class="input-group">
-                                <span class="input-group-addon"></span>
+                                <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
                                 <input type="number" class="form-control" min=1950 max=2017 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}" required/>
                             </div>
                         <#list spring.status.errorMessages as error>
@@ -90,7 +90,9 @@
                         <@spring.bind "vehicleForm.fuelType"/>
                         <label for="fuelType">Fuel</label>
                             <div class="input-group">
-                                <span class="input-group-addon"></span>
+                                <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-tint"></i>
+                                </span>
                                     <select class="form-control" id="fuelType" name="fuelType">
                                         <option value="Petrol">Petrol</option>
                                         <option value="Diesel">Diesel</option>
@@ -105,7 +107,9 @@
                         <@spring.bind "vehicleForm.color"/>
                         <label for="color">Color</label>
                             <div class="input-group">
-                                <span class="input-group-addon"></span>
+                                <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-adjust"></i>
+                                </span>
                                 <input type="String" class="form-control" name="color" id="color" placeholder="Red" value="${vehicleForm.color!""}" required/>
                             </div>
                         <#list spring.status.errorMessages as error>

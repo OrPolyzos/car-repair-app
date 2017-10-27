@@ -13,10 +13,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../utilities.js"></script>
     <link rel="stylesheet" href="/../styles.css">
-    <!---- Trying to make some cool stuff with p5.js
-    <script async src=https://CDN.JSDelivr.net/g/p5.js(p5.min.js+addons/p5.dom.js+addons/p5.sound.js)></script>
-    <script defer src=/../sketch.js></script>
-    <script defer src=/../particle.js></script> ---->
 
     <style>
         fieldset.Hor {
@@ -39,7 +35,7 @@
         <img src="../Images/eXtremeRed.png">
     </div>
     <h1 class="errorRed">${errorMessage!""}</h1>
-    <h1>Create New User</h1>
+    <h2>Create User</h2>
 
     <br><br>
 
@@ -53,7 +49,7 @@
                         <div class="form-group">
                             <label for="afm">AFM</label>
                             <@spring.bind "userForm.afm"/>
-                            <input type="number" class="form-control" id="afm" name="afm" placeholder="123456789" value="${userForm.afm!""}"/>
+                            <input type="number" class="form-control" id="afm" name="afm" placeholder="123456789" value="${userForm.afm!""}" required/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -61,7 +57,7 @@
                         <div class="form-group">
                             <label for="firstName">Firstname</label>
                             <@spring.bind "userForm.firstName"/>
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" value="${userForm.firstName!""}"/>
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" value="${userForm.firstName!""}" required/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -69,7 +65,7 @@
                         <div class="form-group">
                             <label for="lastName">Lastname</label>
                             <@spring.bind "userForm.lastName"/>
-                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" value="${userForm.lastName!""}"/>
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" value="${userForm.lastName!""}" required/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -92,7 +88,7 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <@spring.bind "userForm.email"/>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="john@doe.com" value="${userForm.email!""}"/>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="john@doe.com" value="${userForm.email!""}" required/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -100,7 +96,7 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <@spring.bind "userForm.password"/>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.password!""}"/>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="p4$$w0rd" value="${userForm.password!""}" required/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -111,7 +107,7 @@
                         <div class="form-group">
                             <label for="addressStreet">Street</label>
                             <@spring.bind "userForm.addressStreet"/>
-                            <input type="text" class="form-control" id="addressStreet" name="addressStreet" placeholder="Broadway" value="${userForm.addressStreet!""}"/>
+                            <input type="text" class="form-control" id="addressStreet" name="addressStreet" placeholder="Broadway" value="${userForm.addressStreet!""}" required/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -119,7 +115,7 @@
                         <div class="form-group">
                             <label for="addressNumber">Number</label>
                             <@spring.bind "userForm.addressNumber"/>
-                            <input class="form-control" type="number" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="28" value="${userForm.addressNumber!""}"/>
+                            <input class="form-control" type="number" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="28" value="${userForm.addressNumber!""}" required/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -127,7 +123,7 @@
                         <div class="form-group">
                             <label for="addressZipCode">Zip</label>
                             <@spring.bind "userForm.addressZipCode"/>
-                            <input class="form-control" type="number" min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
+                            <input class="form-control" type="number" min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}" required/>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
@@ -149,9 +145,7 @@
     <div class="container-fluid">
         <div class="row">
             <h2>Search User</h2>
-
             <br><br>
-
             <form class="Search" class="form-horizontal" action="/admin/users/search" method="GET" id="userSearchForm" name="userSearchForm">
                 <fieldset class="Norm">
                     <legend>Fill in User's AFM or Email</legend>

@@ -43,7 +43,9 @@
                             <@spring.bind "userForm.afm"/>
                             <label for="afm">AFM</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"></span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-file"></i>
+                                    </span>
                                     <input type="text" class="form-control" name="afm" id="afm" placeholder="123456789" value="${userForm.afm!""}"/>
                                 </div>
                             <#list spring.status.errorMessages as error>
@@ -56,7 +58,7 @@
                             <label for="firstName">Firstname</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-user"></i>
+                                        <i class="glyphicon glyphicon-pencil"></i>
                                     </span>
                                     <input type="text" class="form-control" id="firstName" name="firstName" placeholder="john" value="${userForm.firstName!""}">
                                 </div>
@@ -69,22 +71,24 @@
                             <@spring.bind "userForm.lastName"/>
                             <label for="lastName">Lastname</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"></span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </span>
                                     <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Doe" value="${userForm.lastName!""}"/>
                                 </div>
                             <#list spring.status.errorMessages as error>
                                 <span class="errorRed">${error}</span>
                             </#list>
                         </div>
-
         <br><br>
-
                         <div class="form-group">
                             <h4>User's Credentials</h4>
                             <@spring.bind "userForm.type"/>
                             <label for="type">Type</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"></span>
+                                    <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    </span>
                                     <select id="type" name="type" class="form-control">
                                         <option value="User">User</option>
                                         <option value="Admin">Admin</option>
@@ -131,7 +135,7 @@
                             <label for="addressStreet">Street</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-address"></i>
+                                        <i class="glyphicon glyphicon-road"></i>
                                     </span>
                                     <input type="text" class="form-control" name="addressStreet" id="addressStreet" placeholder="Bakers" value="${userForm.addressStreet!""}"/>
                                 </div>
@@ -145,7 +149,7 @@
                             <label for="addressNumber">Number</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class=""></i>
+                                        <i class="glyphicon glyphicon-home"></i>
                                     </span>
                                     <input type="number" class="form-control" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="26" value="${userForm.addressNumber!""}"/>
                                 </div>
@@ -159,7 +163,7 @@
                             <label for="addressZipCode">Zip</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class=""></i>
+                                        <i class="	glyphicon glyphicon-map-marker"></i>
                                     </span>
                                     <input type="number" class="form-control" min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
                                 </div>

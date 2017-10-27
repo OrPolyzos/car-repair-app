@@ -10,10 +10,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!---- Trying to make some cool stuff with p5.js ----->
-    <!--<script async src=https://CDN.JSDelivr.net/g/p5.js(p5.min.js+addons/p5.dom.js+addons/p5.sound.js)></script>
-    <script defer src=/../sketch.js></script>
-    <script defer src=/../particle.js></script>-->
     <!---- Our Custom CSS ----->
     <link rel="stylesheet" href="../styles.css">
 </head>
@@ -39,6 +35,7 @@
                                     <th>Status</th>
                                     <th>Type</th>
                                     <th>Tasks</th>
+                                    <th>Total Cost</th>
                                     <th>Vehicle ID</th>
                                 </tr>
                             </thead>
@@ -53,6 +50,7 @@
                                     <td>${repair.repairStatus!"Could not retrieve value!"}</td>
                                     <td>${repair.repairType.repairTypeDescription!"Could not retrieve value!"}</td>
                                     <td>${repair.repairTasks!"Could not retrieve value!"}</td>
+                                    <td>${repair.repairTotalCost!"Could not retrieve value!"}</td>
                                     <td>${repair.vehicleID!"Could not retrieve value!"}</td>
                                 </tr>
                             </span>

@@ -32,7 +32,7 @@
 <!-- NavBar -->
 <#include "navbar.ftl">
     <div class="p5container">
-        <img src="../Images/eXtremeRed.png">
+        <img src="/../Images/eXtremeRed.png">
     </div>
 
     <h1 class="errorRed">${errorMessage!""}</h1>
@@ -81,7 +81,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <h1>Search Part</h1>
+            <h2>Search Part</h2>
 
             <br><br>
 
