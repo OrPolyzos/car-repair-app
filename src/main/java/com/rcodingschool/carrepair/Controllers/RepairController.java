@@ -142,6 +142,11 @@ public class RepairController {
                 }
             }
         }
+        if ((repairSearchForm.getRepairDateTimeStart() != null && repairSearchForm.getRepairDateTimeEnd() == null) ||
+        (repairSearchForm.getRepairDateTimeStart() == null && repairSearchForm.getRepairDateTimeEnd() != null)){
+                redirectAttributes.addFlashAttribute(MESSAGE, "Plase fill in both date fields!");
+                return "redirect:/admin/repairs";
+        }
         //If the List is Empty
         if (repairList.isEmpty()) {
             //We send Information to the user
