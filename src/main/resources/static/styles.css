@@ -53,8 +53,7 @@ form.Search {
 }
 
 footer {
-  position: absolute;
- display: block;
-  bottom: 0;
+    position: absolute;
+    bottom: 0;
     right: 0;
 }

@@ -12,8 +12,6 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     List<Repair> findAll();
 
-    List<Repair> findAllByOrderByRepairDateTime();
-
     List<Repair> findAllByRepairDateTimeBetween(LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd);
 
     List<Repair> findTop10ByOrderByRepairDateTimeDesc();
@@ -22,12 +20,10 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     List<Repair> findByRepairID(Long repairID);
 
-    List<Repair> findByRepairStatus(String repairStatus);
+    List<Repair> findAllByRepairDateTimeBetweenAndVehicleID(LocalDateTime localDateTimeStart, LocalDateTime localDatetimeEnd, String vehicleID);
+
 
     List<Repair> findByVehicleID(String vehicleID);
-
-    List<Repair> findByRepairTypeID(String RepairTypeID);
-
 
     Repair save(Repair repair);
 

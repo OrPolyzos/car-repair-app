@@ -9,7 +9,9 @@ import java.util.List;
 @Repository
 public interface PartRepository extends CrudRepository<Part, Long> {
 
+
     Part findOne(Long partID);
+
 
     List<Part> findAll();
 

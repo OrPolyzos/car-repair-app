@@ -31,6 +31,11 @@ public class RepairPartServiceImpl implements RepairPartService {
     }
 
     @Override
+    public List<RepairPart> findAllByPartID(Long partID){
+        return repairPartRepository.findAllByPartID(partID);
+    }
+
+    @Override
     public void save(RepairPart repairPart) {
         repairPartRepository.save(repairPart);
         Repair repair = repairService.findByRepairID(repairPart.getRepairID()).get(0);
@@ -40,6 +45,8 @@ public class RepairPartServiceImpl implements RepairPartService {
     @Override
     public void deleteByRepairIDAndPartID(Long repairID,Long partID) {
         repairPartRepository.deleteByRepairIDAndPartID(repairID,partID);
+        Repair repair = repairService.findByRepairID(repairID).get(0);
+        repairService.save(repair);
     }
 
 

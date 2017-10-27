@@ -26,13 +26,8 @@ public class RepairForm {
 
     @NotNull(message = "This field is required!")
     @Size(max = 1024, message = "The tasks can contain until 1024 characters!")
-    @Pattern(regexp = "^[a-zA-Z0-9 ]{1,1024}", message = "The tasks can contain only characters!")
+    @Pattern(regexp = "^[a-zA-Z0-9,\\r\\n ]{1,1024}", message = "The tasks can contain only characters!")
     private String repairTasks;
-
-//    @NotNull(message = "This field is required!")
-//    @Size(min = 1, max = 9, message = "The AFM should be exactly 9 digits!")
-//    @Pattern(regexp = "^[1-9][0-9]{0,9}", message = "The cost must contain only digits!")
-//    private String repairTotalCost;
 
     @NotNull(message = "This field is required!")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
@@ -91,11 +86,4 @@ public class RepairForm {
         this.repairVehicleID = repairVehicleID;
     }
 
-//    public String getRepairTotalCost() {
-//        return repairTotalCost;
-//    }
-//
-//    public void setRepairTotalCost(String repairTotalCost) {
-//        this.repairTotalCost = repairTotalCost;
-//    }
 }

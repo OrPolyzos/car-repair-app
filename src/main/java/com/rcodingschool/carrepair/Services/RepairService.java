@@ -9,7 +9,7 @@ public interface RepairService {
 
     List<Repair> findAll();
 
-    List<Repair> findAllByOrderByRepairDateTime();
+    List<Repair> findAllByRepairDateTimeBetweenAndVehicleID(LocalDateTime localDateTimeStart, LocalDateTime localDatetimeEnd, String vehicleID);
 
     List<Repair> findAllByRepairDateTimeBetween(LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd);
 
@@ -23,6 +23,8 @@ public interface RepairService {
     List<Repair> findByVehicleID(String vehicleID);
 
     void save(Repair repair);
+
+    void saveAfterDeletedPart(Repair repair);
 
     void deleteByRepairID(Long repairID);
 

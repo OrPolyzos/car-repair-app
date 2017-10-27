@@ -92,10 +92,11 @@
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
                                 </#list>
+                            </div>
                                 <br><br>
                                 <button type="submit" class="btn btn-success">Save</button>
                                 <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
-                        </div>
+
                     </form>
                 </div>
             </div>

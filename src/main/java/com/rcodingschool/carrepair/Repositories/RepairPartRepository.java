@@ -12,6 +12,8 @@ public interface RepairPartRepository extends CrudRepository<RepairPart, RepairP
 
     List<RepairPart> findAll();
 
+    List<RepairPart> findAllByPartID(Long partID);
+
     List<RepairPart> findAllByRepairID(Long repairID);
 
     RepairPart save(RepairPart repairPart);

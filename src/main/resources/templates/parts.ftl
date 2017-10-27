@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-md-6">
                         <fieldset>
-                            <label partPrice>Price</label>
+                            <label for="partPrice">Price</label>
                             <@spring.bind "partForm.partPrice"/>
                                 <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
                             <#list spring.status.errorMessages as error>
@@ -76,7 +76,6 @@
                 </form>
             </div>
         </div>
-    </div>
 
     <hr></hr>
 
@@ -92,7 +91,7 @@
                     <div class="col-md-4">
                         <label for=partID>Part ID</label>
                         <@spring.bind "partSearchForm.partID"/>
-                        <input type="number" class="form-control" name="partID" id="partID" placeholder="" value="${partSearchForm.partID!""}"/>
+                        <input type="number" class="form-control" name="partID" id="partID" value="${partSearchForm.partID!""}"/>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
                         </#list>
@@ -100,7 +99,7 @@
                     <div class="col-md-4">
                         <label for=partPriceStart>Start Price</label>
                         <@spring.bind "partSearchForm.partPriceStart"/>
-                        <input type="number" class="form-control" name="partPriceStart" id="partPriceStart" placeholder="" value="${partSearchForm.partPriceStart!""}"/>
+                        <input type="number" class="form-control" name="partPriceStart" id="partPriceStart" value="${partSearchForm.partPriceStart!""}"/>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
                         </#list>
@@ -108,7 +107,7 @@
                     <div class="col-md-4">
                         <label for=partPriceEnd>End Price</label>
                         <@spring.bind "partSearchForm.partPriceEnd"/>
-                        <input type="number" class="form-control" name="partPriceEnd" id="partPriceEnd" placeholder="" value="${partSearchForm.partPriceEnd!""}"/>
+                        <input type="number" class="form-control" name="partPriceEnd" id="partPriceEnd" value="${partSearchForm.partPriceEnd!""}"/>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
                         </#list>

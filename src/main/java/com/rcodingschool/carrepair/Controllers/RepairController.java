@@ -131,7 +131,7 @@ public class RepairController {
                     repairList = repairService.findByVehicleID(repairSearchForm.getRepairVehicleID());
                 } else {
                     if (repairSearchForm.getRepairDateTimeStart() != null && repairSearchForm.getRepairDateTimeEnd() != null) {
-                        //repairList = repairService.findAllByRepairDateTimeBetweenAndVehicleID()
+                        repairList = repairService.findAllByRepairDateTimeBetweenAndVehicleID(repairSearchForm.getRepairDateTimeStart(),repairSearchForm.getRepairDateTimeEnd(),repairSearchForm.getRepairVehicleID());
                     }
                 }
             } else {

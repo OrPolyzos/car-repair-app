@@ -121,7 +121,7 @@
                             <@spring.bind "userForm.addressNumber"/>
                             <input class="form-control" type="number" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="28" value="${userForm.addressNumber!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed"class="errorRed">${error}</span>
+                                <span class="errorRed">${error}</span>
                             </#list>
                         </div>
                         <div class="form-group">

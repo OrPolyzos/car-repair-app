@@ -32,9 +32,10 @@ public class RepairServiceImpl implements RepairService {
         return repairRepository.findAll();
     }
 
+
     @Override
-    public List<Repair> findAllByOrderByRepairDateTime() {
-        return repairRepository.findAllByOrderByRepairDateTime();
+    public List<Repair> findAllByRepairDateTimeBetweenAndVehicleID(LocalDateTime localDateTimeStart, LocalDateTime localDatetimeEnd, String vehicleID){
+        return repairRepository.findAllByRepairDateTimeBetweenAndVehicleID(localDateTimeStart,localDatetimeEnd, vehicleID);
     }
 
     @Override
@@ -72,6 +73,11 @@ public class RepairServiceImpl implements RepairService {
             repairTotalCost += (part.getPartPrice() * repairPart.getQuantity());
         }
         repair.setRepairTotalCost(repairTotalCost);
+        repairRepository.save(repair);
+    }
+
+    @Override
+    public void saveAfterDeletedPart(Repair repair){
         repairRepository.save(repair);
     }
 

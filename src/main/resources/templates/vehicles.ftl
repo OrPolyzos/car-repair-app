@@ -49,7 +49,7 @@
 
                         <#--bind this field with the registration form fields-->
                             <div class="form-group">
-                                <label for="plateNumber">Plate Number</label>
+                                <label for="vehicleID">Plate Number</label>
                                 <@spring.bind "vehicleForm.vehicleID"/>
                                 <input type="text" class="form-control "name="vehicleID" id="vehicleID" placeholder="ABC-1234" value="${vehicleForm.vehicleID!""}"/>
                                 <#list spring.status.errorMessages as error>
@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <label for="afm">Owner's AFM</label>
                                 <@spring.bind "vehicleForm.afm"/>
-                                <input type="number" class="form-control "name="afm" id="afm" placeholder="123456789" value="${vehicleForm.afm!""}"/>
+                                <input type="number" class="form-control" name="afm" id="afm" placeholder="123456789" value="${vehicleForm.afm!""}"/>
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
                                 </#list>
@@ -217,6 +217,7 @@
                 </#list>
                 </tbody>
             </table>
+        </div>
     </#if>
     <#include "footer.ftl">
 
