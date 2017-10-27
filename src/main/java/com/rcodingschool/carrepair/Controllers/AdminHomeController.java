@@ -2,6 +2,7 @@ package com.rcodingschool.carrepair.Controllers;
 
 import com.rcodingschool.carrepair.Domain.Repair;
 import com.rcodingschool.carrepair.Domain.User;
+import com.rcodingschool.carrepair.Exceptions.UserNotFoundException;
 import com.rcodingschool.carrepair.Services.RepairService;
 import com.rcodingschool.carrepair.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class AdminHomeController {
     private RepairService repairService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String adminHome(Model model) {
+    public String adminHome(Model model) throws UserNotFoundException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             Long userID = (Long) auth.getPrincipal();

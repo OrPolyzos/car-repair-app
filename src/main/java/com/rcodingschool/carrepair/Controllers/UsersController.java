@@ -2,6 +2,8 @@ package com.rcodingschool.carrepair.Controllers;
 
 import com.rcodingschool.carrepair.Converters.UserConverter;
 import com.rcodingschool.carrepair.Domain.User;
+import com.rcodingschool.carrepair.Exceptions.DuplicateUserException;
+import com.rcodingschool.carrepair.Exceptions.UserNotFoundException;
 import com.rcodingschool.carrepair.Model.UserForm;
 import com.rcodingschool.carrepair.Model.UserSearchForm;
 import com.rcodingschool.carrepair.Services.UserService;
@@ -79,9 +81,10 @@ public class UsersController {
             userService.save(user);
             //Send information to the user
             redirectAttributes.addFlashAttribute(MESSAGE, "User was created!");
-        } catch (Exception exception) {
+        } catch (DuplicateUserException duex) {
             //if an error occurs show it to the user
-            redirectAttributes.addFlashAttribute(MESSAGE, exception.getMessage());
+            redirectAttributes.addFlashAttribute(userForm);
+            redirectAttributes.addFlashAttribute(MESSAGE, duex.getMessage());
         }
         return "redirect:/admin/users";
     }
@@ -113,7 +116,7 @@ public class UsersController {
             //Send information to the user
             redirectAttributes.addFlashAttribute(SEARCH_FORM, userSearchForm);
         }
-
+        UserSearchForm usus = userSearchForm;
         //Initialize a new list of Users to hold the results of the search
         List<User> usersList;
         //Getting the searchForm values and checking
@@ -148,11 +151,17 @@ public class UsersController {
     public String showEditUser(@PathVariable Long id,
                                RedirectAttributes redirectAttributes) {
         //Find the user
-        User user = userService.findOne(id);
-        //Build a userForm Object based on the user we found
-        UserForm userForm = UserConverter.buildUserFormObject(user);
-        //Send the userForm to the editUser.ftl
-        redirectAttributes.addFlashAttribute(userForm);
+        try{
+            User user = userService.findOne(id);
+            //Build a userForm Object based on the user we found
+            UserForm userForm = UserConverter.buildUserFormObject(user);
+            //Send the userForm to the editUser.ftl
+            redirectAttributes.addFlashAttribute(userForm);
+        }
+        catch (UserNotFoundException unfex){
+            redirectAttributes.addFlashAttribute(MESSAGE,unfex.getMessage());
+            return "redirect:/admin/users";
+        }
         return "redirect:/admin/users/editUser";
     }
 
@@ -192,9 +201,10 @@ public class UsersController {
             userService.save(user);
             redirectAttributes.addFlashAttribute(MESSAGE, "User was updated");
             return "redirect:/admin/users";
-        } catch (Exception exception) {
+        } catch (DuplicateUserException duex) {
             //if an error occurs show it to the user
-            redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
+            redirectAttributes.addFlashAttribute(USER_FORM, userForm);
+            redirectAttributes.addFlashAttribute(MESSAGE, duex.getMessage());
             return "redirect:/admin/users/editUser";
         }
     }

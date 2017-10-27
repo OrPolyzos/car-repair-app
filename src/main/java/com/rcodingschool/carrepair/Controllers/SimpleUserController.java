@@ -3,6 +3,7 @@ package com.rcodingschool.carrepair.Controllers;
 import com.rcodingschool.carrepair.Domain.Repair;
 import com.rcodingschool.carrepair.Domain.User;
 import com.rcodingschool.carrepair.Domain.Vehicle;
+import com.rcodingschool.carrepair.Exceptions.UserNotFoundException;
 import com.rcodingschool.carrepair.Services.RepairService;
 import com.rcodingschool.carrepair.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class SimpleUserController {
     private RepairService repairService;
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String showDashBoard(Model model) {
+    public String showDashBoard(Model model) throws UserNotFoundException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             Long userID = (Long) auth.getPrincipal();

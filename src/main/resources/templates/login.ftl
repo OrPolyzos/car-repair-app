@@ -38,7 +38,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <!--h1>Sign In</h1-->
+                <h1>Sign In</h1>
                     <form action="/login" method="post" id="loginForm" name="loginForm" style="text-align:center">
                         <div class="form-group">
                             <label for="username">Email or AFM</label>

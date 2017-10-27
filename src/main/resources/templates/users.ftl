@@ -152,7 +152,7 @@
                     <div class="col-md-4">
                         <label for="afm">AFM</label>
                         <@spring.bind "userSearchForm.afm"/>
-                        <input type="number" class="form-control" name="afm" id="firstName" placeholder="123456789" value="${userSearchForm.afm!""}"/>
+                        <input type="number" class="form-control" name="afm" id="afm" placeholder="123456789" value="${userSearchForm.afm!""}"/>
                         <#list spring.status.errorMessages as error>
                             <span class="errorRed">${error}</span>
                         </#list>

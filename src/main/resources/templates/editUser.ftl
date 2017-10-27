@@ -126,9 +126,7 @@
                                 <span class="errorRed">${error}</span>
                             </#list>
                         </div>
-
-        <br><br>
-
+                        <br><br>
                         <div class="form-group">
                             <h4>User's Address Details</h4>
                             <@spring.bind "userForm.addressStreet"/>

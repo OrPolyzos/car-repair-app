@@ -83,19 +83,19 @@
             <table class="table" class="table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">Part ID</th>
-                        <th class="text-center">Part Price</th>
-                        <th class="text-center">Quantity</th>
-                        <th class="text-center">Delete Part</th>
+                        <th>Part ID</th>
+                        <th>Part Price</th>
+                        <th>Quantity</th>
+                        <th>Delete Part</th>
                     </tr>
                 </thead>
                 <tbody>
                 <#list repairPartList as repairPart>
                 <span>
                 <tr>
-                    <td class="text-center">${repairPart.part.partID}</td>
-                    <td class="text-center">${repairPart.part.partPrice}</td>
-                    <td class="text-center">${repairPart.quantity}</td>
+                    <td>${repairPart.part.partID}</td>
+                    <td>${repairPart.part.partPrice}</td>
+                    <td>${repairPart.quantity}</td>
                     <td>
                         <form action="/admin/repairs/parts/delete/${repairPart.repairID}/${repairPart.part.partID}" method="POST">
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
@@ -114,39 +114,42 @@
     </#if>
     <hr></hr>
 
-        <div class="container-fluid">
-            <div class="row">
-                <form class="form-horizontal">
-                    <fieldset class="Norm">
-                        <div class="col-md-6 col-md-offset-3">
-                            <label  for="filterInput">Filter</label>
-                            <input type="text" class="form-control" name="filterInput" id="filterInput" placeholder="abc-123..."/>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
+
 
 
     <hr></hr>
     <#if wholePartList??>
         <h3 class="text-center"><u>All available parts</u></h3>
+        <br><br>
+            <div class="container-fluid">
+                <div class="row">
+                    <form class="form-horizontal">
+                        <fieldset class="Norm">
+                            <div class="col-md-6 col-md-offset-3">
+                                <label  for="filterInput">Filter</label>
+                                <input type="text" class="form-control" name="filterInput" id="filterInput" placeholder="abc-123..."/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        <br><br>
         <div class="table-responsive">
             <table id="resultsTable" class="table" class="table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">Part ID</th>
-                        <th class="text-center">Part Name</th>
-                        <th class="text-center">Part Price</th>
+                        <th>Part ID</th>
+                        <th>Part Name</th>
+                        <th>Part Price</th>
                     </tr>
                 </thead>
                 <tbody>
                     <#list wholePartList as part>
                 <span>
                 <tr>
-                    <td class="text-center">${part.partID}</td>
-                    <td class="text-center">${part.partName}</td>
-                    <td class="text-center">${part.partPrice}</td>
+                    <td>${part.partID}</td>
+                    <td>${part.partName}</td>
+                    <td>${part.partPrice}</td>
                 </tr>
                 </span>
                     </#list>

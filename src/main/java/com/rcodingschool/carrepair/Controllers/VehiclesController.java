@@ -2,6 +2,7 @@ package com.rcodingschool.carrepair.Controllers;
 
 import com.rcodingschool.carrepair.Converters.VehicleConverter;
 import com.rcodingschool.carrepair.Domain.Vehicle;
+import com.rcodingschool.carrepair.Exceptions.UserNotFoundException;
 import com.rcodingschool.carrepair.Model.VehicleForm;
 import com.rcodingschool.carrepair.Model.VehicleSearchForm;
 import com.rcodingschool.carrepair.Services.UserService;
@@ -67,7 +68,12 @@ public class VehiclesController {
         model.addAttribute(VEHICLE_LIST, vehiclesList);
         if (!map.containsKey(VEHICLE_FORM)) {
             VehicleForm vehicleForm = new VehicleForm();
-            vehicleForm.setAfm(userService.findOne(id).getAfm());
+            try{
+                vehicleForm.setAfm(userService.findOne(id).getAfm());
+            }
+            catch (UserNotFoundException unfex){
+                model.addAttribute(MESSAGE,unfex.getMessage());
+            }
             model.addAttribute(VEHICLE_FORM, vehicleForm);
         }
         if (!map.containsKey(SEARCH_FORM)) {

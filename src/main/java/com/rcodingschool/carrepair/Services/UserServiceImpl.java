@@ -1,7 +1,10 @@
 package com.rcodingschool.carrepair.Services;
 
 import com.rcodingschool.carrepair.Domain.User;
+import com.rcodingschool.carrepair.Exceptions.DuplicateAFMException;
+import com.rcodingschool.carrepair.Exceptions.DuplicateEmailException;
 import com.rcodingschool.carrepair.Exceptions.InvalidCredentialsException;
+import com.rcodingschool.carrepair.Exceptions.UserNotFoundException;
 import com.rcodingschool.carrepair.Repositories.UserRepository;
 import com.rcodingschool.carrepair.Repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +24,12 @@ public class UserServiceImpl implements UserService {
     private VehicleRepository vehicleRepository;
 
     @Override
-    public User findOne(Long userID) {
-        return userRepository.findOne(userID);
+    public User findOne(Long userID) throws UserNotFoundException {
+        User retrievedUser = userRepository.findOne(userID);
+        if (retrievedUser == null){
+            throw new UserNotFoundException("User not found!");
+        }
+        return retrievedUser;
     }
 
     @Override
@@ -54,8 +61,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
+    public void save(User user) throws DuplicateEmailException, DuplicateAFMException {
+        List<User> byEmailList = userRepository.findByEmail(user.getEmail());
+        List<User> byAfmList = userRepository.findByAfm(user.getAfm());
+        if (byAfmList.isEmpty() && byEmailList.isEmpty()){
+            userRepository.save(user);
+        }
+        else if (!byAfmList.isEmpty())
+        {
+            if ((byAfmList.get(0).equals(user.getUserID()))){
+                userRepository.save(user);
+            }
+            else{
+                throw new DuplicateAFMException("This AFM already exists!");
+            }
+        }
+        else if (!byEmailList.isEmpty())
+        {
+            if ((byEmailList.get(0).equals(user.getUserID()))){
+                userRepository.save(user);
+            }
+            else{
+                throw new DuplicateEmailException("This email already exists!");
+            }
+        }
+        //userRepository.save(user);
     }
 
     @Override
