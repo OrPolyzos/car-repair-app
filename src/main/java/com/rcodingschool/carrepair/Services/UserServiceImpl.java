@@ -66,23 +66,44 @@ public class UserServiceImpl implements UserService {
         List<User> byAfmList = userRepository.findByAfm(user.getAfm());
         if (byAfmList.isEmpty() && byEmailList.isEmpty()){
             userRepository.save(user);
+            return;
         }
-        else if (!byAfmList.isEmpty())
+        if (!byAfmList.isEmpty())
         {
-            if ((byAfmList.get(0).equals(user.getUserID()))){
-                userRepository.save(user);
+            if ((byAfmList.get(0).getUserID().equals(user.getUserID()))){
+                if (!byEmailList.isEmpty()){
+                    if ((byEmailList.get(0).getUserID().equals(user.getUserID()))){
+                        userRepository.save(user);
+                    }
+                    else{
+                        throw new DuplicateEmailException("This email already exists!");
+                    }
+                }
+                else{
+                    throw new DuplicateAFMException("This AFM already exists!");
+                }
             }
             else{
-                throw new DuplicateAFMException("This AFM already exists!");
+                throw new DuplicateAFMException("This AFM already exists");
             }
         }
-        else if (!byEmailList.isEmpty())
+        if (!byEmailList.isEmpty())
         {
-            if ((byEmailList.get(0).equals(user.getUserID()))){
-                userRepository.save(user);
+            if ((byEmailList.get(0).getUserID().equals(user.getUserID()))){
+                if (!byAfmList.isEmpty()){
+                    if ((byAfmList.get(0).getUserID().equals(user.getUserID()))){
+                        userRepository.save(user);
+                    }
+                    else{
+                        throw new DuplicateEmailException("This email already exists!");
+                    }
+                }
+                else{
+                    userRepository.save(user);
+                }
             }
             else{
-                throw new DuplicateEmailException("This email already exists!");
+                throw new DuplicateEmailException("This email already exists");
             }
         }
         //userRepository.save(user);

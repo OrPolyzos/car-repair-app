@@ -1,9 +1,19 @@
-body {
+body{
      background-color: rgb(51,51,51);
      text-align: center;
      color: white;
      position: relative;
      z-index: -30;
+}
+
+body.IMAGE {
+background: url(../Images/extremeperformance.png) no-repeat center center fixed;
+         -webkit-background-size: cover;
+         -moz-background-size: cover;
+         -o-background-size: cover;
+         background-size: cover;
+         background-color: rgb(100,100,100);
+         z-index: -30;
 }
 
 #mainNavBar a:hover {

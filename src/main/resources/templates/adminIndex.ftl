@@ -13,13 +13,9 @@
     <!---- Our Custom CSS ----->
     <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+<body class="IMAGE">
 
     <#include "navbar.ftl">
-
-    <div class="p5container">
-        <img src="/../Images/eXtremeRed.png">
-    </div>
 
         <h1 class="errorRed">${errorMessage!""}</h1>
         <#if user??>

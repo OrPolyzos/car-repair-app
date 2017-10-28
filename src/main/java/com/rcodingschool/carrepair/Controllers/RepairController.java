@@ -85,7 +85,7 @@ public class RepairController {
             redirectAttributes.addFlashAttribute(MESSAGE, "Repair was created!");
         } catch (Exception exception) {
             //if an error occurs show it to the repair
-            redirectAttributes.addFlashAttribute(MESSAGE, exception.getMessage());
+            redirectAttributes.addFlashAttribute(MESSAGE, "Please check again the fields!");
         }
         return "redirect:/admin/repairs";
     }
@@ -208,7 +208,8 @@ public class RepairController {
             return "redirect:/admin/repairs";
         } catch (Exception exception) {
             //if an error occurs show it to the user
-            redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", "Please check again the fields!");
+            redirectAttributes.addFlashAttribute(REPAIR_FORM, repairForm);
             return "redirect:/admin/repairs/editRepair";
         }
     }

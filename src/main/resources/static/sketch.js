@@ -17,7 +17,6 @@ var flowfield;
 
 function setup() {
   cnv = createCanvas(windowWidth, windowHeight);
-  cnv.parent('canvasParent');
   cnv.style('z-index','-25');
   colorMode(HSB, 255);
   cols = floor(width / scl);
@@ -30,7 +29,6 @@ function setup() {
 }
 
 function draw() {
-  //canvas.parent('canvasHolder');
   centerCanvas();
   var yoff = 0;
   for (var y = 0; y < rows; y++) {

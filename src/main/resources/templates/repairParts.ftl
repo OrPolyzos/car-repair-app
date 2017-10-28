@@ -27,11 +27,9 @@
 
 </head>
 
-<body>
+<body class="IMAGE">
     <#include "navbar.ftl">
-    <div>
-        <img src="/../Images/eXtremeRed.png">
-    </div>
+
     <h1 class="errorRed">${errorMessage!""}</h1>
     <div>
         <div class="container">

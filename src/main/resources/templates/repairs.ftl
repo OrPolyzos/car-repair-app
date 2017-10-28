@@ -27,13 +27,10 @@
         }
     </style>
 </head>
-<body>
+<body class="IMAGE">
 
     <#include "navbar.ftl">
 
-        <div class="p5container">
-            <img src="../Images/eXtremeRed.png">
-        </div>
 
     <h1 class="errorRed">${errorMessage!""}</h1>
     <h2>Add Repair</h2>

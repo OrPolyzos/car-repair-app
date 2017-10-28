@@ -17,7 +17,7 @@
     <script defer src=sketch.js></script>
     <script defer src=particle.js></script>
 </head>
-<body>
+<body class="IMAGE">
 
     <!-- NavBar -->
     <nav class="navbar navbar-inverse">
@@ -42,9 +42,6 @@
         </div>
     </nav>
 
-    <div class="p5container">
-        <img src="../Images/eXtremeRed.png">
-    </div>
 
     <h1 class="errorRed">${errorMessage!""}</h1>
         <#if user??>

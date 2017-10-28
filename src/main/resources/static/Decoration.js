@@ -26,7 +26,7 @@ class Decoration {
   }
   
   show(){
-    stroke(this.col);
+    stroke(0);
     fill(this.col);
     ellipse(this.x,this.y,this.r * 2,this.r * 2);   
   }

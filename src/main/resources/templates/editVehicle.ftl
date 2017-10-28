@@ -20,7 +20,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="/../styles.css">
 </head>
-<body>
+<body  class="IMAGE">
 
     <#include "navbar.ftl">
     <div class="p5container">

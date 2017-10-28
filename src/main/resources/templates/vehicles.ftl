@@ -25,13 +25,11 @@
     </style>
 
 </head>
-<body>
+<body class="IMAGE">
 
 <!-- NavBar -->
 <#include "navbar.ftl">
-    <div>
-        <img src="../Images/eXtremeRed.png">
-    </div>
+
 
     <h1 class="errorRed">${errorMessage!""}</h1>
     <h2>Add Vehicle</h2>
