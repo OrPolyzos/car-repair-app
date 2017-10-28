@@ -24,7 +24,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `repairs` WRITE;
 /*!40000 ALTER TABLE `repairs` DISABLE KEYS */;
-INSERT INTO `repairs` VALUES (2,'2017-11-01 01:00:00','Pending','Allagh ladiwn',15,1,'ABC-1234'),(3,'2017-11-07 01:00:00','Pending','Some Tasks',55,1,'ABC-1234'),(4,'2017-11-02 01:00:00','Pending','Tasks',55,1,'ADL-9988');
+INSERT INTO `repairs` VALUES (2,'2017-11-01 01:00:00','Pending','Allagh ladiwn',150,1,'ABC-1234'),(3,'2017-11-07 01:00:00','Pending','Some Tasks',150,1,'ABC-1234'),(4,'2017-11-02 01:00:00','Pending','Tasks',150,1,'ADL-9988');
 /*!40000 ALTER TABLE `repairs` ENABLE KEYS */;
 UNLOCK TABLES;
 
