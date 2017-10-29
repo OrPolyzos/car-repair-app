@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
             if ((byAfmList.get(0).getUserID().equals(user.getUserID()))){
                 if (!byEmailList.isEmpty()){
                     if ((byEmailList.get(0).getUserID().equals(user.getUserID()))){
-                        userRepository.save(user);
+                        userRepository.save(user );
                     }
                     else{
                         throw new DuplicateEmailException("This email already exists!");
