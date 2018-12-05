@@ -40,13 +40,12 @@
             <div class="col-md-12">
                 <form class="form-horizontal" action="/admin/repairs/create" method="POST" id="repairForm" name="repairForm">
                     <legend>Repair's Details</legend>
-
                     <fieldset class="Hor">
                         <#--bind this form with the repair form fields-->
                             <div class="form-group">
                                 <@spring.bind "repairForm.repairVehicleID"/>
                                 <label for="repairVehicleID">Vehicle's Plate Number</label>
-                                    <input type="String" class="form-control "name="repairVehicleID" id="repairVehicleID" placeholder="ABE-1234" value="${repairForm.repairVehicleID!""}"/>
+                                    <input type="String" class="form-control"name="repairVehicleID" id="repairVehicleID" placeholder="ABE-1234" value="${repairForm.repairVehicleID!""}"/>
                                 <#list spring.status.errorMessages as error>
                                     <span class="errorRed">${error}</span>
                                 </#list>
@@ -169,7 +168,7 @@
                 </form>
         </div>
     </div>
-<hr></hr>
+<hr/>
     <h2>${searchNotFoundMessage!""}</h2>
     <#if repairsList??>
         <h3><u>Retrieved Repairs</u></h3>
@@ -228,6 +227,5 @@
         </div>
     </#if>
     <#include "footer.ftl">
-
 </body>
 </html>

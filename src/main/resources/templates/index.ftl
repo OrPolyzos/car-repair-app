@@ -34,7 +34,7 @@
     </nav>
 
     <div class="p5container">
-        <img src="Images/eXtreme.png">
+        <img src="/images/eXtreme.png">
     </div>
     <div id="canvasParent">
     </div>

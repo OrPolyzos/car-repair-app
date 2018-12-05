@@ -24,7 +24,7 @@
 
     <#include "navbar.ftl">
     <div class="p5container">
-        <img src="/../Images/eXtremeRed.png">
+        <img src="/../images/eXtremeRed.png">
     </div>
     <h1 class="errorRed">${errorMessage!""}</h1>
     <h3>Vehicle's Details</h3>
