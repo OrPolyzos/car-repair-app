@@ -10,6 +10,7 @@
 *.df            text
 *.htm           text
 *.html          text
+*.ftl           text
 *.java          text
 *.js            text
 *.json          text
