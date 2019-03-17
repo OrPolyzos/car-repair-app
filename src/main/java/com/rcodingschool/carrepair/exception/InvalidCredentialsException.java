@@ -4,12 +4,10 @@ import org.springframework.security.core.AuthenticationException;
 
 public class InvalidCredentialsException extends AuthenticationException {
 
-    public InvalidCredentialsException(String msg, Throwable t) {
-        super(msg, t);
-    }
+    private static final String MESSAGE = "Invalid credentials. Afm/Email: %s";
 
-    public InvalidCredentialsException(String msg) {
-        super(msg);
+    public InvalidCredentialsException(String afmOrEmail) {
+        super(String.format(MESSAGE, afmOrEmail));
     }
 
 }

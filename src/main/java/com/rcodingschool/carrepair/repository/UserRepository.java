@@ -10,15 +10,11 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    Optional<User> findByUserID(Long userID);
-
-    User findByAfmAndPassword(String afm, String password);
-
-    User findByEmailAndPassword(String email, String password);
-
-    Optional<User> findByAfmAndUserIDNot(String afm, Long userId);
-
-    Optional<User> findByEmailAndUserIDNot(String afm, Long userId);
+//    Optional<User> findByUserID(Long userID);
+//
+//    User findByAfmAndPassword(String afm, String password);
+//
+//    User findByEmailAndPassword(String email, String password);
 
     List<User> findAll();
 
@@ -26,8 +22,18 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-    User save(User user);
+    Optional<User> findByAfmOrEmailAndPassword(String afm, String email, String password);
 
-    void deleteByUserID(Long userID);
+    Optional<User> findByAfmAndUserIDNot(String afm, Long userId);
+
+    Optional<User> findByEmailAndUserIDNot(String afm, Long userId);
+
+
+
+
+//
+//    User save(User user);
+//
+//    void deleteByUserID(Long userID);
 
 }

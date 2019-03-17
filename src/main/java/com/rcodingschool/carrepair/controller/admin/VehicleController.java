@@ -9,7 +9,6 @@ import com.rcodingschool.carrepair.exception.vehicle.DuplicateVehicleException;
 import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
 import com.rcodingschool.carrepair.model.VehicleForm;
 import com.rcodingschool.carrepair.model.VehicleSearchForm;
-import com.rcodingschool.carrepair.service.UserService;
 import com.rcodingschool.carrepair.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

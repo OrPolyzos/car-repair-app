@@ -3,11 +3,10 @@ package com.rcodingschool.carrepair.controller.admin;
 import com.rcodingschool.carrepair.controller.base.BaseController;
 import com.rcodingschool.carrepair.converter.UserConverter;
 import com.rcodingschool.carrepair.domain.User;
-import com.rcodingschool.carrepair.exception.user.DuplicateUserException;
-import com.rcodingschool.carrepair.exception.user.UserNotFoundException;
+import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.model.UserForm;
 import com.rcodingschool.carrepair.model.UserSearchForm;
-import com.rcodingschool.carrepair.service.UserService;
+import com.rcodingschool.carrepair.service.UserResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +33,10 @@ public class UserController extends BaseController {
     private static final String USER_WAS_UPDATED_MESSAGE = "User was updated!";
     private static final String USER_WAS_DELETED_MESSAGE = "User was deleted!";
 
-    private final UserService userService;
+    private final UserResourceService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserResourceService userService) {
         this.userService = userService;
     }
 
@@ -70,7 +69,7 @@ public class UserController extends BaseController {
             sendInfoMessage(model, USER_WAS_CREATED_MESSAGE);
             fillWithUserForms(model);
             return USERS_VIEW;
-        } catch (DuplicateUserException exception) {
+        } catch (ResourceException exception) {
             redirectAttributes.addFlashAttribute(USER_FORM_HOLDER, userForm);
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo("/admin/users");
@@ -91,11 +90,11 @@ public class UserController extends BaseController {
     @PostMapping(value = "/users/{userId}/delete")
     public String deleteUser(@PathVariable("userId") Long userId, Model model, RedirectAttributes redirectAttributes) {
         try {
-            userService.deleteByUserID(userId);
+            userService.deleteById(userId);
             sendInfoMessage(model, USER_WAS_DELETED_MESSAGE);
             fillWithUserForms(model);
             return USERS_VIEW;
-        } catch (UserNotFoundException exception) {
+        } catch (ResourceException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo("/admin/users");
         }
@@ -108,11 +107,11 @@ public class UserController extends BaseController {
             return EDIT_USER_VIEW;
         }
         try {
-            User user = userService.findOne(userId);
+            User user = userService.findOrThrow(userId);
             UserForm userForm = UserConverter.buildUserFormObject(user);
             model.addAttribute(USER_FORM_HOLDER, userForm);
             return EDIT_USER_VIEW;
-        } catch (UserNotFoundException exception) {
+        } catch (ResourceException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo("/admin/users");
         }
@@ -129,7 +128,7 @@ public class UserController extends BaseController {
             userService.update(user);
             redirectInfoMessage(redirectAttributes, USER_WAS_UPDATED_MESSAGE);
             return redirectTo("/admin/users");
-        } catch (DuplicateUserException exception) {
+        } catch (ResourceException exception) {
             redirectAttributes.addFlashAttribute(USER_FORM_HOLDER, userForm);
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo(String.format("/admin/users/%s/edit", userId));

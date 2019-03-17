@@ -2,7 +2,6 @@ package com.rcodingschool.carrepair.security;
 
 import com.rcodingschool.carrepair.domain.User;
 import com.rcodingschool.carrepair.exception.user.UserNotFoundException;
-import com.rcodingschool.carrepair.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

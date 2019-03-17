@@ -1,10 +1,8 @@
 package com.rcodingschool.carrepair.exception.user;
 
-public class DuplicateUserException extends Exception {
+import com.rcodingschool.carrepair.exception.base.ResourceException;
 
-    public DuplicateUserException() {
-        super();
-    }
+public class DuplicateUserException extends ResourceException {
 
     public DuplicateUserException(String msg) {
         super(msg);

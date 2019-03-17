@@ -3,7 +3,6 @@ package com.rcodingschool.carrepair.security;
 
 import com.google.common.collect.ImmutableList;
 import com.rcodingschool.carrepair.domain.User;
-import com.rcodingschool.carrepair.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
