@@ -1,3 +1,4 @@
+<h2 class="subtitle">Search</h2>
 <form class="form-horizontal search" action="/admin/users/search" method="POST" id="userSearchForm" name="userSearchForm">
     <fieldset class="horizontal-1">
         <legend>Fill in User's AFM or Email</legend>

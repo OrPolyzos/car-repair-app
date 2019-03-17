@@ -30,9 +30,8 @@ public class UserController extends BaseController {
     private static final String USER_LIST_HOLDER = "userList";
     private static final String USER_SEARCH_FORM_HOLDER = "userSearchForm";
 
-
     private static final String USER_WAS_CREATED_MESSAGE = "User was created!";
-    private static final String USER_WAS_UPDATED_MESSAGE = "User was updated";
+    private static final String USER_WAS_UPDATED_MESSAGE = "User was updated!";
     private static final String USER_WAS_DELETED_MESSAGE = "User was deleted!";
 
     private final UserService userService;
@@ -104,7 +103,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping(value = "/users/{userId}/edit")
-    public String showEditUser(@PathVariable("userId") Long userId, Model model, RedirectAttributes redirectAttributes) {
+    public String getEditUserView(@PathVariable("userId") Long userId, Model model, RedirectAttributes redirectAttributes) {
         if (model.containsAttribute(USER_FORM_HOLDER)) {
             return EDIT_USER_VIEW;
         }
@@ -120,7 +119,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping(value = "/users/{userId}/edit")
-    public String processEditUser(@PathVariable("userId") Long userId, @Valid @ModelAttribute(USER_FORM_HOLDER) UserForm userForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String editUser(@PathVariable("userId") Long userId, @Valid @ModelAttribute(USER_FORM_HOLDER) UserForm userForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             sendBindingErrors(redirectAttributes, bindingResult, USER_FORM_HOLDER, userForm);
             return redirectTo(String.format("/admin/users/%s/edit", userId));

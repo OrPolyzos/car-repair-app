@@ -34,6 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findOneByAfm(String afm) throws UserNotFoundException {
+        return userRepository.findByAfm(afm).orElseThrow(() -> new UserNotFoundException(afm));
+    }
+
+    @Override
     public User login(String username, String password) {
         User retrievedUser;
         retrievedUser = userRepository.findByAfmAndPassword(username, password);
@@ -56,22 +61,21 @@ public class UserServiceImpl implements UserService {
         if (userSearchForm.getAfm() == null && userSearchForm.getEmail() == null) {
             return findAll();
         } else if (userSearchForm.getAfm() != null) {
-            return findByAfm(userSearchForm.getAfm());
+            return findByAfm(userSearchForm.getAfm()).map(Collections::singletonList).orElse(Collections.emptyList());
         } else {
-            return findByEmail(userSearchForm.getEmail());
+            return findByEmail(userSearchForm.getEmail()).map(Collections::singletonList).orElse(Collections.emptyList());
         }
     }
 
     @Override
-    public List<User> findByAfm(String afm) {
-        Optional<User> retrievedUser = userRepository.findByAfm(afm);
-        return retrievedUser.map(Collections::singletonList).orElse(Collections.emptyList());
+    public Optional<User> findByAfm(String afm) {
+        return userRepository.findByAfm(afm);
+
     }
 
     @Override
-    public List<User> findByEmail(String email) {
-        Optional<User> retrievedUser = userRepository.findByEmail(email);
-        return retrievedUser.map(Collections::singletonList).orElse(Collections.emptyList());
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public void insert(User userToInsert) throws DuplicateAfmException, DuplicateEmailException {

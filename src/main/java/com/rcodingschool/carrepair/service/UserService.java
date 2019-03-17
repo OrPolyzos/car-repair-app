@@ -7,10 +7,13 @@ import com.rcodingschool.carrepair.exception.user.UserNotFoundException;
 import com.rcodingschool.carrepair.model.UserSearchForm;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
     User findOne(Long userID) throws UserNotFoundException;
+
+    User findOneByAfm(String afm) throws UserNotFoundException;
 
     User login(String username, String password);
 
@@ -18,9 +21,9 @@ public interface UserService {
 
     List<User> searchUsersBy(UserSearchForm userSearchForm);
 
-    List<User> findByAfm(String afm);
+    Optional<User> findByAfm(String afm);
 
-    List<User> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     void insert(User userToSave) throws DuplicateAfmException, DuplicateEmailException;
 
