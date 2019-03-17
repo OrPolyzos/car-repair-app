@@ -1,7 +1,6 @@
 package com.rcodingschool.carrepair.security;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -9,22 +8,17 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
+
+import static com.rcodingschool.carrepair.security.SecurityConfig.*;
 
 @Component
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private String ADMIN_SUCCESS_URL = "/admin";
-    private String DEFAULT_SUCCESS_URL = "/dashboard";
-
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-
-        boolean isAdmin = checkIfUserIsAdmin(authentication);
-
-        if (isAdmin) {
-            redirectToSuccessUrl(request, response, ADMIN_SUCCESS_URL);
+        if (isAdmin(authentication)) {
+            redirectToSuccessUrl(request, response, ADMIN_URI);
         } else {
-            redirectToSuccessUrl(request, response, DEFAULT_SUCCESS_URL);
+            redirectToSuccessUrl(request, response, USER_URI);
         }
 
     }
@@ -35,14 +29,9 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     }
 
 
-    private boolean checkIfUserIsAdmin(Authentication authentication) {
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        for (GrantedAuthority authority : authorities) {
-            if (authority.getAuthority().equals("Admin")) {
-                return true;
-            }
-        }
-        return false;
+    private boolean isAdmin(Authentication authentication) {
+        return authentication.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals(ADMIN_ROLE));
     }
 
 }

@@ -3,11 +3,9 @@ package com.rcodingschool.carrepair.exception.user;
 
 public class UserNotFoundException extends UserException {
 
-    public UserNotFoundException() {
-        super();
-    }
+    private static final String MESSAGE_TEMPLATE = "User with ID: %s was not found!";
 
-    public UserNotFoundException(String msg) {
-        super(msg);
+    public UserNotFoundException(Long userId) {
+        super(String.format(MESSAGE_TEMPLATE, userId));
     }
 }

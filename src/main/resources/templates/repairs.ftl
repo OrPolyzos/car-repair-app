@@ -16,12 +16,12 @@
 
 
     <style>
-        fieldset.Hor {
+        fieldset.horizontal-3 {
             float: left;
             width: 50%;
             padding: 20;
         }
-        fieldset.Norm {
+        fieldset.horizontal-1 {
             padding: 20;
             width: 100%;
         }
@@ -32,7 +32,7 @@
     <#include "navbar.ftl">
 
 
-    <h1 class="errorRed">${errorMessage!""}</h1>
+    <h1 class="errorMessage">${errorMessage!""}</h1>
     <h2>Add Repair</h2>
     <br><br>
     <div class="container-fluid">
@@ -47,7 +47,7 @@
                                 <label for="repairVehicleID">Vehicle's Plate Number</label>
                                     <input type="String" class="form-control"name="repairVehicleID" id="repairVehicleID" placeholder="ABE-1234" value="${repairForm.repairVehicleID!""}"/>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="form-group">
@@ -58,7 +58,7 @@
                                     <option value="2">Great Service</option>
                                 </select>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="form-group">
@@ -70,7 +70,7 @@
                                     <option value="Completed">Completed</option>
                                 </select>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                     </fieldset>
@@ -80,7 +80,7 @@
                             <@spring.bind "repairForm.repairDateTime"/>
                                 <input class="form-control" type="datetime-local" name="repairDateTime" id="repairDateTime" value="${repairForm.repairDateTime!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
 
@@ -89,7 +89,7 @@
                             <label for="repairTasks">Tasks</label>
                                 <textarea rows=4 cols=50 id="repairTasks" class="form-control" name="repairTasks" placeholder="Engine oil change, Oil filter replacement, Spark plugs Replacement" value="${repairForm.repairTasks!""}">${repairForm.repairTasks!""}</textarea>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
                     </fieldset>
@@ -124,7 +124,7 @@
                                 <label for="repairID">Repair ID</label>
                                     <input type="number" class="form-control" name="repairID" id="repairID" placeholder="1" value="${repairSearchForm.repairID!""}"/>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="col-md-6">
@@ -132,7 +132,7 @@
                                  <label for="repairVehicleID">Vehicle's Plate Number</label>
                                     <input type="text" class="form-control" name="repairVehicleID" id="repairVehicleID" placeholder="ABC-1234" value="${repairSearchForm.repairVehicleID!""}"/>
                                  <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                  </#list>
                             </div>
 
@@ -141,7 +141,7 @@
                                 <label for="repairDateTimeStart">Scheduled DateTime Start</label>
                                     <input type="datetime-local" class="form-control" name="repairDateTimeStart" id="repairDateTimeStart" value="${repairSearchForm.repairDateTimeStart!""}"/>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="col-md-6">
@@ -149,7 +149,7 @@
                                 <label for="repairDateTimeEnd">Scheduled DateTime End</label>
                                     <input type="datetime-local" class="form-control" name="repairDateTimeEnd" id="repairDateTimeEnd" value="${repairSearchForm.repairDateTimeEnd!""}"/>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
 

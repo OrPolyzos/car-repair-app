@@ -14,12 +14,12 @@
     <script type="text/javascript" src="/../utilities.js"></script>
     <link rel="stylesheet" href="/../styles.css">
     <style>
-        fieldset.Hor {
+        fieldset.horizontal-3 {
             float: left;
             width: 50%;
             padding: 20;
         }
-        fieldset.Norm {
+        fieldset.horizontal-1 {
             padding: 20;
             width: 100%;
         }
@@ -30,7 +30,7 @@
 <body class="IMAGE">
     <#include "navbar.ftl">
 
-    <h1 class="errorRed">${errorMessage!""}</h1>
+    <h1 class="errorMessage">${errorMessage!""}</h1>
     <div>
         <div class="container">
             <div class="row">
@@ -46,7 +46,7 @@
                              <@spring.bind "repairPartsForm.partID"/>
                              <input class="form-control" type="number" name="partID" id="partID" placeholder="1" value="${repairPartsForm.partID!""}"/>
                              <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                              </#list>
                              </div>
                              </fieldset>
@@ -58,7 +58,7 @@
                              <@spring.bind "repairPartsForm.quantity"/>
                              <input class="form-control" type="number" min=1 max=999999 name="quantity" id="quantity" placeholder="1" value="${repairPartsForm.quantity!""}"/>
                              <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                              </#list>
                              </div>
                              </fieldset>

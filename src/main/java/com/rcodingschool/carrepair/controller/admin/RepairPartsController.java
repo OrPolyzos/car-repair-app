@@ -1,6 +1,7 @@
-package com.rcodingschool.carrepair.controller;
+package com.rcodingschool.carrepair.controller.admin;
 
 
+import com.rcodingschool.carrepair.controller.base.BaseController;
 import com.rcodingschool.carrepair.converter.RepairPartsConverter;
 import com.rcodingschool.carrepair.domain.Part;
 import com.rcodingschool.carrepair.domain.RepairPart;
@@ -11,12 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -47,7 +43,6 @@ public class RepairPartsController extends BaseController {
 
     @GetMapping("/repairs/parts/{repairID}")
     public String showRepairPartsView(@PathVariable Long repairID, Model model) {
-        //If our Model does not contain a repairPartForm, add a new RepairPartForm()
         if (!model.containsAttribute(REPAIR_PART_FORM_HOLDER)) {
             RepairPartForm repairPartForm = new RepairPartForm();
             repairPartForm.setRepairID(repairID);
@@ -67,36 +62,26 @@ public class RepairPartsController extends BaseController {
 
     @PostMapping("/repairs/parts/add")
     public String processAddRepairPart(@Valid @ModelAttribute(REPAIR_PART_FORM_HOLDER) RepairPartForm repairPartForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        //If something does not pass our @Valid(ations), then this means that our BindingResult
-        //object ".hasErrors()" so we will send the user again to the registration form to correct his mistakes
         if (bindingResult.hasErrors()) {
-            //Also we will be adding repairPartForm to RedirectAttributes so that we can keep his valid inputs and reshow them
-            redirectAttributes.addFlashAttribute(BINDING_RESULT_PREFIX + REPAIR_PART_FORM_HOLDER, bindingResult);
-            redirectAttributes.addFlashAttribute(REPAIR_PART_FORM_HOLDER, repairPartForm);
+            sendBindingErrors(redirectAttributes, bindingResult, REPAIR_PART_FORM_HOLDER, repairPartForm);
             return redirectTo("/admin/repairs/parts/" + repairPartForm.getRepairID());
         }
         try {
-            //Trying to build a RepairPart object
             RepairPart repairPart = RepairPartsConverter.buildRepairPartObject(repairPartForm);
             repairPartService.save(repairPart);
             return redirectTo("/admin/repairs/parts/" + String.valueOf(repairPartForm.getRepairID()));
 
         } catch (Exception exception) {
-            //if an error occurs show it to the user :(
-            redirectAttributes.addFlashAttribute(MESSAGE_HOLDER, exception.getMessage());
+            redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo("/admin/repairs/parts/" + String.valueOf(repairPartForm.getRepairID()));
         }
     }
 
-    //The processDeleteUser() method will map "/admin/users/delete/{id}" GET requests and
-    //will delete a user and redirect to "/admin/users"
     @RequestMapping(value = "/repairs/parts/delete/{repairID}/{partID}", method = RequestMethod.POST)
     public String processDeleteRepairPart(@PathVariable Long repairID, @PathVariable Long partID, RedirectAttributes redirectAttributes) {
-        //Delete the user
         repairPartService.deleteByRepairIDAndPartID(repairID, partID);
-        //Send information to the user
-        redirectAttributes.addFlashAttribute(MESSAGE_HOLDER, THE_PART_WAS_DELETED_FROM_THE_REPAIR_MESSAGE);
-        return redirectTo("/admin/repairs/parts/" + String.valueOf(repairID));
+        redirectErrorMessage(redirectAttributes, THE_PART_WAS_DELETED_FROM_THE_REPAIR_MESSAGE);
+        return redirectTo("/admin/repairs/parts/" + repairID);
     }
 
 }

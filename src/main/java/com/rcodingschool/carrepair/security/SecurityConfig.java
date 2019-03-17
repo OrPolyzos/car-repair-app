@@ -11,11 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String ADMIN_URI = "/admin";
-    public static final String USER_URI = "/dashboard";
+    public static final String USER_URI = "/user";
 
     public static final String ADMIN_ROLE = "Admin";
     public static final String USER_ROLE = "User";
 
+    public static final String INDEX_URI = "/";
     public static final String LOGIN_URI = "/login";
     private static final String LOGOUT_URI = "/logout";
 
@@ -43,9 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers(LOGIN_URI).anonymous()
+                .antMatchers(LOGIN_URI).permitAll()
+                .antMatchers(USER_URI + "/**").hasAnyAuthority(USER_ROLE)
                 .antMatchers(ADMIN_URI + "/**").hasAnyAuthority(ADMIN_ROLE)
-                .antMatchers(USER_URI).hasAnyAuthority(USER_ROLE)
                 .and()
                 .authenticationProvider(loginAuthenticationProvider);
     }

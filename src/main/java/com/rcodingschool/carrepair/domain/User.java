@@ -40,7 +40,7 @@ public class User implements Serializable {
     private String addressZipCode;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Vehicle.class)
-    private List<Vehicle> userVehicles;
+    private List<Vehicle> vehicles;
 
     public Long getUserID() {
         return userID;
@@ -122,11 +122,11 @@ public class User implements Serializable {
         this.addressZipCode = addressZipCode;
     }
 
-    public List<Vehicle> getUserVehicles() {
-        return userVehicles;
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setUserVehicles(List<Vehicle> userVehicles) {
-        this.userVehicles = userVehicles;
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 }

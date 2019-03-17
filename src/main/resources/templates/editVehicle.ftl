@@ -26,7 +26,7 @@
     <div class="p5container">
         <img src="/../images/eXtremeRed.png">
     </div>
-    <h1 class="errorRed">${errorMessage!""}</h1>
+    <h1 class="errorMessage">${errorMessage!""}</h1>
     <h3>Vehicle's Details</h3>
 
     <div class="container">
@@ -54,7 +54,7 @@
                                 <input type="text" class="form-control" name="brand" id="brand" placeholder="Ford" value="${vehicleForm.brand!""}" required/>
                             </div>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
 
@@ -68,7 +68,7 @@
                                 <input type="text" class="form-control" name="model" id="model" placeholder="Focus" value="${vehicleForm.model!""}" required/>
                             </div>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
 
@@ -82,7 +82,7 @@
                                 <input type="number" class="form-control" min=1950 max=2017 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}" required/>
                             </div>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
 
@@ -99,7 +99,7 @@
                                     </select>
                             </div>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
 
@@ -113,7 +113,7 @@
                                 <input type="String" class="form-control" name="color" id="color" placeholder="Red" value="${vehicleForm.color!""}" required/>
                             </div>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
                     <br><br>

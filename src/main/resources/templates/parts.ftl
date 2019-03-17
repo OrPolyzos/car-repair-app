@@ -15,12 +15,12 @@
     <script type="text/javascript" src="/utilities.js"></script>
 
     <style>
-        fieldset.Hor {
+        fieldset.horizontal-3 {
             float: left;
             width: 33.3%;
             padding: 20;
         }
-        fieldset.Norm {
+        fieldset.horizontal-1 {
             padding: 20;
         }
     </style>
@@ -33,7 +33,7 @@
 <#include "navbar.ftl">
 
 
-    <h1 class="errorRed">${errorMessage!""}</h1>
+    <h1 class="errorMessage">${errorMessage!""}</h1>
     <h2>Create Part</h2>
 
     <br><br>
@@ -49,7 +49,7 @@
                             <label for="partName">Part Name</label>
                                 <input type="text" class="form-control "name="partName" id="partName" placeholder="turbocharger" value="${partForm.partName!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </fieldset>
                     </div>
@@ -59,7 +59,7 @@
                             <@spring.bind "partForm.partPrice"/>
                                 <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </fieldset>
                     </div>
@@ -91,7 +91,7 @@
                         <@spring.bind "partSearchForm.partID"/>
                         <input type="number" class="form-control" name="partID" id="partID" value="${partSearchForm.partID!""}"/>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
                     <div class="col-md-4">
@@ -99,7 +99,7 @@
                         <@spring.bind "partSearchForm.partPriceStart"/>
                         <input type="number" class="form-control" name="partPriceStart" id="partPriceStart" value="${partSearchForm.partPriceStart!""}"/>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
                     <div class="col-md-4">
@@ -107,7 +107,7 @@
                         <@spring.bind "partSearchForm.partPriceEnd"/>
                         <input type="number" class="form-control" name="partPriceEnd" id="partPriceEnd" value="${partSearchForm.partPriceEnd!""}"/>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
                     <div class="col-md-6 col-md-offset-3">

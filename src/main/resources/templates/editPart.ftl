@@ -23,7 +23,7 @@
     <#include "navbar.ftl">
 
 
-    <h1 class="errorRed">${errorMessage!""}</h1>
+    <h1 class="errorMessage">${errorMessage!""}</h1>
 
     <div class="container">
         <div class="row">
@@ -44,7 +44,7 @@
                                 <input type="text" class="form-control" name="partName" id="partName" placeholder="Turbocharger" value="${partForm.partName!""}"/>
                             </div>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
 
@@ -60,7 +60,7 @@
                                 <input type="number" class="form-control" name="partPrice" id="partPrice" placeholder="100" value="${partForm.partPrice!""}"/>
                             </div>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
                     <br><br>

@@ -32,3 +32,5 @@
         </div>
     </div>
 </nav>
+<h1 class="infoMessage">${infoMessage!""}</h1>
+<h1 class="errorMessage">${errorMessage!""}</h1>

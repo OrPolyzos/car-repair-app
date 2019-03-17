@@ -31,7 +31,6 @@ public class UserConverter {
 
     public static UserForm buildUserFormObject(User user) {
         UserForm userForm = new UserForm();
-        //User Stuff
         userForm.setUserID(user.getUserID());
         userForm.setPassword(user.getPassword());
         userForm.setAfm(user.getAfm());
@@ -39,7 +38,6 @@ public class UserConverter {
         userForm.setLastName(user.getLastName());
         userForm.setEmail(user.getEmail());
         userForm.setType(user.getType());
-        //Address Stuff
         userForm.setAddressStreet(user.getAddressStreet());
         userForm.setAddressNumber(user.getAddressNumber());
         userForm.setAddressZipCode(user.getAddressZipCode());

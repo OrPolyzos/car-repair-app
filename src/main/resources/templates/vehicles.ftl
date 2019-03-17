@@ -14,12 +14,12 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/../styles.css">
     <script type="text/javascript" src="/utilities.js"></script>
     <style>
-        fieldset.Hor {
+        fieldset.horizontal-3 {
             float: left;
             width: 33.3%;
             padding: 20;
         }
-        fieldset.Norm {
+        fieldset.horizontal-1 {
             padding: 20;
         }
     </style>
@@ -31,7 +31,7 @@
 <#include "navbar.ftl">
 
 
-    <h1 class="errorRed">${errorMessage!""}</h1>
+    <h1 class="errorMessage">${errorMessage!""}</h1>
     <h2>Add Vehicle</h2>
 
     <br><br>
@@ -44,14 +44,13 @@
                     <legend>Vehicle's Details</legend>
                     <fieldset class="Hor">
 
-
                         <#--bind this field with the registration form fields-->
                             <div class="form-group">
                                 <label for="vehicleID">Plate Number</label>
                                 <@spring.bind "vehicleForm.vehicleID"/>
                                 <input type="text" class="form-control "name="vehicleID" id="vehicleID" placeholder="ABC-1234" value="${vehicleForm.vehicleID!""}"/>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="form-group">
@@ -59,7 +58,7 @@
                                 <@spring.bind "vehicleForm.afm"/>
                                 <input type="number" class="form-control" name="afm" id="afm" placeholder="123456789" value="${vehicleForm.afm!""}"/>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                     </fieldset>
@@ -69,7 +68,7 @@
                             <@spring.bind "vehicleForm.brand"/>
                             <input type="text" class="form-control" name="brand" id="brand" placeholder="Ford" value="${vehicleForm.brand!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
                         <div class="form-group">
@@ -77,7 +76,7 @@
                             <@spring.bind "vehicleForm.model"/>
                             <input type="text" class="form-control" name="model" id="model" placeholder="Focus" value="${vehicleForm.model!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
                         <div class="form-group">
@@ -85,7 +84,7 @@
                             <@spring.bind "vehicleForm.year"/>
                             <input type="number" class="form-control" min=1950 max=2017 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
                     </fieldset>
@@ -98,7 +97,7 @@
                                 <option value="Diesel">Diesel</option>
                             </select>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
                         <div class="form-group">
@@ -106,7 +105,7 @@
                             <@spring.bind "vehicleForm.color"/>
                             <input type="String" class="form-control" name="color" id="color" placeholder="Red" value="${vehicleForm.color!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                         </div>
                     </fieldset>
@@ -131,7 +130,7 @@
 
             <br><br>
 
-            <form class="Search" class="form-horizontal" action="/admin/vehicles/search" method="GET" id="vehicleSearchForm" name="vehicleSearchForm">
+            <form class="Search form-horizontal" action="/admin/vehicles/search" method="GET" id="vehicleSearchForm" name="vehicleSearchForm">
                 <fieldset class="Norm">
                     <legend>Fill in Vehicle's Plate number or Owner's AFM</legend>
                     <div class="col-md-4">
@@ -141,7 +140,7 @@
                             <label for="afm">AFM</label>
                             <input type="number" class="form-control" name="afm" id="afm" placeholder="123456789" value="${vehicleSearchForm.afm!""}"/>
                             <#list spring.status.errorMessages as error>
-                                <span class="errorRed">${error}</span>
+                                <span class="errorMessage">${error}</span>
                             </#list>
                     </div>
                     <div class="col-md-4">
@@ -149,7 +148,7 @@
                         <label for="vehicleID">Plate Number</label>
                         <input type="text" class="form-control" name="vehicleID" id="vehicleID" placeholder="ABC-1234" value="${vehicleSearchForm.vehicleID!""}"/>
                         <#list spring.status.errorMessages as error>
-                            <span class="errorRed">${error}</span>
+                            <span class="errorMessage">${error}</span>
                         </#list>
                     </div>
                     <div class="col-md-4">

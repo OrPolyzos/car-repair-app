@@ -19,7 +19,7 @@
     <#include "navbar.ftl">
 
 
-    <h1 class="errorRed">${errorMessage!""}</h1>
+    <h1 class="errorMessage">${errorMessage!""}</h1>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -36,7 +36,7 @@
                                         <input type="String" class="form-control" name="repairVehicleID" id="repairVehicleID" placeholder="ABE-1234" value="${repairForm.repairVehicleID!""}"/>
                                     </div>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="form-group">
@@ -50,7 +50,7 @@
                                         </select>
                                     </div>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="form-group">
@@ -65,7 +65,7 @@
                                         </select>
                                     </div>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="form-group">
@@ -76,7 +76,7 @@
                                         <input class="form-control" type="datetime-local" name="repairDateTime" id="repairDateTime" value="${repairForm.repairDateTime!""}"/>
                                     </div>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                             <div class="form-group">
@@ -87,7 +87,7 @@
                                     <textarea rows=4 cols=50 id="repairTasks" class="form-control" name="repairTasks" placeholder="Engine oil change, Oil filter replacement, Spark plugs Replacement" value="${repairForm.repairTasks!""}">${repairForm.repairTasks!""}</textarea>
                                 </div>
                                 <#list spring.status.errorMessages as error>
-                                    <span class="errorRed">${error}</span>
+                                    <span class="errorMessage">${error}</span>
                                 </#list>
                             </div>
                                 <br><br>

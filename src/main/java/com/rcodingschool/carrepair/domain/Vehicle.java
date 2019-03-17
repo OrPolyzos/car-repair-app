@@ -34,7 +34,7 @@ public class Vehicle implements Serializable {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle", targetEntity = Repair.class)
-    private List<Repair> vehicleRepairs;
+    private List<Repair> repairs;
 
     public Vehicle() {
     }
@@ -103,11 +103,11 @@ public class Vehicle implements Serializable {
         this.user = user;
     }
 
-    public List<Repair> getVehicleRepairs() {
-        return vehicleRepairs;
+    public List<Repair> getRepairs() {
+        return repairs;
     }
 
-    public void setVehicleRepairs(List<Repair> vehicleRepairs) {
-        this.vehicleRepairs = vehicleRepairs;
+    public void setRepairs(List<Repair> repairs) {
+        this.repairs = repairs;
     }
 }
