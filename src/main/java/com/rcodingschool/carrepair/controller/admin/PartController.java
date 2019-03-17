@@ -3,6 +3,7 @@ package com.rcodingschool.carrepair.controller.admin;
 import com.rcodingschool.carrepair.controller.base.BaseController;
 import com.rcodingschool.carrepair.converter.PartConverter;
 import com.rcodingschool.carrepair.domain.Part;
+import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
 import com.rcodingschool.carrepair.exception.part.PartNotFoundException;
 import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
 import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
@@ -69,7 +70,7 @@ public class PartController extends BaseController {
             sendInfoMessage(model, PART_WAS_CREATED_MESSAGE);
             fillWithPartForms(model);
             return PARTS_VIEW;
-        } catch (RepairNotFoundException | VehicleNotFoundException exception) {
+        } catch (RepairNotFoundException | ResourceNotFoundException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             redirectAttributes.addFlashAttribute(PART_FORM_HOLDER, partForm);
             return redirectTo("/admin/parts");
@@ -132,7 +133,7 @@ public class PartController extends BaseController {
             sendInfoMessage(model, PART_WAS_UPDATED_MESSAGE);
             fillWithPartForms(model);
             return PARTS_VIEW;
-        } catch (RepairNotFoundException | VehicleNotFoundException exception) {
+        } catch (RepairNotFoundException | ResourceNotFoundException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             redirectAttributes.addFlashAttribute(PART_FORM_HOLDER, partForm);
             return redirectTo(String.format("/admin/parts/%s/edit", partId));

@@ -1,6 +1,6 @@
 <h2 class="subtitle">Create</h2>
 <div class="col-md-12">
-    <form class="form-horizontal" action="/admin/vehicles/create" method="POST" id="vehicleForm" name="vehicleForm">
+    <form class="form-horizontal" action="/admin/vehicles" method="POST" id="vehicleForm" name="vehicleForm">
         <fieldset class="horizontal-3">
             <div class="form-group">
                 <label for="vehicleID">Plate Number</label>
@@ -39,7 +39,7 @@
             <div class="form-group">
                 <label for="year">Year</label>
                 <@spring.bind "vehicleForm.year"/>
-                <input type="number" class="form-control" min=1950 max=2017 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}"/>
+                <input type="number" class="form-control" min=1950 max=2100 step=1 name="year" id="year" placeholder="2001" value="${vehicleForm.year!""}"/>
                 <#list spring.status.errorMessages as error>
                     <span class="errorMessage">${error}</span>
                 </#list>
@@ -60,7 +60,7 @@
             <div class="form-group">
                 <label for="color">Color</label>
                 <@spring.bind "vehicleForm.color"/>
-                <input type="String" class="form-control" name="color" id="color" placeholder="Red" value="${vehicleForm.color!""}"/>
+                <input type="text" class="form-control" name="color" id="color" placeholder="Red" value="${vehicleForm.color!""}"/>
                 <#list spring.status.errorMessages as error>
                     <span class="errorMessage">${error}</span>
                 </#list>

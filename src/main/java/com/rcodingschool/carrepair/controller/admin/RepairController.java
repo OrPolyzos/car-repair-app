@@ -3,6 +3,7 @@ package com.rcodingschool.carrepair.controller.admin;
 import com.rcodingschool.carrepair.controller.base.BaseController;
 import com.rcodingschool.carrepair.converter.RepairConverter;
 import com.rcodingschool.carrepair.domain.Repair;
+import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
 import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
 import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
 import com.rcodingschool.carrepair.model.RepairForm;
@@ -69,7 +70,7 @@ public class RepairController extends BaseController {
             sendInfoMessage(model, REPAIR_WAS_CREATED_MESSAGE);
             fillWithRepairForms(model);
             return REPAIRS_VIEW;
-        } catch (VehicleNotFoundException exception) {
+        } catch (ResourceNotFoundException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             redirectAttributes.addFlashAttribute(REPAIR_FORM_HOLDER, repairForm);
             return redirectTo("/admin/repairs");
@@ -130,7 +131,7 @@ public class RepairController extends BaseController {
             sendInfoMessage(model, REPAIR_WAS_UPDATED_MESSAGE);
             fillWithRepairForms(model);
             return REPAIRS_VIEW;
-        } catch (VehicleNotFoundException exception) {
+        } catch (ResourceNotFoundException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             redirectAttributes.addFlashAttribute(REPAIR_FORM_HOLDER, repairForm);
             return redirectTo(String.format("/admin/repairs/%s/edit", repairId));

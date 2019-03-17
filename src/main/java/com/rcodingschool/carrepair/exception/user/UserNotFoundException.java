@@ -1,7 +1,9 @@
 package com.rcodingschool.carrepair.exception.user;
 
 
-public class UserNotFoundException extends UserException {
+import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
+
+public class UserNotFoundException extends ResourceNotFoundException {
 
     private static final String ID_MESSAGE_TEMPLATE = "User with ID: %s was not found!";
 

@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <form class="form-horizontal" action="/admin/users/create" method="POST" id="userForm" name="userForm">
+            <form class="form-horizontal" action="/admin/users" method="POST" id="userForm" name="userForm">
                 <fieldset class="horizontal-3">
                     <legend>Personal Details</legend>
                     <div class="form-group">

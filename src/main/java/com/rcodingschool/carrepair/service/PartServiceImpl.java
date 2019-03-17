@@ -3,9 +3,9 @@ package com.rcodingschool.carrepair.service;
 import com.rcodingschool.carrepair.domain.Part;
 import com.rcodingschool.carrepair.domain.Repair;
 import com.rcodingschool.carrepair.domain.RepairPart;
+import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
 import com.rcodingschool.carrepair.exception.part.PartNotFoundException;
 import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
-import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
 import com.rcodingschool.carrepair.model.PartSearchForm;
 import com.rcodingschool.carrepair.repository.PartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +50,12 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public void save(Part part) throws RepairNotFoundException, VehicleNotFoundException {
+    public void save(Part part) throws RepairNotFoundException, ResourceNotFoundException {
         partRepository.save(part);
         updateRepairCosts(part);
     }
 
-    private void updateRepairCosts(Part part) throws VehicleNotFoundException, RepairNotFoundException {
+    private void updateRepairCosts(Part part) throws RepairNotFoundException, ResourceNotFoundException {
         List<RepairPart> repairParts = repairPartService.findAllByPartID(part.getPartID());
         for (RepairPart repairPart : repairParts) {
             repairService.save(repairService.findByRepairID(repairPart.getRepairID()));

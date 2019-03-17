@@ -3,6 +3,7 @@ package com.rcodingschool.carrepair.security;
 
 import com.google.common.collect.ImmutableList;
 import com.rcodingschool.carrepair.domain.User;
+import com.rcodingschool.carrepair.service.UserResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,18 +16,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginAuthenticationProvider implements AuthenticationProvider {
 
-    private final UserService userService;
+    private final UserResourceService userResourceService;
 
     @Autowired
-    public LoginAuthenticationProvider(UserService userService) {
-        this.userService = userService;
+    public LoginAuthenticationProvider(UserResourceService userResourceService) {
+        this.userResourceService = userResourceService;
     }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        User retrievedUser = userService.login(username, password);
+        User retrievedUser = userResourceService.login(username, password);
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(retrievedUser.getType());
         return new UsernamePasswordAuthenticationToken(retrievedUser.getUserID(), password, ImmutableList.of(grantedAuthority));
     }

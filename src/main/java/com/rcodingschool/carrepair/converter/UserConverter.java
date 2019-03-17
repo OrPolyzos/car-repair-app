@@ -5,18 +5,9 @@ import com.rcodingschool.carrepair.model.UserForm;
 
 public class UserConverter {
 
-    public static User buildInsertUserObject(UserForm userForm) {
-        return provideBasicUser(userForm);
-    }
-
-    public static User buildUpdateUserObject(UserForm userForm) {
-        User user = provideBasicUser(userForm);
-        user.setUserID(userForm.getUserID());
-        return user;
-    }
-
-    private static User provideBasicUser(UserForm userForm) {
+    public static User userFormToUser(UserForm userForm) {
         User user = new User();
+        user.setUserID(userForm.getUserID());
         user.setFirstName(userForm.getFirstName());
         user.setLastName(userForm.getLastName());
         user.setAfm(userForm.getAfm());
@@ -29,7 +20,7 @@ public class UserConverter {
         return user;
     }
 
-    public static UserForm buildUserFormObject(User user) {
+    public static UserForm userToUserForm(User user) {
         UserForm userForm = new UserForm();
         userForm.setUserID(user.getUserID());
         userForm.setPassword(user.getPassword());

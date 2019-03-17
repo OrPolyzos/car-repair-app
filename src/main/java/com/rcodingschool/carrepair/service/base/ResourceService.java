@@ -48,6 +48,7 @@ public abstract class ResourceService<T, ID extends Serializable> {
         crudRepository.delete(actualEntity);
     }
 
+
     protected List<T> mapOptionalToList(Optional<T> optionalEntity) {
         return optionalEntity.map(Collections::singletonList).orElse(Collections.emptyList());
     }

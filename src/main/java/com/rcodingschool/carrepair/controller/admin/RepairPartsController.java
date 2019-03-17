@@ -4,8 +4,8 @@ package com.rcodingschool.carrepair.controller.admin;
 import com.rcodingschool.carrepair.controller.base.BaseController;
 import com.rcodingschool.carrepair.converter.RepairPartsConverter;
 import com.rcodingschool.carrepair.domain.RepairPart;
+import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
 import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
-import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
 import com.rcodingschool.carrepair.model.RepairPartForm;
 import com.rcodingschool.carrepair.service.PartService;
 import com.rcodingschool.carrepair.service.RepairPartService;
@@ -72,7 +72,7 @@ public class RepairPartsController extends BaseController {
             sendInfoMessage(model, CREATED_MESSAGE);
             fillWithRepairPartForms(repairId, model);
             return REPAIR_PARTS_VIEW;
-        } catch (RepairNotFoundException | VehicleNotFoundException exception) {
+        } catch (RepairNotFoundException | ResourceNotFoundException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo(String.format("/admin/repairs/%s/parts", repairId));
         }
@@ -85,7 +85,7 @@ public class RepairPartsController extends BaseController {
             sendInfoMessage(model, DELETED_MESSAGE);
             fillWithRepairPartForms(repairID, model);
             return REPAIR_PARTS_VIEW;
-        } catch (RepairNotFoundException | VehicleNotFoundException exception) {
+        } catch (RepairNotFoundException | ResourceNotFoundException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo(String.format("/admin/repairs/%s/parts", repairID));
         }

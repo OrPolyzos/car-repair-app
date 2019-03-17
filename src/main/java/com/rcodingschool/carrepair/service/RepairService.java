@@ -1,6 +1,7 @@
 package com.rcodingschool.carrepair.service;
 
 import com.rcodingschool.carrepair.domain.Repair;
+import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
 import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
 import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
 import com.rcodingschool.carrepair.model.RepairSearchForm;
@@ -24,7 +25,7 @@ public interface RepairService {
 
     List<Repair> findByVehicleID(String vehicleID);
 
-    void save(Repair repair) throws VehicleNotFoundException;
+    void save(Repair repair) throws ResourceNotFoundException;
 
     void saveAfterDeletedPart(Repair repair);
 

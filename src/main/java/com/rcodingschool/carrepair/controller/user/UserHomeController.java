@@ -2,6 +2,7 @@ package com.rcodingschool.carrepair.controller.user;
 
 import com.rcodingschool.carrepair.controller.base.BaseController;
 import com.rcodingschool.carrepair.domain.User;
+import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.exception.user.UserNotFoundException;
 import com.rcodingschool.carrepair.security.SecurityHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class UserHomeController extends BaseController {
     }
 
     @GetMapping(value = "")
-    public String showUserHome(Model model) throws UserNotFoundException {
+    public String showUserHome(Model model) throws ResourceException {
         User user = securityHelper.getSessionUser();
         model.addAttribute("user", user);
         return HOME_VIEW;

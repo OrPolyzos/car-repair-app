@@ -1,7 +1,9 @@
 package com.rcodingschool.carrepair.exception.vehicle;
 
 
-public class VehicleNotFoundException extends Exception {
+import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
+
+public class VehicleNotFoundException extends ResourceNotFoundException {
 
     private static final String MESSAGE_TEMPLATE = "Vehicle with Plate Number: %s was not found!";
 

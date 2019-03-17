@@ -1,12 +1,11 @@
 package com.rcodingschool.carrepair.converter;
 
-import com.rcodingschool.carrepair.domain.User;
 import com.rcodingschool.carrepair.domain.Vehicle;
 import com.rcodingschool.carrepair.model.VehicleForm;
 
 public class VehicleConverter {
 
-    public static Vehicle buildVehicleObject(VehicleForm vehicleForm, User user) {
+    public static Vehicle vehicleFormToVehicle(VehicleForm vehicleForm) {
         Vehicle vehicle = new Vehicle();
         vehicle.setVehicleID(vehicleForm.getVehicleID());
         vehicle.setBrand(vehicleForm.getBrand());
@@ -14,11 +13,11 @@ public class VehicleConverter {
         vehicle.setFuelType(vehicleForm.getFuelType());
         vehicle.setYear(vehicleForm.getYear());
         vehicle.setColor(vehicleForm.getColor());
-        vehicle.setUserID(user.getUserID());
+        vehicle.setUserID(vehicleForm.getUserID());
         return vehicle;
     }
 
-    public static VehicleForm buildVehicleFormObject(Vehicle vehicle) {
+    public static VehicleForm vehicleToVehicleForm(Vehicle vehicle) {
         VehicleForm vehicleForm = new VehicleForm();
         vehicleForm.setVehicleID(vehicle.getVehicleID());
         vehicleForm.setBrand(vehicle.getBrand());

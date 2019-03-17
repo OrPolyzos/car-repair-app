@@ -1,8 +1,8 @@
 package com.rcodingschool.carrepair.service;
 
 import com.rcodingschool.carrepair.domain.Repair;
+import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
 import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
-import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
 import com.rcodingschool.carrepair.model.RepairSearchForm;
 import com.rcodingschool.carrepair.repository.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class RepairServiceImpl implements RepairService {
     private RepairRepository repairRepository;
 
     @Autowired
-    private VehicleService vehicleService;
+    private VehicleResourceService vehicleResourceService;
 
     @Autowired
     private RepairTypeService repairTypeService;
@@ -70,8 +70,8 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public void save(Repair repair) throws VehicleNotFoundException {
-        vehicleService.findOne(repair.getVehicleID());
+    public void save(Repair repair) throws ResourceNotFoundException {
+        vehicleResourceService.findOrThrow(repair.getVehicleID());
         determineCostPerServiceType(repair);
         determineCostPerPartsIncluded(repair);
         repairRepository.save(repair);
@@ -114,10 +114,10 @@ public class RepairServiceImpl implements RepairService {
 
     private void prepareRepairSearchForm(RepairSearchForm repairSearchForm) {
         if (repairSearchForm.getRepairDateTimeEnd() == null) {
-            repairSearchForm.setRepairDateTimeEnd(LocalDateTime.of(2100, 12, 31, 0, 0 ));
+            repairSearchForm.setRepairDateTimeEnd(LocalDateTime.of(2100, 12, 31, 0, 0));
         }
         if (repairSearchForm.getRepairDateTimeStart() == null) {
-            repairSearchForm.setRepairDateTimeStart(LocalDateTime.of(2000, 12, 31, 0, 0 ));
+            repairSearchForm.setRepairDateTimeStart(LocalDateTime.of(2000, 12, 31, 0, 0));
         }
     }
 }

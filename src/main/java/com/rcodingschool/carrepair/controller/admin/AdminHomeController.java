@@ -1,7 +1,7 @@
 package com.rcodingschool.carrepair.controller.admin;
 
 import com.rcodingschool.carrepair.controller.base.BaseController;
-import com.rcodingschool.carrepair.exception.user.UserNotFoundException;
+import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.security.SecurityHelper;
 import com.rcodingschool.carrepair.service.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class AdminHomeController extends BaseController {
     }
 
     @GetMapping
-    public String showAdminHome(Model model) throws UserNotFoundException {
+    public String showAdminHome(Model model) throws ResourceException {
         model.addAttribute(USER_HOLDER, securityHelper.getSessionUser());
         model.addAttribute(REPAIRS_LIST_HOLDER, repairService.findTop10ByOrderByRepairDateTimeDesc());
         return HOME_VIEW;

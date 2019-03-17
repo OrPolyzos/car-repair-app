@@ -1,7 +1,8 @@
 package com.rcodingschool.carrepair.security;
 
 import com.rcodingschool.carrepair.domain.User;
-import com.rcodingschool.carrepair.exception.user.UserNotFoundException;
+import com.rcodingschool.carrepair.exception.base.ResourceException;
+import com.rcodingschool.carrepair.service.UserResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,11 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class SecurityHelper {
 
-    private final UserService userService;
+    private final UserResourceService userResourceService;
 
     @Autowired
-    public SecurityHelper(UserService userService) {
-        this.userService = userService;
+    public SecurityHelper(UserResourceService userResourceService) {
+        this.userResourceService = userResourceService;
     }
 
     public boolean checkForRole(Authentication authentication, String role) {
@@ -22,9 +23,9 @@ public class SecurityHelper {
                 .anyMatch(authority -> authority.getAuthority().equals(role));
     }
 
-    public User getSessionUser() throws UserNotFoundException {
+    public User getSessionUser() throws ResourceException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return userService.findOne((Long) authentication.getPrincipal());
+        return userResourceService.findOrThrow((Long) authentication.getPrincipal());
     }
 
     public String getSessionUserId() {
