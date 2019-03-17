@@ -1,4 +1,4 @@
-<#if vehicleList??>
+<#if vehicleList?has_content>
     <div class="table-responsive">
         <table id="resultsTable" class="table table-hover">
             <thead>

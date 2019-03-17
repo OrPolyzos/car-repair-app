@@ -90,6 +90,13 @@ fieldset.horizontal-3 {
     padding: 20;
 }
 
+fieldset.horizontal-2 {
+    float: left;
+    width: 50%;
+    padding: 20;
+}
+
+
 fieldset.horizontal-1 {
     width: 100%;
     padding: 20;

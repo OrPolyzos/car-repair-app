@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PartRepository extends CrudRepository<Part, Long> {
@@ -13,7 +14,7 @@ public interface PartRepository extends CrudRepository<Part, Long> {
 
     List<Part> findAll();
 
-    List<Part> findByPartID(Long partID);
+    Optional<Part> findByPartID(Long partID);
 
     List<Part> findAllByPartPriceBetween(Long partPriceStart, Long partPriceEnd);
 

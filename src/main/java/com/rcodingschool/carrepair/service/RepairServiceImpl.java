@@ -1,14 +1,16 @@
 package com.rcodingschool.carrepair.service;
 
-import com.rcodingschool.carrepair.domain.Part;
 import com.rcodingschool.carrepair.domain.Repair;
-import com.rcodingschool.carrepair.domain.RepairPart;
+import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
+import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
+import com.rcodingschool.carrepair.model.RepairSearchForm;
 import com.rcodingschool.carrepair.repository.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,6 +19,9 @@ public class RepairServiceImpl implements RepairService {
 
     @Autowired
     private RepairRepository repairRepository;
+
+    @Autowired
+    private VehicleService vehicleService;
 
     @Autowired
     private RepairTypeService repairTypeService;
@@ -49,8 +54,8 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public List<Repair> findByRepairID(Long repairID) {
-        return repairRepository.findByRepairID(repairID);
+    public Repair findByRepairID(Long repairID) throws RepairNotFoundException {
+        return repairRepository.findByRepairID(repairID).orElseThrow(() -> new RepairNotFoundException(repairID));
     }
 
 
@@ -65,15 +70,22 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public void save(Repair repair) {
-        Long repairTotalCost = Long.valueOf(repairTypeService.findByRepairTypeID(repair.getRepairTypeID()).getFixedPrice());
-        List<RepairPart> repairParts = repairPartService.findAllByRepairID(repair.getRepairID());
-        for (RepairPart repairPart : repairParts) {
-            Part part = partService.findByPartID(repairPart.getPartID()).get(0);
-            repairTotalCost += (part.getPartPrice() * repairPart.getQuantity());
-        }
-        repair.setRepairTotalCost(repairTotalCost);
+    public void save(Repair repair) throws VehicleNotFoundException {
+        vehicleService.findOne(repair.getVehicleID());
+        determineCostPerServiceType(repair);
+        determineCostPerPartsIncluded(repair);
         repairRepository.save(repair);
+    }
+
+    private void determineCostPerPartsIncluded(Repair repair) {
+        repairPartService.findAllByRepairID(repair.getRepairID()).forEach(repairPart ->
+                partService.findByPartID(repairPart.getPartID()).ifPresent(part ->
+                        repair.setRepairTotalCost(repair.getRepairTotalCost() + (part.getPartPrice() * repairPart.getQuantity()))));
+    }
+
+    private void determineCostPerServiceType(Repair repair) {
+        Long costForType = Long.valueOf(repairTypeService.findByRepairTypeID(repair.getRepairTypeID()).getFixedPrice());
+        repair.setRepairTotalCost(costForType);
     }
 
     @Override
@@ -82,7 +94,30 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public void deleteByRepairID(Long repairID) {
+    public void deleteByRepairID(Long repairID) throws RepairNotFoundException {
+        findByRepairID(repairID);
         repairRepository.deleteByRepairID(repairID);
+    }
+
+    @Override
+    public List<Repair> searchRepairs(RepairSearchForm repairSearchForm) {
+
+        prepareRepairSearchForm(repairSearchForm);
+        if (repairSearchForm.getRepairID() != null) {
+            return repairRepository.findByRepairID(repairSearchForm.getRepairID()).map(Collections::singletonList).orElse(Collections.emptyList());
+        } else if (repairSearchForm.getRepairVehicleID() != null) {
+            return findAllByRepairDateTimeBetweenAndVehicleID(repairSearchForm.getRepairDateTimeStart(), repairSearchForm.getRepairDateTimeEnd(), repairSearchForm.getRepairVehicleID());
+        } else {
+            return findAllByRepairDateTimeBetween(repairSearchForm.getRepairDateTimeStart(), repairSearchForm.getRepairDateTimeEnd());
+        }
+    }
+
+    private void prepareRepairSearchForm(RepairSearchForm repairSearchForm) {
+        if (repairSearchForm.getRepairDateTimeEnd() == null) {
+            repairSearchForm.setRepairDateTimeEnd(LocalDateTime.of(2100, 12, 31, 0, 0 ));
+        }
+        if (repairSearchForm.getRepairDateTimeStart() == null) {
+            repairSearchForm.setRepairDateTimeStart(LocalDateTime.of(2000, 12, 31, 0, 0 ));
+        }
     }
 }

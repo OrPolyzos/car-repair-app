@@ -2,6 +2,8 @@ package com.rcodingschool.carrepair.service;
 
 import com.rcodingschool.carrepair.domain.Repair;
 import com.rcodingschool.carrepair.domain.RepairPart;
+import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
+import com.rcodingschool.carrepair.exception.vehicle.VehicleNotFoundException;
 import com.rcodingschool.carrepair.repository.RepairPartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,16 +37,16 @@ public class RepairPartServiceImpl implements RepairPartService {
     }
 
     @Override
-    public void save(RepairPart repairPart) {
+    public void save(RepairPart repairPart) throws RepairNotFoundException, VehicleNotFoundException {
         repairPartRepository.save(repairPart);
-        Repair repair = repairService.findByRepairID(repairPart.getRepairID()).get(0);
+        Repair repair = repairService.findByRepairID(repairPart.getRepairID());
         repairService.save(repair);
     }
 
     @Override
-    public void deleteByRepairIDAndPartID(Long repairID,Long partID) {
+    public void deleteByRepairIDAndPartID(Long repairID,Long partID) throws RepairNotFoundException, VehicleNotFoundException {
         repairPartRepository.deleteByRepairIDAndPartID(repairID,partID);
-        Repair repair = repairService.findByRepairID(repairID).get(0);
+        Repair repair = repairService.findByRepairID(repairID);
         repairService.save(repair);
     }
 

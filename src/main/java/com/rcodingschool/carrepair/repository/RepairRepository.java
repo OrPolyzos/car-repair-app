@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RepairRepository extends CrudRepository<Repair, Long> {
@@ -18,7 +19,7 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     Repair findOne(Long repairID);
 
-    List<Repair> findByRepairID(Long repairID);
+    Optional<Repair> findByRepairID(Long repairID);
 
     List<Repair> findAllByRepairDateTimeBetweenAndVehicleID(LocalDateTime localDateTimeStart, LocalDateTime localDatetimeEnd, String vehicleID);
 

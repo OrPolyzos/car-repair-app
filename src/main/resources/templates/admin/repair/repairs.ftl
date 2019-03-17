@@ -1,22 +1,21 @@
 <#import "/spring.ftl" as spring/>
 <html>
-
 <head>
-    <title>Users</title>
+    <title>Repairs</title>
     <#include "../common/head-section.ftl"/>
 </head>
 <body>
 <#include "../common/navbar.ftl">
 <div class="container-fluid">
     <div class="row">
-        <#include "section/create-user-section.ftl"/>
+        <#include "section/create-repair-section.ftl"/>
     </div>
     <hr/>
     <div class="row">
-        <#include "section/search-user-section.ftl"/>
+        <#include "section/search-repair-section.ftl"/>
     </div>
 </div>
-<#include "section/users-table-section.ftl"/>
+<#include "section/repairs-table-section.ftl"/>
 <#include "../common/scripts-section.ftl"/>
 </body>
 </html>

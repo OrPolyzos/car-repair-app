@@ -2,15 +2,10 @@
 <html>
 <head>
     <title>Edit User</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="/../styles.css">
-    <script type="text/javascript" src="../utilities.js"></script>
-
+    <#include "../common/head-section.ftl"/>
 </head>
 <body>
-<#include "../../navbar.ftl">
+<#include "../common/navbar.ftl">
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -63,9 +58,9 @@
                     <@spring.bind "userForm.type"/>
                     <label for="type">Type</label>
                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-user"></i>
-                                    </span>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
                         <select id="type" name="type" class="form-control">
                             <option value="User">User</option>
                             <option value="Admin">Admin</option>
@@ -79,9 +74,9 @@
                     <@spring.bind "userForm.email"/>
                     <label for="email">Email</label>
                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-envelope"></i>
-                                    </span>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                        </span>
                         <input type="text" class="form-control" name="email" id="email" placeholder="john@doe.com" value="${userForm.email!""}"/>
                     </div>
                     <#list spring.status.errorMessages as error>
@@ -92,9 +87,9 @@
                     <@spring.bind "userForm.password"/>
                     <label for="password">Password</label>
                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-lock"></i>
-                                    </span>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-lock"></i>
+                        </span>
                         <input type="password" class="form-control" name="password" id="password" placeholder="p4$$w0rd" value="${userForm.password!""}"/>
                     </div>
                     <#list spring.status.errorMessages as error>
@@ -107,9 +102,9 @@
                     <@spring.bind "userForm.addressStreet"/>
                     <label for="addressStreet">Street</label>
                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-road"></i>
-                                    </span>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-road"></i>
+                        </span>
                         <input type="text" class="form-control" name="addressStreet" id="addressStreet" placeholder="Bakers" value="${userForm.addressStreet!""}"/>
                     </div>
                     <#list spring.status.errorMessages as error>
@@ -120,9 +115,9 @@
                     <@spring.bind "userForm.addressNumber"/>
                     <label for="addressNumber">Number</label>
                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-home"></i>
-                                    </span>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-home"></i>
+                        </span>
                         <input type="number" class="form-control" min=1 max=999 step=1 name="addressNumber" id="addressNumber" placeholder="26" value="${userForm.addressNumber!""}"/>
                     </div>
                     <#list spring.status.errorMessages as error>
@@ -133,24 +128,25 @@
                     <@spring.bind "userForm.addressZipCode"/>
                     <label for="addressZipCode">Zip</label>
                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="	glyphicon glyphicon-map-marker"></i>
-                                    </span>
+                        <span class="input-group-addon">
+                            <i class="	glyphicon glyphicon-map-marker"></i>
+                        </span>
                         <input type="number" class="form-control" min=00001 max=99999 step=1 name="addressZipCode" id="addressZipCode" placeholder="15772" value="${userForm.addressZipCode!""}"/>
                     </div>
                     <#list spring.status.errorMessages as error>
                         <span class="errorMessage">${error}</span>
                     </#list>
                 </div>
-                <br><br>
-                <button type="submit" class="btn btn-success">Save</button>
-                <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
+                <div class="col-md-12 controls">
+                    <span>
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="reset" id="btn-clear" class="btn btn-danger">Clear</button>
+                    </span>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<#include "../common/scripts-section.ftl"/>
 </body>
 </html>

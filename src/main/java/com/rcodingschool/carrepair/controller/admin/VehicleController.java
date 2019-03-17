@@ -67,6 +67,7 @@ public class VehicleController extends BaseController {
         try {
             vehicleForm.setAfm(userService.findOne(userId).getAfm());
             model.addAttribute(VEHICLE_FORM_HOLDER, vehicleForm);
+            fillWithVehicleForms(model);
             return VEHICLES_VIEW;
         } catch (UserNotFoundException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
@@ -122,6 +123,9 @@ public class VehicleController extends BaseController {
 
     @GetMapping("/vehicles/{vehicleID}/edit")
     public String getEditVehicleView(@PathVariable String vehicleID, Model model, RedirectAttributes redirectAttributes) {
+        if (model.containsAttribute(VEHICLE_FORM_HOLDER)) {
+            return EDIT_VEHICLE_VIEW;
+        }
         try {
             Vehicle vehicle = vehicleService.findOne(vehicleID);
             VehicleForm vehicleForm = VehicleConverter.buildVehicleFormObject(vehicle);

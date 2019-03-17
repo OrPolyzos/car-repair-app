@@ -1,4 +1,4 @@
-<#if userList??>
+<#if userList?has_content>
     <div class="table-responsive">
         <table id="resultsTable" class="table table-hover">
             <thead>
