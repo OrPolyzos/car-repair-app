@@ -24,7 +24,7 @@
                     <tbody>
                     <#list allParts as part>
                         <tr>
-                            <td>${part.partID}</td>
+                            <td>${part.id}</td>
                             <td>${part.partName}</td>
                             <td>${part.partPrice}</td>
                         </tr>

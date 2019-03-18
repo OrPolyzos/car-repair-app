@@ -1,15 +1,17 @@
 package com.rcodingschool.carrepair.domain;
 
+import com.rcodingschool.carrepair.domain.base.ResourcePersistable;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "Vehicles")
-public class Vehicle implements Serializable {
+public class Vehicle implements Serializable, ResourcePersistable<String> {
 
     @Id
     @Column(name = "VehicleID", nullable = false)
-    private String vehicleID;
+    private String id;
 
     @Column(name = "Brand", nullable = false)
     private String brand;
@@ -39,12 +41,12 @@ public class Vehicle implements Serializable {
     public Vehicle() {
     }
 
-    public String getVehicleID() {
-        return vehicleID;
+    public String getId() {
+        return id;
     }
 
-    public void setVehicleID(String vehicleID) {
-        this.vehicleID = vehicleID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getBrand() {

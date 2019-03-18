@@ -16,20 +16,20 @@
             <tbody>
             <#list vehicleList as vehicle>
                 <tr>
-                    <td>${vehicle.vehicleID}</td>
+                    <td>${vehicle.id}</td>
                     <td>${vehicle.brand}</td>
                     <td>${vehicle.model}</td>
                     <td>${vehicle.year}</td>
                     <td>${vehicle.color}</td>
                     <td>${vehicle.fuelType}</td>
                     <td>
-                        <form action="/admin/vehicles/${vehicle.vehicleID}/edit" method="GET">
+                        <form action="/admin/vehicles/${vehicle.id}/edit" method="GET">
                             <button type="submit" value="Edit" class="btn btn-success">
                                 <span class="glyphicon glyphicon-cog"></span>
                             </button>
                         </form>
                     <td>
-                        <form action="/admin/vehicles/${vehicle.vehicleID}/delete" method="POST">
+                        <form action="/admin/vehicles/${vehicle.id}/delete" method="POST">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>

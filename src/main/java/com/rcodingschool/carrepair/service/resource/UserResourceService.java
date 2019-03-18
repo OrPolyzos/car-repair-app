@@ -1,4 +1,4 @@
-package com.rcodingschool.carrepair.service;
+package com.rcodingschool.carrepair.service.resource;
 
 import com.rcodingschool.carrepair.domain.User;
 import com.rcodingschool.carrepair.exception.InvalidCredentialsException;
@@ -11,22 +11,17 @@ import com.rcodingschool.carrepair.service.base.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UserResourceService extends ResourceService<User, Long> {
+public class UserResourceService extends ResourceService<User, UserSearchForm, Long> {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserResourceService(UserRepository userRepository) {
         super(userRepository);
         this.userRepository = userRepository;
-    }
-
-    public List<User> findAll() {
-        return userRepository.findAll();
     }
 
     public User login(String afmOrEmail, String password) {
@@ -41,7 +36,8 @@ public class UserResourceService extends ResourceService<User, Long> {
         return userRepository.findByEmail(email);
     }
 
-    public List<User> searchUsersBy(UserSearchForm userSearchForm) {
+    @Override
+    public Iterable<User> searchBy(UserSearchForm userSearchForm) {
         if (userSearchForm.getAfm() == null && userSearchForm.getEmail() == null) {
             return findAll();
         } else if (userSearchForm.getAfm() != null) {
@@ -62,9 +58,9 @@ public class UserResourceService extends ResourceService<User, Long> {
 
     @Override
     protected void validateBeforeUpdateOrThrow(User userToUpdate) throws ResourceException {
-        if (userRepository.findByAfmAndUserIDNot(userToUpdate.getAfm(), userToUpdate.getUserID()).isPresent()) {
+        if (userRepository.findByAfmAndIdNot(userToUpdate.getAfm(), userToUpdate.getId()).isPresent()) {
             throw new DuplicateAfmException(userToUpdate.getAfm());
-        } else if (userRepository.findByEmailAndUserIDNot(userToUpdate.getEmail(), userToUpdate.getUserID()).isPresent()) {
+        } else if (userRepository.findByEmailAndIdNot(userToUpdate.getEmail(), userToUpdate.getId()).isPresent()) {
             throw new DuplicateEmailException(userToUpdate.getEmail());
         }
     }

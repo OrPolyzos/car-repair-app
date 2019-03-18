@@ -19,7 +19,7 @@ public class RepairType implements Serializable {
     private Integer fixedPrice;
 
     @OneToMany(mappedBy = "repairType", targetEntity = Repair.class)
-    private List<Repair> repairsList;
+    private List<Repair> repairList;
 
     public RepairType() {
     }
@@ -48,11 +48,11 @@ public class RepairType implements Serializable {
         this.fixedPrice = fixedPrice;
     }
 
-    public List<Repair> getRepairsList() {
-        return repairsList;
+    public List<Repair> getRepairList() {
+        return repairList;
     }
 
-    public void setRepairsList(List<Repair> repairsList) {
-        this.repairsList = repairsList;
+    public void setRepairList(List<Repair> repairList) {
+        this.repairList = repairList;
     }
 }

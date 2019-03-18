@@ -1,26 +1,20 @@
 package com.rcodingschool.carrepair.domain;
 
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import com.rcodingschool.carrepair.domain.base.ResourcePersistable;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity(name = "Repairs")
-public class Repair implements Serializable {
+public class Repair implements Serializable, ResourcePersistable<Long> {
 
     @Id
     @Column(name = "RepairID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long repairID;
+    private Long id;
 
     @Column(name = "RepairDateTime", nullable = false)
     private LocalDateTime repairDateTime;
@@ -52,12 +46,12 @@ public class Repair implements Serializable {
     private List<RepairPart> repairParts;
 
 
-    public Long getRepairID() {
-        return repairID;
+    public Long getId() {
+        return id;
     }
 
-    public void setRepairID(Long repairID) {
-        this.repairID = repairID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getRepairDateTime() {
@@ -135,7 +129,7 @@ public class Repair implements Serializable {
     @Override
     public String toString() {
         return "Repair{" +
-                "repairID=" + repairID +
+                "id=" + id +
                 ", repairDateTime=" + repairDateTime +
                 ", repairStatus='" + repairStatus + '\'' +
                 ", repairTasks='" + repairTasks + '\'' +

@@ -7,30 +7,20 @@ import com.rcodingschool.carrepair.model.RepairForm;
 
 public class RepairConverter {
 
-    public static Repair buildInsertRepairObject(RepairForm repairForm) {
-        return provideBasicRepair(repairForm);
-    }
-
-    public static Repair buildUpdateRepairObject(RepairForm repairForm) {
-        Repair repair = provideBasicRepair(repairForm);
-        repair.setRepairID(repairForm.getRepairID());
-        return repair;
-    }
-
-    private static Repair provideBasicRepair(RepairForm repairForm) {
+    public static Repair repairFormToRepair(RepairForm repairForm) {
         Repair repair = new Repair();
         repair.setRepairTypeID(repairForm.getRepairTypeID());
         repair.setRepairDateTime(repairForm.getRepairDateTime());
         repair.setRepairStatus(repairForm.getRepairStatus());
         repair.setRepairTasks(repairForm.getRepairTasks());
         repair.setVehicleID(repairForm.getRepairVehicleID());
+        repair.setId(repairForm.getRepairID());
         return repair;
     }
 
-    //Building the repairForm Object using the repair Object
-    public static RepairForm buildRepairFormObject(Repair repair) {
+    public static RepairForm repairToRepairForm(Repair repair) {
         RepairForm repairForm = new RepairForm();
-        repairForm.setRepairID(repair.getRepairID());
+        repairForm.setRepairID(repair.getId());
         repairForm.setRepairDateTime(repair.getRepairDateTime());
         repairForm.setRepairStatus(repair.getRepairStatus());
         repairForm.setRepairTypeID(repair.getRepairTypeID());
@@ -38,6 +28,4 @@ public class RepairConverter {
         repairForm.setRepairVehicleID(repair.getVehicleID());
         return repairForm;
     }
-
-
 }

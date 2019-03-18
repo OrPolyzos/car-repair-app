@@ -48,7 +48,7 @@
         <tbody>
         <#list user.vehicles as vehicle>
             <tr>
-                <td>${vehicle.vehicleID}</td>
+                <td>${vehicle.id}</td>
                 <td>${vehicle.brand}</td>
                 <td>${vehicle.model}</td>
                 <td>${vehicle.year}</td>
@@ -77,7 +77,7 @@
         <#list user.vehicles as vehicle>
             <#list vehicle.repairs as repair>
                 <tr>
-                    <td>${repair.repairID}</td>
+                    <td>${repair.id}</td>
                     <td>
                         <!--TODO Fix the display format -->
                         ${repair.repairDateTime}

@@ -1,5 +1,7 @@
 package com.rcodingschool.carrepair.service.base;
 
+import com.rcodingschool.carrepair.domain.base.ResourcePersistable;
+import com.rcodingschool.carrepair.exception.base.DuplicateResourceException;
 import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
 import org.springframework.data.repository.CrudRepository;
@@ -9,47 +11,62 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class ResourceService<T, ID extends Serializable> {
+public abstract class ResourceService<R extends ResourcePersistable<ID>, RSF, ID extends Serializable> {
 
-    protected CrudRepository<T, ID> crudRepository;
+    protected CrudRepository<R, ID> crudRepository;
 
-    public ResourceService(CrudRepository<T, ID> crudRepository) {
+    public ResourceService(CrudRepository<R, ID> crudRepository) {
         this.crudRepository = crudRepository;
     }
 
-    public T find(ID entityId) {
-        return crudRepository.findOne(entityId);
+    public R find(ID resourceId) {
+        return crudRepository.findOne(resourceId);
     }
 
-    public Optional<T> findOptional(ID entityId) {
-        return Optional.ofNullable(crudRepository.findOne(entityId));
+    public Optional<R> findOptional(ID resourceId) {
+        return Optional.ofNullable(crudRepository.findOne(resourceId));
     }
 
-    public T findOrThrow(ID entityId) throws ResourceNotFoundException {
-        return findOptional(entityId).orElseThrow(() -> new ResourceNotFoundException(entityId));
+    public R findOrThrow(ID resourceId) throws ResourceNotFoundException {
+        return findOptional(resourceId).orElseThrow(() -> new ResourceNotFoundException(resourceId));
     }
 
-    public T insert(T entity) throws ResourceException {
-        validateBeforeInsertOrThrow(entity);
-        return crudRepository.save(entity);
+    public Iterable<R> findAll() {
+        return crudRepository.findAll();
     }
 
-    protected abstract void validateBeforeInsertOrThrow(T entity) throws ResourceException;
-
-    public T update(T entity) throws ResourceException {
-        validateBeforeUpdateOrThrow(entity);
-        return crudRepository.save(entity);
+    public Iterable<R> searchBy(RSF resourceSearchForm) {
+        return findAll();
     }
 
-    protected abstract void validateBeforeUpdateOrThrow(T entity) throws ResourceException;
+    public R insert(R resource) throws ResourceException {
+        validateBeforeInsertOrThrow(resource);
+        return crudRepository.save(resource);
+    }
 
-    public void deleteById(ID entityId) throws ResourceNotFoundException {
-        T actualEntity = findOrThrow(entityId);
+    public R update(R resource) throws ResourceException {
+        validateBeforeUpdateOrThrow(resource);
+        return crudRepository.save(resource);
+    }
+
+    public void deleteById(ID resourceId) throws ResourceException {
+        R actualEntity = findOrThrow(resourceId);
         crudRepository.delete(actualEntity);
     }
 
+    protected void validateBeforeInsertOrThrow(R resource) throws ResourceException {
+        if (findOptional(resource.getId()).isPresent()) {
+            throw new DuplicateResourceException(resource.getId());
+        }
+    }
 
-    protected List<T> mapOptionalToList(Optional<T> optionalEntity) {
+    protected void validateBeforeUpdateOrThrow(R resource) throws ResourceException {
+        if (!findOptional(resource.getId()).isPresent()) {
+            throw new ResourceNotFoundException(resource.getId());
+        }
+    }
+
+    protected List<R> mapOptionalToList(Optional<R> optionalEntity) {
         return optionalEntity.map(Collections::singletonList).orElse(Collections.emptyList());
     }
 }

@@ -7,7 +7,7 @@ public class UserConverter {
 
     public static User userFormToUser(UserForm userForm) {
         User user = new User();
-        user.setUserID(userForm.getUserID());
+        user.setId(userForm.getUserID());
         user.setFirstName(userForm.getFirstName());
         user.setLastName(userForm.getLastName());
         user.setAfm(userForm.getAfm());
@@ -22,7 +22,7 @@ public class UserConverter {
 
     public static UserForm userToUserForm(User user) {
         UserForm userForm = new UserForm();
-        userForm.setUserID(user.getUserID());
+        userForm.setUserID(user.getId());
         userForm.setPassword(user.getPassword());
         userForm.setAfm(user.getAfm());
         userForm.setFirstName(user.getFirstName());

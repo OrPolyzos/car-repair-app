@@ -4,8 +4,8 @@
         <fieldset class="horizontal-3">
             <div class="form-group">
                 <label for="vehicleID">Plate Number</label>
-                <@spring.bind "vehicleForm.vehicleID"/>
-                <input type="text" class="form-control " name="vehicleID" id="vehicleID" placeholder="ABC-1234" value="${vehicleForm.vehicleID!""}"/>
+                <@spring.bind "vehicleForm.id"/>
+                <input type="text" class="form-control " name="vehicleID" id="vehicleID" placeholder="ABC-1234" value="${vehicleForm.id!""}"/>
                 <#list spring.status.errorMessages as error>
                     <span class="errorMessage">${error}</span>
                 </#list>

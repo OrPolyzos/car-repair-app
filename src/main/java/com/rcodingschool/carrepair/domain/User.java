@@ -1,16 +1,18 @@
 package com.rcodingschool.carrepair.domain;
 
+import com.rcodingschool.carrepair.domain.base.ResourcePersistable;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "Users")
-public class User implements Serializable {
+public class User implements Serializable, ResourcePersistable<Long> {
 
     @Id
     @Column(name = "UserID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userID;
+    private Long id;
 
     @Column(name = "Firstname", nullable = false)
     private String firstName;
@@ -42,12 +44,12 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Vehicle.class)
     private List<Vehicle> vehicles;
 
-    public Long getUserID() {
-        return userID;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {

@@ -7,7 +7,7 @@ public class VehicleConverter {
 
     public static Vehicle vehicleFormToVehicle(VehicleForm vehicleForm) {
         Vehicle vehicle = new Vehicle();
-        vehicle.setVehicleID(vehicleForm.getVehicleID());
+        vehicle.setId(vehicleForm.getVehicleID());
         vehicle.setBrand(vehicleForm.getBrand());
         vehicle.setModel(vehicleForm.getModel());
         vehicle.setFuelType(vehicleForm.getFuelType());
@@ -19,14 +19,14 @@ public class VehicleConverter {
 
     public static VehicleForm vehicleToVehicleForm(Vehicle vehicle) {
         VehicleForm vehicleForm = new VehicleForm();
-        vehicleForm.setVehicleID(vehicle.getVehicleID());
+        vehicleForm.setVehicleID(vehicle.getId());
         vehicleForm.setBrand(vehicle.getBrand());
         vehicleForm.setModel(vehicle.getModel());
         vehicleForm.setColor(vehicle.getColor());
         vehicleForm.setFuelType(vehicle.getFuelType());
         vehicleForm.setYear(vehicle.getYear());
         vehicleForm.setAfm(vehicle.getUser().getAfm());
-        vehicleForm.setUserID(vehicle.getUser().getUserID());
+        vehicleForm.setUserID(vehicle.getUser().getId());
         return vehicleForm;
     }
 

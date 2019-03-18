@@ -1,22 +1,18 @@
 package com.rcodingschool.carrepair.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.rcodingschool.carrepair.domain.base.ResourcePersistable;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "Parts")
-public class Part implements Serializable {
+public class Part implements Serializable, ResourcePersistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "partID", nullable = false)
-    private Long partID;
+    private Long id;
 
     @Column(name = "partName", nullable = false)
     private String partName;
@@ -27,12 +23,12 @@ public class Part implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "part", targetEntity = RepairPart.class)
     private List<RepairPart> repairParts;
 
-    public Long getPartID() {
-        return partID;
+    public Long getId() {
+        return id;
     }
 
-    public void setPartID(Long partID) {
-        this.partID = partID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getPartName() {
@@ -58,4 +54,5 @@ public class Part implements Serializable {
     public void setRepairParts(List<RepairPart> repairParts) {
         this.repairParts = repairParts;
     }
+
 }

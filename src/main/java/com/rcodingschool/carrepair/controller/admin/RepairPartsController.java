@@ -1,14 +1,13 @@
 package com.rcodingschool.carrepair.controller.admin;
 
 
-import com.rcodingschool.carrepair.controller.base.BaseController;
+import com.rcodingschool.carrepair.controller.base.InformativeController;
 import com.rcodingschool.carrepair.converter.RepairPartsConverter;
 import com.rcodingschool.carrepair.domain.RepairPart;
-import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
-import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
+import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.model.RepairPartForm;
-import com.rcodingschool.carrepair.service.PartService;
 import com.rcodingschool.carrepair.service.RepairPartService;
+import com.rcodingschool.carrepair.service.resource.PartResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ import static com.rcodingschool.carrepair.security.SecurityConfig.ADMIN_URI;
 
 @Controller
 @RequestMapping(ADMIN_URI)
-public class RepairPartsController extends BaseController {
+public class RepairPartsController implements InformativeController {
 
     private static final String REPAIR_PARTS_VIEW = "admin/repair-part/repair-parts";
 
@@ -33,12 +32,12 @@ public class RepairPartsController extends BaseController {
     private static final String CREATED_MESSAGE = "The part was added!";
     private static final String DELETED_MESSAGE = "The part was deleted!";
 
-    private final PartService partService;
+    private final PartResourceService partResourceService;
     private final RepairPartService repairPartService;
 
     @Autowired
-    public RepairPartsController(PartService partService, RepairPartService repairPartService) {
-        this.partService = partService;
+    public RepairPartsController(PartResourceService partResourceService, RepairPartService repairPartService) {
+        this.partResourceService = partResourceService;
         this.repairPartService = repairPartService;
     }
 
@@ -55,7 +54,7 @@ public class RepairPartsController extends BaseController {
             model.addAttribute(REPAIR_PART_FORM_HOLDER, repairPartForm);
         }
         model.addAttribute(REPAIR_PART_LIST_HOLDER, repairPartService.findAllByRepairID(repairID));
-        model.addAttribute(ALL_PARTS_LIST_HOLDER, partService.findAll());
+        model.addAttribute(ALL_PARTS_LIST_HOLDER, partResourceService.findAll());
     }
 
 
@@ -72,7 +71,7 @@ public class RepairPartsController extends BaseController {
             sendInfoMessage(model, CREATED_MESSAGE);
             fillWithRepairPartForms(repairId, model);
             return REPAIR_PARTS_VIEW;
-        } catch (RepairNotFoundException | ResourceNotFoundException exception) {
+        } catch (ResourceException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo(String.format("/admin/repairs/%s/parts", repairId));
         }
@@ -85,7 +84,7 @@ public class RepairPartsController extends BaseController {
             sendInfoMessage(model, DELETED_MESSAGE);
             fillWithRepairPartForms(repairID, model);
             return REPAIR_PARTS_VIEW;
-        } catch (RepairNotFoundException | ResourceNotFoundException exception) {
+        } catch (ResourceException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo(String.format("/admin/repairs/%s/parts", repairID));
         }

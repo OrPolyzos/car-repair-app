@@ -1,41 +1,50 @@
 package com.rcodingschool.carrepair.controller.admin.base;
 
-import com.rcodingschool.carrepair.controller.base.BaseController;
+import com.rcodingschool.carrepair.controller.base.InformativeController;
+import com.rcodingschool.carrepair.domain.base.ResourcePersistable;
 import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
 import com.rcodingschool.carrepair.service.base.ResourceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.function.Function;
 
-public abstract class ResourceController<T, ID extends Serializable, RF, RSF> extends BaseController {
+public abstract class ResourceController<R extends ResourcePersistable<ID>, ID extends Serializable, RF, RSF> implements InformativeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourceController.class.getName());
 
-    protected final Class<T> resourceClass;
+    protected final Class<R> resourceClass;
     protected final Class<RF> resourceFormClass;
     protected final Class<RSF> resourceSearchFormClass;
 
-    protected Function<RF, T> resourceConverter;
-    protected Function<T, RF> reverseResourceConverter;
+    protected Function<RF, R> resourceConverter;
+    protected Function<R, RF> reverseResourceConverter;
 
-    protected ResourceService<T, ID> resourceService;
+    protected ResourceService<R, RSF, ID> resourceService;
 
-    public ResourceController(Class<T> resourceClass, Class<RF> resourceFormClass, Class<RSF> resourceSearchFormClass,
-                              Function<RF, T> resourceConverter, Function<T, RF> reverseResourceConverter,
-                              ResourceService<T, ID> resourceService) {
+    public ResourceController(Class<R> resourceClass, Class<RF> resourceFormClass, Class<RSF> resourceSearchFormClass,
+                              Function<RF, R> resourceConverter, Function<R, RF> reverseResourceConverter,
+                              ResourceService<R, RSF, ID> resourceService) {
         this.resourceClass = resourceClass;
         this.resourceFormClass = resourceFormClass;
         this.resourceSearchFormClass = resourceSearchFormClass;
         this.resourceConverter = resourceConverter;
         this.reverseResourceConverter = reverseResourceConverter;
         this.resourceService = resourceService;
+    }
+
+    @InitBinder
+    private void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
     public String getResourceView(Model model) {
@@ -55,7 +64,7 @@ public abstract class ResourceController<T, ID extends Serializable, RF, RSF> ex
         }
 
         try {
-            T resourceToSave = resourceConverter.apply(resourceForm);
+            R resourceToSave = resourceConverter.apply(resourceForm);
             resourceService.insert(resourceToSave);
             sendInfoMessage(model, getResourceCreatedMessage());
             model.asMap().remove(getResourceFormHolder());
@@ -72,7 +81,7 @@ public abstract class ResourceController<T, ID extends Serializable, RF, RSF> ex
             resourceService.deleteById(resourceId);
             sendInfoMessage(model, getResourceDeletedMessage());
             return getResourceView(model);
-        } catch (ResourceNotFoundException exception) {
+        } catch (ResourceException exception) {
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo(getResourceBaseUri());
         }
@@ -83,7 +92,7 @@ public abstract class ResourceController<T, ID extends Serializable, RF, RSF> ex
             return getEditResourceViewPath();
         }
         try {
-            T resource = resourceService.findOrThrow(resourceId);
+            R resource = resourceService.findOrThrow(resourceId);
             RF resourceForm = reverseResourceConverter.apply(resource);
             model.addAttribute(getResourceFormHolder(), resourceForm);
             return getEditResourceViewPath();
@@ -99,7 +108,7 @@ public abstract class ResourceController<T, ID extends Serializable, RF, RSF> ex
             return redirectTo(httpServletRequest.getRequestURI());
         }
         try {
-            T user = resourceConverter.apply(resourceForm);
+            R user = resourceConverter.apply(resourceForm);
             resourceService.update(user);
             sendInfoMessage(model, getResourceUpdatedMessage());
             return getResourceView(model);
@@ -108,6 +117,15 @@ public abstract class ResourceController<T, ID extends Serializable, RF, RSF> ex
             redirectErrorMessage(redirectAttributes, exception.getMessage());
             return redirectTo(httpServletRequest.getRequestURI());
         }
+    }
+
+    public String searchBy(RSF resourceSearchForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            sendBindingErrors(redirectAttributes, bindingResult, getResourceSearchFormHolder(), resourceSearchForm);
+            redirectTo(getResourceBaseUri());
+        }
+        model.addAttribute(getResourceListHolder(), resourceService.searchBy(resourceSearchForm));
+        return getResourceView(model);
     }
 
     private <E> E createInstanceOf(Class<E> clazz) {

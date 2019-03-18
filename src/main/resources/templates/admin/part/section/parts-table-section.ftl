@@ -13,18 +13,18 @@
             <tbody>
             <#list partList as part>
                 <tr>
-                    <td>${part.partID}</td>
+                    <td>${part.id}</td>
                     <td>${part.partName}</td>
                     <td>${part.partPrice}</td>
                     <td>
-                        <form action="/admin/parts/${part.partID}/edit" method="GET">
+                        <form action="/admin/parts/${part.id}/edit" method="GET">
                             <button type="submit" class="btn btn-success">
                                 <span class="glyphicon glyphicon-cog"></span>
                             </button>
                         </form>
                     </td>
                     <td>
-                        <form action="/admin/parts/${part.partID}/delete" method="POST">
+                        <form action="/admin/parts/${part.id}/delete" method="POST">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this part?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>

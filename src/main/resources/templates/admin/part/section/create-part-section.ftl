@@ -1,5 +1,5 @@
 <h2 class="subtitle">Create</h2>
-<form class="form-horizontal" action="/admin/parts/create" method="POST" id="partForm" name="partForm">
+<form class="form-horizontal" action="/admin/parts" method="POST" id="partForm" name="partForm">
     <legend>Parts Details</legend>
     <div class="col-md-6">
         <fieldset>

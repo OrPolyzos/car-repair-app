@@ -22,9 +22,9 @@
         </tr>
         </thead>
         <tbody>
-        <#list repairsList as repair>
+        <#list repairList as repair>
             <tr>
-                <td>${repair.repairID!}</td>
+                <td>${repair.id!}</td>
                 <td>
                     <!-- TODO FIX the display format -->
                     ${repair.repairDateTime}

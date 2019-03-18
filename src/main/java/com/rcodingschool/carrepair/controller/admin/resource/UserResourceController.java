@@ -1,11 +1,11 @@
-package com.rcodingschool.carrepair.controller.admin;
+package com.rcodingschool.carrepair.controller.admin.resource;
 
 import com.rcodingschool.carrepair.controller.admin.base.ResourceController;
 import com.rcodingschool.carrepair.converter.UserConverter;
 import com.rcodingschool.carrepair.domain.User;
 import com.rcodingschool.carrepair.model.UserForm;
 import com.rcodingschool.carrepair.model.UserSearchForm;
-import com.rcodingschool.carrepair.service.UserResourceService;
+import com.rcodingschool.carrepair.service.resource.UserResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,14 +29,11 @@ public class UserResourceController extends ResourceController<User, Long, UserF
     private static final String RESOURCE_SEARCH_FORM_HOLDER = "userSearchForm";
     private static final String RESOURCE_LIST_HOLDER = "userList";
 
-    private UserResourceService userResourceService;
-
     @Autowired
     public UserResourceController(UserResourceService userResourceService) {
         super(User.class, UserForm.class, UserSearchForm.class,
                 UserConverter::userFormToUser, UserConverter::userToUserForm,
                 userResourceService);
-        this.userResourceService = userResourceService;
     }
 
     @Override
@@ -70,14 +67,10 @@ public class UserResourceController extends ResourceController<User, Long, UserF
         return super.editResource(resourceId, resourceForm, bindingResult, model, redirectAttributes, httpServletRequest);
     }
 
+    @Override
     @PostMapping(value = "/admin/users/search")
-    public String searchUser(@Valid @ModelAttribute(RESOURCE_SEARCH_FORM_HOLDER) UserSearchForm userSearchForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            sendBindingErrors(redirectAttributes, bindingResult, RESOURCE_SEARCH_FORM_HOLDER, userSearchForm);
-            redirectTo(RESOURCE_BASE_URI);
-        }
-        model.addAttribute(RESOURCE_LIST_HOLDER, userResourceService.searchUsersBy(userSearchForm));
-        return getResourceView(model);
+    public String searchBy(@Valid @ModelAttribute(RESOURCE_SEARCH_FORM_HOLDER) UserSearchForm resourceSearchForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+        return super.searchBy(resourceSearchForm, bindingResult, model, redirectAttributes);
     }
 
     @Override

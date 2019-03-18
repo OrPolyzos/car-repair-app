@@ -1,4 +1,4 @@
-package com.rcodingschool.carrepair.controller.admin;
+package com.rcodingschool.carrepair.controller.admin.resource;
 
 import com.rcodingschool.carrepair.controller.admin.base.ResourceController;
 import com.rcodingschool.carrepair.converter.VehicleConverter;
@@ -8,8 +8,8 @@ import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.exception.user.UserNotFoundException;
 import com.rcodingschool.carrepair.model.VehicleForm;
 import com.rcodingschool.carrepair.model.VehicleSearchForm;
-import com.rcodingschool.carrepair.service.UserResourceService;
-import com.rcodingschool.carrepair.service.VehicleResourceService;
+import com.rcodingschool.carrepair.service.resource.UserResourceService;
+import com.rcodingschool.carrepair.service.resource.VehicleResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,13 +27,12 @@ import javax.validation.Valid;
 public class VehicleResourceController extends ResourceController<Vehicle, String, VehicleForm, VehicleSearchForm> {
 
     private static final String RESOURCE_VIEW = "/admin/vehicle/vehicles";
-    private static final String EDIT_RESOURCE_VIEW = "/admin/vehicle/edit-vehicles";
+    private static final String EDIT_RESOURCE_VIEW = "/admin/vehicle/edit-vehicle";
     private static final String RESOURCE_BASE_URI = "/admin/vehicles";
     private static final String RESOURCE_FORM_HOLDER = "vehicleForm";
     private static final String RESOURCE_SEARCH_FORM_HOLDER = "vehicleSearchForm";
     private static final String RESOURCE_LIST_HOLDER = "vehicleList";
 
-    private VehicleResourceService vehicleResourceService;
     private UserResourceService userResourceService;
 
     @Autowired
@@ -41,7 +40,6 @@ public class VehicleResourceController extends ResourceController<Vehicle, Strin
         super(Vehicle.class, VehicleForm.class, VehicleSearchForm.class,
                 VehicleConverter::vehicleFormToVehicle, VehicleConverter::vehicleToVehicleForm,
                 vehicleResourceService);
-        this.vehicleResourceService = vehicleResourceService;
         this.userResourceService = userResourceService;
     }
 
@@ -56,7 +54,7 @@ public class VehicleResourceController extends ResourceController<Vehicle, Strin
     public String createResource(@Valid @ModelAttribute(RESOURCE_FORM_HOLDER) VehicleForm resourceForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         try {
             User owner = userResourceService.findOptionalByAfm(resourceForm.getAfm()).orElseThrow(() -> new UserNotFoundException(resourceForm.getAfm()));
-            resourceForm.setUserID(owner.getUserID());
+            resourceForm.setUserID(owner.getId());
             return super.createResource(resourceForm, bindingResult, model, redirectAttributes);
         } catch (UserNotFoundException e) {
             sendErrorMessage(model, e.getMessage());
@@ -96,15 +94,10 @@ public class VehicleResourceController extends ResourceController<Vehicle, Strin
         }
     }
 
+    @Override
     @PostMapping("/admin/vehicles/search")
-    public String searchVehicle(@Valid @ModelAttribute(RESOURCE_SEARCH_FORM_HOLDER) VehicleSearchForm vehicleSearchForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            sendBindingErrors(redirectAttributes, bindingResult, RESOURCE_SEARCH_FORM_HOLDER, vehicleSearchForm);
-            return redirectTo("/admin/vehicles");
-        }
-
-        model.addAttribute(RESOURCE_LIST_HOLDER, vehicleResourceService.searchForVehicles(vehicleSearchForm));
-        return getResourceView(model);
+    public String searchBy(@Valid @ModelAttribute(RESOURCE_SEARCH_FORM_HOLDER) VehicleSearchForm resourceSearchForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+        return super.searchBy(resourceSearchForm, bindingResult, model, redirectAttributes);
     }
 
     @Override

@@ -1,17 +1,22 @@
 package com.rcodingschool.carrepair.controller.anonymous;
 
-import com.rcodingschool.carrepair.controller.base.BaseController;
+import com.rcodingschool.carrepair.controller.base.InformativeController;
 import com.rcodingschool.carrepair.model.LoginForm;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static com.rcodingschool.carrepair.security.SecurityConfig.INDEX_URI;
-import static com.rcodingschool.carrepair.security.SecurityConfig.LOGIN_URI;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.rcodingschool.carrepair.security.SecurityConfig.*;
 
 @Controller
-public class LoginController extends BaseController {
+public class LoginController implements InformativeController {
 
     private static final String LOGIN_VIEW = "anonymous/login";
 
@@ -24,7 +29,15 @@ public class LoginController extends BaseController {
             sendErrorMessage(model, LOGIN_ERROR_MESSAGE);
         }
         model.addAttribute(LOGIN_FORM, new LoginForm());
-        return decideForViewBasedOnAuth(LOGIN_VIEW);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            List<String> authorities = authentication.getAuthorities().stream().map(GrantedAuthority::toString).collect(Collectors.toList());
+            if (authorities.contains(ADMIN_ROLE)) {
+                return redirectTo(ADMIN_URI);
+            } else if (authorities.contains(USER_ROLE)) {
+                return redirectTo(USER_URI);
+            }
+        }
+        return LOGIN_VIEW;
     }
-
 }

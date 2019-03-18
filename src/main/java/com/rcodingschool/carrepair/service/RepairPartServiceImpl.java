@@ -2,9 +2,9 @@ package com.rcodingschool.carrepair.service;
 
 import com.rcodingschool.carrepair.domain.Repair;
 import com.rcodingschool.carrepair.domain.RepairPart;
-import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
-import com.rcodingschool.carrepair.exception.repair.RepairNotFoundException;
+import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.repository.RepairPartRepository;
+import com.rcodingschool.carrepair.service.resource.RepairResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,13 @@ import java.util.List;
 @Transactional
 public class RepairPartServiceImpl implements RepairPartService {
 
-    @Autowired
-    private RepairPartRepository repairPartRepository;
+    private final RepairPartRepository repairPartRepository;
+    private final RepairResourceService repairResourceService;
 
     @Autowired
-    private RepairService repairService;
-
-    @Override
-    public List<RepairPart> findAll() {
-        return repairPartRepository.findAll();
+    public RepairPartServiceImpl(RepairPartRepository repairPartRepository, RepairResourceService repairResourceService) {
+        this.repairPartRepository = repairPartRepository;
+        this.repairResourceService = repairResourceService;
     }
 
     @Override
@@ -37,17 +35,17 @@ public class RepairPartServiceImpl implements RepairPartService {
     }
 
     @Override
-    public void save(RepairPart repairPart) throws ResourceNotFoundException, RepairNotFoundException {
+    public void save(RepairPart repairPart) throws ResourceException {
         repairPartRepository.save(repairPart);
-        Repair repair = repairService.findByRepairID(repairPart.getRepairID());
-        repairService.save(repair);
+        Repair repair = repairResourceService.findOrThrow(repairPart.getRepairID());
+        repairResourceService.update(repair);
     }
 
     @Override
-    public void deleteByRepairIDAndPartID(Long repairID, Long partID) throws ResourceNotFoundException, RepairNotFoundException {
+    public void deleteByRepairIDAndPartID(Long repairID, Long partID) throws ResourceException {
         repairPartRepository.deleteByRepairIDAndPartID(repairID, partID);
-        Repair repair = repairService.findByRepairID(repairID);
-        repairService.save(repair);
+        Repair repair = repairResourceService.findOrThrow(repairID);
+        repairResourceService.update(repair);
     }
 
 

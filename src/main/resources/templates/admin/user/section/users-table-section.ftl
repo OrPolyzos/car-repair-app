@@ -20,7 +20,7 @@
             <tbody>
             <#list userList as user>
                 <tr>
-                    <td>${user.userID}</td>
+                    <td>${user.id}</td>
                     <td>${user.afm}</td>
                     <td>${user.email}</td>
                     <td>${user.firstName}</td>
@@ -30,21 +30,21 @@
                     <td>${user.addressNumber}</td>
                     <td>${user.addressZipCode}</td>
                     <td>
-                        <form action="/admin/users/${user.userID}/edit" method="GET">
+                        <form action="/admin/users/${user.id}/edit" method="GET">
                             <button type="submit" class="btn btn-success">
                                 <span class="glyphicon glyphicon-cog"></span>
                             </button>
                         </form>
                     </td>
                     <td>
-                        <form action="/admin/users/${user.userID}/delete" method="POST">
+                        <form action="/admin/users/${user.id}/delete" method="POST">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </form>
                     </td>
                     <td>
-                        <form action="/admin/users/${user.userID}/vehicles" method="GET">
+                        <form action="/admin/users/${user.id}/vehicles" method="GET">
                             <button type="submit" class="btn btn-info">
                                 <span class="glyphicon glyphicon-dashboard"></span>
                             </button>
