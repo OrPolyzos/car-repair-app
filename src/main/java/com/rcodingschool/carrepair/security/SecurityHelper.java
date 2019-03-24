@@ -1,12 +1,12 @@
 package com.rcodingschool.carrepair.security;
 
 import com.rcodingschool.carrepair.domain.User;
-import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.service.resource.UserResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import spring.web.initializr.base.exception.ResourceException;
 
 @Component
 public class SecurityHelper {

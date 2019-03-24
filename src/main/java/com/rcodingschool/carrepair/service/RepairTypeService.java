@@ -4,5 +4,5 @@ import com.rcodingschool.carrepair.domain.RepairType;
 
 public interface RepairTypeService {
 
-    RepairType findByRepairTypeID( Short repairTypeID);
+    RepairType findByRepairTypeID(Short repairTypeID);
 }

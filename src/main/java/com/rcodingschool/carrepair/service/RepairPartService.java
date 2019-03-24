@@ -1,7 +1,7 @@
 package com.rcodingschool.carrepair.service;
 
 import com.rcodingschool.carrepair.domain.RepairPart;
-import com.rcodingschool.carrepair.exception.base.ResourceException;
+import spring.web.initializr.base.exception.ResourceException;
 
 import java.util.List;
 

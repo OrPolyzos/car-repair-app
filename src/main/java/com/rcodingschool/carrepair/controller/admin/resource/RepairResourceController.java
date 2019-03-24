@@ -1,6 +1,5 @@
 package com.rcodingschool.carrepair.controller.admin.resource;
 
-import com.rcodingschool.carrepair.controller.admin.base.ResourceController;
 import com.rcodingschool.carrepair.converter.RepairConverter;
 import com.rcodingschool.carrepair.domain.Repair;
 import com.rcodingschool.carrepair.model.RepairForm;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import spring.web.initializr.base.controller.ResourceController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

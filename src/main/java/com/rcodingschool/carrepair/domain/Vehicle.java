@@ -1,6 +1,6 @@
 package com.rcodingschool.carrepair.domain;
 
-import com.rcodingschool.carrepair.domain.base.ResourcePersistable;
+import spring.web.initializr.base.domain.ResourcePersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -3,9 +3,9 @@ package com.rcodingschool.carrepair.service.resource;
 import com.rcodingschool.carrepair.domain.Vehicle;
 import com.rcodingschool.carrepair.model.VehicleSearchForm;
 import com.rcodingschool.carrepair.repository.VehicleRepository;
-import com.rcodingschool.carrepair.service.base.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import spring.web.initializr.base.service.ResourceService;
 
 @Component
 public class VehicleResourceService extends ResourceService<Vehicle, VehicleSearchForm, String> {

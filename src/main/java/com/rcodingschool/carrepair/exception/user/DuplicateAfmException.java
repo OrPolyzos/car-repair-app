@@ -1,6 +1,7 @@
 package com.rcodingschool.carrepair.exception.user;
 
-import com.rcodingschool.carrepair.exception.base.DuplicateResourceException;
+
+import spring.web.initializr.base.exception.DuplicateResourceException;
 
 public class DuplicateAfmException extends DuplicateResourceException {
 

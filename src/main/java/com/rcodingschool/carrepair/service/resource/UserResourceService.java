@@ -2,14 +2,14 @@ package com.rcodingschool.carrepair.service.resource;
 
 import com.rcodingschool.carrepair.domain.User;
 import com.rcodingschool.carrepair.exception.InvalidCredentialsException;
-import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.exception.user.DuplicateAfmException;
 import com.rcodingschool.carrepair.exception.user.DuplicateEmailException;
 import com.rcodingschool.carrepair.model.UserSearchForm;
 import com.rcodingschool.carrepair.repository.UserRepository;
-import com.rcodingschool.carrepair.service.base.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import spring.web.initializr.base.exception.ResourceException;
+import spring.web.initializr.base.service.ResourceService;
 
 import java.util.Optional;
 

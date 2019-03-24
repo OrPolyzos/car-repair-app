@@ -3,13 +3,13 @@ package com.rcodingschool.carrepair.service.resource;
 import com.rcodingschool.carrepair.domain.Part;
 import com.rcodingschool.carrepair.domain.Repair;
 import com.rcodingschool.carrepair.domain.RepairPart;
-import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.model.PartSearchForm;
 import com.rcodingschool.carrepair.repository.PartRepository;
 import com.rcodingschool.carrepair.service.RepairPartService;
-import com.rcodingschool.carrepair.service.base.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import spring.web.initializr.base.exception.ResourceException;
+import spring.web.initializr.base.service.ResourceService;
 
 import java.util.List;
 

@@ -1,10 +1,8 @@
 package com.rcodingschool.carrepair.controller.admin;
 
 
-import com.rcodingschool.carrepair.controller.base.InformativeController;
 import com.rcodingschool.carrepair.converter.RepairPartsConverter;
 import com.rcodingschool.carrepair.domain.RepairPart;
-import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.model.RepairPartForm;
 import com.rcodingschool.carrepair.service.RepairPartService;
 import com.rcodingschool.carrepair.service.resource.PartResourceService;
@@ -14,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import spring.web.initializr.base.controller.InformativeController;
+import spring.web.initializr.base.exception.ResourceException;
 
 import javax.validation.Valid;
 

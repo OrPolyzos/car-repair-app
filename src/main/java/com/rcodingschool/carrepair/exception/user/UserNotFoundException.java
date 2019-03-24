@@ -1,7 +1,7 @@
 package com.rcodingschool.carrepair.exception.user;
 
 
-import com.rcodingschool.carrepair.exception.base.ResourceNotFoundException;
+import spring.web.initializr.base.exception.ResourceNotFoundException;
 
 public class UserNotFoundException extends ResourceNotFoundException {
 

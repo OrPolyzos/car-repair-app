@@ -1,10 +1,8 @@
 package com.rcodingschool.carrepair.controller.admin.resource;
 
-import com.rcodingschool.carrepair.controller.admin.base.ResourceController;
 import com.rcodingschool.carrepair.converter.VehicleConverter;
 import com.rcodingschool.carrepair.domain.User;
 import com.rcodingschool.carrepair.domain.Vehicle;
-import com.rcodingschool.carrepair.exception.base.ResourceException;
 import com.rcodingschool.carrepair.exception.user.UserNotFoundException;
 import com.rcodingschool.carrepair.model.VehicleForm;
 import com.rcodingschool.carrepair.model.VehicleSearchForm;
@@ -19,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import spring.web.initializr.base.controller.ResourceController;
+import spring.web.initializr.base.exception.ResourceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
