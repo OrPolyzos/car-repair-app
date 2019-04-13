@@ -1,6 +1,6 @@
 package com.rcodingschool.carrepair.domain;
 
-import spring.web.initializr.base.domain.ResourcePersistable;
+import ore.spring.web.initializr.domain.ResourcePersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -130,5 +130,10 @@ public class User implements Serializable, ResourcePersistable<Long> {
 
     public void setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
+    }
+
+    @Override
+    public Long getResourcePersistableId() {
+        return id;
     }
 }

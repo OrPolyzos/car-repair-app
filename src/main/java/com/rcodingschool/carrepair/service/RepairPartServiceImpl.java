@@ -4,9 +4,9 @@ import com.rcodingschool.carrepair.domain.Repair;
 import com.rcodingschool.carrepair.domain.RepairPart;
 import com.rcodingschool.carrepair.repository.RepairPartRepository;
 import com.rcodingschool.carrepair.service.resource.RepairResourceService;
+import ore.spring.web.initializr.exception.ResourceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring.web.initializr.base.exception.ResourceException;
 
 import javax.transaction.Transactional;
 import java.util.List;

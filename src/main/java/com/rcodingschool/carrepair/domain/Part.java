@@ -1,7 +1,7 @@
 package com.rcodingschool.carrepair.domain;
 
 
-import spring.web.initializr.base.domain.ResourcePersistable;
+import ore.spring.web.initializr.domain.ResourcePersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -56,4 +56,8 @@ public class Part implements Serializable, ResourcePersistable<Long> {
         this.repairParts = repairParts;
     }
 
+    @Override
+    public Long getResourcePersistableId() {
+        return id;
+    }
 }

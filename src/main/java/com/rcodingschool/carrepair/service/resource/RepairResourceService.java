@@ -5,10 +5,10 @@ import com.rcodingschool.carrepair.model.RepairSearchForm;
 import com.rcodingschool.carrepair.repository.RepairRepository;
 import com.rcodingschool.carrepair.service.RepairPartService;
 import com.rcodingschool.carrepair.service.RepairTypeService;
+import ore.spring.web.initializr.exception.ResourceException;
+import ore.spring.web.initializr.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import spring.web.initializr.base.exception.ResourceException;
-import spring.web.initializr.base.service.ResourceService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

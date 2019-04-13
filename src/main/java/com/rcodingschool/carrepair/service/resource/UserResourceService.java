@@ -6,10 +6,10 @@ import com.rcodingschool.carrepair.exception.user.DuplicateAfmException;
 import com.rcodingschool.carrepair.exception.user.DuplicateEmailException;
 import com.rcodingschool.carrepair.model.UserSearchForm;
 import com.rcodingschool.carrepair.repository.UserRepository;
+import ore.spring.web.initializr.exception.ResourceException;
+import ore.spring.web.initializr.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import spring.web.initializr.base.exception.ResourceException;
-import spring.web.initializr.base.service.ResourceService;
 
 import java.util.Optional;
 

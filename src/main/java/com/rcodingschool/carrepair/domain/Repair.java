@@ -1,7 +1,7 @@
 package com.rcodingschool.carrepair.domain;
 
 
-import spring.web.initializr.base.domain.ResourcePersistable;
+import ore.spring.web.initializr.domain.ResourcePersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -44,7 +44,6 @@ public class Repair implements Serializable, ResourcePersistable<Long> {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "repair", targetEntity = RepairPart.class)
     private List<RepairPart> repairParts;
-
 
     public Long getId() {
         return id;
@@ -139,5 +138,10 @@ public class Repair implements Serializable, ResourcePersistable<Long> {
                 ", vehicleID='" + vehicleID + '\'' +
                 ", vehicle=" + vehicle +
                 '}';
+    }
+
+    @Override
+    public Long getResourcePersistableId() {
+        return id;
     }
 }

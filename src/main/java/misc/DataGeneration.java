@@ -39,7 +39,7 @@ public class DataGeneration {
     public static void main(String[] args) {
         generateUsers();
         generateRepairs();
-       // exportRepairsToCSV();
+        // exportRepairsToCSV();
 
 //        for (int i=0; i < firstNamesList.size(); i++){
 //            System.out.println(firstNamesList.get(i) + " " + lastNamesList.get(i) + " " +
@@ -209,7 +209,7 @@ public class DataGeneration {
         int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
         gc.set(gc.DAY_OF_YEAR, dayOfYear);
         String date = (gc.get(gc.YEAR) + "-" + (gc.get(gc.MONTH) + 1) + "-" + gc.get(gc.DAY_OF_MONTH));
-        LocalDate ldate = LocalDate.parse(date,formatter);
+        LocalDate ldate = LocalDate.parse(date, formatter);
         return ldate;
     }
 

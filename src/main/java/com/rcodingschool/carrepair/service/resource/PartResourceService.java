@@ -6,10 +6,10 @@ import com.rcodingschool.carrepair.domain.RepairPart;
 import com.rcodingschool.carrepair.model.PartSearchForm;
 import com.rcodingschool.carrepair.repository.PartRepository;
 import com.rcodingschool.carrepair.service.RepairPartService;
+import ore.spring.web.initializr.exception.ResourceException;
+import ore.spring.web.initializr.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import spring.web.initializr.base.exception.ResourceException;
-import spring.web.initializr.base.service.ResourceService;
 
 import java.util.List;
 

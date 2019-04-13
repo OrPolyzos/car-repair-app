@@ -5,6 +5,7 @@ import com.rcodingschool.carrepair.domain.User;
 import com.rcodingschool.carrepair.model.UserForm;
 import com.rcodingschool.carrepair.model.UserSearchForm;
 import com.rcodingschool.carrepair.service.resource.UserResourceService;
+import ore.spring.web.initializr.controller.ResourceController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import spring.web.initializr.base.controller.ResourceController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -31,14 +31,12 @@ public class UserResourceController extends ResourceController<User, Long, UserF
 
     @Autowired
     public UserResourceController(UserResourceService userResourceService) {
-        super(User.class, UserForm.class, UserSearchForm.class,
-                UserConverter::userFormToUser, UserConverter::userToUserForm,
-                userResourceService);
+        super(userResourceService);
     }
 
-    //    @Override
+    @Override
     @GetMapping(RESOURCE_BASE_URI)
-    public String getResourceView(Model model, HttpServletRequest httpServletRequest) {
+    public String getResourceView(Model model) {
         return super.getResourceView(model);
     }
 
@@ -71,6 +69,16 @@ public class UserResourceController extends ResourceController<User, Long, UserF
     @PostMapping(value = "/admin/users/search")
     public String searchBy(@Valid @ModelAttribute(RESOURCE_SEARCH_FORM_HOLDER) UserSearchForm resourceSearchForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         return super.searchBy(resourceSearchForm, bindingResult, model, redirectAttributes);
+    }
+
+    @Override
+    protected User resourceFormToResource(UserForm userForm) {
+        return UserConverter.userFormToUser(userForm);
+    }
+
+    @Override
+    protected UserForm resourceToResourceForm(User user) {
+        return UserConverter.userToUserForm(user);
     }
 
     @Override

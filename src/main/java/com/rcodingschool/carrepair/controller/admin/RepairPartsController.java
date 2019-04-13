@@ -6,14 +6,14 @@ import com.rcodingschool.carrepair.domain.RepairPart;
 import com.rcodingschool.carrepair.model.RepairPartForm;
 import com.rcodingschool.carrepair.service.RepairPartService;
 import com.rcodingschool.carrepair.service.resource.PartResourceService;
+import ore.spring.web.initializr.controller.InformativeController;
+import ore.spring.web.initializr.exception.ResourceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import spring.web.initializr.base.controller.InformativeController;
-import spring.web.initializr.base.exception.ResourceException;
 
 import javax.validation.Valid;
 

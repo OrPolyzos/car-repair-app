@@ -1,6 +1,6 @@
 package com.rcodingschool.carrepair.domain;
 
-import spring.web.initializr.base.domain.ResourcePersistable;
+import ore.spring.web.initializr.domain.ResourcePersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -111,5 +111,10 @@ public class Vehicle implements Serializable, ResourcePersistable<String> {
 
     public void setRepairs(List<Repair> repairs) {
         this.repairs = repairs;
+    }
+
+    @Override
+    public String getResourcePersistableId() {
+        return id;
     }
 }
